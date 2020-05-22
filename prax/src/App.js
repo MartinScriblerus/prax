@@ -1,5 +1,9 @@
 import React from 'react'
 import Camera from './components/posenet/components/Camera.js'
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:5001',{transports: ['websocket']});
+socket.on('connect', function newConnection(props){console.log('props are: ', props)});
 
 const styles = {
   camera : {

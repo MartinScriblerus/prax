@@ -1,10 +1,11 @@
 import * as posenet from '@tensorflow-models/posenet'
 
+
 const pointRadius = 17
 
 export const config = {
   videoWidth: (1200),
-  videoHeight: (400),
+  videoHeight: (1200),
   flipHorizontal: true,
   algorithm: 'single-pose',
   showVideo: false,
@@ -33,6 +34,10 @@ export function drawKeyPoints(
   canvasContext,
   scale = 1
 ) {
+  
+
+
+
   keypoints.forEach(keypoint => {
     if (keypoint.score >= minConfidence) {
       const {x, y} = keypoint.position

@@ -3,10 +3,15 @@ import React, {Component} from 'react'
 import * as posenet from '@tensorflow-models/posenet'
 import Sketch from "react-p5";
 
+const styles = {
+  video: {
+    display:"none"
+  }
+}
 class PoseNet extends Component {
   static defaultProps = {
     videoWidth: (1200),
-    videoHeight: (400),
+    videoHeight: (1200),
     flipHorizontal: true,
     algorithm: 'single-pose',
     showVideo: false,
@@ -32,24 +37,27 @@ class PoseNet extends Component {
   y = 50;
  
   setup = (p5, canvasParentRef) => {
-    p5.createCanvas(500, 500).parent(canvasParentRef); // use parent to render canvas in this ref (without that p5 render this canvas outside your component)
+    p5.createCanvas(1200, 1200).parent(this.canvas); // use parent to render canvas in this ref (without that p5 render this canvas outside your component)
   };
   draw = p5 => {
     p5.background(51);
     p5.ellipse(this.mouseX, this.mouseY, 70, 70);
+    p5.textSize(32);
+    p5.text('word', 10, 30);
+    p5.fill(0, 102, 153);
     // NOTE: Do not use setState in draw function or in functions that is executed in draw function... pls use normal variables or class properties for this purposes
     // this.x++;
   };
-
  
   getCanvas = elem => {
     this.canvas = elem
+    console.log(elem)
   }
 
   getVideo = elem => {
     this.video = elem
   }
-
+  
   async componentDidMount() {
     try {
       await this.setupCamera()
@@ -194,8 +202,8 @@ class PoseNet extends Component {
       <div>
         <div>
         
-          <video id="videoNoShow" playsInline ref={this.getVideo} />
-
+          <video style={styles.video} id="videoNoShow" playsInline ref={this.getVideo} />
+          <div ref={this.canvasParentRef} className={this.props.className || "react-p5"} style={this.props.style || {}} />;
           <canvas className="webcam" ref={this.getCanvas} />
      
         </div>

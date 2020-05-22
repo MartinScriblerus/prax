@@ -200,10 +200,18 @@ const db = require('./models/index');
 
 try{
 const PORT  = process.env.PORT || 5001;
-app.listen(PORT, ()=> console.log(`Server corriendo en ${PORT}`))
+var server = app.listen(PORT, ()=> console.log(`Server corriendo en ${PORT}`))
 }
 catch{console.log('eeerrrrr')}
 
+var socket = require('socket.io');
 
+var io = socket(server);
+
+io.on('connection', newConnection);
+
+function newConnection(socket){
+console.log('new connection: ' + socket.id);
+}
 
    
