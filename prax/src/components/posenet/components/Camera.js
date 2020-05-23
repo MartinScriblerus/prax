@@ -1,7 +1,12 @@
 import {drawKeyPoints, drawSkeleton} from './utils'
 import React, {Component} from 'react'
 import * as posenet from '@tensorflow-models/posenet'
-import Sketch from "react-p5";
+import io from 'socket.io-client';
+
+
+
+const socket = io('http://localhost:5001',{transports: ['websocket']});
+
 
 const styles = {
   video: {
@@ -31,23 +36,10 @@ class PoseNet extends Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps)
+    console.log(props)
   }
 
-  x = 50;
-  y = 50;
- 
-  setup = (p5, canvasParentRef) => {
-    p5.createCanvas(1200, 1200).parent(this.canvas); // use parent to render canvas in this ref (without that p5 render this canvas outside your component)
-  };
-  draw = p5 => {
-    p5.background(51);
-    p5.ellipse(this.mouseX, this.mouseY, 70, 70);
-    p5.textSize(32);
-    p5.text('word', 10, 30);
-    p5.fill(0, 102, 153);
-    // NOTE: Do not use setState in draw function or in functions that is executed in draw function... pls use normal variables or class properties for this purposes
-    // this.x++;
-  };
+
  
   getCanvas = elem => {
     this.canvas = elem
@@ -102,7 +94,7 @@ class PoseNet extends Component {
     })
 
     video.srcObject = stream
-
+   
     return new Promise(resolve => {
       video.onloadedmetadata = () => {
         video.play()
@@ -160,7 +152,8 @@ class PoseNet extends Component {
     
 
       canvasContext.clearRect(0, 0, videoWidth, videoHeight)
-
+      console.log(canvasContext)
+      socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
       if (showVideo) {
         canvasContext.save()
         canvasContext.scale(-1, 1)
@@ -186,10 +179,14 @@ class PoseNet extends Component {
               skeletonColor,
               skeletonLineWidth,
               canvasContext
+              
             )
           }
         }
       })
+      // console.log(canvasContext)
+      socket.emit('poses', {poses: poses})
+      
       requestAnimationFrame(findPoseDetectionFrame)
     }
     findPoseDetectionFrame()

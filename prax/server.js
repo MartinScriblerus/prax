@@ -32,12 +32,8 @@ var passport = require("passport");
   app.use(morgan('dev'))
 
 
-
   app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
-  
-
-
-  
+    
   app.use(express.static("./public"));
       app.use(bodyParser.json());
           // We need to use sessions to keep track of our user's login status
@@ -57,6 +53,45 @@ var passport = require("passport");
 
 
 
+  try{
+    const PORT  = process.env.PORT || 5001;
+    var server = app.listen(PORT, ()=> console.log(`Server corriendo en ${PORT}`))
+    }
+    catch{console.log('eeerrrrr')}
+    
+  //=====================================================
+    //+++++++++++++++++++++++++++++++++++++++++++++++++  
+    var socket = require('socket.io');
+    
+    var io = socket(server);
+    
+    io.on('connection', newConnection);
+    
+    function newConnection(socket){
+    console.log('new connection: ' + socket.id);
+    socket.emit('message', {message: 'Welcome to the chat room!'});
+    socket.emit('message_Users', {message_Users: users});   
+    socket.emit('message_Messages', {message_Messages: messages});
+    
+    socket.on('poses', poses)
+    function poses(poses){
+      console.log(poses)
+    }
+    socket.on('canvasContext', canvasContext)
+    function canvasContext(canvasContext){
+      console.log(canvasContext)
+    }
+    //+++++++++++++++++++++++++++++++++++++++++++++++++
+    // MOVE THIS SOCKET NAMESPACE INTO DYNAMIC URL
+    const nsp = io.of('/:username/:message');
+      nsp.on('connection', function(socket){
+        console.log('someone connected!');
+      });
+      nsp.emit('hi', 'everyone!');
+    }
+    
+    //+++++++++++++++++++++++++++++++++++++++++++++++++
+//=====================================================
 
 const db = require('./models/index');
   
@@ -156,8 +191,7 @@ const db = require('./models/index');
       var newMessage = req.body;
           newMessage= [{
           origin: req.body.origin,
-          content: req.body.content,
-          // description: req.body.description  
+          content: req.body.content, 
         }]
       console.log("newMessage", newMessage)
       messages.push(newMessage);
@@ -173,45 +207,23 @@ const db = require('./models/index');
         }).then(dbUser =>
           console.log("username that posted the message: ", dbUser.username)
           ).then(console.log("this is the room that user created: ", roomname))
-        .catch(err => res.status(422).json(err));
+        .catch(err => res.status(422).json(err)).
+        finally(()=>{return username});
     });
 
-        var users = [];
-        var messages = [];
-
-
+        var users = ["check1", "check2", "check3"];
+        var messages = ["test1", "test2", "test3"];
 
        
-  // =============================================================
+// =============================================================
 //  Signalling!
 // =============================================================
 
-
   // const PeerDataServer = require("peer-data-server");
-
   // const appendPeerCdnServer = PeerDataServer.default || PeerDataServer;
-
-  
   // appendPeerCdnServer(server);
 
 
 
-
-
-try{
-const PORT  = process.env.PORT || 5001;
-var server = app.listen(PORT, ()=> console.log(`Server corriendo en ${PORT}`))
-}
-catch{console.log('eeerrrrr')}
-
-var socket = require('socket.io');
-
-var io = socket(server);
-
-io.on('connection', newConnection);
-
-function newConnection(socket){
-console.log('new connection: ' + socket.id);
-}
 
    
