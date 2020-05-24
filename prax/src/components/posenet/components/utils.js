@@ -4,8 +4,8 @@ import * as posenet from '@tensorflow-models/posenet'
 const pointRadius = 17
 
 export const config = {
-  videoWidth: (1200),
-  videoHeight: (1200),
+  videoWidth: (600),
+  videoHeight: (600),
   flipHorizontal: true,
   algorithm: 'single-pose',
   showVideo: false,
@@ -14,8 +14,8 @@ export const config = {
   minPoseConfidence: 0.3,
   minPartConfidence: 0.3,
   maxPoseDetections: 17,
-  multiplier: .5,
-  nmsRadius: 1,
+  multiplier: .75,
+  nmsRadius: 20,
   outputStride: 16,
   imageScaleFactor: .5,
   skeletonColor: '#B925E6',

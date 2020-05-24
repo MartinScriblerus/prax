@@ -40,7 +40,7 @@ const styles = {
 }
 
 const App = () => {
-console.log(window.canvas)
+
   return (
     <div id="cameraDiv" style={styles.camera}>
       <Camera style={styles.camera}/>

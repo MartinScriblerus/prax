@@ -22,28 +22,25 @@ class PoseNet extends Component {
     showVideo: false,
     showSkeleton: true,
     showPoints: true,
-    minPoseConfidence: 0.3,
-    minPartConfidence: 0.3,
+    minPoseConfidence: 0.5,
+    minPartConfidence: 0.5,
     multiplier: 5,
     maxPoseDetections: 10,
     nmsRadius: 1,
     outputStride: 16,
     imageScaleFactor: .5,
     skeletonColor: "#B925E6",
-    skeletonLineWidth: 12,
+    skeletonLineWidth: 7,
     loadingText: 'Loading...please be patient...'
   }
 
   constructor(props) {
     super(props, PoseNet.defaultProps)
-    console.log(props)
   }
 
-
- 
   getCanvas = elem => {
     this.canvas = elem
-    console.log(elem)
+    // console.log(elem)
   }
 
   getVideo = elem => {
@@ -138,9 +135,6 @@ class PoseNet extends Component {
 
     const findPoseDetectionFrame = async () => {
       let poses = []
-
-    
- 
     
           const pose = await posenetModel.estimateSinglePose(
           video, 
@@ -150,10 +144,20 @@ class PoseNet extends Component {
           )
           poses.push(pose)
     
-
       canvasContext.clearRect(0, 0, videoWidth, videoHeight)
       console.log(canvasContext)
+  
+      // WebRTC canvas stream below -->
+      const canvas_stream = this.canvas.captureStream(25);
+
+      // SOCKET emits canvas context
       socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
+      // console.log(canvasContext)
+      
+      // Sockets url-encoded canvas stream below -->
+      var canvasURL = this.canvas.toDataURL();
+      // console.log(canvasURL)
+  
       if (showVideo) {
         canvasContext.save()
         canvasContext.scale(-1, 1)
@@ -162,6 +166,19 @@ class PoseNet extends Component {
         canvasContext.restore()
       }
 
+      //CURRENTLY EMITTING POSES AND CAMERA BUT WE WILL ONLY WANT ONE  
+      socket.emit('poses', {poses: poses})
+      socket.emit('canvasURL', {canvasURL: canvasURL})  
+      // THESE TWO SOCKETS FUNCTIONS BELOW MAY BE PROBLEMATIC
+      socket.on("serverDrawPoses", poseFunct)
+      function poseFunct(serverDrawPoses){
+        console.log("SERVERSIDE DRAW POSES", serverDrawPoses);
+        }
+      socket.on("serverDrawCanvasURL", function (canvasURL){
+        console.log("SERVERSIDE DRAW CANVAS", canvasURL);
+        }) 
+
+      // ====================================CUT????
       poses.forEach(({score, keypoints}) => {
         if (score >= minPoseConfidence) {
           if (showPoints) {
@@ -184,8 +201,7 @@ class PoseNet extends Component {
           }
         }
       })
-      // console.log(canvasContext)
-      socket.emit('poses', {poses: poses})
+ 
       
       requestAnimationFrame(findPoseDetectionFrame)
     }
@@ -200,7 +216,7 @@ class PoseNet extends Component {
         <div>
         
           <video style={styles.video} id="videoNoShow" playsInline ref={this.getVideo} />
-          <div ref={this.canvasParentRef} className={this.props.className || "react-p5"} style={this.props.style || {}} />;
+
           <canvas className="webcam" ref={this.getCanvas} />
      
         </div>

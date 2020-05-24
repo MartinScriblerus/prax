@@ -45,11 +45,11 @@ var passport = require("passport");
       app.use(passport.initialize());
       app.use(passport.session());
       app.use(express.urlencoded({extended: false})) 
-  app.use(express.json())
-  app.use(bodyParser.json())
-    // compression middleware
-    app.use(compression())
-  // app.use(bodyParser.urlencoded({ extended: true }));
+      app.use(express.json())
+      app.use(bodyParser.json())
+      // compression middleware
+      app.use(compression())
+      // app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
@@ -76,10 +76,13 @@ var passport = require("passport");
     socket.on('poses', poses)
     function poses(poses){
       console.log(poses)
+      socket.broadcast.emit('serverDrawPoses', poses )
     }
-    socket.on('canvasContext', canvasContext)
-    function canvasContext(canvasContext){
-      console.log(canvasContext)
+
+    socket.on('canvasURL', canvasURL)
+    function canvasURL(canvasURL){
+      console.log(canvasURL)
+      socket.broadcast.emit('serverDrawCanvasURL', { serverDrawCanvasURL : canvasURL })
     }
     //+++++++++++++++++++++++++++++++++++++++++++++++++
     // MOVE THIS SOCKET NAMESPACE INTO DYNAMIC URL
