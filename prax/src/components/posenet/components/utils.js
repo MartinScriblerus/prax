@@ -1,24 +1,24 @@
 import * as posenet from '@tensorflow-models/posenet'
 
 
-const pointRadius = 17
+const pointRadius = 30
 
 export const config = {
-  videoWidth: (600),
+  videoWidth: (1200),
   videoHeight: (600),
   flipHorizontal: true,
   algorithm: 'single-pose',
   showVideo: false,
   showSkeleton: true,
   showPoints: true,
-  minPoseConfidence: 0.3,
-  minPartConfidence: 0.3,
-  maxPoseDetections: 17,
-  multiplier: .75,
-  nmsRadius: 20,
+  minPoseConfidence: 0.1,
+  minPartConfidence: 0.1,
+  multiplier: .5,
+  maxPoseDetections: 2,
+  nmsRadius: 2,
   outputStride: 16,
-  imageScaleFactor: .5,
-  skeletonColor: '#B925E6',
+  imageScaleFactor: .2,
+  skeletonColor: "#aaf",
   skeletonLineWidth: 12,
   loadingText: 'Loading...please be patient...'
 }
@@ -30,19 +30,16 @@ function toTuple({x, y}) {
 export function drawKeyPoints(
   keypoints,
   minConfidence,
-  skeletonColor,
+  {skeletonColor = "#aaf0d1"},
   canvasContext,
   scale = 1
 ) {
   
-
-
-
   keypoints.forEach(keypoint => {
     if (keypoint.score >= minConfidence) {
       const {x, y} = keypoint.position
       canvasContext.beginPath()
-      canvasContext.arc(x * scale, y * scale, pointRadius, 0, 10 * Math.PI)
+      canvasContext.arc(x * scale, y * scale, pointRadius, 0, 5 * Math.PI)
       canvasContext.fillStyle = skeletonColor
       canvasContext.fill()
     }

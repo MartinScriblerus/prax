@@ -45,11 +45,11 @@ var passport = require("passport");
       app.use(passport.initialize());
       app.use(passport.session());
       app.use(express.urlencoded({extended: false})) 
-      app.use(express.json())
-      app.use(bodyParser.json())
-      // compression middleware
-      app.use(compression())
-      // app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(express.json())
+  app.use(bodyParser.json())
+    // compression middleware
+    app.use(compression())
+  // app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
@@ -76,9 +76,9 @@ var passport = require("passport");
     socket.on('poses', poses)
     function poses(poses){
       console.log(poses)
+      console.log(poses)
       socket.broadcast.emit('serverDrawPoses', poses )
     }
-
     socket.on('canvasURL', canvasURL)
     function canvasURL(canvasURL){
       console.log(canvasURL)
@@ -210,8 +210,8 @@ const db = require('./models/index');
         }).then(dbUser =>
           console.log("username that posted the message: ", dbUser.username)
           ).then(console.log("this is the room that user created: ", roomname))
-        .catch(err => res.status(422).json(err)).
-        finally(()=>{return username});
+        .catch(err => res.status(422).json(err))
+        .finally(()=>{return username});
     });
 
         var users = ["check1", "check2", "check3"];
@@ -225,8 +225,3 @@ const db = require('./models/index');
   // const PeerDataServer = require("peer-data-server");
   // const appendPeerCdnServer = PeerDataServer.default || PeerDataServer;
   // appendPeerCdnServer(server);
-
-
-
-
-   

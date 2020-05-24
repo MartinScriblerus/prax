@@ -11,36 +11,43 @@ const socket = io('http://localhost:5001',{transports: ['websocket']});
 const styles = {
   video: {
     display:"none"
+  },
+  // THIS IS THE STYLE CONTROLLING CANVAS
+  canvas: {
+    backgroundColor: "#030303"
   }
 }
 class PoseNet extends Component {
   static defaultProps = {
     videoWidth: (1200),
-    videoHeight: (1200),
+    videoHeight: (600),
     flipHorizontal: true,
     algorithm: 'single-pose',
     showVideo: false,
     showSkeleton: true,
     showPoints: true,
-    minPoseConfidence: 0.5,
-    minPartConfidence: 0.5,
-    multiplier: 5,
-    maxPoseDetections: 10,
-    nmsRadius: 1,
+    minPoseConfidence: 0.1,
+    minPartConfidence: 0.1,
+    multiplier: .5,
+    maxPoseDetections: 2,
+    nmsRadius: 2,
     outputStride: 16,
-    imageScaleFactor: .5,
-    skeletonColor: "#B925E6",
-    skeletonLineWidth: 7,
+    imageScaleFactor: .2,
+    skeletonColor: "#aaf",
+    skeletonLineWidth: 12,
     loadingText: 'Loading...please be patient...'
   }
 
   constructor(props) {
     super(props, PoseNet.defaultProps)
+    console.log(props)
   }
 
+
+ 
   getCanvas = elem => {
     this.canvas = elem
-    // console.log(elem)
+    console.log(elem)
   }
 
   getVideo = elem => {
@@ -63,7 +70,7 @@ class PoseNet extends Component {
     } finally {
       setTimeout(() => {
         this.setState({loading: false})
-      }, 200)
+      }, 2000)
     }
 
     this.detectPose()
@@ -113,14 +120,14 @@ class PoseNet extends Component {
 
   poseDetectionFrame(canvasContext) {
     const {
-      algorithm,
+      // algorithm,
       imageScaleFactor, 
       flipHorizontal, 
       outputStride, 
       minPoseConfidence, 
       minPartConfidence, 
-      maxPoseDetections, 
-      nmsRadius, 
+      // maxPoseDetections, 
+      // nmsRadius, 
       videoWidth, 
       videoHeight, 
       showVideo, 
@@ -135,7 +142,7 @@ class PoseNet extends Component {
 
     const findPoseDetectionFrame = async () => {
       let poses = []
-    
+
           const pose = await posenetModel.estimateSinglePose(
           video, 
           imageScaleFactor, 
@@ -146,18 +153,19 @@ class PoseNet extends Component {
     
       canvasContext.clearRect(0, 0, videoWidth, videoHeight)
       console.log(canvasContext)
-  
-      // WebRTC canvas stream below -->
-      const canvas_stream = this.canvas.captureStream(25);
 
-      // SOCKET emits canvas context
-      socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
-      // console.log(canvasContext)
+      // WebRTC canvas stream below -->
+      const canvas_RTCstream = this.canvas.captureStream(25);
+      console.log(canvas_RTCstream)
+   
+
       
-      // Sockets url-encoded canvas stream below -->
+
+      socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
+      
       var canvasURL = this.canvas.toDataURL();
-      // console.log(canvasURL)
-  
+      console.log(canvasURL)
+      
       if (showVideo) {
         canvasContext.save()
         canvasContext.scale(-1, 1)
@@ -173,12 +181,14 @@ class PoseNet extends Component {
       socket.on("serverDrawPoses", poseFunct)
       function poseFunct(serverDrawPoses){
         console.log("SERVERSIDE DRAW POSES", serverDrawPoses);
+        
         }
       socket.on("serverDrawCanvasURL", function (canvasURL){
+        
+        
         console.log("SERVERSIDE DRAW CANVAS", canvasURL);
         }) 
 
-      // ====================================CUT????
       poses.forEach(({score, keypoints}) => {
         if (score >= minPoseConfidence) {
           if (showPoints) {
@@ -201,7 +211,8 @@ class PoseNet extends Component {
           }
         }
       })
- 
+      // console.log(canvasContext)
+      socket.emit('poses', {poses: poses})
       
       requestAnimationFrame(findPoseDetectionFrame)
     }
@@ -216,8 +227,8 @@ class PoseNet extends Component {
         <div>
         
           <video style={styles.video} id="videoNoShow" playsInline ref={this.getVideo} />
-
-          <canvas className="webcam" ref={this.getCanvas} />
+         
+          <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
      
         </div>
       </div>

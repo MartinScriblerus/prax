@@ -3,6 +3,7 @@
     margin-left: auto;
     margin-right: auto;
     padding: 6px;
+
   }
   
   #videoNoShow {
@@ -14,6 +15,3 @@
 
   }
 
-video {
-    background-color: "#030303"
-  }

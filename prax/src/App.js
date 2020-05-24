@@ -5,19 +5,21 @@ import io from 'socket.io-client';
 
 
 const socket = io('http://localhost:5001',{transports: ['websocket']});
+
 socket.on('connect', function newConnection(Camera){
   // console.log('room name: ', futureVariableNameHere)
-  console.log('socketID is: ', socket.id)
-  socket.on('message', function getMessage(message){
-    console.log(message);
-  })
-  socket.on('message_Users', function getMessageUsers(message_Users){
-    console.log(message_Users);
-  })
-  socket.on('message_Messages', function getMessageMessages(message_Messages){
-    console.log(message_Messages);
-  })
-  // socket.emit('test', {test: "yes!"})
+
+
+  // socket.on('message', function getMessage(message){
+  //   console.log(message);
+  // })
+  // socket.on('message_Users', function getMessageUsers(message_Users){
+  //   console.log(message_Users);
+  // })
+  // socket.on('message_Messages', function getMessageMessages(message_Messages){
+  //   console.log(message_Messages);
+  // })
+
   
 
 
