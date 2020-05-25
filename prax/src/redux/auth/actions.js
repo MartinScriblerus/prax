@@ -1,7 +1,7 @@
 import { AuthTypes } from "./types";
 import setAuthToken from "../../services/setAuthToken";
 import { ChatTypes } from "../chat/types";
-import { socket } from "../../services/socketio";
+// import { socket } from "../../services/socketio";
 
 
 
@@ -31,7 +31,8 @@ export const registerUserSuccess = dataLogin => async dispatch => {
   dispatch({ type: AuthTypes.REGISTER_USERS_SUCCESS });
   dispatch(loginUserRequest(dataLogin));
 console.log(dataLogin)
-  socket.emit("getUsers");
+//TK COMMENTED SOCKET
+// socket.emit("getUsers");
 };
 
 export const registerUserFailure = errors => async dispatch => {

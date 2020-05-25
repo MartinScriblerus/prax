@@ -1,5 +1,5 @@
 import { ChatTypes } from './types'
-import { socket } from '../../services/socketio'
+// import { socket } from '../../services/socketio'
 
 import {
     getUsers as getUsersAPI,
@@ -31,14 +31,15 @@ export const getUsersSuccess = (user)=> async dispatch=>{
             type: ChatTypes.GET_USERS_SUCCESS,
             payload: user
         })
-        socket.on("connection", ()=>{
-            const getUsers = {
-                id: user.id, 
-                contacts: user 
-            };
-            socket.emit("getUsers", getUsers)
-            console.log("chat actions got users")
-        })
+ //TK COMMENTED SOCKET
+        // socket.on("connection", ()=>{
+        //     const getUsers = {
+        //         id: user.id, 
+        //         contacts: user 
+        //     };
+        //     socket.emit("getUsers", getUsers)
+        //     console.log("chat actions got users")
+        // })
        
 
     } catch (err){
@@ -95,8 +96,10 @@ export const postMessageRequest = (messages, idOrigin)=>async dispatch=>{
     // dispatch(markAsReadRequest(idDestiny))
     dispatch(getUsersRequest())
     // dispatch(getChatRequest(idDestiny))
-    socket.emit('getUsers', idOrigin)
-    socket.emit('getMessages', idOrigin)
+ 
+ //TK COMMENTED SOCKET
+    // socket.emit('getUsers', idOrigin)
+    // socket.emit('getMessages', idOrigin)
 }
 
 // export const markAsReadRequest = (idDestiny) =>async dispatch=>{
