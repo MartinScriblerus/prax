@@ -77,12 +77,23 @@ var passport = require("passport");
     function poses(poses){
       console.log(poses)
       console.log(poses)
-      socket.broadcast.emit('serverDrawPoses', poses )
+      const serverDrawPoses = poses
+      socket.broadcast.emit('serverDrawPoses', serverDrawPoses )
     }
+  
     socket.on('canvasURL', canvasURL)
     function canvasURL(canvasURL){
+
+        const canvasRTCDraw = (decodeURI(canvasURL.toString()) );
+        console.log("canvasRTCDRAW", canvasRTCDraw);
+
+      
+
+
+
       console.log(canvasURL)
-      socket.broadcast.emit('serverDrawCanvasURL', { serverDrawCanvasURL : canvasURL })
+      const serverDrawCanvasURL = canvasRTCDraw 
+      socket.broadcast.emit('serverDrawCanvasURL', serverDrawCanvasURL)
     }
     //+++++++++++++++++++++++++++++++++++++++++++++++++
     // MOVE THIS SOCKET NAMESPACE INTO DYNAMIC URL

@@ -6,10 +6,9 @@ import io from 'socket.io-client';
 
 const socket = io('http://localhost:5001',{transports: ['websocket']});
 
+// SOCKETS FOR APP --> BRING BACK WHEN FINISHING SIGNALLING
 socket.on('connect', function newConnection(Camera){
   // console.log('room name: ', futureVariableNameHere)
-
-
   // socket.on('message', function getMessage(message){
   //   console.log(message);
   // })
@@ -20,19 +19,7 @@ socket.on('connect', function newConnection(Camera){
   //   console.log(message_Messages);
   // })
 
-  
-
-
-
 });
-
-
-
-
-
-
-
-
 
 const styles = {
   camera : {
@@ -46,7 +33,6 @@ const App = () => {
   return (
     <div id="cameraDiv" style={styles.camera}>
       <Camera style={styles.camera}/>
-  
     </div>
   )
 }
