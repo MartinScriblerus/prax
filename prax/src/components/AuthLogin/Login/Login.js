@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import '../Register/auth.scss'
+import '../authlogin.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Welcome from '../../Layout/Welcome/Welcome'
@@ -16,10 +16,10 @@ const styles = ({
     button: {
         width: 340,
         height: 50,
-        color: "#aaf0d1",
+        color: "#aaf",
         borderStyle: "solid",
         borderWidth: 2,
-        borderColor: "030303",
+        borderColor: "#24a7a8",
         variant: "outlined",
         // justify: "right",
         margin: 10,

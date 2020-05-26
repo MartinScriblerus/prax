@@ -54,7 +54,7 @@ const styles = ({
     // marginRight: 60,
        borderStyle: 'solid',
     borderWidth: 2, 
-    color: '#aaf',
+    color: '$light_grey',
     borderColor: '',
     borderRadius: 7,
     fontFamily: 'Overpass',

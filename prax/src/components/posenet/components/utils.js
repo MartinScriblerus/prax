@@ -30,7 +30,7 @@ function toTuple({x, y}) {
 export function drawKeyPoints(
   keypoints,
   minConfidence,
-  {skeletonColor = "#aaf0d1"},
+  {skeletonColor = "#1fbf92"},
   canvasContext,
   scale = 1
 ) {

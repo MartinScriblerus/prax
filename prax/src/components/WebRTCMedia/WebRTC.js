@@ -6,7 +6,7 @@ import MetronomeApp from './metroIndex'
 // console.log(adapter)
 const styles = {
   container: {
-    backgroundColor: "#3aaf",
+    backgroundColor: "#24a7a8",
     height: "100%"
   },
   h1: {

@@ -26,6 +26,11 @@ const styles = {
  
   button: {
     color: "#85b1d7",
+    width: '40%',
+    alignItem: 'right',
+    placeholder: {
+   float: 'right'
+    }
   }
 }
 
@@ -38,7 +43,7 @@ export default function TemporaryDrawer() {
   const classes = useStyles();
   const [state, setState] = React.useState({
    
-    left: false,
+    contacts: false,
 
   });
 
@@ -65,7 +70,7 @@ export default function TemporaryDrawer() {
 
   return (
     <div style={styles.button}>
-      {['left'].map((anchor) => (
+      {['contacts'].map((anchor) => (
         <React.Fragment key={anchor} >
           <Button style={styles.button} onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>

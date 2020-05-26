@@ -1,5 +1,5 @@
 import React from 'react'
-import Camera from '../posenet/components/Camera.js'
+// import Camera from '../posenet/components/Camera.js'
 import io from 'socket.io-client';
 import Header from '../Header/Header/header'
 import Navbar from '../Header/Navbar/navbar'
@@ -12,7 +12,7 @@ import { AuthContext } from "../../context/auth";
 import { Provider } from "react-redux";
 import PrivateRoute from './PrivateRoute';
 import About from '../About/about';
-
+import {Fatline, Scene, Three} from './threeFiber'
 import FirstTimeLogin from '../FirstTimeSignIn/firstTimeSignIn';
 import {
   BrowserRouter as Router,
@@ -52,28 +52,34 @@ export default function App(state = { isAuth: false }) {
   return (
     <AuthContext.Provider value={{}} style={styles.background}>
     <Provider store={store}>
-     
+    
     <Router>
+   
         <div >
-
+      
     <Grid>
+
       <Header />
       <Navbar />
-          <div id="cameraDiv" style={styles.camera}>
-        <Camera style={styles.camera}/>
-      </div>
+     {Fatline}
+     {Scene}
+     {Three}
     </Grid>
     <Switch>            
     <Route exact path="/" component={Home} />
     <Route exact path="/login" component={Home} />
+ 
     <Route exact path="/about" component={About} />
+  
     <Route exact path="/signup" component={FirstTimeLogin} />
     <Route exact path="/praxspace/:username/:message" component={CreatePraxSpace}/> 
   
     <PrivateRoute exact path="/admin" component={Admin} />
 
   </Switch>
+ 
     </div>
+    
     </Router>
   </Provider>
   </AuthContext.Provider>

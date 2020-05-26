@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import './navbar.scss'
 // import IconButton from '@material-ui/core/IconButton';
 // import PrivateRoute from '../PrivateRoute';
 
@@ -12,19 +13,14 @@ import {
   } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
-  
   root: {
     flexGrow: 1,  
+    
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
-    flexGrow: 1,
-    color: "#aaf0d1",
-  fontSize: 24,
-  marginTop: -7
-  },
+  backgroundColor: '#1F95BF'
 }));
 
 export default function Navbar() {
@@ -36,15 +32,15 @@ export default function Navbar() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className="toolbar">
             <Button>
               <Link 
                 to="/login" 
                 onClick={() => setLogin(!login)}
                 style={{ textDecoration: 'none' }}
-                className={classes.title}  
+                className="title"  
               >
-                <Typography variant="h6" className={classes.title} >
+                <Typography variant="h6" className="title" id="homeText" >
                     Home
                 </Typography>
               </Link>  
@@ -56,9 +52,9 @@ export default function Navbar() {
                 onClick={() => 
                 setShowAbout(!showAbout)}
                 style={{ textDecoration: 'none' }}
-                className={classes.title}  
+                className="title"  
                 >
-                <Typography variant="h6" className={classes.title}  >
+                <Typography variant="h6" className="title" id="aboutText" >
                     About
                 </Typography>
               </Link>
@@ -69,9 +65,9 @@ export default function Navbar() {
                 to="/signup" 
                 onClick={() => setSignUp(!signUp)}
                 style={{ textDecoration: 'none' }}
-                className={classes.title}  
+                className="title"  
               >
-                <Typography variant="h6" className={classes.title} >
+                <Typography variant="h6" className="title" id="signupText" >
                     Sign Up
                 </Typography>
               </Link>
@@ -82,9 +78,9 @@ export default function Navbar() {
                 to="/search" 
                 onClick={() => setLogin(!login)}
                 style={{ textDecoration: 'none' }}
-                className={classes.title}  
+                className="title"  
                 >
-                <Typography variant="h6" className={classes.title} >
+                <Typography variant="h6" className="title" >
                     
                 </Typography>
                 </Link>  

@@ -8,7 +8,7 @@ import {
 // import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card'
-import Grid from '@material-ui/core/Grid';
+
 import setAuthToken from "../../../services/setAuthToken";
 import CreatePraxSpace from '../CreatePraxSpace/CreatePraxSpace';
 
@@ -28,7 +28,7 @@ const styles = {
     marginLeft: "7.5%",
     border: "solid",
     borderWidth: 2,
-    borderColor: "#24a7a8",
+    borderColor: "#4797DE",
     marginBottom: 30,
     marginTop:20
   },
@@ -36,20 +36,21 @@ const styles = {
 margin:4
   },
   roomNameCard: {
-    backgroundColor: "#030303",
+    backgroundColor: "#212121",
     color: "#dadcd7",
     width: "100%",
       border: "solid",
     borderWidth: 2,
-    borderColor: "#aaf",
-    
+    borderColor: "#85b1d7",
+ 
   },
   openRoomsCard: {
-    backgroundColor: "#030303",
+  
+    backgroundColor: "#272727",
     color: "#dadcd7",
   },
   openRoomsTitle: {
-    backgroundColor: "#030303",
+    backgroundColor: "#85b1d7",
     color: "#24a7a8",
     zIndex: 3,
     width: "100%",
@@ -60,26 +61,29 @@ margin:4
 
   },
   openRoomsDescription: {
-    backgroundColor: "#24a7a8",
+    backgroundColor: "#85b1d7",
     zIndex: 3
   },
   input: {
     width: "85%",
     marginRight: "7.5%",
     marginLeft: "7.5%",
-    marginTop: 40,
-    backgroundColor: "#dadcd7"
+    marginTop: 5,
+    height: 40,
+    backgroundColor: "#dadcd7",
+    fontSize: 18 
   },
 
   // dynamic1 : {
   //   backgroundColor: "pink"
   // },
 h1: {
-  backgroundColor: "#24a7a8",
+  backgroundColor: "#85b1d7",
+  color: "#212121"
 },
 
 h3: {
-  color: "#aaf0d1",
+  color: "#5e5d5d",
   paddingTop: 5,
   marginLeft: "5%"
 },
@@ -103,8 +107,7 @@ export default class DynamButton extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {
-    
+    this.state = { 
       dynamicList: [],
       dynamicListDescription: []
     };
@@ -114,13 +117,6 @@ export default class DynamButton extends React.Component {
     userID = props.idUserLogged;
     username = props.username;
     instrument = props.instruments
-
-  //  console.log(socket)
-  //   socket.on("connect", function(){
-  //     socket.emit("return", function(){ console.log(username) })
-  //     socket.on("returnback", messages)
-  //   })
-
 
     this.addListItem = this.addListItem.bind(this);
     this.removeListItem = this.removeListItem.bind(this);
@@ -173,23 +169,24 @@ export default class DynamButton extends React.Component {
     return(
       <> 
       <div className="component-wrapper">
-        <Grid item xs={12}>
+     
           <Card className="roomCard" style={styles.roomNameCard}> 
             <h1 style={styles.h1}>Create a Room</h1>
               <InputBoxDescription  addItem={this.addListItem} addItemDescription={this.addListItemDescription} style={styles.textarea2} /><br/>
           </Card>
-        </Grid>
+       
     
       </div>
       <div>  
-      <Grid style={styles.openRoomGrid} item xs={12}>     
+    
         <Card style={styles.openRoomsCard}> 
         <h3>Open Rooms</h3>
       <div>
-          <DynamicList style={styles.openRoomsTitle} listItems={this.state.dynamicList} removeItem={this.removeListItem} />
+    {/*tk*/}    
+      <DynamicList style={styles.openRoomsTitle} listItems={this.state.dynamicList} removeItem={this.removeListItem} />
       </div>    
           </Card>
-      </Grid> 
+     
      </div>
       </>
     );
@@ -290,7 +287,7 @@ export class InputBoxDescription extends React.Component {
   render(){
     return (
       <form ref="itemForm" onSubmit={e => this.formSubmit2(e)}>  
-        <input style={styles.input} type="text" id="item" ref="item" placeholder="Name your prax-space"/>
+        <input style={styles.input} type="text" id="item" ref="item" placeholder="Give your prax-space a name"/>
 
         <Button  style={styles.button} type="submit" className="btn btn-primary roomDefineButton"
         > Define Style

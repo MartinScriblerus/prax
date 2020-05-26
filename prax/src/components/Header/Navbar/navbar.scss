@@ -1,1 +1,62 @@
-@import "../../../App/variables";
+@import "../../App/variables";
+
+.toolbar {
+    background-color: $header_black;
+    height: 6vh
+}
+.title {
+    // flex: 1;
+    color: $white;
+  font-size: 24;
+  margin-top: -7;
+  width: 10vw;
+  }
+.MuiButton-root {
+    width: 12vw;
+    margin-left: 16vw
+}
+
+@media screen and (min-width: $mini){
+    .title {
+
+        // flex: 1;
+        color:  $white;
+      font-size: 20;
+      margin-top: -7;
+      width: 20vw;
+      }
+    .MuiButton-root {
+        width: 30vw;
+        margin-left: 16vw
+    }
+}
+
+@media screen and (min-width: $tablet){
+    .title {
+
+        // flex: 1;
+        color:  $white;
+      font-size: 24;
+      margin-top: -7;
+      width: 15vw;
+      }
+    .MuiButton-root {
+        width: 30vw;
+        margin-left: 16vw
+    }
+}
+
+@media screen and (min-width: $desktop){
+    .title {
+
+        // flex: 1;
+        color:  $light_grey;
+      font-size: 18;
+      margin-top: -7;
+      width: 100%;
+      }
+    .MuiButton-root {
+        width: 100%;
+        margin-left: 6vw
+    }
+}

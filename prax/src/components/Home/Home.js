@@ -9,6 +9,7 @@ import jwt_decode from "jwt-decode";
 import store from "../../redux/store";
 import setAuthToken from "../../services/setAuthToken";
 import { setUserLogged } from "../../redux/auth/actions";
+import './home.scss'
 // import { Register } from '../Auth/Register'
 import { Login } from '../AuthLogin/Login/Login'
 // import { PrivateRoute } from '../Auth/PrivateRoute/'
@@ -30,7 +31,7 @@ const styles = ({
         marginTop: 5
     },
     profile: {
-      color: "#aaf",
+      color: "#aafs",
   
     },
     card: {
@@ -110,7 +111,7 @@ const App = (props) => {
       <BrowserRouter>
         <main>     
   
-        <div className="container" >
+       
       
         {<div style={styles.drawer}> {showCtx.map(oneContact=><Button style={styles.button} key={oneContact}>{oneContact}</Button>)}</div>}
           
@@ -129,7 +130,7 @@ const App = (props) => {
                  sendingMsg={chat.sendingMsg}
                />
              </div> 
-         </div>
+         
      
 
           <Switch>

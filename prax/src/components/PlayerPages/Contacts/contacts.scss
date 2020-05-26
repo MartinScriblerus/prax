@@ -1,0 +1,67 @@
+@import '../../App/variables';
+
+.contacts-container{
+    position: relative;
+    flex: 1;
+    .searcher-container{
+        padding: 0.3rem;
+        input {
+            width: 100%;
+            font-size: 0.8rem;
+            color: pink;
+        }
+    }
+    .contacts-list {
+        overflow: auto;
+        // height: calc(100vh - 96px);
+        height: 50px;
+        border-right: 1px solid $light_grey;
+        color: black;
+       
+        .each-user{
+            cursor: pointer;
+           
+            border-bottom: 1px solid #5d5d5e1e;
+            height: 70px;
+            margin-left: 1px;
+            padding: 0.5rem;
+            background-color: purple;
+            &:last-child{
+                border-bottom: none;
+            }
+            .top-box, .bottom-box{
+                display: flex;
+                justify-content: space-between;
+                color: pink;
+            }
+            .top-box{
+                .username-box{
+                    color: black;
+                }
+                .time-box{
+                    font-size: 0.9rem;
+                }
+            }
+            .bottom-box{
+                font-size: 0.9rem;
+                margin-top: 0.3rem;
+                .lastmessage-box{
+                    margin-left: 0.5rem;
+                    margin-right: 0.5rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .unseencount-box{
+                    background-color: orange;
+                    color: yellow;
+                    border-radius: 50%;
+                    padding: 0 0.4rem;
+                }
+            }
+            &:hover{
+                background-color: $light_grey;
+            }
+        }
+    }
+}

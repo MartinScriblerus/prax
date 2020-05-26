@@ -1,0 +1,11 @@
+@import '../App/variables';
+
+.auth-container{
+    width: 50%;
+    .submit-auth{
+        background: $blue;
+        color: #24a7a8;
+        padding: 2.5rem;
+        margin-top: 1rem;
+    }
+}

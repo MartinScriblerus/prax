@@ -16,7 +16,7 @@ const styles = ({
 		marginTop: 5
 	},
 	card: {
-		backgroundColor: "#24a7a8",	
+		backgroundColor: "#041621",	
 		color: "#aaf",
 		variant: "solid",
 		width: "70%",

@@ -1,0 +1,71 @@
+@import '../App/variables';
+
+.MuiButton-label {
+    align-items: 'left'
+}
+
+main {
+   
+    .container{
+        display: flex;
+     
+
+        .left-side{
+            width: 5%;
+            //display: flex;
+            //flex-direction: column;
+        }
+        .right-side{
+            // background-image: url("https://laughingsquid.com/wp-content/uploads/2013/10/21.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            
+            // border-right: 1px solid $border;
+            //display: flex;
+            //flex-direction: column;
+            .select-user-container{
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $medium){
+    main {
+        
+        .container {
+            .left-side{
+                width: 5%;
+            }
+            .right-side{
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 420px){
+    main {
+        overflow-x: hidden;
+        .container {
+            position: relative;
+         
+            .right-side{
+                width: 100%;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                transform: translateX(100%);
+                transition: transform .3s ease-in-out;
+            }
+            // .show-destiny {
+            //     transform: translateX(0%) !important;
+            // }
+        }
+    }
+}

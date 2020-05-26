@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
     const useStyles = makeStyles(theme => ({
         root: {
             flexGrow: 1,
-            backgroundImage: "url(https://laughingsquid.com/wp-content/uploads/2013/10/21.jpg)",
+            // backgroundImage: "url(https://laughingsquid.com/wp-content/uploads/2013/10/21.jpg)",
             opacity: "90%",
             backgroundPosition: 'top',
             
@@ -47,7 +47,7 @@ import { makeStyles } from '@material-ui/core/styles';
         card: {
         borderStyle: "solid",
         borderWidth: 5,
-        borderColor: "#aaf",
+        borderColor: "##1F95BF",
         variant: "outlined",
         padding: 30,
         marginRight: "10%",

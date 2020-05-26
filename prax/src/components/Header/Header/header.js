@@ -12,7 +12,7 @@ const style={
         fontFamily: 'Didact Gothic',
         borderBottom: "solid",
         borderWidth: 4,
-        borderColor: "#030303"
+        borderColor: "#aaf"
     },
     text: {
       fontFamily: 'Permanent Marker',
