@@ -290,7 +290,7 @@ export class InputBoxDescription extends React.Component {
         <input style={styles.input} type="text" id="item" ref="item" placeholder="Give your prax-space a name"/>
 
         <Button  style={styles.button} type="submit" className="btn btn-primary roomDefineButton"
-        > Define Style
+        > Join Room
         </Button>
       </form>
       );
