@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 import axios from 'axios';
+import './firsttimesignin.scss'
 import {
     BrowserRouter as Router,
     useHistory,
@@ -19,40 +20,42 @@ import { makeStyles } from '@material-ui/core/styles';
             // backgroundImage: "url(https://laughingsquid.com/wp-content/uploads/2013/10/21.jpg)",
             opacity: "90%",
             backgroundPosition: 'top',
-            
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             overflow: 'auto',
         }}));
 
     const styles = ({
+        input: {
+         marginLeft: '10vw'
+        },
         signup: {
         marginTop: 0,
-        marginRight: "15%",
-        marginLeft:  "15%",
         color: '#212121'
         },
-            
         button: {
             width: 200,
             height: 50,
             borderStyle: "solid",
+            backgroundColor: "#24a7a8",
+            color: '#dadcd7',
             borderWidth: 2,
             borderColor: "#24a7a8",
             variant: "outlined",
             // justify: "right",
             margin: 10,
-            marginTop: 10
         },
         card: {
         borderStyle: "solid",
-        borderWidth: 5,
-        borderColor: "##1F95BF",
+        backgroundColor: "#212121",
+        borderWidth: 2,
+        borderColor: "#85b1d7",
         variant: "outlined",
-        padding: 30,
         marginRight: "10%",
         marginLeft: "10%",
-        marginTop: 100,
+        paddingRight: '5%',
+        paddingLeft: '5%',
+        marginTop: 60,
         zIndex: 5
         }
     })
@@ -99,9 +102,10 @@ export default function FirstTimeLogin(newUser){
     <div className={classes.root}>
   
     <Card style={styles.card}>
-    <h1>Sign Up</h1>
+    <h1 className='signupText'>Sign Up</h1>
     <form onSubmit={handleSubmit} noValidate autoComplete="off">  
-        <TextField       
+        <TextField   
+            className="inputPad"  
             type="username"
             variant="outlined"
             margin="normal"
@@ -118,7 +122,9 @@ export default function FirstTimeLogin(newUser){
     </form>
 
     <form onSubmit={handleSubmit} noValidate autoComplete="off">
-        <TextField       
+        <TextField  
+         
+            className="inputPad"
             type="password"
             variant="outlined"
             margin="normal"
@@ -131,12 +137,14 @@ export default function FirstTimeLogin(newUser){
             onChange={e => 
             setPassword(e.target.value)
             }
-            label="Choose a Password (7 characters minimum)" 
+            label="Choose a Password (7 char min)" 
         />
     </form>
 
     <form onSubmit={handleSubmit} noValidate autoComplete="off">  
-    <TextField       
+    <TextField  
+     
+        className="inputPad"     
         type="text"
         variant="outlined"
         margin="normal"
@@ -155,6 +163,8 @@ export default function FirstTimeLogin(newUser){
 
     <form onSubmit={handleSubmit} noValidate autoComplete="off">
         <TextField       
+            className="inputPad"
+           
             type="text"
             variant="outlined"
             margin="normal"
@@ -173,6 +183,8 @@ export default function FirstTimeLogin(newUser){
 
     <form onSubmit={handleSubmit} noValidate autoComplete="off">
         <TextField       
+            
+            className="inputPad"
             type="email"
             variant="outlined"
             margin="normal"
@@ -191,6 +203,8 @@ export default function FirstTimeLogin(newUser){
   
     <form onSubmit={handleSubmit} noValidate autoComplete="off">
         <TextField       
+            className="inputPad"
+           
             type="text"
             variant="outlined"
             margin="normal"
@@ -203,12 +217,14 @@ export default function FirstTimeLogin(newUser){
             onChange={e => 
             setBandName(e.target.value)
             }
-            label="Name of your Primary Band (leave blank if none)" 
+            label="Name of your Band (if applicable)" 
         />
     </form>
 
     <form onSubmit={handleSubmit} noValidate autoComplete="off">
         <TextField       
+            className="inputPad"
+      
             type="text"
             variant="outlined"
             margin="normal"

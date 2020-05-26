@@ -1,0 +1,15 @@
+@import '../App/variables';
+
+.signupText {
+    color: $headline_text;
+    width: 100%;
+}
+.inputPad {
+    width: '70%';
+background-color: $white
+}
+form {
+    width: '70%';
+    margin-left: 40;
+    margin-right: 40;
+}

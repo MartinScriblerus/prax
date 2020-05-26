@@ -79,7 +79,7 @@ const styles = ({
     fontFamily: 'Overpass',
     backgroundColor: '#333333',
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 40,
     opacity: .93,
     padding: 15
   },
