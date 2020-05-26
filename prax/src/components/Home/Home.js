@@ -11,17 +11,14 @@ import setAuthToken from "../../services/setAuthToken";
 import { setUserLogged } from "../../redux/auth/actions";
 import './home.scss'
 // import { Register } from '../Auth/Register'
-import { Login } from '../AuthLogin/Login/Login'
+import Login from '../AuthLogin/Login/Login'
 // import { PrivateRoute } from '../Auth/PrivateRoute/'
 import FirstTimeLogin from "../FirstTimeSignIn/firstTimeSignIn";
 
 const styles = ({
     color:  '#030303',
     
-    drawer: {
-     color: "#030303",
-      width: 2
-    },
+
     button: {
         height: 50,
         backgroundColor: '#85b1d7',
@@ -52,7 +49,6 @@ if (token) {
 }
 
 const App = (props) => {
-
     const auth = useSelector(state => state.auth)
     const chat = useSelector(state => state.chat)
     console.log(auth.user.id)
@@ -82,8 +78,7 @@ const App = (props) => {
       let showContax = [];
       if (typeof chat.contacts && auth.user.id !== (undefined || null)){
         try{
-          console.log("*****************************GETTING CONTACT PROFILES HERE")
-        
+          console.log("*****************************GETTING CONTACT PROFILES HERE")      
         console.log("tktktktktktktktktk")
           console.log(auth.user.id)
           
@@ -112,14 +107,10 @@ const App = (props) => {
         <main>     
   
        
-      
+        <TemporaryDrawer className='title'/>
         {<div style={styles.drawer}> {showCtx.map(oneContact=><Button style={styles.button} key={oneContact}>{oneContact}</Button>)}</div>}
           
-        
-       <TemporaryDrawer style={styles.drawer} />
-       
        <div className="right-side">
-        
                <Chat
                  idUserLogged={auth.user.id}
                  username={auth.user.username}
@@ -130,11 +121,7 @@ const App = (props) => {
                  sendingMsg={chat.sendingMsg}
                />
              </div> 
-         
-     
-
           <Switch>
-          
             <Route exact path="/signup" component={FirstTimeLogin} />
             <Route exact path="/login" component={Login} />
           </Switch>

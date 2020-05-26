@@ -50,8 +50,8 @@ margin:4
     color: "#dadcd7",
   },
   openRoomsTitle: {
-    backgroundColor: "#85b1d7",
-    color: "#24a7a8",
+    backgroundColor: "#212121",
+    color: "#dadcd7",
     zIndex: 3,
     width: "100%",
     height: 60,
@@ -181,10 +181,10 @@ export default class DynamButton extends React.Component {
     
         <Card style={styles.openRoomsCard}> 
         <h3>Open Rooms</h3>
-      <div>
+   
     {/*tk*/}    
       <DynamicList style={styles.openRoomsTitle} listItems={this.state.dynamicList} removeItem={this.removeListItem} />
-      </div>    
+  
           </Card>
      
      </div>
@@ -245,14 +245,6 @@ export class DynamicList extends React.Component {
 
 export class DynamicListDescription extends React.Component {
  
-
-
-
-  handleSubmit = (e) => {
-    
-    // CUT THIS!?
-    }
- 
   render(){
     return (
       <>
@@ -290,7 +282,7 @@ export class InputBoxDescription extends React.Component {
         <input style={styles.input} type="text" id="item" ref="item" placeholder="Give your prax-space a name"/>
 
         <Button  style={styles.button} type="submit" className="btn btn-primary roomDefineButton"
-        > Join Room
+        > Join the Room
         </Button>
       </form>
       );

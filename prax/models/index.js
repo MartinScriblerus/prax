@@ -9,19 +9,21 @@ var env       = process.env.NODE_ENV || 'development';
 var db        = {};
 
 
+
 // const config = require(`${__dirname}/../sequelize.config.js`)[env]
 const config = require(__dirname + '/../config/config.json')[env];
 
 if (config.use_env_variable) {
   var sequelize = new Sequelize({
-    database: "process.env.DB_DATABASE",
-    username: "process.env.DB_USERNAME",
-    password: "process.DB_PASSWORD",
+    database: "Alt_SXSW_db",
+    username: "root",
+    password: "test1234",
     dialect: "mysql",
   });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
 sequelize = new Sequelize(config)
 
 

@@ -89,7 +89,6 @@ router.post('/login', async (req, res) => {
 });
 
 
-
 router.get('http://localhost:5001/api/message', auth, async(req, res)=>{
 	res.json({current: req.users})
 	console.log(req.users)

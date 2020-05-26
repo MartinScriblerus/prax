@@ -4,10 +4,11 @@
     background-color: #212121;
 }
 
-.iconOrder {
-    margin-left: 32%;
-    margin-right: 32%;
-}
+// .iconOrder {
+//     margin-left: 28%;
+//     margin-right: 28vw;
+//     // margin-right: 32%;
+// }
 .card2 {
   
         display: 'flex';
@@ -18,16 +19,16 @@
         width: "100%";
         overflow: 'auto';
         border-style: 'solid';
-        borderWidth: 2;
+        border-width: 2;
         color: '#f6f6f6';
-        borderColor: '#85b1d7';
+        border-color: '#85b1d7';
         // borderRadius: 7,
-        paddingRight: 3;
-        paddingLeft: 3;
-        fontFamily: 'Overpass';
-        backgroundColor: '#333333';
-        marginTop: 10;
-        marginBottom: 40;
+        padding-right: 3;
+        padding-left: 3;
+        font-family: 'Overpass';
+        background-color: '#333333';
+        margin-top: 10;
+        margin-bottom: 40;
         opacity: .93;
         padding: 15;
    

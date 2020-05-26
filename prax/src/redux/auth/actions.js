@@ -3,8 +3,6 @@ import setAuthToken from "../../services/setAuthToken";
 import { ChatTypes } from "../chat/types";
 // import { socket } from "../../services/socketio";
 
-
-
 import { 
   registerUser as registerUserAPI,
   loginUser as loginUserAPI
@@ -13,7 +11,7 @@ import {
 export const registerUserRequest = dataRegister => async dispatch => {
   dispatch({ type: AuthTypes.REGISTER_USERS_REQUEST });
   try {
-    //await axios.post(`${BASE_URL}/user/register`, dataRegister);
+    // await axios.post(`${BASE_URL}/user/register`, dataRegister);
     await registerUserAPI(dataRegister)
     const dataLogin = {
       username: dataRegister.username,

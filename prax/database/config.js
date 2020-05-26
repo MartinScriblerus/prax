@@ -1,5 +1,6 @@
 let config
 
+
 if (process.env.NODE_ENV === 'production'){
     config = {
         db: process.env.DB_NAME,
@@ -9,10 +10,10 @@ if (process.env.NODE_ENV === 'production'){
     }
 }else{
     config = {
-        db: process.env.DB_DATABASE,
-        username: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        host: process.env.HOST
+        db: 'Alt_SXSW_db',
+        username: 'root',
+        password: 'test1234',
+        host: '127.0.0.1'
     }
 }
 

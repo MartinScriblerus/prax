@@ -4,17 +4,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Welcome from '../../Layout/Welcome/Welcome'
 import { loginUserRequest } from '../../../redux/auth/actions'
+import { registerUserRequest, clearErrors } from '../../../redux/auth/actions'
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 
 
 const styles = ({
-
-
-
     button: {
-        width: 340,
+        width: 200,
         height: 50,
         color: "#aaf",
         borderStyle: "solid",
@@ -37,7 +35,7 @@ const styles = ({
     }
 })
 
-export const Login = (props) => {
+export default function Login(props) {
     const auth = useSelector(state=> state.auth)
     const dispatch = useDispatch()
 
@@ -49,6 +47,11 @@ export const Login = (props) => {
         password: ''
     })
 
+    const [registerForm, setRegisterForm] = useState({
+        registername: "",
+        password: ""
+      });
+    
     const {username, password} = loginForm
 
     useEffect(()=>{
@@ -63,31 +66,51 @@ export const Login = (props) => {
         })
     }
 
+    useEffect(() => {
+        if (isAuth) history.push("/");
+      }, [isAuth, history]);
+    
+      useEffect(()=>{
+        return ()=> dispatch(clearErrors())
+    }, [])
+
     const handleSubmit=(e)=>{
         e.preventDefault()
         const dataLogin  = {
             username,
             password
         }
+
+        const { registername, registervalue } = e.target;
+        setRegisterForm({
+          ...registerForm,
+          [registername]: registervalue
+        });
         dispatch(loginUserRequest(dataLogin))
     }
+    const handleChange2 = e => {
+        e.preventDefault();
+        const dataRegister = {
+          username,
+          password
+     
+        };
+        console.log(dataRegister)
+        dispatch(registerUserRequest(dataRegister));
+      };
 
     return ( 
         <Welcome 
         >
             <div 
             className="auth-container"
-           
             >
-                <form 
-                onSubmit={handleSubmit} 
-                
-                >
-                    <Typography 
-                    variant="h4"
-                    
-                    >Log In</Typography>
-                    <label htmlFor="username">Username:</label>
+           <form onSubmit={handleSubmit} onChange={handleChange2}>
+            
+           <Typography variant="h4"
+            >Log In</Typography>
+            
+            <label htmlFor="username">Username:</label>
                     <input 
                         type="text"
                         id="username"

@@ -16,13 +16,6 @@ export const Contacts = (props) => {
 
 
 
-  // useEffect(() => {
-    // socket.on("getUsers", () => {
-    //   dispatch(getUsersRequest());  
-    //   console.log("Contacts dispatched getUserRequest")      
-    // });
-  // }, []);
-
 if (!Array.isArray(contacts)) { console.log('results are not array' ) }   
 if (contacts !== undefined || null){
       console.log(contacts)

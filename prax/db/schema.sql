@@ -1,0 +1,34 @@
+-- DROP TABLE User, UserMusic, Bands;
+-- USE Alt_SXSW_db;
+
+-- CREATE TABLE User
+-- (
+-- 	id int NOT NULL AUTO_INCREMENT,
+-- 	first_name varchar(255) NOT NULL,
+--     last_name varchar(255) NOT NULL,
+-- 	username varchar(255) NOT NULL,
+--     password varchar(255) NOT NULL,
+-- 	email varchar(255) NOT NULL,
+-- 	bandname varchar(255) NOT NULL,
+-- 	instrument varchar(255) NOT NULL,
+-- 	PRIMARY KEY (id)
+-- );
+
+-- CREATE TABLE UserMusic
+-- (
+-- 	id int NOT NULL AUTO_INCREMENT,
+-- 	band_name varchar(255) NOT NULL,
+-- 	member_ids int NOT NULL,
+--     performance_user LONGBLOB,
+-- 	PRIMARY KEY (id)
+-- );
+
+-- CREATE TABLE Bands
+-- (
+-- 	id int NOT NULL AUTO_INCREMENT,
+-- 	band_name varchar(255) NOT NULL,
+-- 	band_members varchar(255) NOT NULL,
+-- 	band_performances LONGBLOB,
+-- 	likes int,
+-- 	PRIMARY KEY (id)
+-- );

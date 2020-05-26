@@ -12,6 +12,7 @@ import { AuthContext } from "../../context/auth";
 import { Provider } from "react-redux";
 import PrivateRoute from './PrivateRoute';
 import About from '../About/about';
+import Login from '../AuthLogin/Login/Login'
 import {Fatline, Scene, Three} from './threeFiber'
 import FirstTimeLogin from '../FirstTimeSignIn/firstTimeSignIn';
 import {
@@ -49,6 +50,20 @@ const styles = {
 
 export default function App(state = { isAuth: false }) {
 
+if (window !== undefined){
+
+function threeBackground (){
+  twoBackground()
+  return <Fatline/>
+}
+function twoBackground(){
+  oneBackground(Three)
+  return <Scene/>
+}
+function oneBackground(){
+  return <Three/>
+}
+}
   return (
     <AuthContext.Provider value={{}} style={styles.background}>
     <Provider store={store}>
@@ -57,23 +72,18 @@ export default function App(state = { isAuth: false }) {
    
         <div >
       
-    <Grid>
+  
 
       <Header />
       <Navbar />
-     {Fatline}
-     {Scene}
-     {Three}
-    </Grid>
-    <Switch>            
-    <Route exact path="/" component={Home} />
-    <Route exact path="/login" component={Home} />
  
-    <Route exact path="/about" component={About} />
   
+    <Switch>            
+    <Route exact path="/" component={Login} />
+    <Route exact path="/login" component={Home} />
+    <Route exact path="/about" component={About} />
     <Route exact path="/signup" component={FirstTimeLogin} />
     <Route exact path="/praxspace/:username/:message" component={CreatePraxSpace}/> 
-  
     <PrivateRoute exact path="/admin" component={Admin} />
 
   </Switch>

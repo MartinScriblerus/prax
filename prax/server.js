@@ -236,3 +236,7 @@ const db = require('./models/index');
   // const PeerDataServer = require("peer-data-server");
   // const appendPeerCdnServer = PeerDataServer.default || PeerDataServer;
   // appendPeerCdnServer(server);
+  db.sequelize.sync().then(() => {
+    // eslint-disable-next-line no-console
+    console.log('User db and user table have been created');
+  });

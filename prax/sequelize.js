@@ -3,11 +3,10 @@ import UserModel from './models/user';
 import MessageModel from '.models/Message'
 import RelationModel from './models/Relation'
 
-const sequelize = new Sequelize('process.env.DB_DATABASE', process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: 'mysql',
+const sequelize = new Sequelize('user', 'test', 'test1234', {
+  host: 'db',
+  dialect: 'mysql',
 });
-
 
 const User = UserModel(sequelize, Sequelize);
 const Message = MessageModel(sequelize, Sequelize)
