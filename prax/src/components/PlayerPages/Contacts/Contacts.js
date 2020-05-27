@@ -5,7 +5,11 @@ import "./contacts.scss";
 
 import { getUsersRequest } from '../../../redux/chat/actions'
 
+
 export const Contacts = (props) => {
+
+
+  
   const { id: idUserLogged, contacts } = props;
     console.log(idUserLogged)
     const dispatch = useDispatch()

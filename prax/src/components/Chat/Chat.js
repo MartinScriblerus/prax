@@ -41,7 +41,7 @@ export const Chat = (props) => {
 	// const [inRoom, setInRoom] = useState(false);
 
 	console.log(props.idUserLogged)
-console.log("tktktktktktktktktk")
+// console.log("tktktktktktktktktk")
 
 	const { idOrigin, messages } = props;
 	// const dispatch = useDispatch();

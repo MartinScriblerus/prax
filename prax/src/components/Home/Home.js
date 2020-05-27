@@ -10,10 +10,24 @@ import store from "../../redux/store";
 import setAuthToken from "../../services/setAuthToken";
 import { setUserLogged } from "../../redux/auth/actions";
 import './home.scss'
+import axios from 'axios'
 // import { Register } from '../Auth/Register'
 import Login from '../AuthLogin/Login/Login'
 // import { PrivateRoute } from '../Auth/PrivateRoute/'
 import FirstTimeLogin from "../FirstTimeSignIn/firstTimeSignIn";
+// import { BASE_URL } from '../../const'
+// var jwt = require('jsonwebtoken');
+
+
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+// const token = localStorage.getItem("token");
+if (token) {
+
+  setAuthToken(token);
+  console.log(token)
+  const decoded = jwt_decode(token);
+  store.dispatch(setUserLogged(decoded));
+}
 
 const styles = ({
     color:  '#030303',
@@ -41,66 +55,41 @@ const styles = ({
     }
   })
 
-const token = localStorage.getItem("token");
-if (token) {
-  setAuthToken(token);
-  const decoded = jwt_decode(token);
-  store.dispatch(setUserLogged(decoded));
-}
+
+
 
 const App = (props) => {
-    const auth = useSelector(state => state.auth)
-    const chat = useSelector(state => state.chat)
-    console.log(auth.user.id)
-  
-    // const { destiny } = chat;
-  
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        window.addEventListener("resize", updateWindowWidth);
-      }, []);
     
-      const updateWindowWidth = () => {
-        setWindowWidth(window.innerWidth);
-      };
-    
-      useEffect(() => {
-       async function fetchData(){ 
-        if (windowWidth > 420) {
-    
-          // rightSide.classList.remove("show-destiny");
-        }
-      }
-        fetchData()
-      }, [windowWidth]);
+  const auth = useSelector(state => state.auth)
+  const chat = useSelector(state => state.chat)
+  console.log(auth.user.id)
 
-      let showContax = [];
-      if (typeof chat.contacts && auth.user.id !== (undefined || null)){
-        try{
-          console.log("*****************************GETTING CONTACT PROFILES HERE")      
-        console.log("tktktktktktktktktk")
-          console.log(auth.user.id)
-          
-  
-  
-          for(var id = 0; id< chat.contacts.data.length; id++){
-            showContax.push(chat.contacts.data[id][0].username)    
-            // console.log(showContax) 
-            if (id === chat.contacts.data.length){
-              return showContax
-            }
-          }
-        }
-        catch{
-  
-            console.log("catching -- no worries!")
-          }
-          console.log(showContax)
-        }
-    let showCtx = showContax.map(s=> s)
-  
+// console.log(auth.user.id)
 
+// const { destiny } = chat;
+
+const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+useEffect(() => {
+    window.addEventListener("resize", updateWindowWidth);
+  }, []);
+
+  const updateWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+   async function fetchData(){ 
+    if (windowWidth > 420) {
+
+      // rightSide.classList.remove("show-destiny");
+    }
+  }
+    fetchData()
+  }, [windowWidth]);
+  
+ 
+ 
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -108,8 +97,10 @@ const App = (props) => {
   
        
         <TemporaryDrawer className='title'/>
-        {<div style={styles.drawer}> {showCtx.map(oneContact=><Button style={styles.button} key={oneContact}>{oneContact}</Button>)}</div>}
-          
+
+      
+
+
        <div className="right-side">
                <Chat
                  idUserLogged={auth.user.id}

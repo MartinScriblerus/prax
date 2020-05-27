@@ -35,14 +35,47 @@ const styles = {
 }
 
 export default function TemporaryDrawer() {
+  const auth = useSelector(state => state.auth)
+  const chat = useSelector(state => state.chat)
+  let showContax = [];
+  if (typeof chat.contacts && auth.user.id !== (undefined || null)){
+    try{
+      console.log("*****************************GETTING CONTACT PROFILES HERE")      
+    console.log("tktktktktktktktktk")
+      console.log(auth.user.id)
+      
 
-    const auth = useSelector(state => state.auth)
+
+      for(var id = 0; id< chat.contacts.data.length; id++){
+        showContax.push(chat.contacts.data[id][0].username)    
+        // console.log(showContax) 
+        if (id === chat.contacts.data.length){
+          return showContax
+        }
+      }
+    }
+    catch{
+
+        console.log("catching -- no worries!")
+      }
+      console.log(showContax)
+    }
+let showCtx = showContax.map(s=> s)
+
+    // const auth = useSelector(state => state.auth)
     // const chat = useSelector(state => state.chat)
     console.log(auth.user.id)
 
   const classes = useStyles();
   const [state, setState] = React.useState({
    
+
+
+
+
+
+
+    
   left: false,
 
   });
@@ -70,6 +103,8 @@ export default function TemporaryDrawer() {
 
   return (
     <div style={styles.button}>
+    {<div style={styles.drawer}> {showCtx.map(oneContact=><Button style={styles.button} key={oneContact}>{oneContact}</Button>)}</div>}
+          
     <h1>contacts
       {['left'].map((anchor) => (
         <React.Fragment key={anchor} >

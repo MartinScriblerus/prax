@@ -1,10 +1,12 @@
 import React from 'react'
+import store from '../../redux/store'
 // import Camera from '../posenet/components/Camera.js'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import io from 'socket.io-client';
 import Header from '../Header/Header/header'
 import Navbar from '../Header/Navbar/navbar'
 import Grid from '@material-ui/core/Grid';
-import store from '../../redux/store'
+
 import CreatePraxSpace from '../Chat/CreatePraxSpace/CreatePraxSpace'
 import Admin from '../../Admin';
 import Home from '../Home/Home';
@@ -41,6 +43,20 @@ socket.on('connect', function newConnection(Camera){
 
 });
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#4f5055',
+    },
+    secondary: {
+        main: '#aaf'
+      }
+    },
+    background: {
+      backgroundColor: "#303030"
+    }
+  })
+
 const styles = {
   camera : {
     backgroundColor: "#030303",
@@ -52,17 +68,13 @@ export default function App(state = { isAuth: false }) {
 
 if (window !== undefined){
 
-function threeBackground (){
-  twoBackground()
-  return <Fatline/>
-}
-function twoBackground(){
-  oneBackground(Three)
-  return <Scene/>
-}
-function oneBackground(){
-  return <Three/>
-}
+  // const existingTokens = JSON.parse(localStorage.getItem("tokens"));
+  // const [authTokens, setAuthTokens] = useState(false);
+
+  // const setTokens = (data) => {
+  //   localStorage.setItem("tokens", JSON.stringify(data));
+  //   setAuthTokens(data);
+  // }
 }
   return (
     <AuthContext.Provider value={{}} style={styles.background}>
@@ -71,23 +83,24 @@ function oneBackground(){
     <Router>
    
         <div >
-      
-  
 
       <Header />
-      <Navbar />
- 
-  
-    <Switch>            
-    <Route exact path="/" component={Login} />
-    <Route exact path="/login" component={Home} />
-    <Route exact path="/about" component={About} />
-    <Route exact path="/signup" component={FirstTimeLogin} />
-    <Route exact path="/praxspace/:username/:message" component={CreatePraxSpace}/> 
-    <PrivateRoute exact path="/admin" component={Admin} />
+      <MuiThemeProvider theme={theme}>
+        <Navbar />
+      </MuiThemeProvider>>
+    <MuiThemeProvider theme={theme}>
+      <Switch>            
+        <Route exact path="/" component={Login} />
 
-  </Switch>
- 
+        <Route exact path="/login" component={Home} />
+      
+        <Route exact path="/about" component={About} />
+        <Route exact path="/signup" component={FirstTimeLogin} />
+        <Route exact path="/praxspace/:username/:message" component={CreatePraxSpace}/> 
+        <PrivateRoute exact path="/admin" component={Admin} />
+
+    </Switch>
+  </MuiThemeProvider>
     </div>
     
     </Router>

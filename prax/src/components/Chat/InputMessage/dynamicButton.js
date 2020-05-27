@@ -102,7 +102,7 @@ var instrument;
 
 
 
-export default class DynamButton extends React.Component {
+export default class DynamButtons extends React.Component {
 
   constructor(props){
     super(props);

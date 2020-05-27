@@ -31,7 +31,6 @@ export const getUsersSuccess = (user)=> async dispatch=>{
             type: ChatTypes.GET_USERS_SUCCESS,
             payload: user
         })
- //TK COMMENTED SOCKET
         // socket.on("connection", ()=>{
         //     const getUsers = {
         //         id: user.id, 
@@ -96,8 +95,6 @@ export const postMessageRequest = (messages, idOrigin)=>async dispatch=>{
     // dispatch(markAsReadRequest(idDestiny))
     dispatch(getUsersRequest())
     // dispatch(getChatRequest(idDestiny))
- 
- //TK COMMENTED SOCKET
     // socket.emit('getUsers', idOrigin)
     // socket.emit('getMessages', idOrigin)
 }

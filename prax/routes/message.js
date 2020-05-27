@@ -5,7 +5,7 @@ const Relation = require('../models/Relation');
 
 //const { Op } = require('sequelize');
 
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const db = require('../models');
 const auth = require('./verifyToken');
 
@@ -64,11 +64,11 @@ router.get('/api/createpraxspace/:id_destiny', auth, async (req, res) => {
 			origin: req.user.id,
 			content: req.user.message
 			// destiny: req.params.id_destiny
-                },
-                include: [ { model: User, as: 'infoOrigin' } ]
-            });
+		},
+		include: [ { model: User, as: 'infoOrigin' } ]
+	});
 
-        });
+});
 
 // TK => COMMENTED OUT THIS FUNCTION TO PREVENT API FREEZE ON MESSAGES
 // router.get('/', async (req, res) => {
@@ -90,5 +90,7 @@ router.get('/api/createpraxspace/:id_destiny', auth, async (req, res) => {
 // 	});
 // 	res.send(messages);
 // });
+
+
 
 module.exports = router;

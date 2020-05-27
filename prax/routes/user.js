@@ -2,11 +2,17 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../models');
-// const Relation = require('../models/Relation');
+const Relation = require('../models/Relation');
 const validatorRegisterInput = require('../validation/register');
 const validatorLoginInput = require('../validation/login');
 const auth = require('./verifyToken');
 
+// router.options('/login', function(req, res){
+// 	res.header('Access-Control-Allow-Origin', '*');
+// 	res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+// 	res.header("Access-Control-Allow-Headers", "*")
+// 	res.send(200);
+// })
 
 router.post('/register', async (req, res) => {
 	const { username, password } = req.body;
@@ -41,11 +47,19 @@ router.post('/register', async (req, res) => {
 			console.log(relationsOrigin)
 			return {
 				origin: newUser.id,
+				// destiny: user.id
 			};
 		});
-
-		// await Relation.bulkCreate(relationsOrigin, { fields: [ 'origin' ] });
-
+		// const relationsDestiny = usersFilter.map((user) => {
+		// 	console.log(relationsDestiny)
+		// 	return {
+		// 		origin: user.id,
+		// 		destiny: newUser.id
+		// 	};
+		// });
+		// await Relation.bulkCreate(relationsOrigin, { fields: [ 'origin', 'destiny' ] });
+		await Relation.bulkCreate(relationsOrigin, { fields: [ 'origin' ] });
+		// await Relation.bulkCreate(relationsDestiny, { fields: [ 'origin', 'destiny' ] });
 		res.status(200).json({ newUser });
 	} catch (err) {
 		res.status(500).json({ err });
@@ -74,7 +88,7 @@ router.post('/login', async (req, res) => {
 		id: user.id,
 		username
 	};
-	const token = await jwt.sign(payload, process.env.TOKEN_SECRET);
+	const token = await jwt.sign(payload, "Alt_SXSW");
 
 	res.status(200)
 
@@ -87,6 +101,7 @@ router.post('/login', async (req, res) => {
 		}
 	});
 });
+
 
 
 router.get('http://localhost:5001/api/message', auth, async(req, res)=>{

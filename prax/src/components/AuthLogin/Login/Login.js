@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import '../authlogin.scss'
+// import '../Register/auth.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Welcome from '../../Layout/Welcome/Welcome'
 import { loginUserRequest } from '../../../redux/auth/actions'
-import { registerUserRequest, clearErrors } from '../../../redux/auth/actions'
 import Button from '@material-ui/core/Button';
+// import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+// import Initialize from '../components/(commented_out)initialize';
+// import Register from '../components/registerComponent'
+// import Grid from '@material-ui/core/Grid';
+// import Card from '@material-ui/core/Card';
 
+// import { makeStyles } from '@material-ui/core/styles';
 
 
 const styles = ({
+
+
+
     button: {
-        width: 200,
+        width: 340,
         height: 50,
-        color: "#aaf",
+        color: "#aaf0d1",
         borderStyle: "solid",
         borderWidth: 2,
-        borderColor: "#24a7a8",
+        borderColor: "030303",
         variant: "outlined",
         // justify: "right",
         margin: 10,
@@ -35,7 +43,7 @@ const styles = ({
     }
 })
 
-export default function Login(props) {
+export default function Login (props){
     const auth = useSelector(state=> state.auth)
     const dispatch = useDispatch()
 
@@ -47,11 +55,6 @@ export default function Login(props) {
         password: ''
     })
 
-    const [registerForm, setRegisterForm] = useState({
-        registername: "",
-        password: ""
-      });
-    
     const {username, password} = loginForm
 
     useEffect(()=>{
@@ -66,51 +69,31 @@ export default function Login(props) {
         })
     }
 
-    useEffect(() => {
-        if (isAuth) history.push("/");
-      }, [isAuth, history]);
-    
-      useEffect(()=>{
-        return ()=> dispatch(clearErrors())
-    }, [])
-
     const handleSubmit=(e)=>{
         e.preventDefault()
         const dataLogin  = {
             username,
             password
         }
-
-        const { registername, registervalue } = e.target;
-        setRegisterForm({
-          ...registerForm,
-          [registername]: registervalue
-        });
         dispatch(loginUserRequest(dataLogin))
     }
-    const handleChange2 = e => {
-        e.preventDefault();
-        const dataRegister = {
-          username,
-          password
-     
-        };
-        console.log(dataRegister)
-        dispatch(registerUserRequest(dataRegister));
-      };
 
     return ( 
         <Welcome 
         >
             <div 
             className="auth-container"
+           
             >
-           <form onSubmit={handleSubmit} onChange={handleChange2}>
-            
-           <Typography variant="h4"
-            >Log In</Typography>
-            
-            <label htmlFor="username">Username:</label>
+                <form 
+                onSubmit={handleSubmit} 
+                
+                >
+                    <Typography 
+                    variant="h4"
+                    
+                    >Log In</Typography>
+                    <label htmlFor="username">Username:</label>
                     <input 
                         type="text"
                         id="username"

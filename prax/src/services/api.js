@@ -1,29 +1,31 @@
   
 import axios from "axios";
-import { BASE_URL } from '../const'
+import { BASE_URL } from '../const/index'
 
 
 
 
 const getAxiosClient = () => {
-  const token = localStorage.getItem("token");
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+  console.log(token)
   return axios.create({
     baseURL: BASE_URL,
     headers: { "auth-token": token }
   });
+  
 };
 
 export const registerUser = dataRegister => {
+  console.log('DATAREGISTER', dataRegister)
   const api = getAxiosClient();
-  console.log(dataRegister)
-  return api.post("http://localhost:5001/api/user/login/", dataRegister);
+  return api.post("http://localhost:5001/api/user/login", dataRegister);
 };
 
 export const loginUser = dataLogin => {
   const api = getAxiosClient();
-  console.log("gettingLogin")
+  console.log("DATALOGIN", dataLogin)
   api.get("http://localhost:5001/api/user/login");
-  return api.post("http://localhost:5001/api/user/login/", dataLogin);
+  return api.post("http://localhost:5001/api/user/login", dataLogin);
 };
 
 export const getUsers = () => {

@@ -1,6 +1,6 @@
 import axios from "axios";
-const auth = require('./verifyToken');
-
+const auth = require('../../routes/verifyToken');
+console.log(auth)
 export default {
 
 // ==================================================================

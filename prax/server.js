@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 
 var bodyParser = require('body-parser');
 var session = require("express-session");
-// const jwt = require('jsonwebtoken');
+// var jwt = require('jsonwebtoken');
 
 var cors = require('cors')
 
@@ -29,6 +29,11 @@ var passport = require("passport");
     next();
   });
 
+  // jwt.sign({
+  //   exp: Math.floor(Date.now() / 1000) + (60 * 60),
+  //   data: 'token'
+  // }, 'alt_SXSW');
+
   app.use(morgan('dev'))
 
 
@@ -37,11 +42,11 @@ var passport = require("passport");
   app.use(express.static("./public"));
       app.use(bodyParser.json());
           // We need to use sessions to keep track of our user's login status
-    //   app.use(session({ 
-    //     secret: "altSXSW", 
-    //     resave: true, 
-    //     saveUninitialized: true })
-    //     );
+      app.use(session({ 
+        secret: "altSXSW", 
+        resave: true, 
+        saveUninitialized: true })
+        );
       app.use(passport.initialize());
       app.use(passport.session());
       app.use(express.urlencoded({extended: false})) 

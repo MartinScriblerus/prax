@@ -1,6 +1,6 @@
 
 const Message = require('./Message')
-
+const Relation = require('./Relation')
 
 var bcrypt = require("bcryptjs");
 
