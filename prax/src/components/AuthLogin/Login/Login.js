@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import '../Register/auth.scss'
+import '../authlogin.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Welcome from '../../Layout/Welcome/Welcome'
@@ -7,30 +7,13 @@ import { loginUserRequest } from '../../../redux/auth/actions'
 import Button from '@material-ui/core/Button';
 // import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-// import Initialize from '../components/(commented_out)initialize';
-// import Register from '../components/registerComponent'
 // import Grid from '@material-ui/core/Grid';
 // import Card from '@material-ui/core/Card';
-
 // import { makeStyles } from '@material-ui/core/styles';
 
 
 const styles = ({
 
-
-
-    button: {
-        width: 340,
-        height: 50,
-        color: "#aaf0d1",
-        borderStyle: "solid",
-        borderWidth: 2,
-        borderColor: "030303",
-        variant: "outlined",
-        // justify: "right",
-        margin: 10,
-        marginTop: 10
-    },
     card: {
     borderStyle: "solid",
     borderWidth: 2,
@@ -89,6 +72,7 @@ export default function Login (props){
                 onSubmit={handleSubmit} 
                 
                 >
+                <div id="logPos">
                     <Typography 
                     variant="h4"
                     
@@ -98,6 +82,7 @@ export default function Login (props){
                         type="text"
                         id="username"
                         name="username"
+                        className="input"
                         onChange={handleChange}
                         value={username}
                         style={{border: errors && errors.user ? '1px solid red': undefined}}
@@ -108,14 +93,15 @@ export default function Login (props){
                         type="password"
                         name="password"
                         id="password"
+                        className="input"
                         onChange={handleChange}
                         value={password}
                         style={{border: errors && errors.password ? '1px solid red': undefined}}
                     ></input>
+                  </div>
                     {errors && errors.password && <span className="show-error">{errors.password}</span>}
                     <Button
                         className="submit-auth"
-                       style={styles.button}
                         type="submit"
                         disabled={!username || !password ? true : false}
                     >Log In</Button>

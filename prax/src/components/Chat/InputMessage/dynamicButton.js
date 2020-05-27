@@ -116,7 +116,7 @@ export default class DynamButtons extends React.Component {
     // console.log(props.idUserLogged)
     userID = props.idUserLogged;
     username = props.username;
-    instrument = props.instruments
+    instrument = props.instrument
 
     this.addListItem = this.addListItem.bind(this);
     this.removeListItem = this.removeListItem.bind(this);
