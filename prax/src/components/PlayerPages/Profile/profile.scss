@@ -1,23 +1,31 @@
 @import '../../App/variables';
 
 i {
-   background-color: #dadcd7;
-   color: #24a7a8
+   background-color: $metronome_on;
+   color: $metronome_off
 }
+.options-box {
+   color: "#f6d";
+    // height: 100%
 
+}
+fa-ellipsis-v {
+    background-color: $headline_text
+}
 .profile-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $blue;
+    // height: 100%;
+    background-color: $dark_grey;
     padding: 1rem;
-    color: #dadcd7;
+    color: $metronome_on;
     .options-box{
         button{
             position: relative;
             background: none;
             i{
-                background-color: $blue;
+                background-color: $dark_grey;
                 color: #dadcd7;
                 padding: 0 1rem;
             }
@@ -26,7 +34,7 @@ i {
                 font-size: 0.9rem;
                 padding: 0.5rem 0 ;
                 display: block;
-                background-color: "#dadcd7";
+                background-color: $header_black;
                 position: absolute;
                 top: 150%;
                 right: 0;

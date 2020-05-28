@@ -2,12 +2,21 @@
 
 .toolbar {
     background-color: $header_black;
-    height: 6vh
+    height: 6vh;
+    width: 100%
 }
-
+.title {
+    color: $white;
+    text-align: center;
+    margin-top: 2vh;
+}
+h6 {
+    color: $white
+}
 .MuiButton-root {
     width: 12vw;
-    margin-left: 16vw
+    margin-left: 16vw;
+    color: $white
 }
 
 @media screen and (min-width: $mini){
@@ -16,12 +25,17 @@
         // flex: 1;
         color:  $white;
       font-size: 20;
+      text-align: center;
       margin-top: -7;
       width: 20vw;
       }
+      h6 {
+        color: $white
+    }
     .MuiButton-root {
         width: 30vw;
-        margin-left: 16vw
+        margin-left: 16vw;
+        color: $white;
     }
 }
 
@@ -32,11 +46,16 @@
         color:  $white;
       font-size: 24;
       margin-top: -7;
+      text-align: center;
       width: 15vw;
       }
+      h6 {
+        color: $white
+    }
     .MuiButton-root {
         width: 30vw;
-        margin-left: 16vw
+        margin-left: 16vw;
+        color: $white;
     }
 }
 
@@ -44,13 +63,22 @@
     .title {
 
         // flex: 1;
-        color:  $light_grey;
+        color:  $white;
       font-size: 18;
+      text-align: center;
       margin-top: -7;
       width: 100%;
       }
+      h6 {
+        color: $white
+    }
     .MuiButton-root {
         width: 100%;
-        margin-left: 6vw
+        margin-left: 6vw;
+        color: $white;
     }
+}
+.MuiAppBar-colorPrimary {
+    background-color: $header_black;
+    color: $header_black;
 }

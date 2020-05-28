@@ -1,7 +1,26 @@
 @import "../../App/variables";
 
-  
-  
+  a {
+    position: relative;
+    width:100%
+  }
+
+  .inputCreateRoom{
+      margin-left: 10%;
+      margin-right: 10%;
+      width: 80%;
+      background-color: $header_black;
+      display: flex;
+      position: relative;
+      // marginRight: '1%',
+      justify-content: center;
+      // marginLeft: '1%',
+      margin-top: 5;
+      height: 30;
+      color: #dadcd7;
+      font-size: 18; 
+      border: 2px solid $white;
+  }
   h3 {
     color: $light_grey;
     padding-top: 5;
@@ -15,3 +34,5 @@
   .textarea2 {
     color: $white
   }
+
+  

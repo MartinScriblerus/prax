@@ -120,6 +120,10 @@ const db = require('./models/index');
     //   // We need to use sessions to keep track of our user's login status
   app.use(session({ secret: "altSXSW", resave: true, saveUninitialized: true }));
   
+  app.get('/', (req, res) => {
+    console.log("in /")
+    return res.json(users)
+  });
   app.get('/login', (req, res) => {
     console.log("in /login")
     return res.json(users)
@@ -230,8 +234,8 @@ const db = require('./models/index');
         .finally(()=>{return username});
     });
 
-        var users = ["check1", "check2", "check3"];
-        var messages = ["test1", "test2", "test3"];
+        var users = [];
+        var messages = [];
 
        
 // =============================================================

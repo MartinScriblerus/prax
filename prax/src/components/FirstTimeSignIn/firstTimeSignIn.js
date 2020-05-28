@@ -18,44 +18,83 @@ import { makeStyles } from '@material-ui/core/styles';
         root: {
             flexGrow: 1,
             // backgroundImage: "url(https://laughingsquid.com/wp-content/uploads/2013/10/21.jpg)",
-            opacity: "90%",
+      
             backgroundPosition: 'top',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             overflow: 'auto',
-        }}));
+        },
+      a: {
+            textAlign: 'center'
+        }
+    }));
 
     const styles = ({
         input: {
-         marginLeft: '10vw'
+         marginLeft: '10vw',
+         marginRight: '10vw',
+         backgroundColor: "#aaf",
+         color: "#f6f6f6",
         },
         signup: {
         marginTop: 0,
-        color: '#212121'
+        color: '#f6f6f6'
         },
         button: {
-            width: 200,
-            height: 50,
+            width: '80%',
+            marginRight: '10%',
+            marginLeft: '10%',
+            height: 80,
+            position: 'relative',
+            display: 'flex',
+            justifyContent: 'center',
+            textAlign: 'center',
             borderStyle: "solid",
-            backgroundColor: "#24a7a8",
+            borderColor: "#aaf",
+            borderRadius: '5%',
             color: '#dadcd7',
             borderWidth: 2,
-            borderColor: "#24a7a8",
+            // margin: '10vw',
             variant: "outlined",
             // justify: "right",
-            margin: 10,
+            align: 'center',
+            marginTop: '10vh',
+            // marginRight: '10%',
+            // marginLeft: '10%',
+           
+        },
+        a: {
+            width: 400,
+            height: 80,
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            
+            borderStyle: "solid",
+            borderColor: "#9ED1FF",
+            color: '#dadcd7',
+            borderWidth: 2,
+            borderRadius: '5%',
+            variant: "outlined",
+            // justify: "right",
+           
+            marginTop: '10vh'
         },
         card: {
         borderStyle: "solid",
         backgroundColor: "#212121",
         borderWidth: 2,
         borderColor: "#85b1d7",
+        borderRadius: '5%',
         variant: "outlined",
-        marginRight: "10%",
-        marginLeft: "10%",
-        paddingRight: '5%',
-        paddingLeft: '5%',
-        marginTop: 60,
+        marginRight: "12%",
+        marginLeft: "12%",
+        // paddingRight: '5%',
+        // paddingLeft: '5%',
+        paddingTop: '8vh',
+        paddingBottom: '20vh',
+        marginBottom: '60vh',
+        marginTop: 20,
         zIndex: 5
         }
     })
@@ -74,6 +113,7 @@ export default function FirstTimeLogin(newUser){
     const [ password, setPassword ] = useState("");
     const [ instrument, setInstrument ] = useState("");
 
+   
     const handleSubmit = (evt) => {
 
         var user = {
@@ -88,7 +128,7 @@ export default function FirstTimeLogin(newUser){
     
        console.log(user);
        console.log(user.username);
-       history.push("/login");
+       history.push("/");
       
     axios({
         method: 'post',
@@ -100,9 +140,9 @@ export default function FirstTimeLogin(newUser){
   return (
       <Router>
     <div className={classes.root}>
-  
-    <Card style={styles.card}>
     <h1 className='signupText'>Sign Up</h1>
+    <Card style={styles.card}>
+    
     <form onSubmit={handleSubmit} noValidate autoComplete="off">  
         <TextField   
             className="inputPad"  
@@ -137,7 +177,7 @@ export default function FirstTimeLogin(newUser){
             onChange={e => 
             setPassword(e.target.value)
             }
-            label="Choose a Password (7 char min)" 
+            label="Choose a Password" 
         />
     </form>
 
@@ -217,7 +257,7 @@ export default function FirstTimeLogin(newUser){
             onChange={e => 
             setBandName(e.target.value)
             }
-            label="Name of your Band (if applicable)" 
+            label="Group Affiliation" 
         />
     </form>
 
@@ -242,11 +282,11 @@ export default function FirstTimeLogin(newUser){
     </form>
 
             <Button 
-                id="register_button"
+                // id="register_button"
                 style={styles.button}
             >
             <Link 
-                to="/login" 
+                to="/" 
                 onClick={() => 
                 handleSubmit()
             }
@@ -257,11 +297,7 @@ export default function FirstTimeLogin(newUser){
             </Button> 
 
             <br/>
-            <Link 
-            to="/login"
-            onClick={() => handleSubmit()}
-            >
-            Already have an account?</Link>              
+                
         </Card>
     </div>
 </Router>

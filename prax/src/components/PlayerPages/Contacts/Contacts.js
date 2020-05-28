@@ -23,7 +23,7 @@ export const Contacts = (props) => {
 if (!Array.isArray(contacts)) { console.log('results are not array' ) }   
 if (contacts !== undefined || null){
       console.log(contacts)
-  return <h1>{props.idUserLogged}</h1>}
+  return <h1 className="contacts-container">{props.idUserLogged}</h1>}
   else {
   return (
       <div className="contacts-container" />

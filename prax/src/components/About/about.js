@@ -24,23 +24,20 @@ const styles = ({
     zIndex: 10
   },
   about: {
-    variant: "h2",
-    fontSize: 24,
-    paddingTop: 40,
+    variant: "h5",
+    fontSize: 20,
     fontFamily: 'Overpass',
     backgroundImage: "url(http://davidhall.io/wp-content/uploads/2019/07/graphic-notation-John-Cage.jpg)",
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     overflow: 'auto',
- 
   },
   icons : {
     marginRight: 10,
     marginLeft: 10,
     align: 'center',
     backgroundColor: '#212121'
-
   },
   card : {
     display: 'flex',
@@ -59,11 +56,13 @@ const styles = ({
     marginRight: "7%",
     marginBottom: 40,
     paddingRight: 10,
+    marginTop: 15,
+ 
     
   },
   card2 : {
     display: 'flex',
-    variant: "h2",
+    variant: "h5",
     fontSize: 20,
     position:'relative', 
     left: "20%",
@@ -74,32 +73,31 @@ const styles = ({
     color: '#f6f6f6',
     borderColor: '#85b1d7',
     // borderRadius: 7,
-    paddingRight: 3,
-    paddingLeft: 3,
     fontFamily: 'Overpass',
     backgroundColor: '#333333',
-    marginTop: 10,
-    marginBottom: 40,
+    
+    marginBottom: 50,
     opacity: .93,
-    padding: 15
+   
   },
  
   text : {
     variant: "h5",
-    fontSize: 22,
+    fontSize: 20,
+    lineHeight: 1.5,
     // borderRadius: 7,
     fontFamily: 'Overpass',
-    margin: 15
+    margin: 10,
+    marginTop: 27,
+    marginBottom: 25
   },
   text2 : {
-    variant: "h3",
-    fontSize: 20,
+    // variant: "h5",
+    fontSize: 22,
+  
     borderRadius: 7,
     fontFamily: 'Overpass',
-    marginTop: 25,
-    marginBottom: 10,
-    marginRight: 10,
-    marginLeft: 5,
+ 
   },
 })
 
@@ -114,26 +112,29 @@ export default function About(newUser){
  
         <Card style={styles.card}> 
               <Typography variant="h3" gutterBottom style={styles.text}>
-              Prax is an audio-video platform enhanced with tools to help musicians stay on time over a remote connection. 
-             </Typography>
-        </Card> 
+              Prax is a site for remote collaboration. It provides a low-latency A/V connection that enables musicians, actors, comedians, and content creators to record and share live performances. It also provides audio tools to synchronize performers and visual filters to mask their appearance and environment.  
+       </Typography>
+              </Card> 
  
 
       <Grid item xs={6}>
           <Card style={styles.card2}>
-            <ul>
+         
+          <ul>
+          <h4 id="aboutTech">Tech Stack:  </h4>
               <li>
-                <Typography variant="h6"> Encrypted Audio & Video</Typography>
+              WebRTC, Socket.io, Media Stream API
               </li>
               <li>
-                <Typography variant="h6"> Authentication without Tracking </Typography>
+              Tensorflow PoseNet
               </li>
               <li>
-                <Typography variant="h6"> No Advertisements </Typography>
+              React, Redux, Express, MySQL, JWT Tokens
               </li>
               <li> 
-                <Typography variant="h6"> Tools for Remote Musicians </Typography>
+              HTML, Sass, JSX 
               </li>
+             
             </ul>
           </Card>
       </Grid>
@@ -141,7 +142,7 @@ export default function About(newUser){
     </Grid>
 
   
-<Grid item xs={12}>
+<Grid item xs={12} className="iconGrid">
     <div className="iconOrder">
         <SocialIcon className="socialicons" url="https://github.com/MartinScriblerus" style={styles.icons}/>
         <SocialIcon className="socialicons" url="https://twitter.com/A00PE"  style={styles.icons} />

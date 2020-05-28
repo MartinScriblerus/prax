@@ -1,15 +1,122 @@
 @import '../App/variables';
 
 .signupText {
-    color: $headline_text;
-    width: 100%;
+        position: relative;
+        text-align: center;
+        // padding: 5%;
+        background-color: $headline_text;
+        color: $header_black;
+        width: 100%;
+        text-align: center;
 }
+
+.MuiPaper-root{
+    background-color: $header_black;
+    padding-right: 7%;
+    padding-left: 7%;
+}
+.MuiInputLabel-formControl{
+    color: $white
+}
+.inputPad label {
+    width: '70%';
+    color: $metronome_off;
+    font-size: 18px;
+}
+
 .inputPad {
-    width: '70%';
-background-color: $white
+    border-style: solid;
+    border-width: 2px;
 }
+
 form {
-    width: '70%';
-    margin-left: 40;
-    margin-right: 40;
+    width: '100%';
+    padding:5px
+}
+
+#instrument {
+    color: $white;
+    border: 2px solid $offset_black;
+}
+#instrument-label {
+    color: $white;
+}
+#bandName {
+    color: $white;
+    border: 2px solid $offset_black;
+}
+#bandName-label {
+    color: $white;
+}
+#email {
+    color: $white;
+    border: 2px solid $offset_black;
+}
+#email-label {
+    color: $white;
+}
+#lastName {
+    color:$white;
+    border: 2px solid $offset_black;
+}
+#lastName-label {
+    color: $white;
+}
+#firstName {
+    color: $white;
+    border: 2px solid $offset_black;
+}
+#firstName-label {
+    color: $white;
+}
+#password {
+    color: $white;
+    border: 2px solid $offset_black;
+}
+#password-label {
+    color: $white;
+}
+#username {
+    color: $white;
+    border: 2px solid $offset_black;
+}
+#username-label {
+    color: $white;
+}
+#register_button{
+    width: 50%;
+    margin-right: 7%;
+    margin-left: 7%;
+    &:hover{
+        background-color: $light_grey;
+    }
+}
+.MuiButtonBase-root .MuiButton-root .MuiButton-text {
+    justify-content: center;
+    width: 60%
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: $mini){
+  
+
+}
+
+@media screen and (min-width: $tablet){
+
+  
+}
+
+@media screen and (min-width: $desktop){
+ 
+   
 }

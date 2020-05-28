@@ -2,13 +2,14 @@
 
 .contacts-container{
     position: relative;
+    // height: 100%;
     flex: 1;
     .searcher-container{
         padding: 0.3rem;
         input {
             width: 100%;
             font-size: 0.8rem;
-            color: pink;
+            // color: pink;
         }
     }
     .contacts-list {
@@ -32,7 +33,7 @@
             .top-box, .bottom-box{
                 display: flex;
                 justify-content: space-between;
-                color: pink;
+                // color: pink;
             }
             .top-box{
                 .username-box{

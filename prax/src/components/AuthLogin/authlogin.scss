@@ -1,24 +1,179 @@
 @import '../App/variables';
 
+#username{
+    background-color: $header_black;
+    color: $white;
+    margin-top: 10vh;
+}
+#password{
+    background-color: $header_black;
+    color: $white;
+}
+
+
 .auth-container{
     width: 100%;
+    // border-top: solid 2px #aaf;
+    
+
+    .submit-auth:disabled{
+        color: $header_black;
+        border-color: $header_black;
+        height: 0vh;
+    }
     .submit-auth{
-        background: $blue;
-        border-color: #24a7a8;
-        border-style: solid;
-        border-width: 2px;
+        // border-color: $header_black;
         background-color: $header_black;
+        border-color: $metronome_on;
+        border-width: 2px;
+        border-radius: 5px;
+        border-style: solid;
+        position: relative;
+        display: flex;
+       
         color: $metronome_on;
-        padding: 2.5rem;
+        padding: 1.5rem;
         margin-top: 1rem;
-        height: 10vh;
+        height: 20vh;
+        width: 100%;
+        font-size: 24px;
+    }
+   
+}
+#logBorder{
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: $headline_text;
+    border-radius: 5%;
+    background-color: #212121;
+    // margin-top: 10vh;
+    margin-bottom: 30vh;
+    position: relative;
+    justify-content: center
+  
+}
+h6 {
+    text-align: center;
+    color: $metronome_off;  
+}
+#username {
+    color: $white
+}
+input {
+    color: $white;
+    align-content: left;
+    font-size: 18px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 2%;
+    font-size: 18px;
+    
+}
+#username input.placeholder {
+    color: $white
+}
+
+form {
+   
+    padding-right: 10%; 
+    padding-left: 10%;
+
+}
+#logPos {
+    position: relative;
+    text-align: center;
+    padding: 5%;
+    background-color: $headline_text;
+    width: 100%;
+    text-align: center;
+   
+}
+
+h2 {
+    background-color: $headline_text;
+    color: $header_black;
+}
+input::placeholder {
+color: $white
+}
+
+
+@media screen and (min-width: $mini){
+    #logBorder {
+   
+   width: 80%;
+       
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    form {
+        background-color: $header_black;
+        // padding-right: 14%; 
+        // padding-left: 14%;
+    }
+    #logPos {
+        position: relative;
+        text-align: center;
+        padding: 6%;
+        background-color: $header_black;
+        color: $headline_text;
+        width: 100%;
+        text-align: center
     }
 }
-.submit-auth {
-    width: 100%;
-    color: $metronome_on;
-    font: 42px;
+
+@media screen and (min-width: $tablet){
+    #logBorder {
+   
+        width: 70%;
+            
+             margin-left: 15%;
+             margin-right: 15%;
+         }
+    form {
+        background-color: $header_black;
+     
+    }
+    #logPos {
+        position: relative;
+        text-align: center;
+     
+        background-color: $header_black;
+        color: $headline_text;
+        width: 100%;
+        text-align: center
+  
+    }
 }
-.logPos {
-    position: relative
+
+@media screen and (min-width: $desktop){
+    #logBorder {
+   
+        width: 60%;
+            
+             margin-left: 20%;
+             margin-right: 20%;
+         }
+    form {
+        background-color: $header_black;
+        // padding-right: 12%; 
+        // padding-left: 12%;
+    }
+    #logPos {
+        position: relative;
+        text-align: center;
+    
+        // color: $headline_text;
+        width: 100%;
+        text-align: center;
+        background-color: $header_black;
+    }
+}
+#logTitle{
+    background-color: $headline_text;
+    color: $header_black;
+    text-align: center;
 }

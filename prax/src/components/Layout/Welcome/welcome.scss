@@ -6,16 +6,17 @@
     display: flex;
     .left-column{
         width: 60%;
-        background: $blue;
+        background: $dark_grey;
         display: flex;
-        align-items: left;
+        align-items: center;
         justify-content: center;
     }
     .right-column{
-        width: 50%;
-  
+        width: 100%;
+    background-color: $header_black;
         display: flex;
         align-items: center;
         justify-content: right;
     }
+ 
 }

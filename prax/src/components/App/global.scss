@@ -60,7 +60,7 @@ img {
 
 p{
     padding: 100;
-    color: #24a7a8;
+    color: $white;
     margin-top: .15rem
 }
 h4{
@@ -68,7 +68,7 @@ h4{
     font-size: 18px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding-left:2.2rem;
-    color: #24a7a8
+    color: $white
 }
 
 
@@ -105,7 +105,7 @@ li{
 }
 
 a{
-    color: $metronome_on;
+    color: $metronome_off;
     text-decoration: none;
     &:hover{
         text-decoration: none;
@@ -164,18 +164,7 @@ input[type="text"], input[type="password"]{
     }
 }
 
-.question-form{
-    margin-top: 1.5rem;
-   color: #24a7a8;
-    height: 100vh
-}
 
-.blue-link{
-    color: #24a7a8;
-    position: relative;
-  
-
-}
 
 .show-error{
     font-size: 0.8rem;

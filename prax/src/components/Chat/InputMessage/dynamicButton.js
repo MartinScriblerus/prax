@@ -23,9 +23,9 @@ const styles = {
     // backgroundColor: "#030303",
     color: "#dadcd7",
     height:40,
-    width: "85%",
-    marginRight: "7.5%",
-    marginLeft: "7.5%",
+    width: "92%",
+    marginRight: "4%",
+    marginLeft: "4%",
     border: "solid",
     borderWidth: 2,
     borderColor: "#4797DE",
@@ -46,7 +46,7 @@ margin:4
   },
   openRoomsCard: {
   
-    backgroundColor: "#272727",
+    backgroundColor: "#212121",
     color: "#dadcd7",
   },
   openRoomsTitle: {
@@ -57,21 +57,12 @@ margin:4
     height: 60,
     borderStyle: "solid",
     borderWidth: 2,
-    borderColor: "#24a7a8",
+    borderColor: "$headline_text",
 
   },
   openRoomsDescription: {
     backgroundColor: "#85b1d7",
     zIndex: 3
-  },
-  input: {
-    width: "85%",
-    marginRight: "7.5%",
-    marginLeft: "7.5%",
-    marginTop: 5,
-    height: 40,
-    backgroundColor: "#dadcd7",
-    fontSize: 18 
   },
 
   // dynamic1 : {
@@ -79,7 +70,8 @@ margin:4
   // },
 h1: {
   backgroundColor: "#85b1d7",
-  color: "#212121"
+  color: "#212121",
+  width: '100%'
 },
 
 h3: {
@@ -140,6 +132,7 @@ export default class DynamButtons extends React.Component {
       currentListDescription.push(itemToAddDescription);
       // THIS WORKS ---> currentListDescription
       // console.log(currentListDescription)
+      
       // socket.emit("toInputMessageDescription", currentListDescription)
   
       this.setState({dynamicListDescription : currentListDescription});
@@ -279,7 +272,8 @@ export class InputBoxDescription extends React.Component {
   render(){
     return (
       <form ref="itemForm" onSubmit={e => this.formSubmit2(e)}>  
-        <input style={styles.input} type="text" id="item" ref="item" placeholder="Give your prax-space a name"/>
+       
+        <input className="inputCreateRoom" type="text" id="item" ref="item" placeholder="Name your Room"/>
 
         <Button  style={styles.button} type="submit" className="btn btn-primary roomDefineButton"
         > Join the Room

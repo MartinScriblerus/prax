@@ -2,17 +2,24 @@
 
 .socialicons {
     background-color: #212121;
+    margin: 5vh
 }
 
-// .iconOrder {
-//     margin-left: 28%;
-//     margin-right: 28vw;
-//     // margin-right: 32%;
-// }
+.social-svg {
+    background-color: $header_black;
+    color: $header_black;
+}
+.iconOrder {
+    display: flex;
+    justify-content: center;
+}
+.iconGrid {
+    display: flex;
+    justify-content: center;
+    }
 .card2 {
   
         display: 'flex';
-        variant: "h2";
         font-size: 20;
         position:'relative'; 
         left: "20%";
@@ -23,15 +30,11 @@
         color: '#f6f6f6';
         border-color: '#85b1d7';
         // borderRadius: 7,
-        padding-right: 3;
-        padding-left: 3;
+        margin-right: 6;
+       
         font-family: 'Overpass';
         background-color: '#333333';
-        margin-top: 10;
-        margin-bottom: 40;
         opacity: .93;
-        padding: 15;
-   
 }
 @media screen and (min-width: $mini){
     .title {
@@ -75,4 +78,15 @@
         width: 100%;
         margin-left: 6vw
     }
+}
+li, ul, h5 {
+    color: $headline_text;
+   
+}
+.socialicons .MuiGrid-root  {
+    background-color: $header_black
+}
+#aboutTech {
+    font-size: 28px;
+    color: $white
 }

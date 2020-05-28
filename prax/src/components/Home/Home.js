@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, Provider } from 'react-redux'
 import { Chat } from "../Chat/Chat";
 import { InputMessage } from "../Chat/InputMessage/InputMessage";
-import Button from '@material-ui/core/Button';
+
 import TemporaryDrawer from './drawerComponent'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -10,17 +10,18 @@ import store from "../../redux/store";
 import setAuthToken from "../../services/setAuthToken";
 import { setUserLogged } from "../../redux/auth/actions";
 import './home.scss'
-import axios from 'axios'
+// import axios from 'axios'
 // import { Register } from '../Auth/Register'
-import Login from '../AuthLogin/Login/Login'
+// import Login from '../AuthLogin/Login/Login'
+
 // import { PrivateRoute } from '../Auth/PrivateRoute/'
 import FirstTimeLogin from "../FirstTimeSignIn/firstTimeSignIn";
 // import { BASE_URL } from '../../const'
 // var jwt = require('jsonwebtoken');
 
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-// const token = localStorage.getItem("token");
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+const token = localStorage.getItem("token");
 if (token) {
 
   setAuthToken(token);
@@ -31,8 +32,6 @@ if (token) {
 
 const styles = ({
     color:  '#030303',
-    
-
     button: {
         height: 50,
         backgroundColor: '#85b1d7',
@@ -42,11 +41,10 @@ const styles = ({
         marginTop: 5
     },
     profile: {
-      color: "#aafs",
+      color: "#aaf",
   
     },
-    card: {
-    
+    card: { 
     variant: "solid",
     padding: 5,
     marginRight: 20,
@@ -114,7 +112,7 @@ useEffect(() => {
              </div> 
           <Switch>
             <Route exact path="/signup" component={FirstTimeLogin} />
-            <Route exact path="/login" component={Login} />
+        
           </Switch>
         </main>
       </BrowserRouter>

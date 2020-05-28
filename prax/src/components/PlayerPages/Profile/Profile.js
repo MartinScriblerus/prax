@@ -5,25 +5,30 @@ import { logOutUser } from '../../../redux/auth/actions'
 
 const styles = {
   logout: {
-    color: "#dadcd7",
-    backgroundColor: "#85b1d7" 
+    backgroundColor: "#85b1d7",
+    color: "#272" 
   },
   logoutPopup: {
     color: "#85b1d7",
-    backgroundColor: "#030303" 
+    backgroundColor: "#030303", 
+    fontSize: 20,
+    width: '100%'
+
   },
   contactTabs: {
     fontSize: 29,
-    marginLeft: "-15%"
+    marginLeft: "-15%",
+    backgroundColor: '#212121' 
   },
   button: {
     color: "black",
-    height: 20
+    height: 60
   },
   ellipsis: {
-    backgroundColor: "#24a7a8",
+    color: "#daddc7",
     fontSize: 26,
-    color: "#dadcd7"
+    height: '100%',
+    width: '100%',
   }
 }
 
@@ -56,7 +61,8 @@ export const Profile = props => {
        {showMenu && (
             <nav className="profile-menu">
               <ul>
-                <li style={styles.logoutPopup}
+                <li 
+                style={styles.logoutPopup}
                   onClick={() => {
                     dispatch(logOutUser());
                   }}

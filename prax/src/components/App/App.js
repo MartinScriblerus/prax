@@ -5,7 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import io from 'socket.io-client';
 import Header from '../Header/Header/header'
 import Navbar from '../Header/Navbar/navbar'
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 import CreatePraxSpace from '../Chat/CreatePraxSpace/CreatePraxSpace'
 import Admin from '../../Admin';
@@ -15,7 +15,6 @@ import { Provider } from "react-redux";
 import PrivateRoute from './PrivateRoute';
 import About from '../About/about';
 import Login from '../AuthLogin/Login/Login'
-import {Fatline, Scene, Three} from './threeFiber'
 import FirstTimeLogin from '../FirstTimeSignIn/firstTimeSignIn';
 import {
   BrowserRouter as Router,
@@ -26,34 +25,34 @@ import {
 require('typeface-overpass')
 require('typeface-permanent-marker')
 
-const socket = io('http://localhost:5001',{transports: ['websocket']});
+// const socket = io('http://localhost:5001',{transports: ['websocket']});
 
-// SOCKETS FOR APP --> BRING BACK WHEN FINISHING SIGNALLING
-socket.on('connect', function newConnection(Camera){
-  // console.log('room name: ', futureVariableNameHere)
-  // socket.on('message', function getMessage(message){
-  //   console.log(message);
-  // })
-  // socket.on('message_Users', function getMessageUsers(message_Users){
-  //   console.log(message_Users);
-  // })
-  // socket.on('message_Messages', function getMessageMessages(message_Messages){
-  //   console.log(message_Messages);
-  // })
+// // SOCKETS FOR APP --> BRING BACK WHEN FINISHING SIGNALLING
+// socket.on('connect', function newConnection(Camera){
+//   // console.log('room name: ', futureVariableNameHere)
+//   // socket.on('message', function getMessage(message){
+//   //   console.log(message);
+//   // })
+//   // socket.on('message_Users', function getMessageUsers(message_Users){
+//   //   console.log(message_Users);
+//   // })
+//   // socket.on('message_Messages', function getMessageMessages(message_Messages){
+//   //   console.log(message_Messages);
+//   // })
 
-});
+// });
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#4f5055',
+      main: '#212121',
     },
     secondary: {
-        main: '#aaf'
+        main: '#dadcd7'
       }
     },
     background: {
-      backgroundColor: "#303030"
+      backgroundColor: "$offset_black"
     }
   })
 
@@ -82,21 +81,21 @@ if (window !== undefined){
     
     <Router>
    
-        <div >
+        <div id="outerDiv">
 
       <Header />
       <MuiThemeProvider theme={theme}>
         <Navbar />
-      </MuiThemeProvider>>
+      </MuiThemeProvider>
     <MuiThemeProvider theme={theme}>
       <Switch>            
         <Route exact path="/" component={Login} />
 
-        <Route exact path="/login" component={Home} />
+        <PrivateRoute exact path="/login" component={Home} />
       
         <Route exact path="/about" component={About} />
         <Route exact path="/signup" component={FirstTimeLogin} />
-        <Route exact path="/praxspace/:username/:message" component={CreatePraxSpace}/> 
+        <PrivateRoute exact path="/praxspace/:username/:message" component={CreatePraxSpace}/> 
         <PrivateRoute exact path="/admin" component={Admin} />
 
     </Switch>

@@ -81,6 +81,7 @@ export const setUserLogged = user => async dispatch => {
 
 export const logOutUser = () => async dispatch => {
   await setAuthToken(false);
+  console.log("MADE IT HEEEEEERE")
   localStorage.removeItem("token");
   dispatch({ type: AuthTypes.LOGOUT_USER });
   dispatch({ type: ChatTypes.CLEAR_STORE });

@@ -6,7 +6,7 @@ import MetronomeApp from './metroIndex'
 // console.log(adapter)
 const styles = {
   container: {
-    backgroundColor: "#24a7a8",
+    backgroundColor: "#85b1d7",
     height: "100%"
   },
   h1: {
@@ -17,7 +17,7 @@ const styles = {
     height: 40
   },
   buttoncall: {
-    backgroundColor: "pink",
+    // backgroundColor: "pink",
     height: 40
   },
   buttonhangup: {

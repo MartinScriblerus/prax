@@ -6,30 +6,38 @@ import Button from '@material-ui/core/Button';
 import { Profile } from '../PlayerPages/Profile/Profile'
 import { Contacts } from '../PlayerPages/Contacts/Contacts'
 import { useSelector } from 'react-redux'
-
+import './home.scss'
+var i;
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#030303"
+    color: "#030303",
+    // height: '100%'
   },
   list: {
-    width: 200,
-    backgroundColor: '#85b1d7',
+    backgroundColor: "#212121",
+    // height: '100%' 
   },
-  fullList: {
-      top: 100,
-    width: 'auto',
-  },
-
+  
 });
 
 const styles = {
- 
+  root: {
+color: "#212121"
+  },
   button: {
     color: "#85b1d7",
-    
+    borderTopStyle: "solid",
+    borderTopColor: "#85b1d7",
+    borderBottomStyle: "solid",
+    borderBottomColor: "#85b1d7",
     alignItem: 'right',
     placeholder: {
    float: 'right'
+    },
+    drawer: {
+      color: "#212121",
+      
+      height: '100%'
     }
   }
 }
@@ -62,20 +70,12 @@ export default function TemporaryDrawer() {
     }
 let showCtx = showContax.map(s=> s)
 
-    // const auth = useSelector(state => state.auth)
-    // const chat = useSelector(state => state.chat)
     console.log(auth.user.id)
 
   const classes = useStyles();
   const [state, setState] = React.useState({
    
 
-
-
-
-
-
-    
   left: false,
 
   });
@@ -100,21 +100,29 @@ let showCtx = showContax.map(s=> s)
     >
     </div>
   );
-
+ 
   return (
     <div style={styles.button}>
-    {<div style={styles.drawer}> {showCtx.map(oneContact=><Button style={styles.button} key={oneContact}>{oneContact}</Button>)}</div>}
+  {/*}  {<div style={styles.drawer}> {showCtx.map(oneContact=><Button style={styles.button} key={auth.user.id}>{auth.user.username}</Button>)}</div>} */}
           
-    <h1>contacts
+
       {['left'].map((anchor) => (
         <React.Fragment key={anchor} >
-          <Button style={styles.button} onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-            {list(anchor)}
-
-            <div className="left-side" >
+     
+          <Button style={styles.button} onClick={toggleDrawer(anchor, true)}>Open Contacts Menu {anchor}</Button>
+          <Drawer 
+          className="drawerComponent"
+          style={styles.drawer}
+          anchor={anchor} 
+          open={state[anchor]} 
+          onClose={toggleDrawer(anchor, false)}
+          >
+          {list(anchor)} 
+          <div className="left-side" >
+         
             <Profile
               username={auth.user.username}
+              style={styles.profile}
             />
             <Contacts
     
@@ -123,13 +131,13 @@ let showCtx = showContax.map(s=> s)
            
               // windowWidth={windowWidth}
             ></Contacts>
-            
+          
           </div>
 
           </Drawer>
         </React.Fragment>
       ))}
-      </h1>
+    
     </div>
   );
 }
