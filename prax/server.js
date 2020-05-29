@@ -60,9 +60,9 @@ var passport = require("passport");
 
   try{
     const PORT  = process.env.PORT || 5001;
-    var server = app.listen(PORT, ()=> console.log(`Server corriendo en ${PORT}`))
+    var server = app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`))
     }
-    catch{console.log('eeerrrrr')}
+    catch{console.log('server err')}
     
   //=====================================================
     //+++++++++++++++++++++++++++++++++++++++++++++++++  
@@ -78,10 +78,29 @@ var passport = require("passport");
     socket.emit('message_Users', {message_Users: users});   
     socket.emit('message_Messages', {message_Messages: messages});
     
+    socket.on('username', username)
+    function username(username){
+      console.log(username)
+      socket.broadcast.emit('username_Joined', username)
+    }  
+
+    socket.on('userID', userID)
+    function userID(userID){
+      console.log(userID)
+      socket.broadcast.emit('userID_Joined', userID)
+    }  
+
+    socket.on('roomOption', roomOption)
+    function roomOption(roomOption){
+      console.log(roomOption)
+      socket.broadcast.emit('roomOption_Joined', roomOption)
+    }  
+
     socket.on('poses', poses)
     function poses(poses){
-      console.log(poses)
-      console.log(poses)
+      // BELOW IS AN OBJECT w. PROPERTIES OF SCORE & KEYPOINTS ARRAY
+      // console.log(poses)
+      // This broadcast emit is working when there are 2 users!!! 
       const serverDrawPoses = poses
       socket.broadcast.emit('serverDrawPoses', serverDrawPoses )
     }
@@ -90,23 +109,21 @@ var passport = require("passport");
     function canvasURL(canvasURL){
 
         const canvasRTCDraw = (decodeURI(canvasURL.toString()) );
-        console.log("canvasRTCDRAW", canvasRTCDraw);
+       // BELOW GIVES AN OBJECT 'poses' WITH PROPERTIES OF 'score' AND 'keypoints'
+        // console.log("canvasRTCDRAW", canvasRTCDraw);
 
-      
-
-
-
-      console.log(canvasURL)
+      // BELOW GIVES BACK A LONG STRING (IT WORKS!) 
+      // console.log(canvasURL)
       const serverDrawCanvasURL = canvasRTCDraw 
       socket.broadcast.emit('serverDrawCanvasURL', serverDrawCanvasURL)
     }
     //+++++++++++++++++++++++++++++++++++++++++++++++++
     // MOVE THIS SOCKET NAMESPACE INTO DYNAMIC URL
-    const nsp = io.of('/:username/:message');
-      nsp.on('connection', function(socket){
-        console.log('someone connected!');
-      });
-      nsp.emit('hi', 'everyone!');
+    // const nsp = io.of('/:username/:message');
+    //   nsp.on('connection', function(socket){
+    //     console.log('someone connected!');
+    //   });
+    //   nsp.emit('hi', 'everyone!');
     }
     
     //+++++++++++++++++++++++++++++++++++++++++++++++++

@@ -1,5 +1,6 @@
 import React from 'react';
 import "./inputmessage.scss";
+// import io from 'socket.io-client';
 import {
   Switch,
   Route,
@@ -12,11 +13,19 @@ import Card from '@material-ui/core/Card'
 import setAuthToken from "../../../services/setAuthToken";
 import CreatePraxSpace from '../CreatePraxSpace/CreatePraxSpace';
 
+import io from 'socket.io-client';
+
+
 
 const token = localStorage.getItem("token");
 if (token) {
   setAuthToken(token);
 }
+
+const socket = io('http://localhost:5001',{transports: ['websocket']});
+
+
+
 
 const styles = {
   button: {
@@ -131,9 +140,15 @@ export default class DynamButtons extends React.Component {
       let currentListDescription = this.state.dynamicListDescription;
       currentListDescription.push(itemToAddDescription);
       // THIS WORKS ---> currentListDescription
+     
+// socket.on('connect', function newConnection(Camera){
+
       // console.log(currentListDescription)
       
       // socket.emit("toInputMessageDescription", currentListDescription)
+  // }
+
+  
   
       this.setState({dynamicListDescription : currentListDescription});
       console.log(this.state.dynamicListDescription);
@@ -192,14 +207,33 @@ console.log(instrument);
 console.log(userID);
 
 let count = 0
+let roomOptions=[];
 export class DynamicList extends React.Component {
- 
+
   render(){
 
     return (
       <>
         {  
           Object.keys(this.props.listItems).map( (index) => {
+            let roomOption = this.props.listItems
+            socket.emit('username', {username: username})
+            socket.emit('userID', {userID: userID})
+            socket.emit('roomOption', {roomOption: roomOption})
+            socket.on("username_Joined", usernameFunct)
+            function usernameFunct(username){
+              console.log("USERNAME joined: ", username);
+              return username;
+              }
+            socket.on("userID_Joined", userIDFunct)
+            function userIDFunct(userID){
+              console.log("USERID joined: ", userID);
+              }
+            socket.on("roomOption_Joined", roomOptionFunct)
+            function roomOptionFunct(roomOption){
+              console.log("ROOM OPTION: ", roomOption);
+              
+            }
             
             return (
               <Link 

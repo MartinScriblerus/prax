@@ -8,12 +8,3 @@ module.exports = function(app) {
     })
   );
 };
-// module.exports = function(app2) {
-//     app2.use(
-//       '/socket',
-//       createProxyMiddleware({
-//         target: 'http://localhost:3000',
-//         changeOrigin: true,
-//       })
-//     );
-//   };

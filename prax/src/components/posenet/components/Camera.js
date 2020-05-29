@@ -152,11 +152,11 @@ class PoseNet extends Component {
           poses.push(pose)
     
       canvasContext.clearRect(0, 0, videoWidth, videoHeight)
-      console.log(canvasContext)
+      // console.log(canvasContext)
 
       // WebRTC canvas stream below -->
       const canvas_RTCstream = this.canvas.captureStream(25);
-      console.log(canvas_RTCstream)
+      // console.log(canvas_RTCstream)
    
 
       
@@ -164,7 +164,7 @@ class PoseNet extends Component {
       socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
       
       var canvasURL = this.canvas.toDataURL();
-      console.log(canvasURL)
+      console.log("canvasURL", canvasURL)
       
       if (showVideo) {
         canvasContext.save()

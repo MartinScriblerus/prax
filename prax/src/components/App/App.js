@@ -25,7 +25,7 @@ import {
 require('typeface-overpass')
 require('typeface-permanent-marker')
 
-// const socket = io('http://localhost:5001',{transports: ['websocket']});
+const socket = io('http://localhost:5001',{transports: ['websocket']});
 
 // // SOCKETS FOR APP --> BRING BACK WHEN FINISHING SIGNALLING
 // socket.on('connect', function newConnection(Camera){

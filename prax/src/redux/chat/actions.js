@@ -31,6 +31,7 @@ export const getUsersSuccess = (user)=> async dispatch=>{
             type: ChatTypes.GET_USERS_SUCCESS,
             payload: user
         })
+        // THIS SOCKET IS PROBABLY OK TO CUT =>
         // socket.on("connection", ()=>{
         //     const getUsers = {
         //         id: user.id, 
@@ -47,15 +48,7 @@ export const getUsersSuccess = (user)=> async dispatch=>{
 }
 }
 
-// export const setUserDestiny = (destiny)=>async dispatch=>{
-//     dispatch({
-//         type: ChatTypes.SET_USER_DESTINY,
-//         payload: destiny
-//     })
-//     dispatch(markAsReadRequest(destiny.id))
-//     dispatch(getUsersRequest())
-//     dispatch(getChatRequest(destiny.id))
-// }
+
 
 export const getChatRequest =(id)=> async dispatch=>{
     dispatch({type: ChatTypes.GET_USERS_REQUEST})
