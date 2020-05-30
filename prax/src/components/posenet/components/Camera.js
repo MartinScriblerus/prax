@@ -4,7 +4,7 @@ import * as posenet from '@tensorflow-models/posenet'
 import io from 'socket.io-client';
 
 
-
+console.log("this should be fine")
 const socket = io('http://localhost:5001',{transports: ['websocket']});
 
 

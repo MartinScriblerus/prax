@@ -61,7 +61,7 @@ export const getMessages = messages => {
 
 export const postMessage = dataMessage => {
   const api = getAxiosClient();
-  return api.post("http://localhost:5001/api/message", dataMessage);
+  // return api.post("http://localhost:5001/api/message", dataMessage);
 };
 
 export const markAsRead = () => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import "./inputmessage.scss";
 // import io from 'socket.io-client';
 import {
@@ -113,7 +114,7 @@ export default class DynamButtons extends React.Component {
       dynamicListDescription: []
     };
   
-    console.log(props)
+    
     // console.log(props.idUserLogged)
     userID = props.idUserLogged;
     username = props.username;
@@ -127,13 +128,24 @@ export default class DynamButtons extends React.Component {
 
   addListItem(itemToAdd){
       let currentList = this.state.dynamicList;
-    
+      console.log(this.props);
       currentList.push(itemToAdd);
       this.setState({dynamicList : currentList});
       console.log(this.state.dynamicList)
-
       let dynamicList = this.state.dynamicList
       console.log(dynamicList)
+      let origin = this.props.idUserLogged;
+
+      var message = {
+       content: itemToAdd, 
+        origin: origin,
+      }
+      axios({
+          method: 'post',
+          url: 'http://localhost:5001/api/message',
+          data: message
+        })
+      
     }
 
   addListItemDescription(itemToAddDescription){
@@ -147,8 +159,7 @@ export default class DynamButtons extends React.Component {
       
       // socket.emit("toInputMessageDescription", currentListDescription)
   // }
-
-  
+  console.log(this.props.userID)
   
       this.setState({dynamicListDescription : currentListDescription});
       console.log(this.state.dynamicListDescription);
@@ -156,6 +167,8 @@ export default class DynamButtons extends React.Component {
       let dynamicListDescription  = this.state.dynamicListDescription
       console.log(dynamicListDescription)
     }
+
+
   removeListItem(itemToRemove){
       let currentList = this.state.dynamicList;
       currentList.splice(itemToRemove, 1);
@@ -172,8 +185,9 @@ export default class DynamButtons extends React.Component {
       console.log(this.props)
       console.log(response)
     }
- 
+
   render(){
+   
     return(
       <> 
       <div className="component-wrapper">

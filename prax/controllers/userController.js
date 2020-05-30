@@ -24,6 +24,11 @@ module.exports = {
       // you can now access the newly created user
       console.log('success', user.toJSON());
   })
+  db.Messages.create(req.body)
+  .then(function(message) {
+    // you can now access the newly created user
+    console.log('success', message.toJSON());
+})
   .catch(function(err) {
       // print the error details
       console.log(err, req.body.user);

@@ -48,9 +48,9 @@ export const Chat = (props) => {
 var check = 0
 	useEffect(() => {
 		setIdUserLogged(props);
-		console.log(idUserLogged);
+		console.log("IIIIDDUSSSSERLOGGED", idUserLogged);
 		console.log(idOrigin);
-		console.log(messages);
+		console.log("MMEESSAAGES", messages);
 		console.log(check += check)
 		});
 		

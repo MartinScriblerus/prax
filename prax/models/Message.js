@@ -12,13 +12,13 @@ module.exports = function(sequelize, DataTypes) {
 				autoIncrement: true,
 			  },
 			origin: {
-				type: DataTypes.INTEGER,
-				references: {
-					model: 'User',
-					key: 'id',
-					as: 'origin',
-				  },
-				allowNull: false
+				type: DataTypes.STRING,
+				// references: {
+				// 	model: 'User',
+				// 	key: 'id',
+				// 	as: 'origin',
+				//   },
+				allowNull: true
 			},
 			content: {
 				type: DataTypes.STRING,

@@ -69,7 +69,7 @@ passport.use(
   'login',
   new LocalStrategy(
     {
-      usernameField: 'userName',
+      usernameField: 'username',
       passwordField: 'password',
       session: false,
     },
@@ -119,6 +119,7 @@ passport.use(
         } else {
           console.log('user not found in db');
           done(null, false);
+          return
         }
       });
     } catch (err) {

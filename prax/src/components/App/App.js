@@ -25,10 +25,10 @@ import {
 require('typeface-overpass')
 require('typeface-permanent-marker')
 
-const socket = io('http://localhost:5001',{transports: ['websocket']});
-
+// const socket = io('http://localhost:5001',{transports: ['websocket']});
 // // SOCKETS FOR APP --> BRING BACK WHEN FINISHING SIGNALLING
-// socket.on('connect', function newConnection(Camera){
+// socket.on('connection', function newConnection(Camera){
+
 //   // console.log('room name: ', futureVariableNameHere)
 //   // socket.on('message', function getMessage(message){
 //   //   console.log(message);

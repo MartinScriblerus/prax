@@ -156,7 +156,7 @@ const db = require('./models/index');
   
   app.get('/api/message', (req, res) => {
    console.log("got msg route")
-      console.log(res.json({}));
+      return res.json({messages});
     });
   
   app.get('/praxspace/:username/:message', (req, res) => {
@@ -201,55 +201,72 @@ const db = require('./models/index');
           console.log("this is users:", users)
         });
 
-  app.post("/api/message", function(req, res) {
+        app.post("/api/message", function(req, res) {
   
-        console.log("server is posting db.Message & api/message");
-       
-        // req.body hosts is equal to the JSON post sent from the user
-        // This works because of our body parsing middleware
-        // CREATING THE DATABASE
-    
+          console.log("server is posting db.Message & api/message");
+         
+          // req.body hosts is equal to the JSON post sent from the user
+          // This works because of our body parsing middleware
+          // CREATING THE DATABASE
+      
+  
+          db.Message.create({
+            // id: req.body.id, 
+            origin: req.body.origin,
+            content: req.body.content,
+  
+          })
+          // .then(function(message) {
+          //   // you can now access the newly created user
+          //   console.log('success', message.toJSON());
+          //   console.log("here is the MESSAGE: ", message)
+          // })
+          // .catch(function(err) {
+          //     // print the error details
+          //     console.log("error", err, req.body.origin);
+          // });
+  
+         
+  
+        var newMessage = req.body;
+            newMessage= [{
+            origin: req.body.origin,
+            content: req.body.content,
+  
+          }]
+        // console.log(newMessage);
+            // Using a RegEx Pattern to remove spaces from newCharacter
+            // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+            // newUser.routeName = newUser.name.replace(/\s+/g, "").toLowerCase();
+        console.log("newMessage", newMessage)
+        messages.push(newMessage);
+        res.json(messages);
+          console.log(messages);
+        console.log("this is messages origin!: ", req.body.origin);
+        var roomname = req.body.content;
+        var username = req.body.origin;
+          db.User.findOne({
+            where: {
+              id: username,
+            },
+          }).then(dbUser =>
+            console.log("username that posted the message: ", dbUser.username)
+            ).then(console.log("this is the room that user created: ", roomname))
+          .catch(err => res.status(422).json(err));
+      });
 
-        db.Message.create({
-          // id: req.body.id, 
-          origin: req.body.origin,
-          content: req.body.content,
-          // description: req.body.description   
-        })
-        .then(function(message) {
-          // you can now access the newly created user
-          console.log('success', message.toJSON());
-          console.log("here is the MESSAGE: ", message)
-        })
-        .catch(function(err) {
-            // print the error details
-            console.log("error", err, req.body.origin);
-        });
-
-       
-
-      var newMessage = req.body;
-          newMessage= [{
-          origin: req.body.origin,
-          content: req.body.content, 
-        }]
-      console.log("newMessage", newMessage)
-      messages.push(newMessage);
-      res.json(messages);
-        console.log(messages);
-      console.log("this is messages origin!: ", req.body.origin);
-      var roomname = req.body.content;
-      var username = req.body.origin;
-        db.User.findOne({
-          where: {
-            id: username,
-          },
-        }).then(dbUser =>
-          console.log("username that posted the message: ", dbUser.username)
-          ).then(console.log("this is the room that user created: ", roomname))
-        .catch(err => res.status(422).json(err))
-        .finally(()=>{return username});
-    });
+    //   var roomname = req.body.content;
+    //   var username = req.body.origin;
+    //     db.User.findOne({
+    //       where: {
+    //         id: username,
+    //       },
+    //     }).then(dbUser =>
+    //       console.log("username that posted the message: ", dbUser.username)
+    //       ).then(console.log("this is the room that user created: ", roomname))
+    //     .catch(console.log("error"))
+    //     .finally(()=>{return username});
+    // });
 
         var users = [];
         var messages = [];

@@ -38,19 +38,8 @@ console.log(auth)
 // });
 
 
-// router.post('http://localhost:5001/api/message', auth, async (req, res) => {
-// 	const destinyExists = await db.User.findOne({ where: { id: req.params.id_origin } });
-// 	if (!destinyExists) return res.status(400).json({ errors: 'Invalid user origin' });
-// console.log("WTF");
-// 	const sentMessages = await Message.findAll({
-// 		where: {
-// 			origin: req.user.id,
-// 			// destiny: req.params.id_destiny
-// 		},
-// 		include: [ { model: User, as: 'infoOrigin' } ]
-// 	});
-// 	return sentMessages;
-// });
+
+
 
 router.get('/api/createpraxspace/:id_destiny', auth, async (req, res) => {
 	// const destinyExists = await User.findOne({ where: { id: req.params.id_destiny } });
