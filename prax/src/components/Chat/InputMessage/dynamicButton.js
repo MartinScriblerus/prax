@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import "./inputmessage.scss";
-// import io from 'socket.io-client';
+
 import {
   Switch,
   Route,
@@ -24,8 +24,6 @@ if (token) {
 }
 
 const socket = io('http://localhost:5001',{transports: ['websocket']});
-
-
 
 
 const styles = {
@@ -135,7 +133,7 @@ export default class DynamButtons extends React.Component {
       let dynamicList = this.state.dynamicList
       console.log(dynamicList)
       let origin = this.props.idUserLogged;
-
+      
       var message = {
        content: itemToAdd, 
         origin: origin,
@@ -145,14 +143,45 @@ export default class DynamButtons extends React.Component {
           url: 'http://localhost:5001/api/message',
           data: message
         })
-      
+    
+        axios.get('/api/user/login', {
+          params: {
+            ID: origin
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        
+        let username = this.props.username;
+        origin = this.props.idUserLogged
+        socket.emit('username', {username: username})
+        socket.emit('userID', {userID: origin})
+        socket.emit('roomOption', {roomOption: itemToAdd})
+        socket.on("username_Joined", usernameFunct)
+        function usernameFunct(username){
+          console.log("USERNAME joined: ", username);
+          return username;
+          }
+        socket.on("userID_Joined", userIDFunct)
+        function userIDFunct(userID){
+          console.log("USERID joined: ", userID);
+          }
+        socket.on("roomOption_Joined", roomOptionFunct)
+        function roomOptionFunct(roomOption){
+          console.log("ROOM OPTION: ", roomOption);   
+        }
+        
     }
 
   addListItemDescription(itemToAddDescription){
       let currentListDescription = this.state.dynamicListDescription;
       currentListDescription.push(itemToAddDescription);
       // THIS WORKS ---> currentListDescription
-     
+     //tktk
 // socket.on('connect', function newConnection(Camera){
 
       // console.log(currentListDescription)
@@ -230,24 +259,7 @@ export class DynamicList extends React.Component {
       <>
         {  
           Object.keys(this.props.listItems).map( (index) => {
-            let roomOption = this.props.listItems
-            socket.emit('username', {username: username})
-            socket.emit('userID', {userID: userID})
-            socket.emit('roomOption', {roomOption: roomOption})
-            socket.on("username_Joined", usernameFunct)
-            function usernameFunct(username){
-              console.log("USERNAME joined: ", username);
-              return username;
-              }
-            socket.on("userID_Joined", userIDFunct)
-            function userIDFunct(userID){
-              console.log("USERID joined: ", userID);
-              }
-            socket.on("roomOption_Joined", roomOptionFunct)
-            function roomOptionFunct(roomOption){
-              console.log("ROOM OPTION: ", roomOption);
-              
-            }
+         
             
             return (
               <Link 

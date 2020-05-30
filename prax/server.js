@@ -245,14 +245,17 @@ const db = require('./models/index');
         console.log("this is messages origin!: ", req.body.origin);
         var roomname = req.body.content;
         var username = req.body.origin;
-          db.User.findOne({
+        
+        async function getUserPoster(){
+          var userThatPosted = await db.User.findOne({
             where: {
               id: username,
             },
-          }).then(dbUser =>
-            console.log("username that posted the message: ", dbUser.username)
-            ).then(console.log("this is the room that user created: ", roomname))
-          .catch(err => res.status(422).json(err));
+          })
+          console.log("POSTER", userThatPosted.dataValues.username);
+          console.log("ROOM", roomname)
+          
+          } getUserPoster();
       });
 
     //   var roomname = req.body.content;
