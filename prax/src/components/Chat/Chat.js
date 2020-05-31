@@ -49,7 +49,7 @@ var check = 0
 	useEffect(() => {
 		setIdUserLogged(props);
 		console.log("IIIIDDUSSSSERLOGGED", idUserLogged);
-		console.log(idOrigin);
+		// console.log(idOrigin);
 		console.log("MMEESSAAGES", messages);
 		console.log(check += check)
 		});

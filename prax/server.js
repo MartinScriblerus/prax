@@ -163,9 +163,17 @@ const db = require('./models/index');
       console.log("got the audio / video route route")
          console.log(res.json({}));
        });
+  
 
+  let postingUser = '';
+  let roomListOrigin = []
+  let roomListContent = [];
+  let roomPosterList = [];
+ 
+  
   app.post("/api/user", function(req, res) {
-          // req.body hosts is equal to the JSON post sent from the user
+    
+    // req.body hosts is equal to the JSON post sent from the user
       db.User.create({
             // id: req.body.id, 
             username: req.body.username, 
@@ -214,7 +222,7 @@ const db = require('./models/index');
             // id: req.body.id, 
             origin: req.body.origin,
             content: req.body.content,
-  
+            userPosted: req.body.userPosted
           })
           // .then(function(message) {
           //   // you can now access the newly created user
@@ -232,7 +240,7 @@ const db = require('./models/index');
             newMessage= [{
             origin: req.body.origin,
             content: req.body.content,
-  
+            userPosted: req.body.userPosted
           }]
         // console.log(newMessage);
             // Using a RegEx Pattern to remove spaces from newCharacter
@@ -245,31 +253,105 @@ const db = require('./models/index');
         console.log("this is messages origin!: ", req.body.origin);
         var roomname = req.body.content;
         var username = req.body.origin;
+        var userPosted = req.body.userPosted
         
+      
         async function getUserPoster(){
           var userThatPosted = await db.User.findOne({
             where: {
               id: username,
             },
           })
-          console.log("POSTER", userThatPosted.dataValues.username);
-          console.log("ROOM", roomname)
-          
-          } getUserPoster();
+          // console.log("POSTER", userThatPosted.dataValues.username);
+          // console.log("ROOM", roomname)
+          postingUser = userThatPosted.dataValues.username
+          return postingUser
+          } getUserPoster(); return postingUser
       });
 
-    //   var roomname = req.body.content;
-    //   var username = req.body.origin;
-    //     db.User.findOne({
-    //       where: {
-    //         id: username,
-    //       },
-    //     }).then(dbUser =>
-    //       console.log("username that posted the message: ", dbUser.username)
-    //       ).then(console.log("this is the room that user created: ", roomname))
-    //     .catch(console.log("error"))
-    //     .finally(()=>{return username});
-    // });
+    // console.log(postingUser);
+        
+      
+    let roomList = {
+      roomListOrigin: roomListOrigin,
+      roomListContent: roomListContent
+    }
+    todayRooms()
+      async function todayRooms(){
+        const Op = db.Sequelize.Op;
+        const TODAY_START = new Date('May 25, 2020 23:15:30').setHours(0, 0, 0, 0);
+        const NOW = new Date('May 25, 2020 23:15:30');
+       
+        var todayRooms = await db.Message.findAll({
+            createdAt: { 
+              [Op.gt]: TODAY_START,
+              [Op.lt]: NOW
+            },     
+          })
+  console.log("TODAY'S ROOMS", todayRooms )
+     for (var i = 0; i < todayRooms.length; i++){ 
+      // console.log(todayRooms[i].dataValues.origin); 
+      // console.log(todayRooms[i].dataValues.content); 
+      // console.log(todayRooms[i].dataValues.createdAt);
+      roomListOrigin.push(todayRooms[i].dataValues.origin) 
+      roomListContent.push(todayRooms[i].dataValues.content)
+     }
+ 
+let username;
+
+for (var i = 0; i< roomListOrigin.length; i++){
+// console.log(roomList.roomListOrigin)
+  
+// INSTEAD OF THIS LET'S JUST ADD 
+// A USERNAME AND DESSCRIPTION COLUMN
+// TO MESSAGE API
+  // db.User.findOne({
+  //         where: {
+  //           id : roomListOrigin[i],
+
+  //         },
+  //       }).then(
+  //         dbUser => {
+  //           roomPosterList.push(dbUser.username)
+  //         console.log("username that posted the message: ", dbUser.username)
+          
+  //         console.log(roomPosterList);
+  //         }
+  //         )
+  //       .catch(console.log("error"))
+     
+
+
+}
+
+      
+
+
+
+
+    console.log("ROOMLIST", roomList)
+    // let username = '';
+    console.log(roomList);
+ 
+     return roomList
+    }
+ console.log(roomList)
+
+
+ 
+    app.get('/api/newestRooms', (req, res) => {
+        
+      return res.json(roomList )
+      });
+      // var roomname = req.body.content;
+      // var username = req.body.origin;
+
+    app.post("/api/newestRooms", function(req, res, roomList) {
+    // add in username when you add description
+ 
+
+        return req.body(roomList)
+    });
 
         var users = [];
         var messages = [];
