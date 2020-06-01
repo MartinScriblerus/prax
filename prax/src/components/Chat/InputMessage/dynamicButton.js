@@ -165,20 +165,12 @@ console.log(props)
   async function addingItem(currentList){
     var r = await axios.get('http://localhost:5001/api/message')
       .then(function (response) {
-    console.log(response.data.messages[0])
-    
-        
-return r
-
+      console.log(response.data.messages[0])    
+    // return r
       })
       .catch(function(){
         console.log(("error in axios get of addListItem in dynamicButton"));
       });
-    //  console.log(data)
-    // for (var i = 0; i<r.length; i++){
-    // console.log(r[i]);
-    // currentList.push(r[i]);
-    // }
     }addingItem();
 
       console.log(currentList); 
@@ -203,41 +195,15 @@ return r
           data: message
         })
     
-  
+ 
         
         let username = this.props.username;
         origin = this.props.idUserLogged
         socket.emit('username', {username: username})
         socket.emit('userID', {userID: origin})
-        socket.emit('roomOption', {roomOption: itemToAdd})
-   
-        
-
-     
+        socket.emit('roomOption', {roomOption: itemToAdd})     
     }
  
-//   addListItemDescription(itemToAddDescription){
-   
-//       let currentListDescription = this.state.dynamicListDescription;
-//       currentListDescription.push(itemToAddDescription);
-//       console.log(currentListDescription)
-//       // THIS WORKS ---> currentListDescription
-//      //tktk
-// // socket.on('connect', function newConnection(Camera){
-
-//       // console.log(currentListDescription)
-      
-//       // socket.emit("toInputMessageDescription", currentListDescription)
-//   // }
-//   console.log(this.props.userID)
-  
-//       this.setState({dynamicListDescription : currentListDescription});
-//       console.log(this.state.dynamicListDescription);
-//   // THIS WORKS ---> this.state.dynamicListDescription
-//       let dynamicListDescription  = this.state.dynamicListDescription
-//       console.log(dynamicListDescription)
-//     }
-
 
   removeListItem(itemToRemove){
       let currentList = this.state.dynamicList;
@@ -245,12 +211,6 @@ return r
       this.setState({dynamicList : currentList});
       // this.props.history.push("praxspace/" + username + "/" + currentList);
     }
-
-  // removeListItemDescription(itemToRemoveDescription){
-  //     let currentListDescription = this.state.dynamicListDescription;
-  //     currentListDescription.splice(itemToRemoveDescription, 1);
-  //     this.setState({dynamicListDescription : currentListDescription});
-  //   }
 
   handleSend = response => {
       this.props.getUsersRequest(response)
@@ -261,21 +221,12 @@ return r
 
   render(){
   let g = JSON.stringify(this.state.rooms.messages)
-  // async function t(h){
-  // h = await (typeof g !== undefined)
-  //   // console.log(g[0])
-  //   console.log(h)
-  //   return h
-  // } t().then(setTimeout(console.log(g), 1000))
 
 console.log(g);
-
-
 
     let roomOption = this.state.rooms.messages;
     let username = this.state.username;
 
-  
 let redsox; 
 let baseball;   
 console.log(roomOption)  
@@ -286,24 +237,22 @@ if (redsox !== undefined || null){
 baseball = redsox.map(
   yankees=>yankees)
 }
-console.log(baseball)
-
+console.log(baseball);
+console.log(username);
     return(
       <> 
       <div className="component-wrapper">
-     
+ 
           <Card className="roomCard" style={styles.roomNameCard}> 
             <h1 style={styles.h1}>Create a Room</h1>
               <InputBoxDescription  addItem={this.addListItem} addItemDescription={this.addListItemDescription} style={styles.textarea2} /><br/>
-          </Card>
-
-    
+          </Card>    
       </div>
-      <div>  
-    
+    <div>  
+   
         <Card style={styles.openRoomsCard}> 
         <h3>Open Rooms</h3>
-      <h1>{this.state.rooms.content}</h1>
+        <h1>{this.state.rooms.content}</h1>
       
     {/*tk*/}    
      
@@ -314,7 +263,7 @@ console.log(baseball)
         : null
       }
     
-         <h1>{username}</h1> 
+         
           </Card>
      
      </div>
@@ -334,7 +283,7 @@ let count = 0
 export class DynamicList extends React.Component {
 
   render(){
-   
+   console.log()
     return (
       <>
         {  
