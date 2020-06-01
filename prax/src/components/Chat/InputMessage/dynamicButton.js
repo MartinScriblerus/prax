@@ -158,6 +158,7 @@ export default class DynamButtons extends React.Component {
       var message = {
        content: itemToAdd, 
         origin: origin,
+        username: this.props.username
       }
       axios({
           method: 'post',
