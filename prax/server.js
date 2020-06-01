@@ -245,12 +245,12 @@ const db = require('./models/index');
           })
   
         var newMessage = req.body;
-            newMessage= [{
+            newMessage= {
             origin: req.body.origin,
             content: req.body.content,
             username: req.body.username
             // userPosted: req.body.userPosted
-          }]
+          }
         // console.log(newMessage);
             // Using a RegEx Pattern to remove spaces from newCharacter
             // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html

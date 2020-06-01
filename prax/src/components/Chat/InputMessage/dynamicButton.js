@@ -107,47 +107,84 @@ export default class DynamButtons extends React.Component {
 
   constructor(props){
     super(props);
-
+console.log(props)
     this.state = { 
       dynamicList: [],
       dynamicListDescription: [],
-      roomOption : [],
+      rooms : [],
       username : '',
     };
   
     
     // console.log(props.idUserLogged)
-    userID = props.idUserLogged;
+   
     username = props.username;
     instrument = props.instrument;
-    roomOption = props.roomOption;
-
-
+    let rooms = props.rooms;
+    
+   
     this.addListItem = this.addListItem.bind(this);
     this.removeListItem = this.removeListItem.bind(this);
     // this.addListItemDescription = this.addListItemDescription.bind(this);
     // this.removeListItemDescription = this.removeListItem.bind(this);
     }
-
-  addListItem(itemToAdd){
     
-    
-    let roomOption = ['check1']
-    axios.get('/api/message', function(req, res){
-    console.log(res)
-      return res.json()
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    componentDidMount(){
+ const {rooms} = this.state
+      console.log(this.props)
 
-      let currentList = this.state.dynamicList;
+      axios.get('http://localhost:5001/api/message')
+                .then(res => {
+                    const rooms = res.data;
+                    this.setState({rooms});
+                    return rooms
+                });
+                console.log(rooms)
+      const socket = io('http://localhost:5001',{transports: ['websocket']});
+    
+      socket.on("username_Joined", usernameFunct)
+      function usernameFunct(username){
+        console.log("USERNAME joined: ", username);
+        return username;
+        }
+      socket.on("userID_Joined", userIDFunct)
+      function userIDFunct(userID){
+        console.log("USERID joined: ", userID);
+        }
+      socket.on("roomOption_Joined", roomOptionFunct)
+      function roomOptionFunct(roomOption){
+        console.log("ROOM OPTION: ", roomOption);
+      }
+    
+    }
+    
+  
+    addListItem(itemToAdd){
+    let currentList = this.state.dynamicList;
+    // let msg = response.messages;
+  async function addingItem(currentList){
+    var r = await axios.get('http://localhost:5001/api/message')
+      .then(function (response) {
+    console.log(response.data.messages[0])
+    
+        
+return r
+
+      })
+      .catch(function(){
+        console.log(("error in axios get of addListItem in dynamicButton"));
+      });
+    //  console.log(data)
+    // for (var i = 0; i<r.length; i++){
+    // console.log(r[i]);
+    // currentList.push(r[i]);
+    // }
+    }addingItem();
+
+      console.log(currentList); 
       console.log(this.props);
       currentList.push(itemToAdd);
-      currentList.push(roomOption)
+     
 
       this.setState({dynamicList : currentList});
       console.log(this.state.dynamicList)
@@ -166,17 +203,7 @@ export default class DynamButtons extends React.Component {
           data: message
         })
     
-        axios.get('/api/user/login', {
-          params: {
-            ID: origin
-          }
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+  
         
         let username = this.props.username;
         origin = this.props.idUserLogged
@@ -231,32 +258,36 @@ export default class DynamButtons extends React.Component {
       console.log(response)
     }
 
-componentDidMount(){
- 
-  const socket = io('http://localhost:5001',{transports: ['websocket']});
-
-  socket.on("username_Joined", usernameFunct)
-  function usernameFunct(username){
-    console.log("USERNAME joined: ", username);
-    return username;
-    }
-  socket.on("userID_Joined", userIDFunct)
-  function userIDFunct(userID){
-    console.log("USERID joined: ", userID);
-    }
-  socket.on("roomOption_Joined", roomOptionFunct)
-  function roomOptionFunct(roomOption){
-    console.log("ROOM OPTION: ", roomOption);
-  }
-console.log(roomOption)
-}
 
   render(){
-   
-    let roomOption = this.state.roomOption;
+  let g = JSON.stringify(this.state.rooms.messages)
+  // async function t(h){
+  // h = await (typeof g !== undefined)
+  //   // console.log(g[0])
+  //   console.log(h)
+  //   return h
+  // } t().then(setTimeout(console.log(g), 1000))
+
+console.log(g);
+
+
+
+    let roomOption = this.state.rooms.messages;
     let username = this.state.username;
-   
-    console.log(roomOption)
+
+  
+let redsox; 
+let baseball;   
+console.log(roomOption)  
+if(roomOption !== undefined || null){
+redsox = roomOption.map(room=>room.content)
+}
+if (redsox !== undefined || null){
+baseball = redsox.map(
+  yankees=>yankees)
+}
+console.log(baseball)
+
     return(
       <> 
       <div className="component-wrapper">
@@ -272,10 +303,17 @@ console.log(roomOption)
     
         <Card style={styles.openRoomsCard}> 
         <h3>Open Rooms</h3>
-  
+      <h1>{this.state.rooms.content}</h1>
+      
     {/*tk*/}    
-      <DynamicList style={styles.openRoomsTitle} listItems={this.state.dynamicList} removeItem={this.removeListItem} />
-         
+     
+        <DynamicList style={styles.openRoomsTitle} listItems={this.state.dynamicList} removeItem={this.removeListItem} />
+        {
+          (baseball !== undefined || null)
+          ? <DynamicList style={styles.openRoomsTitle} listItems={baseball} removeItem={this.removeListItem} />
+        : null
+      }
+    
          <h1>{username}</h1> 
           </Card>
      
@@ -296,7 +334,7 @@ let count = 0
 export class DynamicList extends React.Component {
 
   render(){
-  
+   
     return (
       <>
         {  
@@ -337,6 +375,8 @@ export class DynamicList extends React.Component {
       );
   }
 }
+
+
 
 // export class DynamicListDescription extends React.Component {
  
