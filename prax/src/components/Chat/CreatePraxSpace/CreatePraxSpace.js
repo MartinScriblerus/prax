@@ -1,6 +1,6 @@
 import React  from 'react';
 // import WebRTC from './components/WebRTC'
-import Camera from '../../posenet/components/Camera.js'
+import Posenet from '../../posenet/components/Camera.js'
 
 
 
@@ -13,8 +13,9 @@ import {
 
 const styles = {
   camera : {
-    backgroundColor: "#030303",
-    color: "#dadcd7"
+    backgroundColor: "#aff",
+    color: "#dadcd7",
+
   },
   outergrid: {
     backgroundColor: "#1F95BF"
@@ -29,17 +30,20 @@ export default function CreatePraxSpace() {
     return(
     <Router>
       <Grid style={styles.outergrid}>
+      <div>
       <div id="cameraDiv" style={styles.camera}>
-      <Camera style={styles.camera}/>
+      <Posenet style={styles.camera}/>
     </div>
-
+    </div>
         {/*  <WebRTC />  */}
       </Grid>
        
       <Switch>
         <Route path="/room/:slug">
-        <CreatePraxSpace/> 
-      </Route>
+
+   <Posenet/>
+  
+        </Route>
       
       </Switch>
     </Router>

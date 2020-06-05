@@ -3,7 +3,6 @@
 #username{
     background-color: $header_black;
     color: $white;
-    margin-top: 10vh;
 }
 #password{
     background-color: $header_black;
@@ -26,7 +25,7 @@
         background-color: $header_black;
         border-color: $metronome_on;
         border-width: 2px;
-        border-radius: 5px;
+        // border-radius: 5px;
         border-style: solid;
         position: relative;
         display: flex;
@@ -76,12 +75,12 @@ input {
     color: $white
 }
 
-form {
+// form {
    
-    padding-right: 10%; 
-    padding-left: 10%;
+//     // padding-right: 10%; 
+//     // padding-left: 10%;
 
-}
+// }
 #logPos {
     position: relative;
     text-align: center;

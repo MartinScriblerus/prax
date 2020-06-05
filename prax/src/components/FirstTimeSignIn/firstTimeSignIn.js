@@ -35,34 +35,13 @@ import { makeStyles } from '@material-ui/core/styles';
          marginRight: '10vw',
          backgroundColor: "#aaf",
          color: "#f6f6f6",
+         marginTop: '10%'
         },
         signup: {
         marginTop: 0,
         color: '#f6f6f6'
         },
-        button: {
-            width: '80%',
-            marginRight: '10%',
-            marginLeft: '10%',
-            height: 80,
-            position: 'relative',
-            display: 'flex',
-            justifyContent: 'center',
-            textAlign: 'center',
-            borderStyle: "solid",
-            borderColor: "#aaf",
-            borderRadius: '5%',
-            color: '#dadcd7',
-            borderWidth: 2,
-            // margin: '10vw',
-            variant: "outlined",
-            // justify: "right",
-            align: 'center',
-            marginTop: '10vh',
-            // marginRight: '10%',
-            // marginLeft: '10%',
-           
-        },
+     
         a: {
             width: 400,
             height: 80,
@@ -78,7 +57,7 @@ import { makeStyles } from '@material-ui/core/styles';
             variant: "outlined",
             // justify: "right",
            
-            marginTop: '10vh'
+            // marginTop: '10vh'
         },
         card: {
         borderStyle: "solid",
@@ -89,8 +68,8 @@ import { makeStyles } from '@material-ui/core/styles';
         variant: "outlined",
         marginRight: "12%",
         marginLeft: "12%",
-        // paddingRight: '5%',
-        // paddingLeft: '5%',
+        paddingRight: '5%',
+        paddingLeft: '5%',
         paddingTop: '8vh',
         paddingBottom: '20vh',
         marginBottom: '60vh',
@@ -283,14 +262,15 @@ export default function FirstTimeLogin(newUser){
 
             <Button 
                 // id="register_button"
-                style={styles.button}
+                className="button"
             >
             <Link 
                 to="/" 
+                className="firsttimeSubmit"
                 onClick={() => 
                 handleSubmit()
             }
-                style={{ textDecoration: 'none' }} 
+                // style={{ textDecoration: 'none' }} 
             >
             Start Playing
             </Link>

@@ -16,6 +16,7 @@ require('typeface-overpass')
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    paddingTop: '10vh'
   },
 }));
   
@@ -56,7 +57,7 @@ const styles = ({
     marginRight: "7%",
     marginBottom: 40,
     paddingRight: 10,
-    marginTop: 15,
+    // marginTop: 15,
  
     
   },
@@ -88,16 +89,16 @@ const styles = ({
     // borderRadius: 7,
     fontFamily: 'Overpass',
     margin: 10,
-    marginTop: 27,
-    marginBottom: 25
+    marginTop: 7,
+    marginBottom: 5,
+    paddingRight: 10,
+    paddingLeft: 10
   },
   text2 : {
     // variant: "h5",
     fontSize: 22,
-  
     borderRadius: 7,
     fontFamily: 'Overpass',
- 
   },
 })
 
@@ -119,9 +120,9 @@ export default function About(newUser){
 
       <Grid item xs={6}>
           <Card style={styles.card2}>
-         
+          <h4 id="aboutTech">Prax uses:</h4>
           <ul>
-          <h4 id="aboutTech">Tech Stack:  </h4>
+         
               <li>
               WebRTC, Socket.io, Media Stream API
               </li>

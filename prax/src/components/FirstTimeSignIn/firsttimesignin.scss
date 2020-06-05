@@ -2,7 +2,7 @@
 
 .signupText {
         position: relative;
-        text-align: center;
+        justify-content: center;
         // padding: 5%;
         background-color: $headline_text;
         color: $header_black;
@@ -11,9 +11,14 @@
 }
 
 .MuiPaper-root{
-    background-color: $header_black;
-    padding-right: 7%;
-    padding-left: 7%;
+    // background-color: $header_black;
+    justify-content: center;
+    padding-bottom: 3%;
+    // padding-top: 6%;
+    margin-bottom: 15%;
+    // padding-left: 5%;
+    // padding-right: 5%
+    // color: $header_black
 }
 .MuiInputLabel-formControl{
     color: $white
@@ -31,9 +36,29 @@
 
 form {
     width: '100%';
-    padding:5px
+    // padding:5px
 }
-
+button {
+    width: 100%;
+    margin-right: 10%;
+    margin-left: 10%;
+    height: 80;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-style: solid;
+    border-color: #aaf;
+    border-radius: '5%';
+    color: #dadcd7;
+    border-width: 2;
+    // margin: '10vw',
+ 
+    // margin-top: 10vh
+    // marginRight: '10%',
+    // marginLeft: '10%',
+   
+}
 #instrument {
     color: $white;
     border: 2px solid $offset_black;
@@ -85,15 +110,33 @@ form {
 }
 #register_button{
     width: 50%;
-    margin-right: 7%;
-    margin-left: 7%;
+    margin-right: 5%;
+    margin-left: 5%;
     &:hover{
         background-color: $light_grey;
     }
 }
 .MuiButtonBase-root .MuiButton-root .MuiButton-text {
     justify-content: center;
-    width: 60%
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    height: 12vh;
+    cursor: zoom-in;
+
+    }
+
+
+
+.firsttimeSubmit {
+    border: 2px solid #4797de;
+    box-shadow: 0 2px 4px 0 #4797de, 0 4px 8px 0 #4797de;
+    height: 16vh;
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding-top: 4vh;
+    margin-top: 12vh;
+    text-align: center;
 }
 
 
@@ -104,19 +147,65 @@ form {
 
 
 
+// @media screen and (min-width: $mini){
+//     .MuiButtonBase-root .MuiButton-root .MuiButton-text {
+//         justify-content: center;
+//         width: 40%;
+//         margin-left: 30%;
+//         margin-right: 30%;
+//         height: 12vh;
+//     }
+    
+//     .firsttimeSubmit {
+//         border: 2px solid #4797de;
+//         box-shadow: 0 2px 4px 0 #4797de, 0 4px 8px 0 #4797de;
+//         height: 12vh;
+        
+    
+//         text-align: center;
+//     }
+      
 
+// }
 
-@media screen and (min-width: $mini){
+// @media screen and (min-width: $tablet){
+//     .MuiButtonBase-root .MuiButton-root .MuiButton-text {
+//         justify-content: center;
+//         width: 40%;
+//         margin-left: 30%;
+//         margin-right: 30%;
+//         height: 12vh;
+//     }
+    
+//     .firsttimeSubmit {
+//         border: 2px solid #4797de;
+//         box-shadow: 0 2px 4px 0 #4797de, 0 4px 8px 0 #4797de;
+//         height: 12vh;
+        
+    
+//         text-align: center;
+//     }
+    
   
+// }
 
-}
-
-@media screen and (min-width: $tablet){
-
-  
-}
-
-@media screen and (min-width: $desktop){
- 
+// @media screen and (min-width: $desktop){
+//     .MuiButtonBase-root .MuiButton-root .MuiButton-text {
+//         justify-content: center;
+//         width: 40%;
+//         margin-left: 30%;
+//         margin-right: 30%;
+//         height: 12vh;
+//     }
+    
+//     .firsttimeSubmit {
+//         border: 2px solid #4797de;
+//         box-shadow: 0 2px 4px 0 #4797de, 0 4px 8px 0 #4797de;
+//         height: 12vh;
+        
+    
+//         text-align: center;
+//     }
+    
    
-}
+// }

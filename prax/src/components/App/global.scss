@@ -65,7 +65,7 @@ p{
 }
 h4{
     padding-top: 1.3rem;
-    font-size: 18px;
+    font-size: 28px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding-left:2.2rem;
     color: $white
@@ -103,9 +103,12 @@ li{
     padding-left: 5px;
     font-size: 18px;
 }
+ul li::before {
+    content: "\200B";
+  }
 
 a{
-    color: $metronome_off;
+    // color: $metronome_off;
     text-decoration: none;
     &:hover{
         text-decoration: none;

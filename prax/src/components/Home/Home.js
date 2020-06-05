@@ -3,7 +3,6 @@ import { useSelector, Provider } from 'react-redux'
 import { Chat } from "../Chat/Chat";
 import { InputMessage } from "../Chat/InputMessage/InputMessage";
 
-import TemporaryDrawer from './drawerComponent'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import store from "../../redux/store";
@@ -20,8 +19,8 @@ import FirstTimeLogin from "../FirstTimeSignIn/firstTimeSignIn";
 // var jwt = require('jsonwebtoken');
 
 
-// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-const token = localStorage.getItem("token");
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+// const token = localStorage.getItem("token");
 if (token) {
 
   setAuthToken(token);
@@ -31,7 +30,7 @@ if (token) {
 }
 
 const styles = ({
-    color:  '#030303',
+    // color:  '#030303',
     button: {
         height: 50,
         backgroundColor: '#85b1d7',
@@ -49,8 +48,10 @@ const styles = ({
     padding: 5,
     marginRight: 20,
     marginLeft: 200,
-    marginTop: 0 
-    }
+    marginTop: 0, 
+    
+    },
+  
   })
 
 
@@ -94,8 +95,7 @@ useEffect(() => {
         <main>     
   
        
-        <TemporaryDrawer className='title'/>
-
+      
       
 
 

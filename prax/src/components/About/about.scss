@@ -42,13 +42,21 @@
         color:  $white;
       font-size: 20;
       margin-top: -7;
-      width: 20vw;
+      width: 100%;
+    
       }
-    .MuiButton-root {
-        width: 30vw;
-        margin-left: 16vw
+      .MuiButton-root {
+        width: 100%;
+        margin-left: 6vw;
+        height: 12vh;
+        background-color: $metronome_off;
     }
 }
+li, ul, h5 {
+    color: $headline_text;
+   
+}
+
 
 @media screen and (min-width: $tablet){
     .title {
@@ -59,10 +67,18 @@
       margin-top: -7;
       width: 15vw;
       }
-    .MuiButton-root {
-        width: 30vw;
-        margin-left: 16vw
+      .MuiButton-root {
+        width: 100%;
+        margin-left: 6vw;
+        background-color: $metronome_on;
+        height: 12vh;
+
     }
+}
+li, ul, h5 {
+    color: $headline_text;
+   
+
 }
 
 @media screen and (min-width: $desktop){
@@ -76,7 +92,9 @@
       }
     .MuiButton-root {
         width: 100%;
-        margin-left: 6vw
+        margin-left: 6vw;
+        background-color: $header_black;
+        height: 12vh;
     }
 }
 li, ul, h5 {
@@ -87,6 +105,7 @@ li, ul, h5 {
     background-color: $header_black
 }
 #aboutTech {
-    font-size: 28px;
-    color: $white
+    font-size: 22px;
+    color: $white;
+    margin-left: 3vw;
 }

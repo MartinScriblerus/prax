@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -9,6 +8,8 @@ import './navbar.scss'
 import {
     Link
   } from "react-router-dom";
+import {Profile} from '../../Home'
+import TemporaryDrawer from '../../Home/drawerComponent'
 
 const styles = {
   h6: {
@@ -26,6 +27,7 @@ export default function Navbar() {
     <div>
    
         <Toolbar className="toolbar">
+      
             <Button>
               <Link 
                 to="/" 
@@ -66,20 +68,13 @@ export default function Navbar() {
               </Link>
             </Button>
 
-            <Button>
-                <Link 
-                to="/search" 
-                onClick={() => setLogin(!login)}
-                style={{ textDecoration: 'none' }}
-                className="title"  
-                >
-                <Typography variant="h6" style={styles.color}  className="title" >
-                    
-                </Typography>
-                </Link>  
-            </Button>
+
+            
+
+       
+
         </Toolbar>
-    
+        <TemporaryDrawer className='title'/>
     </div>
   );
 }

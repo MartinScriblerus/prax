@@ -1,1 +1,10 @@
 @import "../../App/variables";
+
+header {
+    background-color: $header_black;
+    font-family: 'Didact Gothic';
+    border-bottom: solid;
+    border-width: 4px;
+    border-color: #aaf;
+    
+}

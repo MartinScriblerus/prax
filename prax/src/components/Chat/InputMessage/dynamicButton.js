@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import "./inputmessage.scss";
 
+
 import {
-  Switch,
-  Route,
+  // Switch,
+  // Route,
   Link
 } from "react-router-dom";
 // import Typography from '@material-ui/core/Typography';
@@ -12,10 +13,9 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card'
 
 import setAuthToken from "../../../services/setAuthToken";
-import CreatePraxSpace from '../CreatePraxSpace/CreatePraxSpace';
+// import CreatePraxSpace from '../CreatePraxSpace/CreatePraxSpace';
 
-import io from 'socket.io-client';
-
+import {socket} from '../../../services/socketIO' 
 
 
 const token = localStorage.getItem("token");
@@ -23,70 +23,57 @@ if (token) {
   setAuthToken(token);
 }
 
-const socket = io('http://localhost:5001',{transports: ['websocket']});
-
-
 
 const styles = {
   button: {
     // backgroundColor: "#030303",
-    color: "#dadcd7",
-    height:40,
-    width: "92%",
-    marginRight: "4%",
-    marginLeft: "4%",
+    color: "#85b1d7",
+    height:60,
+    fontSize: '22px',
+    width: "96%",
+    marginRight: "2%",
+    marginLeft: "2%",
     border: "solid",
     borderWidth: 2,
     borderColor: "#4797DE",
     marginBottom: 30,
-    marginTop:20
+    // marginTop:20,
   },
   openRoomGrid: {
-margin:4
+    margin:4
   },
   roomNameCard: {
     backgroundColor: "#212121",
-    color: "#dadcd7",
+    // color: "#dadcd7",
     width: "100%",
-      border: "solid",
-    borderWidth: 2,
-    borderColor: "#85b1d7",
- 
-  },
-  openRoomsCard: {
-  
-    backgroundColor: "#212121",
-    color: "#dadcd7",
-  },
-  openRoomsTitle: {
-    backgroundColor: "#212121",
-    color: "#dadcd7",
-    zIndex: 3,
-    width: "100%",
-    height: 60,
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: "$headline_text",
+    justifyContent: 'center',
+      // border: "solid",
+    // borderWidth: 1,
+    // borderColor: "#aaf",
 
   },
+  openRoomsCard: {
+    textAlign: 'center',
+    marginRight: '5%',
+    marginLeft: '5%',
+    backgroundColor: "#212121",
+    color: "#dadcd7",
+  },
+
   openRoomsDescription: {
-    backgroundColor: "#85b1d7",
+    // backgroundColor: "#85b1d7",
+    justifyContent: 'center',
     zIndex: 3
   },
 
   // dynamic1 : {
   //   backgroundColor: "pink"
   // },
-h1: {
-  backgroundColor: "#85b1d7",
-  color: "#212121",
-  width: '100%'
-},
 
 h3: {
-  color: "#5e5d5d",
-  paddingTop: 5,
-  marginLeft: "5%"
+  // color: "#5e5d5d",
+
+  fontSize: 28,
 },
 textarea2: {
   color: "#dadcd7"
@@ -97,7 +84,7 @@ textarea2: {
 // let dynamicList=[]
 
 var userID
-var username;
+let username;
 var messages;
 var instrument;
 let roomOption = [] 
@@ -107,7 +94,7 @@ export default class DynamButtons extends React.Component {
 
   constructor(props){
     super(props);
-console.log(props)
+    console.log(props)
     this.state = { 
       dynamicList: [],
       dynamicListDescription: [],
@@ -120,7 +107,7 @@ console.log(props)
    
     username = props.username;
     instrument = props.instrument;
-    let rooms = props.rooms;
+  
     
    
     this.addListItem = this.addListItem.bind(this);
@@ -130,7 +117,7 @@ console.log(props)
     }
     
     componentDidMount(){
- const {rooms} = this.state
+      const {rooms} = this.state
       console.log(this.props)
 
       axios.get('http://localhost:5001/api/message')
@@ -140,21 +127,11 @@ console.log(props)
                     return rooms
                 });
                 console.log(rooms)
-      const socket = io('http://localhost:5001',{transports: ['websocket']});
-    
-      socket.on("username_Joined", usernameFunct)
-      function usernameFunct(username){
-        console.log("USERNAME joined: ", username);
-        return username;
-        }
-      socket.on("userID_Joined", userIDFunct)
-      function userIDFunct(userID){
-        console.log("USERID joined: ", userID);
-        }
-      socket.on("roomOption_Joined", roomOptionFunct)
-      function roomOptionFunct(roomOption){
-        console.log("ROOM OPTION: ", roomOption);
-      }
+  
+                socket.on("roomOption_Joined", roomOptionFunct)
+                function roomOptionFunct(itemToAdd){
+                  console.log("ROOM OPTION (ITEM TO ADD): ", itemToAdd);
+                }
     
     }
     
@@ -162,22 +139,11 @@ console.log(props)
     addListItem(itemToAdd){
     let currentList = this.state.dynamicList;
     // let msg = response.messages;
-  async function addingItem(currentList){
-    var r = await axios.get('http://localhost:5001/api/message')
-      .then(function (response) {
-      console.log(response.data.messages[0])    
-    // return r
-      })
-      .catch(function(){
-        console.log(("error in axios get of addListItem in dynamicButton"));
-      });
-    }addingItem();
 
       console.log(currentList); 
       console.log(this.props);
       currentList.push(itemToAdd);
      
-
       this.setState({dynamicList : currentList});
       console.log(this.state.dynamicList)
       let dynamicList = this.state.dynamicList
@@ -189,6 +155,25 @@ console.log(props)
         origin: origin,
         username: this.props.username
       }
+
+
+      // socket.emit('username', {username: username})
+      // socket.emit('userID', {userID: origin})
+      socket.emit('joinRoom', itemToAdd)   
+
+      // socket.on("username_Joined", usernameFunct)
+      // function usernameFunct(username){
+      //   console.log("USERNAME joined: ", username);
+      //   return username;
+      //   }
+      // socket.on("userID_Joined", userIDFunct)
+      // function userIDFunct(userID){
+      //   console.log("USERID joined: ", userID);
+      //   }
+
+        
+   
+
       axios({
           method: 'post',
           url: 'http://localhost:5001/api/message',
@@ -197,11 +182,8 @@ console.log(props)
     
  
         
-        let username = this.props.username;
-        origin = this.props.idUserLogged
-        socket.emit('username', {username: username})
-        socket.emit('userID', {userID: origin})
-        socket.emit('roomOption', {roomOption: itemToAdd})     
+        username = this.props.username;
+        origin = this.props.idUserLogged  
     }
  
 
@@ -220,16 +202,16 @@ console.log(props)
 
 
   render(){
-  let g = JSON.stringify(this.state.rooms.messages)
+//   let g = JSON.stringify(this.state.rooms.messages)
 
-console.log(g);
+// console.log(g);
 
     let roomOption = this.state.rooms.messages;
-    let username = this.state.username;
+    username = this.state.username;
 
 let redsox; 
 let baseball;   
-console.log(roomOption)  
+// console.log(roomOption)  
 if(roomOption !== undefined || null){
 redsox = roomOption.map(room=>room.content)
 }
@@ -237,29 +219,30 @@ if (redsox !== undefined || null){
 baseball = redsox.map(
   yankees=>yankees)
 }
-console.log(baseball);
-console.log(username);
+// console.log(baseball);
+// console.log(username);
     return(
       <> 
+    
       <div className="component-wrapper">
- 
-          <Card className="roomCard" style={styles.roomNameCard}> 
-            <h1 style={styles.h1}>Create a Room</h1>
+      <h1 style={styles.roomNameCard}>Create a Room</h1>
+          <Card className="roomNameCard" style={styles.roomNameCard}> 
+          
               <InputBoxDescription  addItem={this.addListItem} addItemDescription={this.addListItemDescription} style={styles.textarea2} /><br/>
           </Card>    
       </div>
     <div>  
-   
+ 
         <Card style={styles.openRoomsCard}> 
-        <h3>Open Rooms</h3>
-        <h1>{this.state.rooms.content}</h1>
+        <h3  style={styles.roomNameCard} >Open Rooms</h3>
+ 
       
     {/*tk*/}    
      
-        <DynamicList style={styles.openRoomsTitle} listItems={this.state.dynamicList} removeItem={this.removeListItem} />
+        <DynamicList className="openRoomsTitle" listItems={this.state.dynamicList} removeItem={this.removeListItem} />
         {
           (baseball !== undefined || null)
-          ? <DynamicList style={styles.openRoomsTitle} listItems={baseball} removeItem={this.removeListItem} />
+          ? <DynamicList className="openRoomsTitle" listItems={baseball} removeItem={this.removeListItem} />
         : null
       }
     
@@ -282,6 +265,7 @@ let count = 0
 
 export class DynamicList extends React.Component {
 
+
   render(){
    console.log()
     return (
@@ -294,32 +278,30 @@ export class DynamicList extends React.Component {
               <Link 
               // to={"praxspace/" + username + "/" + this.props.listItems[index]} 
               key={index}
-              to={"praxspace/" + username + "/" + this.props.listItems[index]}
+              to={"praxspace/" + this.props.listItems[index]}
               onClick={(e)=>{
                 e.preventDefault()
-                window.open("praxspace/" + username + "/" + this.props.listItems[index])}}
+                window.open("praxspace/" + this.props.listItems[index])}}
             > 
-              <li 
+              <span 
                 className="joinRoomButton" 
-                to={window.open("praxspace/" + username + "/" + this.props.listItems[index])}
+                // to={window.open("praxspace/" + this.props.listItems[index])}
                 // onClick={
                 //  window.open("praxspace/" + username + "/" + this.props.listItems[index]) 
                 // }
                 key={index}
                 count={count++}
               >
-                <Button style={styles.openRoomsTitle}  >
+                    <Button className="openRoomsTitle"  >
                     {this.props.listItems[index]}
                     </Button>
-                </li>
+                </span>
               </Link>
             );
           })
         }
      <br/>
-      <Switch>            
-        <Route exact path="/praxspace/:username/:message" component={CreatePraxSpace}/> 
-      </Switch>
+
       </>
       );
   }
@@ -362,14 +344,16 @@ export class InputBoxDescription extends React.Component {
 
   render(){
     return (
+ 
       <form ref="itemForm" onSubmit={e => this.formSubmit2(e)}>  
        
         <input className="inputCreateRoom" type="text" id="item" ref="item" placeholder="Name your Room"/>
 
-        <Button style={styles.button} type="submit" className="btn btn-primary roomDefineButton"
-        > Join the Room
+        <Button type="submit" style={styles.button} className="buttonJoin btn btn-primary roomDefineButton"
+        > Open Room
         </Button>
       </form>
+
       );
     }
   }

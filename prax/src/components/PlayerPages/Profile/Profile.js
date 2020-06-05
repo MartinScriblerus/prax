@@ -2,33 +2,42 @@ import React, { useState } from "react";
 import "./profile.scss";
 import { useDispatch } from 'react-redux'
 import { logOutUser } from '../../../redux/auth/actions'
+import TemporaryDrawer from '../../Home/drawerComponent'
+ 
+
 
 const styles = {
+  loggedAs: {
+    color: "#dadcd7"
+  },
   logout: {
-    backgroundColor: "#85b1d7",
-    color: "#272" 
+    fontSize: "26px",
+  justifyContent: 'left',
+    // backgroundColor: "#85b1d7",
+    color: "#272", 
+ 
   },
   logoutPopup: {
     color: "#85b1d7",
-    backgroundColor: "#030303", 
     fontSize: 20,
-    width: '100%'
-
+    width: '100%',
+  //  marginTop: 20
   },
   contactTabs: {
-    fontSize: 29,
-    marginLeft: "-15%",
+    // fontSize: '22px',
+    // marginLeft: "20px",
     backgroundColor: '#212121' 
   },
   button: {
-    color: "black",
-    height: 60
+    color: "#aaf",
+    
+    marginRight: '20px'
   },
   ellipsis: {
-    color: "#daddc7",
+   
     fontSize: 26,
     height: '100%',
-    width: '100%',
+    // width: '100%',
   }
 }
 
@@ -40,27 +49,30 @@ export const Profile = props => {
   
   return (
     <div className="profile-container" style={styles.logout}>
-      <div className="username-box">
-        <h4 
-        className="handle"
-        style={styles.contactTabs}
-        type="text"
-        placeholder = "Handle"
-        >{username}</h4>
-      
+
         <div className="options-box">
-        <button style={styles.button}
-       
+
+        <button style={styles.button}      
           onClick={() => {
             setShowMenu(!showMenu);
           }}
-        > 
+          > 
+
+
           <i style={styles.ellipsis} className="fas fa-ellipsis-v">
           Menu
           </i>
        {showMenu && (
             <nav className="profile-menu">
+
               <ul>
+              <li 
+              // className="handle"
+              style={styles.logoutPopup}
+              type="text"
+              placeholder = "Handle"
+              > Logged as: <br/> <span style={styles.loggedAs}> 
+              {username}</span></li>
                 <li 
                 style={styles.logoutPopup}
                   onClick={() => {
@@ -73,8 +85,9 @@ export const Profile = props => {
             </nav>
           )}
         </button>
-      </div>
+       
         </div>
+  
     
     </div>
   );

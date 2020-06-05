@@ -2,7 +2,7 @@ import React from 'react'
 import store from '../../redux/store'
 // import Camera from '../posenet/components/Camera.js'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import io from 'socket.io-client';
+
 import Header from '../Header/Header/header'
 import Navbar from '../Header/Navbar/navbar'
 // import Grid from '@material-ui/core/Grid';
@@ -25,22 +25,6 @@ import {
 require('typeface-overpass')
 require('typeface-permanent-marker')
 
-// const socket = io('http://localhost:5001',{transports: ['websocket']});
-// // SOCKETS FOR APP --> BRING BACK WHEN FINISHING SIGNALLING
-// socket.on('connection', function newConnection(Camera){
-
-//   // console.log('room name: ', futureVariableNameHere)
-//   // socket.on('message', function getMessage(message){
-//   //   console.log(message);
-//   // })
-//   // socket.on('message_Users', function getMessageUsers(message_Users){
-//   //   console.log(message_Users);
-//   // })
-//   // socket.on('message_Messages', function getMessageMessages(message_Messages){
-//   //   console.log(message_Messages);
-//   // })
-
-// });
 
 const theme = createMuiTheme({
   palette: {
@@ -60,6 +44,10 @@ const styles = {
   camera : {
     backgroundColor: "#030303",
     color: "#f6f6f6"
+  },
+  navbar: {
+    marginTop: '100vh',
+    borderBottom: '50vh'
   }
 }
 
@@ -85,7 +73,7 @@ if (window !== undefined){
 
       <Header />
       <MuiThemeProvider theme={theme}>
-        <Navbar />
+        <Navbar style={styles.navbar}/>
       </MuiThemeProvider>
     <MuiThemeProvider theme={theme}>
       <Switch>            
@@ -95,7 +83,7 @@ if (window !== undefined){
       
         <Route exact path="/about" component={About} />
         <Route exact path="/signup" component={FirstTimeLogin} />
-        <PrivateRoute exact path="/praxspace/:username/:message" component={CreatePraxSpace}/> 
+        <PrivateRoute exact path="/praxspace/:message" component={CreatePraxSpace}/> 
         <PrivateRoute exact path="/admin" component={Admin} />
 
     </Switch>

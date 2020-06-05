@@ -1,12 +1,10 @@
 import {drawKeyPoints, drawSkeleton} from './utils'
 import React, {Component} from 'react'
 import * as posenet from '@tensorflow-models/posenet'
-import io from 'socket.io-client';
+import {socket} from '../../../services/socketIO'
 
 
 console.log("this should be fine")
-const socket = io('http://localhost:5001',{transports: ['websocket']});
-
 
 const styles = {
   video: {
@@ -17,24 +15,25 @@ const styles = {
     backgroundColor: "#030303"
   }
 }
+
 class PoseNet extends Component {
   static defaultProps = {
-    videoWidth: (1200),
-    videoHeight: (600),
+    videoWidth: (550),
+    videoHeight: (550),
     flipHorizontal: true,
     algorithm: 'single-pose',
     showVideo: false,
     showSkeleton: true,
     showPoints: true,
-    minPoseConfidence: 0.1,
-    minPartConfidence: 0.1,
-    multiplier: .5,
+    minPoseConfidence: 0.07,
+    minPartConfidence: 0.17,
+    multiplier: 6,
     maxPoseDetections: 2,
     nmsRadius: 2,
     outputStride: 16,
     imageScaleFactor: .2,
-    skeletonColor: "#aaf",
-    skeletonLineWidth: 12,
+    skeletonColor: "#dadcd7",
+    skeletonLineWidth: 6,
     loadingText: 'Loading...please be patient...'
   }
 
@@ -42,8 +41,6 @@ class PoseNet extends Component {
     super(props, PoseNet.defaultProps)
     console.log(props)
   }
-
-
  
   getCanvas = elem => {
     this.canvas = elem
@@ -72,8 +69,30 @@ class PoseNet extends Component {
         this.setState({loading: false})
       }, 2000)
     }
-
     this.detectPose()
+
+    try {
+      function poseFunct(serverDrawPoses){
+        console.log("SERVERSIDE DRAW POSES", serverDrawPoses);
+        
+        }
+      socket.on("serverDrawPoses", poseFunct)
+      
+      socket.on("serverDrawCanvasURL", function (canvasURL){
+        
+        console.log("SERVERSIDE DRAW CANVAS", canvasURL);
+      }) 
+    } catch (error) {
+      throw new Error('PoseNet failed to load')
+    } finally {
+      console.log("SOCKETS IN CAMERA COMPONENTDIDMOUNT WORK!")
+    }
+
+   
+
+
+
+
   }
 
   async setupCamera() {
@@ -143,7 +162,7 @@ class PoseNet extends Component {
     const findPoseDetectionFrame = async () => {
       let poses = []
 
-          const pose = await posenetModel.estimateSinglePose(
+        const pose = await posenetModel.estimateSinglePose(
           video, 
           imageScaleFactor, 
           flipHorizontal, 
@@ -164,11 +183,11 @@ class PoseNet extends Component {
       socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
       
       var canvasURL = this.canvas.toDataURL();
-      console.log("canvasURL", canvasURL)
+      // console.log("canvasURL", canvasURL)
       
       if (showVideo) {
         canvasContext.save()
-        canvasContext.scale(-1, 1)
+        canvasContext.scale(-.2, .2)
         canvasContext.translate(-videoWidth, 0)
         canvasContext.drawImage(video, 0, 0, videoWidth, videoHeight)
         canvasContext.restore()
@@ -178,16 +197,9 @@ class PoseNet extends Component {
       socket.emit('poses', {poses: poses})
       socket.emit('canvasURL', {canvasURL: canvasURL})  
       // THESE TWO SOCKETS FUNCTIONS BELOW MAY BE PROBLEMATIC
-      socket.on("serverDrawPoses", poseFunct)
-      function poseFunct(serverDrawPoses){
-        console.log("SERVERSIDE DRAW POSES", serverDrawPoses);
-        
-        }
-      socket.on("serverDrawCanvasURL", function (canvasURL){
-        
-        
-        console.log("SERVERSIDE DRAW CANVAS", canvasURL);
-        }) 
+  
+  
+  
 
       poses.forEach(({score, keypoints}) => {
         if (score >= minPoseConfidence) {
@@ -224,13 +236,14 @@ class PoseNet extends Component {
   render() {
     return (
       <div>
-        <div>
-        
+        <div>  
           <video style={styles.video} id="videoNoShow" playsInline ref={this.getVideo} />
          
           <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
      
         </div>
+
+  
       </div>
     )
   }
