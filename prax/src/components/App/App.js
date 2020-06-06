@@ -76,7 +76,8 @@ if (window !== undefined){
         <Navbar style={styles.navbar}/>
       </MuiThemeProvider>
     <MuiThemeProvider theme={theme}>
-      <Switch>            
+      <Switch>
+                  
         <Route exact path="/" component={Login} />
 
         <PrivateRoute exact path="/login" component={Home} />
@@ -86,8 +87,8 @@ if (window !== undefined){
         <PrivateRoute exact path="/praxspace/:message" component={CreatePraxSpace}/> 
         <PrivateRoute exact path="/admin" component={Admin} />
 
-    </Switch>
-  </MuiThemeProvider>
+      </Switch>
+    </MuiThemeProvider>
     </div>
     
     </Router>

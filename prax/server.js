@@ -71,7 +71,7 @@ var passport = require("passport");
     var io = socket(server);
     
    
-    io.on('connection', newConnection);
+    
     
 
   //   io.on('connection', socket => {
@@ -110,30 +110,30 @@ var passport = require("passport");
 
 
 
-
+  io.on('connection', newConnection);
 
     function newConnection(socket){
       // I WILL NEED TO TRACK THIS ID AS THE SINGLE SOURCE OF SOCKET TRUTH
   
     
     console.log('new connection: ' + socket.id);
-    socket.emit('message', {message: 'Welcome to the chat room!'});
-    socket.emit('message_Users', {message_Users: users});   
-    socket.emit('message_Messages', {message_Messages: messages});
+    // socket.emit('message', {message: 'Welcome to the chat room!'});
+    // socket.emit('message_Users', {message_Users: users});   
+    // socket.emit('message_Messages', {message_Messages: messages});
     
 
 
-    socket.on('username', username)
-    function username(username){
-      console.log(username)
-      socket.broadcast.emit('username_Joined', username)
-    }  
+    // socket.on('username', username)
+    // function username(username){
+    //   console.log(username)
+    //   socket.broadcast.emit('username_Joined', username)
+    // }  
 
-    socket.on('userID', userID)
-    function userID(userID){
-      console.log(userID)
-      socket.broadcast.emit('userID_Joined', userID)
-    }  
+    // socket.on('userID', userID)
+    // function userID(userID){
+    //   console.log(userID)
+    //   socket.broadcast.emit('userID_Joined', userID)
+    // }  
        socket.on('joinRoom', roomOption)
       function roomOption(itemToAdd){
       
