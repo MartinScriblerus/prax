@@ -83,3 +83,21 @@
   .name {
     margin-right: 20px;
   }
+#localVideo {
+    height: 200;
+    width: 200;
+    z-index: 100;
+    border: 2px solid green;
+  }
+  #remoteVideo {
+    height: 200;
+    width: 200;
+    z-index: 100;
+    border: 2px solid yellow;
+  }
+video {
+    height: 200;
+    width: 200;
+    z-index: 100;
+    border: 2px solid pink;
+  }

@@ -2,13 +2,15 @@ import {drawKeyPoints, drawSkeleton} from './utils'
 import React, {Component} from 'react'
 import * as posenet from '@tensorflow-models/posenet'
 import {socket} from '../../../services/socketIO'
-
+import { withWebRTC } from 'react-liowebrtc';
 
 console.log("this should be fine")
 
 const styles = {
   video: {
-    display:"none"
+    // display:"none"
+    height: '200px',
+    width: '200px'
   },
   // THIS IS THE STYLE CONTROLLING CANVAS
   canvas: {
@@ -177,7 +179,7 @@ class PoseNet extends Component {
       const canvas_RTCstream = this.canvas.captureStream(25);
       // console.log(canvas_RTCstream)
    
-
+          
       
 
       socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
@@ -229,7 +231,7 @@ class PoseNet extends Component {
       requestAnimationFrame(findPoseDetectionFrame)
     }
     findPoseDetectionFrame()
-  }
+    }
 
 
 
@@ -249,4 +251,4 @@ class PoseNet extends Component {
   }
 }
 
-export default PoseNet
+export default withWebRTC(PoseNet)
