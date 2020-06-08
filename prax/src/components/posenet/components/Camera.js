@@ -3,7 +3,8 @@ import React, {Component} from 'react'
 import * as posenet from '@tensorflow-models/posenet'
 import {socket} from '../../../services/socketIO'
 import { withWebRTC } from 'react-liowebrtc';
-
+import { LioWebRTC, LocalVideo, RemoteVideo } from 'react-liowebrtc'
+ 
 console.log("this should be fine")
 
 const styles = {
@@ -42,12 +43,29 @@ class PoseNet extends Component {
   constructor(props) {
     super(props, PoseNet.defaultProps)
     console.log(props)
+    this.state = {
+      peers: []
+    };
   }
     state = {
       source: ""
     }
   
  
+    join = (webrtc) => webrtc.joinRoom('video-chat-room-arbitrary-name');
+ 
+    handleCreatedPeer = (webrtc, peer) => {
+      this.setState({ peers: [...this.state.peers, peer] });
+    }
+   
+    handleRemovedPeer = () => {
+      this.setState({ peers: this.state.peers.filter(p => !p.closed) });
+    }
+   
+    generateRemotes = () => this.state.peers.map((peer) => (
+      <RemoteVideo key={`remote-video-${peer.id}`} peer={peer} />
+    ));
+
   getCanvas = elem => {
     this.canvas = elem
     console.log(elem)
@@ -98,9 +116,9 @@ class PoseNet extends Component {
 
    
   
-      navigator.mediaDevices.getUserMedia({video: true, audio: true})
-      .then(this.handleVideo)
-      .catch(this.videoError)
+      // navigator.mediaDevices.getUserMedia({video: true, audio: true})
+      // .then(this.handleVideo)
+      // .catch(this.videoError)
 
 
 
@@ -256,13 +274,28 @@ socket.on('herecanvasCTX', (canvasContext)=>{
       <div>
 
         <div>  
-        <video style={styles.video} id="videoNoShow" playsInline ref={this.getVideo} />
-       
+        <video style={styles.video} id="videoNoShow" playsInline ref={this.getVideo} >
+        <LioWebRTC
+        options={{ debug: true }}
+        onReady={this.join}
+        onCreatedPeer={this.handleCreatedPeer}
+        onRemovedPeer={this.handleRemovedPeer}
+      >
+        <LocalVideo />
+  
+      </LioWebRTC>
+        </video>
+        {
+          this.state.peers !== undefined || [] || null
+          ? this.state.peers &&
+          this.generateRemotes()
+          : null
+        }
         <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
    
       </div>
   
-  
+
       </div>
     )
   }

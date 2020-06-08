@@ -36,7 +36,7 @@ export default class CreatePraxSpace extends Component  {
   constructor(props) {
     super(props);
 
-    this.videoRef = React.createRef();
+    this.videoTag = React.createRef();
     this.state = {
       source: "",
       isVideoLoading: true,
@@ -61,60 +61,68 @@ export default class CreatePraxSpace extends Component  {
 
   
 
+
+
+
+
 // // get user media
-// getUserMedia = (err, stream) => {
-//   // if the browser doesn't support user media
-//   // or the user says "no" the error gets passed
-//   // as the first argument.
-//   if (err) {
-//     console.log('failed');
-//   } else {
-//     console.log('got a stream', stream);  
-//   }
-// };
-async componentDidMount() {
-  const g = await this.webrtc
-  if (this.webrtc !== undefined) {
-  this.webrtc = new LioWebRTC({
-    // The url for your signaling server. Use your own in production!
-    url: 'https://sm1.lio.app:443/',
-    // The local video ref set within your render function
-    localVideoEl: this.localVid,
-    // Immediately request camera access
-    autoRequestMedia: true,
-    // Optional: nickname
-    nick: this.state.nick,
-    debug: true
-  });
+getUserMedia = (err, stream) => {
+  // if the browser doesn't support user media
+  // or the user says "no" the error gets passed
+  // as the first argument.
+  if (err) {
+    console.log('failed');
+  } else {
+    console.log('got a stream', stream); 
+    navigator.mediaDevices.getUserMedia({video: true, audio: true})
+    .then(this.handleVideo)
+    .catch(this.videoError) 
+  }
+};
 
-  this.webrtc.on('peerStreamAdded', this.addVideo);
-  this.webrtc.on('removedPeer', this.removeVideo);
-  this.webrtc.on('ready', this.readyToJoin);
-  this.webrtc.on('iceFailed', this.handleConnectionError);
-  this.webrtc.on('connectivityError', this.handleConnectionError);
+componentDidMount() {
+  // getting access to webcam
+ navigator.mediaDevices
+      .getUserMedia({video: true})
+      .then(stream => this.videoTag.current.srcObject = stream)
+      .catch(console.log);
 }
-}
-
 
 
   join = (webrtc) => webrtc.joinRoom('my-p2p-app-demo');
 
   handleCreatedPeer = (webrtc, peer) => {
-    if (peer.id ===undefined){
+
+      // this.setState({ peers: [...this.state.peers, peer] });
     this.addChat(`Peer-${peer.id.substring(0, 5)} joined the room!`, ' ', true);
-    this.webrtc.on('peerStreamAdded', (stream, peer) => {
-      webrtc.attachStream(stream, this.videoRef);
-      console.log(webrtc)
-    });  
-  }
-    else {
-      return
-    }
+
+
+ 
   }
 
   handleRemovedPeer = () => {
     this.setState({ peers: this.state.peers.filter(p => !p.closed) });
+    console.log(this.state.peers)
   }
+
+//   generateRemotes = () => this.state.peers.map((peer) => (
+//     <>
+    
+//     <h1>{`remote-video-${peer.id}`}</h1>
+  
+//     <RemoteVideo 
+//     key={`remote-video-${peer.id}`} 
+//     peer={peer}
+//     id={this.props.id}
+//     srcObject={this.videoTag}
+//     width={this.props.width}
+//     height={this.props.height}
+//     autoPlay
+//     title={this.props.title}
+//     />
+// </>
+
+//     ));
 
   readyToJoin = () => {
     // Starts the process of joining a room.
@@ -178,27 +186,31 @@ async componentDidMount() {
     this.disconnect();
   }
 
+
+
   render() {
     const { chatLog, options } = this.state;
    
     return(
     <Router> 
     <Grid style={styles.outergrid}>
-x
+
       <div className="App">
         <LioWebRTC
           options={{ debug: true }}
           onReady={this.join}
-          onCreatedPeer={this.handleCreatedPeerVideo}
+          onCreatedPeer={this.handleCreatedPeer}
           onRemovedPeer={this.handleRemovedPeer} 
           >
-          <Posenet id="posenetImport" style={styles.camera}/>
-     
+      <Posenet id="posenetImport" style={styles.camera}>
+      <LocalVideo/>
+      </Posenet>
+  s
+    
         </LioWebRTC>
       </div>
 
-     
- <ExampleVideoChat/>
+
 
       
       <div className="App">
