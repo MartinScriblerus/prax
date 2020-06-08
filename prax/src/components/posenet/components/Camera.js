@@ -113,16 +113,10 @@ class PoseNet extends Component {
     } finally {
       console.log("SOCKETS IN CAMERA COMPONENTDIDMOUNT WORK!")
     }
-
-   
   
       // navigator.mediaDevices.getUserMedia({video: true, audio: true})
       // .then(this.handleVideo)
       // .catch(this.videoError)
-
-
-
-
 
   }
 

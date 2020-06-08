@@ -205,7 +205,7 @@ componentDidMount() {
       <Posenet id="posenetImport" style={styles.camera}>
       <LocalVideo/>
       </Posenet>
-  s
+  
     
         </LioWebRTC>
       </div>
