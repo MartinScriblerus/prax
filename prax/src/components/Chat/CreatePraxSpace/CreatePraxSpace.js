@@ -9,10 +9,8 @@ import ChatBox from './chatbox';
 import {
   BrowserRouter as Router,
 } from "react-router-dom";
-var getUserMedia = require('getusermedia');
-var attachMediaStream = require('attachmediastream');
-
-
+import ExampleVideoChat from './LioWebRTC' 
+import MyComponent from './componentLioWebRTC'
 
 
 const styles = {
@@ -33,17 +31,6 @@ const styles = {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 export default class CreatePraxSpace extends Component  {
 
   constructor(props) {
@@ -51,6 +38,7 @@ export default class CreatePraxSpace extends Component  {
 
     this.videoRef = React.createRef();
     this.state = {
+      source: "",
       isVideoLoading: true,
       nick: this.props.nick,
       roomID: `party-${this.props.roomName}`,
@@ -58,39 +46,54 @@ export default class CreatePraxSpace extends Component  {
       camPaused: false,
       chatLog: [],
       peers: [],
-      options: {
-        debug: true,
-        autoRequestMedia: true,
-        media: {
-            video: true,
-            audio: false
-        },
-        video: null,
-      //   video: {
-      //     autoplay: true, // automatically play the video stream on the page
-      //     mirror: true, // flip the local video to mirror mode (for UX)
-      //     muted: true // mute local video stream to prevent echo
-      // },
-        // data: true
-      }
+      // options: {
+      //   debug: true,
+      //   // autoRequestMedia: true,
+      //   // media: {
+      //   //     video: true,
+      //   //     audio: false
+      //   // },
+      //   video: null,
+      // }
     };
     this.remoteVideos = {};
   }
 
+  
 
-// get user media
-getUserMedia = (err, stream) => {
-  // if the browser doesn't support user media
-  // or the user says "no" the error gets passed
-  // as the first argument.
-  if (err) {
-    console.log('failed');
-  } else {
-    console.log('got a stream', stream);  
-  }
-};
+// // get user media
+// getUserMedia = (err, stream) => {
+//   // if the browser doesn't support user media
+//   // or the user says "no" the error gets passed
+//   // as the first argument.
+//   if (err) {
+//     console.log('failed');
+//   } else {
+//     console.log('got a stream', stream);  
+//   }
+// };
+async componentDidMount() {
+  const g = await this.webrtc
+  if (this.webrtc !== undefined) {
+  this.webrtc = new LioWebRTC({
+    // The url for your signaling server. Use your own in production!
+    url: 'https://sm1.lio.app:443/',
+    // The local video ref set within your render function
+    localVideoEl: this.localVid,
+    // Immediately request camera access
+    autoRequestMedia: true,
+    // Optional: nickname
+    nick: this.state.nick,
+    debug: true
+  });
 
-
+  this.webrtc.on('peerStreamAdded', this.addVideo);
+  this.webrtc.on('removedPeer', this.removeVideo);
+  this.webrtc.on('ready', this.readyToJoin);
+  this.webrtc.on('iceFailed', this.handleConnectionError);
+  this.webrtc.on('connectivityError', this.handleConnectionError);
+}
+}
 
 
 
@@ -130,6 +133,14 @@ getUserMedia = (err, stream) => {
     };
   }
 
+  handleCreatedPeer = (webrtc, peer) => {
+    this.setState({ peers: [...this.state.peers, peer] });
+  }
+
+  handleRemovedPeer = () => {
+    this.setState({ peers: this.state.peers.filter(p => !p.closed) });
+  }
+
   addChat = (name, message, alert = false) => {
     this.setState({ chatLog: this.state.chatLog.concat({
       ...this.props,
@@ -140,8 +151,31 @@ getUserMedia = (err, stream) => {
     })});
   }
 
+
+
+
+
+
+  handleConnectionError = (peer) => {
+    const pc = peer.pc;
+    console.log('had local relay candidate', pc.hadLocalRelayCandidate);
+    console.log('had remote relay candidate', pc.hadRemoteRelayCandidate);
+  }
+
+  readyToJoin = () => {
+    // Starts the process of joining a room.
+    this.webrtc.joinRoom(this.state.roomID, (err, desc) => {
+    });
+  }
+
+
+
   disconnect = () => {
     this.webrtc.quit();
+  }
+
+  componentWillUnmount() {
+    this.disconnect();
   }
 
   render() {
@@ -150,19 +184,23 @@ getUserMedia = (err, stream) => {
     return(
     <Router> 
     <Grid style={styles.outergrid}>
+x
       <div className="App">
         <LioWebRTC
           options={{ debug: true }}
           onReady={this.join}
           onCreatedPeer={this.handleCreatedPeerVideo}
-          onRemovedPeer={this.handleRemovedPeer}         
+          onRemovedPeer={this.handleRemovedPeer} 
           >
           <Posenet id="posenetImport" style={styles.camera}/>
+     
         </LioWebRTC>
       </div>
 
-      
+     
+ <ExampleVideoChat/>
 
+      
       <div className="App">
         <LioWebRTC
         options={options}
@@ -177,6 +215,12 @@ getUserMedia = (err, stream) => {
         </LioWebRTC>
       </div>
 
+
+
+
+
+
+
   </Grid>
        
     </Router>
@@ -185,4 +229,5 @@ getUserMedia = (err, stream) => {
 
 }
   
+
 

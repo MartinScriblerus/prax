@@ -66,7 +66,7 @@ var passport = require("passport");
 
   //=====================================================
     //+++++++++++++++++++++++++++++++++++++++++++++++++  
-    var socket = require('socket.io');
+    var socket = require('socket.io', { origins: '*:*'});
     
     var io = socket(server);
     
@@ -141,7 +141,7 @@ var passport = require("passport");
         socket.broadcast.to(itemToAdd).emit('roomOption_Joined', itemToAdd)
        
   
-      socket.to(itemToAdd).on('poses', poses)
+      socket.broadcast.to(itemToAdd).on('poses', poses)
       function poses(poses){
         // BELOW IS AN OBJECT w. PROPERTIES OF SCORE & KEYPOINTS ARRAY
         // console.log(poses)
@@ -150,17 +150,22 @@ var passport = require("passport");
         socket.broadcast.to(itemToAdd).emit('serverDrawPoses', serverDrawPoses )
       }
     
-      socket.to(itemToAdd).on('canvasURL', canvasURL)
+      socket.on('canvasContext', canvasCTX)
+      function canvasCTX(canvasContext){
+        socket.broadcast.to(itemToAdd).emit("herecanvasCTX", canvasContext)
+      }
+      
+      socket.on('canvasURL', canvasURL)
       function canvasURL(canvasURL){
   
           const canvasRTCDraw = (decodeURI(canvasURL.toString()) );
          // BELOW GIVES AN OBJECT 'poses' WITH PROPERTIES OF 'score' AND 'keypoints'
           // console.log("canvasRTCDRAW", canvasRTCDraw);
-  
+        
         // BELOW GIVES BACK A LONG STRING (IT WORKS!) 
         // console.log(canvasURL)
         const serverDrawCanvasURL = canvasRTCDraw 
-        socket.broadcast.to(itemToAdd).emit('serverDrawCanvasURL', serverDrawCanvasURL)
+        socket.emit('serverDrawCanvasURL', serverDrawCanvasURL)
         }
       }  
     

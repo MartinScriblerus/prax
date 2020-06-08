@@ -15,7 +15,7 @@ import Card from '@material-ui/core/Card'
 import setAuthToken from "../../../services/setAuthToken";
 // import CreatePraxSpace from '../CreatePraxSpace/CreatePraxSpace';
 
-// import {socket} from '../../../services/socketIO' 
+import {socket} from '../../../services/socketIO' 
 
 
 const token = localStorage.getItem("token");
@@ -128,10 +128,10 @@ export default class DynamButtons extends React.Component {
                 });
                 console.log(rooms)
   
-                // socket.on("roomOption_Joined", roomOptionFunct)
-                // function roomOptionFunct(itemToAdd){
-                //   console.log("ROOM OPTION (ITEM TO ADD): ", itemToAdd);
-                // }
+                socket.on("roomOption_Joined", roomOptionFunct)
+                function roomOptionFunct(itemToAdd){
+                  console.log("ROOM OPTION (ITEM TO ADD): ", itemToAdd);
+                }
     
     }
     
@@ -159,7 +159,7 @@ export default class DynamButtons extends React.Component {
 
       // socket.emit('username', {username: username})
       // socket.emit('userID', {userID: origin})
-      // socket.emit('joinRoom', itemToAdd)   
+      socket.emit('joinRoom', itemToAdd)   
 
       // socket.on("username_Joined", usernameFunct)
       // function usernameFunct(username){

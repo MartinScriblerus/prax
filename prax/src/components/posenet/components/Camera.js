@@ -43,6 +43,10 @@ class PoseNet extends Component {
     super(props, PoseNet.defaultProps)
     console.log(props)
   }
+    state = {
+      source: ""
+    }
+  
  
   getCanvas = elem => {
     this.canvas = elem
@@ -83,6 +87,8 @@ class PoseNet extends Component {
       socket.on("serverDrawCanvasURL", function (canvasURL){
         
         console.log("SERVERSIDE DRAW CANVAS", canvasURL);
+
+
       }) 
     } catch (error) {
       throw new Error('PoseNet failed to load')
@@ -91,6 +97,11 @@ class PoseNet extends Component {
     }
 
    
+  
+      navigator.mediaDevices.getUserMedia({video: true, audio: true})
+      .then(this.handleVideo)
+      .catch(this.videoError)
+
 
 
 
@@ -179,11 +190,16 @@ class PoseNet extends Component {
       const canvas_RTCstream = this.canvas.captureStream(25);
       // console.log(canvas_RTCstream)
    
-          
+
       
 
       socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
       
+socket.on('herecanvasCTX', (canvasContext)=>{
+ 
+    console.log("HEREE IS CANVASCTX", canvasContext)
+})
+
       var canvasURL = this.canvas.toDataURL();
       // console.log("canvasURL", canvasURL)
       
@@ -238,13 +254,14 @@ class PoseNet extends Component {
   render() {
     return (
       <div>
-        <div>  
-          <video style={styles.video} id="videoNoShow" playsInline ref={this.getVideo} />
-         
-          <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
-     
-        </div>
 
+        <div>  
+        <video style={styles.video} id="videoNoShow" playsInline ref={this.getVideo} />
+       
+        <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
+   
+      </div>
+  
   
       </div>
     )
