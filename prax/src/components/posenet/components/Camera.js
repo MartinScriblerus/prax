@@ -46,6 +46,8 @@ class PoseNet extends Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps)
+    this.remoteCanvas = React.createRef();
+    this.remoteVideo = React.createRef();
     console.log(props)
     this.state = {
       source: "",
@@ -128,7 +130,7 @@ getUserMedia = (err, stream) => {
 
   
     generateRemotes = () => this.state.peers.map((peer) => (
-      (peer !== undefined) && (<video peer={peer.id} key={'remote-video' + peer.id} />)
+      (peer !== undefined) && (<video ref={this.getRemoteVideo} peer={peer.id} key={'remote-video' + peer.id} />)
 
       // ? <video peer={peer.id} key={'remote-video' + peer.id}></video>
       // : null 
@@ -136,6 +138,15 @@ getUserMedia = (err, stream) => {
    
   
   getCanvas = elem => {
+    this.canvas = elem
+  }
+
+getRemoteVideo = async (elem) => {
+ await this.video
+  this.video = elem
+}
+
+  getRemoteCanvas = elem => {
     this.canvas = elem
     console.log(elem)
   }
@@ -183,6 +194,15 @@ getUserMedia = (err, stream) => {
       console.log("SOCKETS IN CAMERA COMPONENTDIDMOUNT WORK!")
     }
   
+    try{
+    const remoteCtx = this.remoteCanvas.current.getContext("2d");
+    remoteCtx.fillRect(0, 0, 100, 100);
+    } catch (error) {
+      throw new Error('PoseNet failed to load')
+    } finally {
+      console.log("remote canvas in ComponentDidMount should work")
+    }
+
       // navigator.mediaDevices.getUserMedia({video: true, audio: true})
       // .then(this.handleVideo)
       // .catch(this.videoError)
@@ -359,7 +379,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
           : null
         }
         <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
-   
+        <canvas className="remoteCanvas" ref={this.remoteCanvas}  style={styles.canvas}/>
       </div>
   
 
