@@ -128,9 +128,9 @@ getUserMedia = (err, stream) => {
 
   
     generateRemotes = () => this.state.peers.map((peer) => (
-      peer !== undefined
+      (peer !== undefined) && (<video peer={peer} key={peer.id} />)
 
-      ? <video peer={peer}key={peer.id} />
+      ? <video peer={peer} key={peer.id} />
       : null
     ));
    
@@ -339,18 +339,18 @@ socket.on('herecanvasCTX', (canvasContext)=>{
       <div>
 
         <div>  
-        <video key={`local-video`} style={styles.video} id="videoNoShow" playsInline ref={this.getVideo}>  
+      
         <LioWebRTC
         options={{ debug: true }}
         onReady={this.join}
         onCreatedPeer={this.handleCreatedPeer}
         onRemovedPeer={this.handleRemovedPeer}
       >
-  
-      <LocalVideo  />
+      <video key={`local-video`} style={styles.video} id="videoNoShow" playsInline ref={this.getVideo}/>  
+      
       </LioWebRTC>
 
-</video>
+
         {
           this.state.peers !== undefined || [] || null
           ? this.state.peers &&
