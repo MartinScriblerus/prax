@@ -32,7 +32,13 @@ class ExampleVideoChat extends Component {
         onReady={this.join}
         onCreatedPeer={this.handleCreatedPeer}
         onRemovedPeer={this.handleRemovedPeer}
-      >   
+      >
+   
+      <Posenet>
+      <LocalVideo/>
+      </Posenet>
+   
+       
         {
           this.state.peers &&
           this.generateRemotes()

@@ -4,8 +4,12 @@ import * as posenet from '@tensorflow-models/posenet'
 import {socket} from '../../../services/socketIO'
 import { withWebRTC } from 'react-liowebrtc';
 import { LioWebRTC, LocalVideo, RemoteVideo } from 'react-liowebrtc'
- 
+import ChatBox from '../../Chat/CreatePraxSpace/chatbox';
+
+import {PropTypes} from 'prop-types';
 console.log("this should be fine")
+
+
 
 const styles = {
   video: {
@@ -44,28 +48,93 @@ class PoseNet extends Component {
     super(props, PoseNet.defaultProps)
     console.log(props)
     this.state = {
-      peers: []
+      source: "",
+      isVideoLoading: true,
+      nick: this.props.nick,
+      roomID: `party-${this.props.roomName}`,
+      muted: false,
+      camPaused: false,
+      chatLog: [],
+      peers: [],
+      options: {
+        debug: true,
+        autoRequestMedia: true,
+        media: {
+            video: true,
+            audio: false
+        },
+        video: null,
+      }
     };
   }
     state = {
       source: ""
     }
   
+    // // get user media
+getUserMedia = (err, stream) => {
+  // if the browser doesn't support user media
+  // or the user says "no" the error gets passed
+  // as the first argument.
+  if (err) {
+    console.log('failed');
+  } else {
+    console.log('got a stream', stream); 
+    navigator.mediaDevices.getUserMedia({video: true, audio: true})
+    .then(this.handleVideo)
+    .catch(this.videoError) 
+  }
+};
+
  
     join = (webrtc) => webrtc.joinRoom('video-chat-room-arbitrary-name');
  
     handleCreatedPeer = (webrtc, peer) => {
+      console.log(this.props)
       this.setState({ peers: [...this.state.peers, peer] });
+      this.addChat(`Peer-${peer.id.substring(0, 5)} joined the room!`, ' ', true);
     }
    
     handleRemovedPeer = () => {
       this.setState({ peers: this.state.peers.filter(p => !p.closed) });
     }
    
-    generateRemotes = () => this.state.peers.map((peer) => (
-      <RemoteVideo key={`remote-video-${peer.id}`} peer={peer} />
-    ));
+    readyToJoin = () => {
+      // Starts the process of joining a room.
+      this.webrtc.joinRoom(this.state.roomID, (err, desc) => {
+        
+      });
+    }
 
+    handlePeerData = (webrtc, type, payload, peer) => {
+      switch(type) {
+        case 'chat':
+          this.addChat(`Peer-${peer.id.substring(0, 5)}`, payload);
+          break;
+        default:
+          return;
+      };
+    }
+
+    addChat = (name, message, alert = false) => {
+      this.setState({ chatLog: this.state.chatLog.concat({
+        ...this.props,
+        name,
+        message: `${message}`,
+        timestamp: `${Date.now()}`,
+        alert,
+      })});
+    }
+
+  
+    generateRemotes = () => this.state.peers.map((peer) => (
+      peer !== undefined
+
+      ? <video peer={peer}key={peer.id} />
+      : null
+    ));
+   
+  
   getCanvas = elem => {
     this.canvas = elem
     console.log(elem)
@@ -264,21 +333,24 @@ socket.on('herecanvasCTX', (canvasContext)=>{
 
 
   render() {
+    const { chatLog, options } = this.state;
     return (
+      <>
       <div>
 
         <div>  
-        <video style={styles.video} id="videoNoShow" playsInline ref={this.getVideo} >
+        <video key={`local-video`} style={styles.video} id="videoNoShow" playsInline ref={this.getVideo}>  
         <LioWebRTC
         options={{ debug: true }}
         onReady={this.join}
         onCreatedPeer={this.handleCreatedPeer}
         onRemovedPeer={this.handleRemovedPeer}
       >
-        <LocalVideo />
   
+      <LocalVideo  />
       </LioWebRTC>
-        </video>
+
+</video>
         {
           this.state.peers !== undefined || [] || null
           ? this.state.peers &&
@@ -291,6 +363,20 @@ socket.on('herecanvasCTX', (canvasContext)=>{
   
 
       </div>
+      <div className="App">
+      <LioWebRTC
+      options={options}
+      onReady={this.join}
+      onCreatedPeer={this.handleCreatedPeer}
+      onReceivedPeerData={this.handlePeerData}
+      >
+        <ChatBox
+          chatLog={chatLog}
+          onSend={(msg) => msg && this.addChat('Me', msg)}
+        />
+      </LioWebRTC>
+    </div>
+    </>
     )
   }
 }
