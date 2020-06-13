@@ -8,7 +8,6 @@ import ChatBox from '../../Chat/CreatePraxSpace/chatbox';
 import firebase from '../../firebase';
 
 
-
 const configuration = {
   iceServers: [
     {
@@ -227,11 +226,6 @@ async function openUserMedia() {
 }
 
 
-
-
-
-
-
 export default class PoseNet extends Component {
   static defaultProps = {
     videoWidth: (550),
@@ -281,23 +275,7 @@ export default class PoseNet extends Component {
     state = {
       source: ""
     }
-  
-    // // get user media
-// getUserMedia = (err, stream) => {
-//   // if the browser doesn't support user media
-//   // or the user says "no" the error gets passed
-//   // as the first argument.
-//   if (err) {
-//     console.log('failed');
-//   } else {
-//     console.log('got a stream', stream); 
-//     navigator.mediaDevices.getUserMedia({video: true, audio: true})
-//     .then(this.handleVideo)
-//     .catch(this.videoError) 
-//   }
-// };
-
- 
+   
     join = (webrtc) => webrtc.joinRoom('video-chat-room-arbitrary-name');
  
     handleCreatedPeer = (webrtc, peer) => {
@@ -313,7 +291,6 @@ export default class PoseNet extends Component {
     readyToJoin = () => {
       // Starts the process of joining a room.
       this.webrtc.joinRoom(this.state.roomID, (err, desc) => {
-        
       });
     }
 
@@ -337,18 +314,14 @@ export default class PoseNet extends Component {
       })});
     }
 
-  
-    
-   
-  
   getCanvas = elem => {
     this.canvas = elem
   }
 
-getRemoteVideo = async (elem) => {
- await this.video
-  this.video = elem
-}
+  getRemoteVideo = async (elem) => {
+  await this.video
+    this.video = elem
+  }
 
   getRemoteCanvas = elem => {
     this.canvas = elem
@@ -411,11 +384,6 @@ getRemoteVideo = async (elem) => {
     } finally {
       console.log("remote canvas in ComponentDidMount should work")
     }
-
-      // navigator.mediaDevices.getUserMedia({video: true, audio: true})
-      // .then(this.handleVideo)
-      // .catch(this.videoError)
-
   }
 
   async setupCamera() {
