@@ -3,8 +3,6 @@ var express = require("express");
 const app = require('express')();
 const morgan = require('morgan')
 const compression = require('compression')
-const dotenv = require('dotenv');
-
 var bodyParser = require('body-parser');
 var session = require("express-session");
 // var jwt = require('jsonwebtoken');
@@ -91,23 +89,7 @@ var passport = require("passport");
   //     socket.on("acceptCall", (data) => {
   //         io.to(data.to).emit('callAccepted', data.signal);
   //     })
-
-
-
-
-
-
-
-
   // });
-
-
-
-
-
-
-
-
 
 
   io.on('connection', newConnection);
@@ -115,14 +97,11 @@ var passport = require("passport");
     function newConnection(socket){
       // I WILL NEED TO TRACK THIS ID AS THE SINGLE SOURCE OF SOCKET TRUTH
   
-    
     console.log('new connection: ' + socket.id);
     // socket.emit('message', {message: 'Welcome to the chat room!'});
     // socket.emit('message_Users', {message_Users: users});   
     // socket.emit('message_Messages', {message_Messages: messages});
     
-
-
     // socket.on('username', username)
     // function username(username){
     //   console.log(username)
@@ -140,7 +119,6 @@ var passport = require("passport");
        console.log("SOCKET JOINING ITEMTOADD", socket.join(itemToAdd));
         socket.broadcast.to(itemToAdd).emit('roomOption_Joined', itemToAdd)
        
-  
       socket.broadcast.to(itemToAdd).on('poses', poses)
       function poses(poses){
         // BELOW IS AN OBJECT w. PROPERTIES OF SCORE & KEYPOINTS ARRAY

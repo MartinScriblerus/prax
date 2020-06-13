@@ -12,7 +12,7 @@ const style={
         fontFamily: 'Didact Gothic',
         borderBottom: "solid",
         borderWidth: '4px',
-        borderColor: "#aaf",
+        borderColor: "#0B748C",
         
     },
     text: {
@@ -24,7 +24,7 @@ const style={
       fontFamily: 'Arial',
       fontSize: 22,
       marginLeft: '10%',
-      color: "#85b1d7",
+      color: "#11B3D9",
       paddingBottom: '20px'
     }   
 }
@@ -38,7 +38,7 @@ function Header() {
         
           </Typography>
           <Typography justify="left" variant="h3" style={style.text2}>
-          A Site for Remote Musicians
+          A Site for Remote Performace
           </Typography>
         </div>
       </header>

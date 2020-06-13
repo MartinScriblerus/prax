@@ -4,12 +4,13 @@
     background-color: $header_black;
     height: 6vh;
     width: 100%;
-    box-shadow: 2px 2px 3px #aaf, 2px 3px 7px 0 #aaf;
+    box-shadow: .5px .5px 1px #198C63, 1px 1px 2px 0 #198C63;
 }
 .title {
     color: $white;
     text-align: center;
-    margin-top: 1vh;
+
+    
    
 }
 h6 {
@@ -17,9 +18,10 @@ h6 {
    
 }
 .MuiButton-root {
-    width: 12vw;
-    margin-left: 6vw;
+    width: 8vw;
+    margin-left: 3vw;
     color: $white;
+    margin-bottom: 10vh;
 }
 
 @media screen and (min-width: $mini){

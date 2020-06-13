@@ -21,15 +21,60 @@ fa-ellipsis-v {
     align-items: center;
     // height: 100%;
     // background-color: $dark_grey;
-    padding-left: 2rem;
+    // padding-left: 2rem;
     color: $dark_grey;
+
+    .menuNav {
+        margin-bottom: 20vh;
+        padding-bottom: 15vh;
+    }
+    
     .options-box{
-        button{
+        width: 100%;
+        // margin-right: 30vw;
+    
+        height: 40;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+   
+  
+        color: #dadcd7;
+     
+        .buttonMenu:focus {
+            background-color: transparent;
+            border: none;
+            margin-bottom: 25vh;
+         
+        }
+        .buttonMenu {
             position: relative;
-            box-shadow: 0 2px 4px 0 #4797de, 0 4px 8px 0 #4797de;
+            background-color: $header_black;
+            box-shadow: 0 .5px 1px 0 #0B748C, 0 1px 2px 0 #0B748C;
             margin-top: 1vh;
-            margin-bottom: 1vh;
-            background: none;
+            margin: 1vh;
+
+   
+         
+                // width: 100%;
+                // margin-right: 30vw;
+
+                height: 0;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                text-align: center;
+            
+           
+       
+                // margin: '10vw',
+             
+                // margin-top: 10vh
+                // marginRight: '10%',
+                // marginLeft: '10%',
+               
+            
             i{
                 // background-color: $dark_grey;
                 color: #dadcd7;
@@ -39,25 +84,31 @@ fa-ellipsis-v {
                 z-index: 1;
                 font-size: 0.9rem;
                 // padding: 0.5rem 0 ;
+                margin-right: 5vw;
+            
                 display: block;
                 background-color: $header_black;
                 position: relative;
                 // top: 150%;
-                left: 100px;
-                bottom: -15px;
+         
+              
                 width: 10rem;
-                box-shadow: 0 2px 5px 0 $white, 0 2px 10px 0 $white;
+                // box-shadow: 0 .5px 1px 0 $white, 0 1px 2px 0 $white;
                 ul {
+                    margin-bottom: 30vh;
                     li{
                         padding: 0.5rem 0 ;
                             &:hover{
                                 // margin-top: 10px;
-                                background-color: $metronome_off;
-                                border-radius: 0;
+                                // background-color: $metronome_off;
+                                // border-radius: 0;
                             }
                             button{
                                 color: $dark_grey;
                                 height: 5px;
+                                
+                             
+
                             }
                     }
                 }

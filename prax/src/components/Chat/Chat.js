@@ -27,7 +27,8 @@ const styles = ({
 		// marginLeft: "15%",
 		// marginTop: 50,
 		backgroundColor: "#212121",	
-		backgroundImage: "url(http://davidhall.io/wp-content/uploads/2019/07/graphic-notation-John-Cage.jpg)",
+		backgroundSize: "cover",
+		backgroundImage: "url(https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg)",
 	},
 	card2: {
 		variant: "solid",

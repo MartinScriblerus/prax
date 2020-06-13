@@ -72,9 +72,9 @@ export default function Navbar() {
             
 
        
-
+            <TemporaryDrawer className='title'/>
         </Toolbar>
-        <TemporaryDrawer className='title'/>
+        
     </div>
   );
 }

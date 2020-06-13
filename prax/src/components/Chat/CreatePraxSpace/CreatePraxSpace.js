@@ -39,7 +39,7 @@ export default class CreatePraxSpace extends Component  {
   componentDidMount(stream) {
     // getting access to webcam
    navigator.mediaDevices
-        .getUserMedia({video: true})
+        .getUserMedia({audio: true}, {video: true})
         .then(stream => this.videoTag.current.srcObject = stream)
         .then(()=>{return this.stream})
         .catch(console.log);

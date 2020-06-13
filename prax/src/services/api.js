@@ -6,7 +6,7 @@ import { BASE_URL } from '../const/index'
 
 
 const getAxiosClient = () => {
-  // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+ 
   const token = localStorage.getItem("token");
   console.log(token)
   return axios.create({

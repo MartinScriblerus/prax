@@ -5,7 +5,7 @@
 *:before{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    // box-sizing: border-box;
 }
 
 body {
@@ -85,9 +85,9 @@ button{
     height: 0px;
     outline: none;
  margin-left:3.25rem;
-    border-radius: 0.5rem;
-    background: $light_grey;
-    color:"#1F95BF";
+    // border-radius: 0.5rem;
+    // background: $light_grey;
+    // color:"#1F95BF";
     width: 100%;
     &:disabled{
         cursor: default;
@@ -135,7 +135,7 @@ label{
 }
 
 input{
-    background: "#dadcd7";
+    // background: "#dadcd7";
     font-family: 'Helvetica', Arial;
     
     border-radius: 0.5rem;
@@ -153,10 +153,11 @@ input{
 }
 
 input[type="text"], input[type="password"]{
-    border: 1px solid rgb(192, 192, 192);
+    // border: 1px solid rgb(192, 192, 192);
     &:focus
     {
         border-color: #7b7e80;
+        
     }
 }
 

@@ -30,12 +30,12 @@ const styles = {
     color: "#85b1d7",
     height:60,
     fontSize: '22px',
-    width: "96%",
+    width: "76%",
     marginRight: "2%",
     marginLeft: "2%",
     border: "solid",
     borderWidth: 2,
-    borderColor: "#4797DE",
+    // borderColor: "#4797DE",
     marginBottom: 30,
     // marginTop:20,
   },
@@ -143,7 +143,7 @@ export default class DynamButtons extends React.Component {
       console.log(currentList); 
       console.log(this.props);
       currentList.push(itemToAdd);
-     
+      
       this.setState({dynamicList : currentList});
       console.log(this.state.dynamicList)
       let dynamicList = this.state.dynamicList
@@ -171,8 +171,7 @@ export default class DynamButtons extends React.Component {
       //   console.log("USERID joined: ", userID);
       //   }
 
-        
-   
+
 
       axios({
           method: 'post',

@@ -40,7 +40,7 @@ const styles = ({
         marginTop: 5
     },
     profile: {
-      color: "#aaf",
+      color: "#198C63",
   
     },
     card: { 

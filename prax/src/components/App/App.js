@@ -2,7 +2,7 @@ import React from 'react'
 import store from '../../redux/store'
 // import Camera from '../posenet/components/Camera.js'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
+import { fire, fireAnalytics } from '../firebase';
 import Header from '../Header/Header/header'
 import Navbar from '../Header/Navbar/navbar'
 // import Grid from '@material-ui/core/Grid';

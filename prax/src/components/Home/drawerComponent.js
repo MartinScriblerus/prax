@@ -24,9 +24,7 @@ color: "#212121"
   },
   button: {
     // color: "#85b1d7",
-    borderTopStyle: "solid",
-  
-    borderBottomStyle: "solid",
+
     // borderBottomColor: "#85b",
     alignItem: 'right',
     placeholder: {

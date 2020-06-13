@@ -2,25 +2,32 @@ import React, { useState } from "react";
 import "./profile.scss";
 import { useDispatch } from 'react-redux'
 import { logOutUser } from '../../../redux/auth/actions'
-import TemporaryDrawer from '../../Home/drawerComponent'
- 
+
 
 
 const styles = {
   loggedAs: {
-    color: "#dadcd7"
+    color: "#dadcd7",
+  
+
   },
   logout: {
     fontSize: "26px",
+    // padding: '20vh',
   justifyContent: 'left',
     // backgroundColor: "#85b1d7",
     color: "#272", 
- 
+    
   },
   logoutPopup: {
     color: "#85b1d7",
     fontSize: 20,
     width: '100%',
+
+    // marginRight: '5vh',
+    // paddingRight: '5vh',
+    
+ 
   //  marginTop: 20
   },
   contactTabs: {
@@ -29,14 +36,14 @@ const styles = {
     backgroundColor: '#212121' 
   },
   button: {
-    color: "#aaf",
-    
-    marginRight: '20px'
+    color: '#dadcd7',
+    backgroundColor: '#212121',
+
   },
   ellipsis: {
    
     fontSize: 26,
-    height: '100%',
+ 
     // width: '100%',
   }
 }
@@ -50,9 +57,9 @@ export const Profile = props => {
   return (
     <div className="profile-container" style={styles.logout}>
 
-        <div className="options-box">
+   
 
-        <button style={styles.button}      
+        <button className="buttonMenu" style={styles.button}      
           onClick={() => {
             setShowMenu(!showMenu);
           }}
@@ -65,13 +72,13 @@ export const Profile = props => {
        {showMenu && (
             <nav className="profile-menu">
 
-              <ul>
+              <ul className="menuNav">
               <li 
               // className="handle"
               style={styles.logoutPopup}
               type="text"
               placeholder = "Handle"
-              > Logged as: <br/> <span style={styles.loggedAs}> 
+              > User: <span style={styles.loggedAs}> 
               {username}</span></li>
                 <li 
                 style={styles.logoutPopup}
@@ -89,6 +96,6 @@ export const Profile = props => {
         </div>
   
     
-    </div>
+
   );
 };

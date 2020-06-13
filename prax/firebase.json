@@ -1,0 +1,23 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+"appAssociation": "AUTO",
+"rewrites": [ { "source": "/praxspace/**", "dynamicLinks": true } ],
+"redirects": [ {
+  
+  "source": "/praxspace",
+  "destination": "/**",
+  "type": 301
+}
+], 
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+
+  }
+}

@@ -17,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
     const useStyles = makeStyles(theme => ({
         root: {
             flexGrow: 1,
-            // backgroundImage: "url(https://laughingsquid.com/wp-content/uploads/2013/10/21.jpg)",
+            backgroundImage: "url(https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg)",
       
             backgroundPosition: 'top',
             backgroundSize: 'cover',
@@ -33,7 +33,7 @@ import { makeStyles } from '@material-ui/core/styles';
         input: {
          marginLeft: '10vw',
          marginRight: '10vw',
-         backgroundColor: "#aaf",
+         backgroundColor: "#0B748C",
          color: "#f6f6f6",
          marginTop: '10%'
         },

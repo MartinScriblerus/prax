@@ -18,7 +18,7 @@ export const config = {
   nmsRadius: 2,
   outputStride: 16,
   imageScaleFactor: .2,
-  skeletonColor: "#aaf",
+  skeletonColor: "#198C63",
   skeletonLineWidth: 12,
   loadingText: 'Loading...please be patient...'
 }
