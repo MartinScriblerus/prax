@@ -359,14 +359,14 @@ getRemoteVideo = async (elem) => {
     this.video = elem
   }
 
-  // getRemoteVideo = elem => {
-  //   this.video = elem
-  // }
+  getRemoteVideo = elem => {
+    this.video = elem
+  }
   
   async componentDidMount() {
     openUserMedia();
     try {
-await posenet
+      await this.setupCamera()
     } catch (error) {
       throw new Error(
         'This browser does not support video capture, or this device does not have a camera'
@@ -418,36 +418,36 @@ await posenet
 
   }
 
-  // async setupCamera() {
-  //   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-  //     throw new Error(
-  //       'Browser API navigator.mediaDevices.getUserMedia not available'
-  //     )
-  //   }
-  //   const {videoWidth, videoHeight} = this.props
-  //   const video = this.video
-  //   video.width = videoWidth
-  //   video.height = videoHeight
+  async setupCamera() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      throw new Error(
+        'Browser API navigator.mediaDevices.getUserMedia not available'
+      )
+    }
+    const {videoWidth, videoHeight} = this.props
+    const video = this.video
+    video.width = videoWidth
+    video.height = videoHeight
 
 
-  //   const stream = await navigator.mediaDevices.getUserMedia({
-  //     audio: false,
-  //     video: {
-  //       facingMode: 'user',
-  //       width: videoWidth,
-  //       height: videoHeight
-  //     }
-  //   })
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: {
+        facingMode: 'user',
+        width: videoWidth,
+        height: videoHeight
+      }
+    })
 
-  //   video.srcObject = stream
+    video.srcObject = stream
    
-  //   return new Promise(resolve => {
-  //     video.onloadedmetadata = () => {
-  //       video.play()
-  //       resolve(video)
-  //     }
-  //   })
-  // }
+    return new Promise(resolve => {
+      video.onloadedmetadata = () => {
+        video.play()
+        resolve(video)
+      }
+    })
+  }
 
   detectPose() {
     const {videoWidth, videoHeight} = this.props
@@ -483,7 +483,6 @@ await posenet
     const video = this.video
 
     const findPoseDetectionFrame = async () => {
-      if (this.video !== undefined || null){
       let poses = []
 
         const pose = await posenetModel.estimateSinglePose(
@@ -500,7 +499,7 @@ await posenet
       // WebRTC canvas stream below -->
       const canvas_RTCstream = this.canvas.captureStream(25);
       // console.log(canvas_RTCstream)
-      
+   
 
       
 
@@ -560,7 +559,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
     findPoseDetectionFrame()
     }
 
-  }
+
 
   render() {
     const { chatLog, options } = this.state;
@@ -607,7 +606,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
 
       <div className="media-bridge" id="videos">
       <video key={`local-video`} style={styles.video} id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
-      <video className="remote-video" id="remoteVideo" autoPlay playsInline></video>
+      <video className="remote-video" id="remoteVideo" autoPlay playsInline ref={this.getRemoteVideo}></video>
   </div>
 
       <div id="room-dialog">
