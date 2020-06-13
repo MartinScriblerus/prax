@@ -283,19 +283,19 @@ export default class PoseNet extends Component {
     }
   
     // // get user media
-getUserMedia = (err, stream) => {
-  // if the browser doesn't support user media
-  // or the user says "no" the error gets passed
-  // as the first argument.
-  if (err) {
-    console.log('failed');
-  } else {
-    console.log('got a stream', stream); 
-    navigator.mediaDevices.getUserMedia({video: true, audio: true})
-    .then(this.handleVideo)
-    .catch(this.videoError) 
-  }
-};
+// getUserMedia = (err, stream) => {
+//   // if the browser doesn't support user media
+//   // or the user says "no" the error gets passed
+//   // as the first argument.
+//   if (err) {
+//     console.log('failed');
+//   } else {
+//     console.log('got a stream', stream); 
+//     navigator.mediaDevices.getUserMedia({video: true, audio: true})
+//     .then(this.handleVideo)
+//     .catch(this.videoError) 
+//   }
+// };
 
  
     join = (webrtc) => webrtc.joinRoom('video-chat-room-arbitrary-name');
@@ -606,7 +606,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
 
       <div className="media-bridge" id="videos">
       <video key={`local-video`} style={styles.video} id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
-      <video className="remote-video" id="remoteVideo" autoPlay playsInline ref={this.getRemoteVideo}></video>
+      <video className="remote-video" id="remoteVideo" autoPlay playsInline ref={this.remoteStream}></video>
   </div>
 
       <div id="room-dialog">
