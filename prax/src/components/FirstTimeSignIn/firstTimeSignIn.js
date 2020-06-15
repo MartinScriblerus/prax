@@ -34,12 +34,12 @@ import { makeStyles } from '@material-ui/core/styles';
          marginLeft: '10vw',
          marginRight: '10vw',
          backgroundColor: "#0B748C",
-         color: "#f6deba",
+         color: "#030303",
          marginTop: '10%'
         },
         signup: {
         marginTop: 0,
-        color: '#f6deba'
+        color: '#030303'
         },
      
         a: {

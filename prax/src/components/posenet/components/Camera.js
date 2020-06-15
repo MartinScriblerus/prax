@@ -555,7 +555,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
     const { chatLog, options } = this.state;
     return (
    <>
-   <Grid container spacing={12} style={styles.container}>
+   <Grid item xs={12} style={styles.container}>
  
    
         <div>  
@@ -576,9 +576,14 @@ socket.on('herecanvasCTX', (canvasContext)=>{
             </div>
 
             <div>
+              
               <button type="button" style={styles.btn} className="rtcRoomButton">
                 <span>Cancel</span>
               </button>
+
+
+              
+
               <button onClick={joinRoom} style={styles.btn} className="rtcRoomButton" id="confirmJoinBtn" type="button">
                 <span>Join</span>
               </button>
@@ -594,6 +599,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                  <div>
                    <button onClick={this.copyToClipboard}>Copy</button> 
                    {this.state.copySuccess}
+                   {roomId}
                  </div>
                }
                   
@@ -602,7 +608,8 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                     <div>
                       <input type="text" id="room-id"
                       ref={(textarea) => this.textArea = textarea}
-                      value={this.roomID}
+                      defaultValue={roomId || ''}
+              
                       ></input>
                       <label htmlFor="my-text-field">Room ID</label>
                     </div>
