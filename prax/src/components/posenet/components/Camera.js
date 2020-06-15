@@ -456,6 +456,7 @@ export default class PoseNet extends Component {
   }
 
   async setupCamera() {
+    await this.video
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error(
         'Browser API navigator.mediaDevices.getUserMedia not available'
@@ -468,16 +469,20 @@ export default class PoseNet extends Component {
 
 
     const stream = await navigator.mediaDevices.getUserMedia({
-      audio: false,
+       audio: false,
       video: {
         facingMode: 'user',
         width: videoWidth,
         height: videoHeight
       }
     })
+    await this.stream
+    try {
+    this.video.srcObject = stream
+    }
+    catch(err){console.log(err)}
+    finally{console.log("stream is ready")}
 
-    video.srcObject = stream
-   
     return new Promise(resolve => {
       video.onloadedmetadata = () => {
         video.play()
