@@ -13,11 +13,11 @@ import {
 const styles = {
   camera : {
     backgroundColor: "#aff",
-    color: "#dadcd7",
+    color: "#f6deba",
   },
   video2 : {
     backgroundColor: "#aff",
-    color: "#dadcd7",
+    color: "#f6deba",
   },
   outergrid: {
     backgroundColor: "#1F95BF"
@@ -39,9 +39,10 @@ export default class CreatePraxSpace extends Component  {
   componentDidMount(stream) {
     // getting access to webcam
    navigator.mediaDevices
-        .getUserMedia({audio: true}, {video: true})
-        .then(stream => this.videoTag.current.srcObject = stream)
-        .then(()=>{return this.stream})
+        .getUserMedia({dataOnly: true})
+        // .then(stream => this.video.current.srcObject = stream)
+        // .then(()=>{return this.stream})
+        .then(console.log("hooray"))
         .catch(console.log);
   }
 
@@ -53,28 +54,10 @@ const streamingMedia = this.stream
     <Grid style={styles.outergrid}>
 
       <div className="App">
-
-      <Posenet streamingMedia={streamingMedia} id="posenetImport" style={styles.camera}>
-  
-      </Posenet>
-  
-    
-  
+        <Posenet streamingMedia={streamingMedia} id="posenetImport" style={styles.camera} />
       </div>
 
-
-
-      
-
-
-
-
-
-
-
-
-  </Grid>
-       
+    </Grid>   
     </Router>
     )
   }

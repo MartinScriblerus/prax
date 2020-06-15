@@ -7,7 +7,6 @@ import { SocialIcon } from 'react-social-icons';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-// import BottomNavigation from '@material-ui/core/BottomNavigation';
 
 require('typeface-overpass')
 
@@ -38,7 +37,9 @@ const styles = ({
     marginRight: 10,
     marginLeft: 10,
     align: 'center',
-    backgroundColor: '#212121'
+    backgroundColor: '#212121',
+    fill: '#aaf'
+
   },
   card : {
     display: 'flex',
@@ -47,22 +48,21 @@ const styles = ({
     overflow: 'auto',
        borderStyle: 'solid',
     borderWidth: 2, 
-    color: '$light_grey',
-    borderColor: '#198C63',
+    color: '#f6deba',
+    borderColor: '#7295AB',
     borderRadius: 7,
     fontFamily: 'Overpass',
     backgroundColor: '#333333',
-    opacity: .93,
+    opacity: .97,
     marginLeft:"25%",
     marginRight: "7%",
     marginBottom: 40,
     paddingRight: 10,
     // marginTop: 15,
  
-    
   },
   card2 : {
-    display: 'flex',
+  
     variant: "h5",
     fontSize: 20,
     position:'relative', 
@@ -71,14 +71,14 @@ const styles = ({
     overflow: 'auto',
     borderStyle: 'solid',
     borderWidth: 2, 
-    color: '#f6f6f6',
+    color: '#f6deba',
     borderColor: '#85b1d7',
     // borderRadius: 7,
     fontFamily: 'Overpass',
     backgroundColor: '#333333',
-    
+   
     marginBottom: 50,
-    opacity: .93,
+    opacity: .97,
    
   },
  
@@ -99,6 +99,8 @@ const styles = ({
     fontSize: 22,
     borderRadius: 7,
     fontFamily: 'Overpass',
+    margin:'5%',
+    marginLeft: '2%',
   },
 })
 
@@ -120,23 +122,15 @@ export default function About(newUser){
 
       <Grid item xs={6}>
           <Card style={styles.card2}>
-          <h4 id="aboutTech">Prax uses:</h4>
-          <ul>
+          <h4 id="aboutTech">Prax is Powered by:</h4>
+          <p style={styles.text2}>
+          WebRTC, Socket.io, Media Stream API, 
+          Tensorflow PoseNet, Firebase,
+          React, Redux, Express, MySQL, JWT Tokens
+          </p>
          
-              <li>
-              WebRTC, Socket.io, Media Stream API
-              </li>
-              <li>
-              Tensorflow PoseNet
-              </li>
-              <li>
-              React, Redux, Express, MySQL, JWT Tokens
-              </li>
-              <li> 
-              HTML, Sass, JSX 
-              </li>
              
-            </ul>
+       
           </Card>
       </Grid>
 

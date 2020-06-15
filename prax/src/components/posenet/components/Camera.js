@@ -6,6 +6,7 @@ import {socket} from '../../../services/socketIO'
 import { LioWebRTC } from 'react-liowebrtc'
 import ChatBox from '../../Chat/CreatePraxSpace/chatbox';
 import firebase from '../../firebase';
+import Grid from '@material-ui/core/Grid';
 
 
 const configuration = {
@@ -30,6 +31,19 @@ const styles = {
   // THIS IS THE STYLE CONTROLLING CANVAS
   canvas: {
     backgroundColor: "#030303"
+  }, 
+  joinRoomContainer: {
+    backgroundColor: "#aaf0d1"
+  },
+  container: {
+    backgroundColor: '#aff',
+    padding: '1vh'
+  },
+  btn: {
+    backgroundColor: '#212121', 
+    color: '#f6deba',
+    width: '50%',
+    height: '10vh'
   }
 }
 
@@ -235,14 +249,14 @@ export default class PoseNet extends Component {
     showVideo: false,
     showSkeleton: true,
     showPoints: true,
-    minPoseConfidence: 0.07,
-    minPartConfidence: 0.17,
+    minPoseConfidence: 0.1,
+    minPartConfidence: 0.2,
     multiplier: 6,
     maxPoseDetections: 2,
     nmsRadius: 2,
     outputStride: 16,
     imageScaleFactor: .2,
-    skeletonColor: "#dadcd7",
+    skeletonColor: "#f6deba",
     skeletonLineWidth: 6,
     loadingText: 'Loading...please be patient...'
   }
@@ -255,6 +269,7 @@ export default class PoseNet extends Component {
     this.state = {
       source: "",
       isVideoLoading: true,
+      copySuccess: '', 
       nick: this.props.nick,
       roomID: `party-${this.props.roomName}`,
       muted: false,
@@ -527,83 +542,104 @@ socket.on('herecanvasCTX', (canvasContext)=>{
     findPoseDetectionFrame()
     }
 
-
+  copyToClipboard = (e) => {
+    this.textArea.select();
+    document.execCommand('copy');
+    // This is just personal preference.
+    // I prefer to not show the the whole text area selected.
+    e.target.focus();
+    this.setState({ copySuccess: 'Copied!' });
+  };
 
   render() {
     const { chatLog, options } = this.state;
     return (
    <>
-      <div>
-
+   <Grid container spacing={12} style={styles.container}>
+ 
+   
         <div>  
         <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
-        </div>
 
-        <div>
         <canvas className="remoteCanvas" ref={this.remoteCanvas}  style={styles.canvas}/>
         </div>
-  
-
-      </div>
-      <div className="App">
-      <LioWebRTC
-      options={options}
-      onReady={this.join}
-      onCreatedPeer={this.handleCreatedPeer}
-      onReceivedPeerData={this.handlePeerData}
-      >
-        <ChatBox
-          chatLog={chatLog}
-          onSend={(msg) => msg && this.addChat('Me', msg)}
-        />
-      </LioWebRTC>
-      </div>
-
-      <div className='app'>
-      <div id="buttons">
-        <h1>Welcome!</h1>
-        <div id="buttons">
-          <button onClick={createRoom} id="createBtn">
-            <span>Create room</span>
-          </button>
-          <button onClick={hangUp} id="hangupBtn">
-            <span>Hangup</span>
-          </button>
-        </div>
-      </div>
-
-      <div className="media-bridge" id="videos">
-      <video key={`local-video`} style={styles.video} id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
-      <video className="remote-video" id="remoteVideo" autoPlay playsInline ref={this.remoteStream}></video>
-  </div>
-
-      <div id="room-dialog">
-        <div>
-          <div>
-            <h2>Join room</h2>
-            <div>
-              Enter ID for room to join:
-                 <div>
-                <input type="text" id="room-id"></input>
-                <label htmlFor="my-text-field">Room ID</label>
-              </div>
+    
+        <Grid item xs={6}>
+          <div className='app'>
+            <div id="buttons">
+                <button onClick={createRoom} style={styles.btn} className="rtcRoomButton" id="createBtn">
+                  <span>Create room</span>
+                </button>
+                <button onClick={hangUp} style={styles.btn} className="rtcRoomButton" id="hangupBtn">
+                  <span>Hangup</span>
+                </button>
             </div>
+
             <div>
-              <button type="button">
+              <button type="button" style={styles.btn} className="rtcRoomButton">
                 <span>Cancel</span>
               </button>
-              <button onClick={joinRoom} id="confirmJoinBtn" type="button">
+              <button onClick={joinRoom} style={styles.btn} className="rtcRoomButton" id="confirmJoinBtn" type="button">
                 <span>Join</span>
               </button>
             </div>
-          </div>
-        </div>
-      </div>
 
-    </div>
-  
+            <div id="room-dialog">
+              <div>
+              
+              {
+                /* Logical shortcut for only displaying the 
+                   button if the copy command exists */
+                document.queryCommandSupported('copy') &&
+                 <div>
+                   <button onClick={this.copyToClipboard}>Copy</button> 
+                   {this.state.copySuccess}
+                 </div>
+               }
+                  
+                  <div>
+                    Enter ID for room to join:
+                    <div>
+                      <input type="text" id="room-id"
+                      ref={(textarea) => this.textArea = textarea}
+                      value={this.roomID}
+                      ></input>
+                      <label htmlFor="my-text-field">Room ID</label>
+                    </div>
+                    
+                  </div>
+             
+              </div>
+            </div>
+          </div>
+        </Grid>
+        <Grid item xs={6}>
+          <div className="App">
+            <LioWebRTC
+            options={options}
+            onReady={this.join}
+            onCreatedPeer={this.handleCreatedPeer}
+            onReceivedPeerData={this.handlePeerData}
+            >
+              <ChatBox
+                chatLog={chatLog}
+                onSend={(msg) => msg && this.addChat('Me', msg)}
+              />
+            </LioWebRTC>
+          </div>
+        </Grid>
+
+
+
+
+    
+
+    <div className="media-bridge" id="videos">
+    <video key={`local-video`} style={styles.video} id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
+    <video className="remote-video" id="remoteVideo" autoPlay playsInline ref={this.remoteStream}></video>
+  </div>
+  </Grid>
   </>
     )
   }
 }
-

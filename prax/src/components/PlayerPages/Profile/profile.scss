@@ -25,8 +25,8 @@ fa-ellipsis-v {
     color: $dark_grey;
 
     .menuNav {
-        margin-bottom: 20vh;
-        padding-bottom: 15vh;
+        
+        
     }
     
     .options-box{
@@ -38,9 +38,7 @@ fa-ellipsis-v {
         display: flex;
         justify-content: center;
         text-align: center;
-   
-  
-        color: #dadcd7;
+        color: #7295AB;
      
         .buttonMenu:focus {
             background-color: transparent;
@@ -77,7 +75,7 @@ fa-ellipsis-v {
             
             i{
                 // background-color: $dark_grey;
-                color: #dadcd7;
+                color: #7295AB;
                 // padding: 0 1rem;
             }
             .profile-menu{

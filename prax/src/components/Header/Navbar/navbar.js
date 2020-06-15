@@ -11,11 +11,7 @@ import {
 import {Profile} from '../../Home'
 import TemporaryDrawer from '../../Home/drawerComponent'
 
-const styles = {
-  h6: {
-    color: '#dadcd7'
-  }
-}
+
 
 export default function Navbar() {
 
@@ -35,7 +31,7 @@ export default function Navbar() {
                 style={{ textDecoration: 'none' }}
                 className="title"  
               >
-                <Typography variant="h6" style={styles.color} className="title" id="homeText" >
+                <Typography variant="h6" className="title" id="homeText" >
                     Home
                 </Typography>
               </Link>  
@@ -49,7 +45,7 @@ export default function Navbar() {
                 style={{ textDecoration: 'none' }}
                 className="title"  
                 >
-                <Typography variant="h6" style={styles.color}  className="title" id="aboutText" >
+                <Typography variant="h6" className="title" id="aboutText" >
                     About
                 </Typography>
               </Link>
@@ -62,7 +58,7 @@ export default function Navbar() {
                 style={{ textDecoration: 'none' }}
                 className="title"  
               >
-                <Typography variant="h6" style={styles.color}  className="title" id="signupText" >
+                <Typography variant="h6"  className="title" id="signupText" >
                     Sign Up
                 </Typography>
               </Link>

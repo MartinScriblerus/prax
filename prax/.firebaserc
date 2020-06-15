@@ -1,5 +1,6 @@
 {
   "projects": {
-    "Prax": "fir-rtc-d3a58"
+    "Prax": "fir-rtc-d3a58",
+    "default": "fir-rtc-d3a58"
   }
 }

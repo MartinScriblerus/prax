@@ -23,11 +23,10 @@ if (token) {
   setAuthToken(token);
 }
 
-
 const styles = {
   button: {
     // backgroundColor: "#030303",
-    color: "#85b1d7",
+    color: "#f6deba",
     height:60,
     fontSize: '22px',
     width: "76%",
@@ -35,7 +34,7 @@ const styles = {
     marginLeft: "2%",
     border: "solid",
     borderWidth: 2,
-    // borderColor: "#4797DE",
+
     marginBottom: 30,
     // marginTop:20,
   },
@@ -47,28 +46,19 @@ const styles = {
     // color: "#dadcd7",
     width: "100%",
     justifyContent: 'center',
-      // border: "solid",
-    // borderWidth: 1,
-    // borderColor: "#aaf",
-
   },
   openRoomsCard: {
     textAlign: 'center',
-    marginRight: '5%',
-    marginLeft: '5%',
+    marginRight: '15%',
+    marginLeft: '15%',
     backgroundColor: "#212121",
-    color: "#dadcd7",
+    color: "#030303",
   },
 
   openRoomsDescription: {
-    // backgroundColor: "#85b1d7",
     justifyContent: 'center',
     zIndex: 3
   },
-
-  // dynamic1 : {
-  //   backgroundColor: "pink"
-  // },
 
 h3: {
   // color: "#5e5d5d",
@@ -76,7 +66,7 @@ h3: {
   fontSize: 28,
 },
 textarea2: {
-  color: "#dadcd7"
+  color: "#f6deba"
 }
 }
 
@@ -232,8 +222,9 @@ baseball = redsox.map(
       </div>
     <div>  
  
-        <Card style={styles.openRoomsCard}> 
-        <h3  style={styles.roomNameCard} >Open Rooms</h3>
+     
+    <Card style={styles.openRoomsCard}> 
+        <h3 style={styles.roomNameCard} >Open Rooms</h3>
  
       
     {/*tk*/}    
@@ -277,10 +268,11 @@ export class DynamicList extends React.Component {
               <Link 
               // to={"praxspace/" + username + "/" + this.props.listItems[index]} 
               key={index}
-              to={"praxspace/" + this.props.listItems[index]}
+              to={this.props.listItems[index]}
               onClick={(e)=>{
                 e.preventDefault()
-                window.open("praxspace/" + this.props.listItems[index])}}
+                window.open(this.props.listItems[index])
+              }}
             > 
               <span 
                 className="joinRoomButton" 

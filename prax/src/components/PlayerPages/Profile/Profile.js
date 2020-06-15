@@ -7,7 +7,7 @@ import { logOutUser } from '../../../redux/auth/actions'
 
 const styles = {
   loggedAs: {
-    color: "#dadcd7",
+    color: "#f6deba",
   
 
   },
@@ -36,7 +36,7 @@ const styles = {
     backgroundColor: '#212121' 
   },
   button: {
-    color: '#dadcd7',
+    color: '#7295AB',
     backgroundColor: '#212121',
 
   },

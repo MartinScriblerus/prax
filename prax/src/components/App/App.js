@@ -6,8 +6,8 @@ import { fire, fireAnalytics } from '../firebase';
 import Header from '../Header/Header/header'
 import Navbar from '../Header/Navbar/navbar'
 // import Grid from '@material-ui/core/Grid';
-
-import CreatePraxSpace from '../Chat/CreatePraxSpace/CreatePraxSpace'
+import PoseNet from '../posenet/components/Camera'
+// import CreatePraxSpace from '../Chat/CreatePraxSpace/CreatePraxSpace'
 import Admin from '../../Admin';
 import Home from '../Home/Home';
 import { AuthContext } from "../../context/auth";
@@ -32,7 +32,7 @@ const theme = createMuiTheme({
       main: '#212121',
     },
     secondary: {
-        main: '#dadcd7'
+        main: '#f6deba'
       }
     },
     background: {
@@ -43,7 +43,7 @@ const theme = createMuiTheme({
 const styles = {
   camera : {
     backgroundColor: "#030303",
-    color: "#f6f6f6"
+    color: "#f6deba"
   },
   navbar: {
     marginTop: '100vh',
@@ -84,7 +84,7 @@ if (window !== undefined){
       
         <Route exact path="/about" component={About} />
         <Route exact path="/signup" component={FirstTimeLogin} />
-        <PrivateRoute exact path="/praxspace/:message" component={CreatePraxSpace}/> 
+        <PrivateRoute exact path="/:message" component={PoseNet}/> 
         <PrivateRoute exact path="/admin" component={Admin} />
 
       </Switch>

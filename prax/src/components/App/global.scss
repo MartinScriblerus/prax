@@ -135,7 +135,7 @@ label{
 }
 
 input{
-    // background: "#dadcd7";
+    // background: "$white";
     font-family: 'Helvetica', Arial;
     
     border-radius: 0.5rem;
@@ -156,7 +156,7 @@ input[type="text"], input[type="password"]{
     // border: 1px solid rgb(192, 192, 192);
     &:focus
     {
-        border-color: #7b7e80;
+        border-color: $white;
         
     }
 }

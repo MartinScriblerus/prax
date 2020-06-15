@@ -8,23 +8,23 @@ require('typeface-permanent-marker')
 
 const style={
     header: {
-        backgroundColor: "#212121",
+        backgroundColor: "#505478",
         fontFamily: 'Didact Gothic',
         borderBottom: "solid",
         borderWidth: '4px',
-        borderColor: "#0B748C",
+        borderColor: "#505478",
         
     },
     text: {
       fontFamily: 'Permanent Marker',
       marginLeft: 40,
-      color: "#e5e6e5"
+      color: "#f6deba"
     },  
     text2: {
       fontFamily: 'Arial',
       fontSize: 22,
       marginLeft: '10%',
-      color: "#11B3D9",
+      color: "#7295AB",
       paddingBottom: '20px'
     }   
 }
@@ -38,7 +38,7 @@ function Header() {
         
           </Typography>
           <Typography justify="left" variant="h3" style={style.text2}>
-          A Site for Remote Performace
+          Collaborate and Perform Remotely
           </Typography>
         </div>
       </header>

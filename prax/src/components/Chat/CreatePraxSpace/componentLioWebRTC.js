@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { withWebRTC } from 'react-liowebrtc';
+// import React, { Component } from 'react';
+// import { withWebRTC } from 'react-liowebrtc';
  
-class MyComponent extends Component {
+// class MyComponent extends Component {
  
-  handleClick = () => this.props.webrtc.shout('event-label', 'payload');
+//   handleClick = () => this.props.webrtc.shout('event-label', 'payload');
  
-  render() {
-    return (
-      <div>
-        <button onClick={this.handleClick}>
-          Click Me
-        </button>
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div>
+//         <button onClick={this.handleClick}>
+//           Click Me
+//         </button>
+//       </div>
+//     );
+//   }
+// }
  
-export default withWebRTC(MyComponent);
+// export default withWebRTC(MyComponent);

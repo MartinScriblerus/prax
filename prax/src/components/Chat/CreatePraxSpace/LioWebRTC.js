@@ -1,51 +1,51 @@
-import React, { Component } from 'react';
-import { LioWebRTC, LocalVideo, RemoteVideo } from 'react-liowebrtc'
-import Posenet from '../../posenet/components/Camera'
+// import React, { Component } from 'react';
+// import { LioWebRTC, LocalVideo, RemoteVideo } from 'react-liowebrtc'
+// import Posenet from '../../posenet/components/Camera'
 
-class ExampleVideoChat extends Component {
+// class ExampleVideoChat extends Component {
  
-  constructor(props) {
-    super(props);
-    this.state = {
-      peers: []
-    };
-  }
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       peers: []
+//     };
+//   }
  
-  join = (webrtc) => webrtc.joinRoom('video-chat-room-arbitrary-name');
+//   join = (webrtc) => webrtc.joinRoom('video-chat-room-arbitrary-name');
  
-  handleCreatedPeer = (webrtc, peer) => {
-    this.setState({ peers: [...this.state.peers, peer] });
-  }
+//   handleCreatedPeer = (webrtc, peer) => {
+//     this.setState({ peers: [...this.state.peers, peer] });
+//   }
  
-  handleRemovedPeer = () => {
-    this.setState({ peers: this.state.peers.filter(p => !p.closed) });
-  }
+//   handleRemovedPeer = () => {
+//     this.setState({ peers: this.state.peers.filter(p => !p.closed) });
+//   }
  
-  generateRemotes = () => this.state.peers.map((peer) => (
-    <RemoteVideo key={`remote-video-${peer.id}`} peer={peer} />
-  ));
+//   generateRemotes = () => this.state.peers.map((peer) => (
+//     <RemoteVideo key={`remote-video-${peer.id}`} peer={peer} />
+//   ));
  
-  render () {
-    return (
-      <LioWebRTC
-        options={{ debug: true }}
-        onReady={this.join}
-        onCreatedPeer={this.handleCreatedPeer}
-        onRemovedPeer={this.handleRemovedPeer}
-      >
+//   render () {
+//     return (
+//       <LioWebRTC
+//         options={{ debug: true }}
+//         onReady={this.join}
+//         onCreatedPeer={this.handleCreatedPeer}
+//         onRemovedPeer={this.handleRemovedPeer}
+//       >
    
-      <Posenet>
-      <LocalVideo/>
-      </Posenet>
+//       <Posenet>
+//       <LocalVideo/>
+//       </Posenet>
    
        
-        {
-          this.state.peers &&
-          this.generateRemotes()
-        }
-      </LioWebRTC>
-    )
-  }
-}
+//         {
+//           this.state.peers &&
+//           this.generateRemotes()
+//         }
+//       </LioWebRTC>
+//     )
+//   }
+// }
  
-export default ExampleVideoChat;
+// export default ExampleVideoChat;

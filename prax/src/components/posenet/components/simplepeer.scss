@@ -7,7 +7,7 @@ body {
 }
 
 #message {
-    background: white;
+    background: #f6deba;
     max-width: 360px;
     margin: 100px auto 16px;
     padding: 32px 24px;
@@ -40,7 +40,7 @@ body {
     background: #039be5;
     text-transform: uppercase;
     text-decoration: none;
-    color: white;
+    color: #f6deba;
     padding: 16px;
     border-radius: 4px;
 }
@@ -58,7 +58,7 @@ body {
 @media (max-width: 600px) {
     body, #message {
         margin-top: 0;
-        background: white;
+        background: #f6deba;
         box-shadow: none;
     }
 

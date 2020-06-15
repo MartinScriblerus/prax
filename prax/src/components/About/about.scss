@@ -2,12 +2,23 @@
 
 .socialicons {
     background-color: #212121;
-    margin: 5vh
+    margin: 5vh;
+    fill: $white;
+}
+
+#aboutTech {
+    color: #7295AB;
 }
 
 .social-svg {
     background-color: $header_black;
     color: $header_black;
+}
+.social-svg-mask {
+    fill: $white;
+}
+g {
+    fill: $white;
 }
 .iconOrder {
     display: flex;
@@ -19,7 +30,7 @@
     }
 .card2 {
   
-        display: 'flex';
+       
         font-size: 20;
         position:'relative'; 
         left: "20%";
@@ -27,7 +38,7 @@
         overflow: 'auto';
         border-style: 'solid';
         border-width: 2;
-        color: '#f6f6f6';
+        color: $white;
         border-color: '#85b1d7';
         // borderRadius: 7,
         margin-right: 6;
@@ -85,7 +96,7 @@ li, ul, h5 {
     .title {
 
         // flex: 1;
-        color:  $light_grey;
+        color: #f6deba;
       font-size: 18;
       margin-top: -7;
       width: 100%;
@@ -103,9 +114,4 @@ li, ul, h5 {
 }
 .socialicons .MuiGrid-root  {
     background-color: $header_black
-}
-#aboutTech {
-    font-size: 22px;
-    color: $white;
-    margin-left: 3vw;
 }

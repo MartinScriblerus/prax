@@ -34,12 +34,12 @@ import { makeStyles } from '@material-ui/core/styles';
          marginLeft: '10vw',
          marginRight: '10vw',
          backgroundColor: "#0B748C",
-         color: "#f6f6f6",
+         color: "#f6deba",
          marginTop: '10%'
         },
         signup: {
         marginTop: 0,
-        color: '#f6f6f6'
+        color: '#f6deba'
         },
      
         a: {
@@ -51,7 +51,7 @@ import { makeStyles } from '@material-ui/core/styles';
             
             borderStyle: "solid",
             borderColor: "#9ED1FF",
-            color: '#dadcd7',
+            color: '#f6deba',
             borderWidth: 2,
             borderRadius: '5%',
             variant: "outlined",
@@ -119,9 +119,9 @@ export default function FirstTimeLogin(newUser){
   return (
       <Router>
     <div className={classes.root}>
-    <h1 className='signupText'>Sign Up</h1>
-    <Card style={styles.card}>
     
+    <Card style={styles.card}>
+    <h1 className='signupText'>Sign Up</h1>
     <form onSubmit={handleSubmit} noValidate autoComplete="off">  
         <TextField   
             className="inputPad"  

@@ -4,22 +4,19 @@
     background-color: $header_black;
     height: 6vh;
     width: 100%;
-    box-shadow: .5px .5px 1px #198C63, 1px 1px 2px 0 #198C63;
+    box-shadow: .5px .5px 1px #78725c, 1px 1px 2px 0 #78725c;
 }
 .title {
     color: $white;
     text-align: center;
-
-    
-   
 }
 h6 {
     color: $white;
    
 }
 .MuiButton-root {
-    width: 8vw;
-    margin-left: 3vw;
+    width: 6vw;
+
     color: $white;
     margin-bottom: 10vh;
 }
@@ -38,8 +35,8 @@ h6 {
         color: $white
     }
     .MuiButton-root {
-        width: 20vw;
-        margin-left: 8vw;
+        width: 15vw;
+        // margin-left: 6vw;
         color: $white;
     }
 }
@@ -59,7 +56,7 @@ h6 {
     }
     .MuiButton-root {
         width: 20vw;
-        margin-left: 8vw;
+        margin-left: 5vw;
         color: $white;
     }
 }
@@ -79,7 +76,7 @@ h6 {
     }
     .MuiButton-root {
         width: 20vw;
-        margin-left: 8vw;
+        margin-left: 4vw;
         color: $white;
     }
 }

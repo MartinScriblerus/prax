@@ -183,11 +183,10 @@ const db = require('./models/index');
       return res.json({messages});
     });
   
-  app.get('/praxspace/:message', (req, res) => {
+  app.get('/:message', (req, res) => {
       console.log("got the audio / video route route")
          console.log(res.json({}));
        });
-
 
   app.post("/api/user", function(req, res) {
   

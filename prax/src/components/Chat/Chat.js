@@ -15,6 +15,9 @@ const styles = ({
 		variant: "solid",
 		marginTop: 5
 	},
+	icons: {
+		fill: '#aaf'
+	},
 	card: {
 	
 		color: "#85b1d7",
