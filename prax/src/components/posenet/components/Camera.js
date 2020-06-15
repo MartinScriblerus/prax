@@ -61,6 +61,9 @@ async function createRoom() {
   console.log('Create PeerConnection with configuration: ', configuration);
   peerConnection = new RTCPeerConnection(configuration);
 
+  // tk added register peer connection listeners based on codelab
+registerPeerConnectionListeners();
+
   localStream.getTracks().forEach(track => {
     peerConnection.addTrack(track, localStream);
   });
@@ -126,7 +129,7 @@ async function createRoom() {
   });
   // Listen for remote ICE candidates above
 }
-
+// PICK BACK UP HERE TK
 function joinRoom() {
   document.querySelector('#confirmJoinBtn').addEventListener('click', async () => {
         roomId = document.querySelector('#room-id').value;
@@ -144,6 +147,8 @@ async function joinRoomById (roomId) {
     if (roomSnapshot.exists) {
       console.log('Create PeerConnection with configuration: ', configuration);
       peerConnection = new RTCPeerConnection(configuration);
+      //added register peer connection listeners based on codelab
+      registerPeerConnectionListeners();
       localStream.getTracks().forEach(track => {
         peerConnection.addTrack(track, localStream);
       });
@@ -203,11 +208,29 @@ async function joinRoomById (roomId) {
 async function openUserMedia() {
   const stream = await navigator.mediaDevices.getUserMedia(
       {video: true, audio: true});
-  document.querySelector('#localVideo').srcObject = stream;
+
+      document.querySelector('#localVideo').srcObject = stream;
   localStream = stream;
   remoteStream = new MediaStream();
   document.querySelector('#remoteVideo').srcObject = remoteStream;
-  }
+  
+// tk added querySelectors below based on codelab
+console.log('Stream:', document.querySelector('#localVideo').srcObject);
+// document.querySelector('#cameraBtn').disabled = true;
+// document.querySelector('#joinBtn').disabled = false;
+// document.querySelector('#createBtn').disabled = false;
+// document.querySelector('#hangupBtn').disabled = false;
+}
+
+
+
+
+
+
+
+
+
+
   async function hangUp(e) {
     const tracks = document.querySelector('#localVideo').srcObject.getTracks();
     tracks.forEach(track => {
@@ -221,6 +244,15 @@ async function openUserMedia() {
     if (peerConnection) {
       peerConnection.close();
     }
+
+    // tk added querySelectors below based on Codelab 
+    document.querySelector('#localVideo').srcObject = null;
+    document.querySelector('#remoteVideo').srcObject = null;
+    // document.querySelector('#cameraBtn').disabled = false;
+    // document.querySelector('#joinBtn').disabled = true;
+    // document.querySelector('#createBtn').disabled = true;
+    // document.querySelector('#hangupBtn').disabled = true;
+    document.querySelector('#currentRoom').innerText = '';
 
       // Delete room on hangup
   if (roomId) {
@@ -238,6 +270,28 @@ async function openUserMedia() {
   }
   document.location.reload(true);
 }
+
+// tk added registerpeerconnection function based on codelab
+function registerPeerConnectionListeners() {
+  peerConnection.addEventListener('icegatheringstatechange', () => {
+    console.log(
+        `ICE gathering state changed: ${peerConnection.iceGatheringState}`);
+  });
+
+  peerConnection.addEventListener('connectionstatechange', () => {
+    console.log(`Connection state change: ${peerConnection.connectionState}`);
+  });
+
+  peerConnection.addEventListener('signalingstatechange', () => {
+    console.log(`Signaling state change: ${peerConnection.signalingState}`);
+  });
+
+  peerConnection.addEventListener('iceconnectionstatechange ', () => {
+    console.log(
+        `ICE connection state change: ${peerConnection.iceConnectionState}`);
+  });
+}
+
 
 
 export default class PoseNet extends Component {
@@ -583,7 +637,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
 
 
               
-
+{/* I have switched up the joinBtn and confirmJoinBtn based on both WebRTC Codelab and Stage2Example */}
               <button onClick={joinRoom} style={styles.btn} className="rtcRoomButton" id="confirmJoinBtn" type="button">
                 <span>Join</span>
               </button>
@@ -613,7 +667,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                       ></input>
                       <label htmlFor="my-text-field">Room ID</label>
                     </div>
-                    
+                    <button id="confirmJoinBtn" type="button" ></button>
                   </div>
              
               </div>
