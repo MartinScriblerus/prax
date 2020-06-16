@@ -1,6 +1,6 @@
 import React from 'react';
 import './chat.scss';
-import ScrollToBottom from 'react-scroll-to-bottom';
+// import ScrollToBottom from 'react-enter id-to-bottom';
 import { Provider } from "react-redux";
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -19,7 +19,7 @@ const styles = ({
 		fill: '#aaf'
 	},
 	card: {
-	
+		backgroundColor: 'rgba(0, 0, 0, 0.3)',
 		color: "#85b1d7",
 		variant: "solid",
 		width: "100%",
@@ -29,10 +29,11 @@ const styles = ({
 		// marginRight: "10%",
 		// marginLeft: "15%",
 		// marginTop: 50,
-		backgroundColor: "#212121",	
+		// backgroundColor: "#212121",	
 		backgroundSize: "cover",
 		backgroundImage: "url(https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg)",
 	},
+
 	card2: {
 		variant: "solid",
 		padding: 30,
@@ -64,7 +65,7 @@ export const Chat = (props) => {
 		
 	return (
 		<>
-			<ScrollToBottom className="scroll-to-bottom" followButtonClassName="button-scroll">
+			
 			<div className="appendBtn">
 				<Grid item xs={12}>
 					<Card className={"roomCard"} style={styles.card}>
@@ -76,7 +77,7 @@ export const Chat = (props) => {
 					</Card>
 				</Grid>
 			</div>		
-				</ScrollToBottom>
+			
 			<div>
 			<div className="iconOrder">
 			<SocialIcon className="socialicons" url="https://github.com/MartinScriblerus" style={styles.icons}/>

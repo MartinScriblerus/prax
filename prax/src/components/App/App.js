@@ -23,7 +23,7 @@ import {
 } from "react-router-dom";
 
 require('typeface-overpass')
-require('typeface-permanent-marker')
+require('fontsource-poppins')
 
 
 const theme = createMuiTheme({

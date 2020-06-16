@@ -1,21 +1,65 @@
 @import '../App/variables';
 
+
+
+.about {   
+    font-size: 20;
+    font-family: 'Overpass';
+    background-image: url("https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg");
+    background-position: 'center';
+    background-size: 'cover';
+    background-repeat: 'no-repeat';
+    overflow: 'auto';
+    
+}
+// .about::after, .about::before {
+//     z-index:0;
+//     opacity: .7;
+
+
+//     content: ""; 
+//     position: absolute;
+//     top: 0;
+//     left: 50%;
+//     transform: skew(15deg)
+//                translateX(-50%);
+//     width: 85%;
+//     height: 100%;
+//     background-image: linear-gradient(120deg,$metronome_on,$metronome_off);
+//     background-color: #333;
+//     opacity: .7;
+// }
+
+// .about::before {
+//     transform: skew(-15deg) 
+//                translateX(-50%);
+// }
 .socialicons {
     background-color: #212121;
     margin: 5vh;
-    fill: $white;
+  
 }
 
 #aboutTech {
     color: #7295AB;
+    font-family: "Poppins"
 }
 
 .social-svg {
     background-color: $header_black;
     color: $header_black;
 }
-.social-svg-mask {
+
+svg {
+    display: inline-block;
     fill: $white;
+}
+
+.social-svg-mask > path {
+    fill: $white;
+}
+.social-svg-mask:hover > path {
+    fill: $metronome_off;
 }
 g {
     fill: $white;
@@ -23,6 +67,8 @@ g {
 .iconOrder {
     display: flex;
     justify-content: center;
+    fill: $white;
+    color: $white;
 }
 .iconGrid {
     display: flex;

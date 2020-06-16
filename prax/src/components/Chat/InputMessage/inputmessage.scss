@@ -5,6 +5,8 @@
     width:60%
   }
 
+
+
   .inputCreateRoom{
       margin-left: 10%;
       margin-right: 10%;
@@ -70,6 +72,8 @@
     }
   }
 
+
+
   .h1 {
     background-image: linear-gradient(-180deg, $metronome_on, $white);
     color: $white;
@@ -97,13 +101,15 @@
   }
 
   .component-wrapper {
-
+  
     color: $white;
     margin-right: 10%;
     margin-left: 10%;
 
   }
   
+
+
   .buttonJoin {
     // backgroundColor: "#030303",
     color: $white;
@@ -131,7 +137,7 @@
   
   .roomNameCard {
     box-shadow: 0 1px 2px 0 #030303, 0 2px 4px 0 #030303;
-    
+   border-radius: 0%
   }
 
 
@@ -140,35 +146,35 @@
 @media screen and (min-width: $mini){
   .component-wrapper {
     color: $white;
-    margin-right: 10%;
-    margin-left: 10%;
+    margin-right: 2%;
+    margin-left: 2%;
   }
 }
 @media screen and (min-width: $cellphone){
   .component-wrapper {
     color: $white;
-    margin-right: 13%;
-    margin-left: 13%;
+    margin-right: 4%;
+    margin-left: 4%;
   }
 }
 @media screen and (min-width: $tablet){
   .component-wrapper {
     color: $white;
-    margin-right: 16%;
-    margin-left: 16%;
+    margin-right: 6%;
+    margin-left: 6%;
   }
 }
 @media screen and (min-width: $medium){
   .component-wrapper {
     color: $white;
-    margin-right: 19%;
-    margin-left: 19%;
+    margin-right: 8%;
+    margin-left: 8%;
   }
 }
 @media screen and (min-width: $desktop){
   .component-wrapper {
     color: $white;
-    margin-right: 22%;
-    margin-left: 22%;
+    margin-right: 10%;
+    margin-left: 10%;
   }
 }

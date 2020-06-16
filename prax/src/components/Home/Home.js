@@ -93,11 +93,6 @@ useEffect(() => {
     <Provider store={store}>
       <BrowserRouter>
         <main>     
-  
-       
-      
-      
-
 
        <div className="right-side">
                <Chat

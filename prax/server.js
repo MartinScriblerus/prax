@@ -133,18 +133,18 @@ var passport = require("passport");
         socket.broadcast.to(itemToAdd).emit("herecanvasCTX", canvasContext)
       }
       
-      socket.on('canvasURL', canvasURL)
-      function canvasURL(canvasURL){
+      // socket.on('canvasURL', canvasURL)
+      // function canvasURL(canvasURL){
   
-          const canvasRTCDraw = (decodeURI(canvasURL.toString()) );
-         // BELOW GIVES AN OBJECT 'poses' WITH PROPERTIES OF 'score' AND 'keypoints'
-          // console.log("canvasRTCDRAW", canvasRTCDraw);
+      //     const canvasRTCDraw = (decodeURI(canvasURL.toString()) );
+      //    // BELOW GIVES AN OBJECT 'poses' WITH PROPERTIES OF 'score' AND 'keypoints'
+      //     // console.log("canvasRTCDRAW", canvasRTCDraw);
         
-        // BELOW GIVES BACK A LONG STRING (IT WORKS!) 
-        // console.log(canvasURL)
-        const serverDrawCanvasURL = canvasRTCDraw 
-        socket.emit('serverDrawCanvasURL', serverDrawCanvasURL)
-        }
+      //   // BELOW GIVES BACK A LONG STRING (IT WORKS!) 
+      //   // console.log(canvasURL)
+      //   const serverDrawCanvasURL = canvasRTCDraw 
+      //   socket.emit('serverDrawCanvasURL', serverDrawCanvasURL)
+      //   }
       }  
     
   }

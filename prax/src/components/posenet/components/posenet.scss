@@ -4,6 +4,9 @@
 .webcam {
     margin: 1vh
 }
+#remoteCanvas {
+    margin: 1vh
+}
 
 button .rtcRoomButton {  
         z-index: 10;
@@ -44,13 +47,21 @@ button .rtcRoomButton {
     background-color: yellow;
 }
 
+#room-id {
+    color: #030303;
+    
+}
+
 #peerConnectionNamed {
-    background-color: orange;
+    border: 2px solid orange;
+   
 }
 
 label {
-    background-color: green;
+    background-color: $header_black;
 }
+
+
 
 #MetronomeApp {
     background-color: pink;
@@ -70,6 +81,11 @@ label {
     height: 30vh;
 }
 
+#chatbox {
+    display:inline;
+    float:left;
+    width:50%
+}
 canvas {
   background-color: #ccc;
   --width: calc(45%);
@@ -78,6 +94,29 @@ canvas {
   margin: 1em;
   vertical-align: top;
 }
+
+#idRoomJoin {
+    width: 50%;
+    border: 4px solid green;
+    display: inline;
+    float: left;
+}
+
+#roomNumberTextArea {
+    width: 40%;
+}
+
+#room-dialog {
+    width: 100%;
+    color: $white;
+    border: 8px solid yellow;
+}
+
+.chatContainer {
+    width: 40%;
+}
+
+
 
 // video {
 //   --width: calc(45%);

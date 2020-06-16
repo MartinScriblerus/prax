@@ -24,27 +24,27 @@ main{
     //padding-top: 5rem;
 }
 
-img {
-    max-width: 100%;
+// img {
+//     max-width: 100%;
     
-}
+// }
 
-.container {
-    // max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    height: 100%;
+// .container {
+//     // max-width: 1200px;
+//     width: 80%;
+//     margin: 0 auto;
+//     height: 100%;
     
-}
+// }
 
-@media screen and (max-width: $desktop){
-    .container{
-        max-width: auto;
-        width: 100%;
+// @media screen and (max-width: $desktop){
+//     // .container{
+//     //     max-width: auto;
+//     //     width: 100%;
         
         
-    }
-}
+//     // }
+// }
 
 /* .loading-container{
     height: 100%;
@@ -140,7 +140,7 @@ input{
     
     border-radius: 0.5rem;
     border: none;
-    width: 85%;
+    // width: 85%;
     padding: 0.5rem 1rem;
     margin-left: 1.5rem;
     margin-top: 1rem;
@@ -161,12 +161,12 @@ input[type="text"], input[type="password"]{
     }
 }
 
-@media screen and (max-width: $medium){
-    html{
-        font-size: 90%;
+// @media screen and (max-width: $medium){
+//     html{
+//         font-size: 90%;
         
-    }
-}
+//     }
+// }
 
 
 

@@ -3,6 +3,7 @@
 
 .chat-container {
   color: #198C63;
+  
   padding: 1rem;
   //flex: 1;
   display: flex;
@@ -18,7 +19,7 @@
     .bubble {
       box-shadow: 0 10px 50px $white;
       padding: 0.3rem;
-      max-width: 90%;
+      max-width: 60%;
       word-break: break-word;
       .msg-content {
         font-size: 1.9rem;

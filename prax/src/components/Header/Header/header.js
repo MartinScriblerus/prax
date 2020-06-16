@@ -4,7 +4,7 @@ import './header.scss'
 // import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 require("typeface-open-sans")
-require('typeface-permanent-marker')
+require('fontsource-poppins')
 
 const style={
     header: {
@@ -16,7 +16,10 @@ const style={
         
     },
     text: {
-      fontFamily: 'Permanent Marker',
+      fontFamily: 'Poppins',
+      // subset: 'devanagari',
+      weights: 900,
+      style: 'normal',
       marginLeft: 40,
       color: "#f6deba"
     },  
@@ -38,7 +41,7 @@ function Header() {
         
           </Typography>
           <Typography justify="left" variant="h3" style={style.text2}>
-          Collaborate and Perform Remotely
+          Remote Creative Collaboration
           </Typography>
         </div>
       </header>

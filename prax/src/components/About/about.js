@@ -12,12 +12,6 @@ require('typeface-overpass')
 
 
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    paddingTop: '10vh'
-  },
-}));
   
 const styles = ({
   link:{
@@ -25,20 +19,24 @@ const styles = ({
   },
   about: {
     variant: "h5",
+    flexGrow: 1,
+    paddingTop: '10vh',
     fontSize: 20,
     fontFamily: 'Overpass',
-    backgroundImage: "url(https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg)",
-    backgroundPosition: 'center',
+    // backgroundImage: "url(https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg)",
+    backgroundPosition: 'absolute',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     overflow: 'auto',
+    // WebkitFilter: 'blur(10px) saturate(2)'
   },
+
   icons : {
     marginRight: 10,
     marginLeft: 10,
     align: 'center',
     backgroundColor: '#212121',
-    fill: '#aaf'
+    fill: '#aaf' 
 
   },
   card : {
@@ -50,7 +48,7 @@ const styles = ({
     borderWidth: 2, 
     color: '#f6deba',
     borderColor: '#7295AB',
-    borderRadius: 7,
+    // borderRadius: 7,
     fontFamily: 'Overpass',
     backgroundColor: '#333333',
     opacity: .97,
@@ -87,7 +85,7 @@ const styles = ({
     fontSize: 20,
     lineHeight: 1.5,
     // borderRadius: 7,
-    fontFamily: 'Overpass',
+    fontFamily: 'Poppins',
     margin: 10,
     marginTop: 7,
     marginBottom: 5,
@@ -98,31 +96,33 @@ const styles = ({
     // variant: "h5",
     fontSize: 22,
     borderRadius: 7,
-    fontFamily: 'Overpass',
+    fontFamily: 'Poppins',
     margin:'5%',
     marginLeft: '2%',
   },
 })
 
 export default function About(newUser){
-  const classes = useStyles();
+
 
    
   return (
  
 <>
-    <Grid item xs={12} className={classes.root} style={styles.about}>
- 
+
+   
+<Grid item xs={12}  >
+<Grid item xs={12} className="about" style={styles.about}>
         <Card style={styles.card}> 
               <Typography variant="h3" gutterBottom style={styles.text}>
-              Prax is a site for remote collaboration. It provides a low-latency A/V connection that enables musicians, actors, comedians, and content creators to record and share live performances. It also provides audio tools to synchronize performers and visual filters to mask their appearance and environment.  
+              Prax is a site for remote collaboration. It provides a low-latency A/V connection, tools for audio synchronization, and filters to mask appearance and environment.  
        </Typography>
               </Card> 
  
 
       <Grid item xs={6}>
           <Card style={styles.card2}>
-          <h4 id="aboutTech">Prax is Powered by:</h4>
+          <h4 id="aboutTech">Tech Stack:</h4>
           <p style={styles.text2}>
           WebRTC, Socket.io, Media Stream API, 
           Tensorflow PoseNet, Firebase,
@@ -144,7 +144,7 @@ export default function About(newUser){
         <SocialIcon className="socialicons" url="https://www.linkedin.com/in/matthew-reilly-91b316142/" style={styles.icons} />
     </div>
 </Grid>
-
+</Grid>
  
 </>
 

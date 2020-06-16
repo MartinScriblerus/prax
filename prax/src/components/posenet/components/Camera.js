@@ -7,7 +7,7 @@ import { LioWebRTC } from 'react-liowebrtc'
 import ChatBox from '../../Chat/CreatePraxSpace/chatbox';
 import firebase from '../../firebase';
 import Grid from '@material-ui/core/Grid';
-
+import './posenet.scss'
 
 const configuration = {
   iceServers: [
@@ -37,7 +37,7 @@ const styles = {
   },
   container: {
     backgroundColor: '#aff',
-    padding: '1vh'
+  
   },
   btn: {
     backgroundColor: '#212121', 
@@ -303,8 +303,8 @@ export default class PoseNet extends Component {
     showVideo: false,
     showSkeleton: true,
     showPoints: true,
-    minPoseConfidence: 0.1,
-    minPartConfidence: 0.2,
+    minPoseConfidence: 0.2,
+    minPartConfidence: 0.3,
     multiplier: 6,
     maxPoseDetections: 2,
     nmsRadius: 2,
@@ -541,6 +541,7 @@ export default class PoseNet extends Component {
       // WebRTC canvas stream below -->
       const canvas_RTCstream = this.canvas.captureStream(25);
       // console.log(canvas_RTCstream)
+      
    
 
       
@@ -548,11 +549,11 @@ export default class PoseNet extends Component {
       socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
       
 socket.on('herecanvasCTX', (canvasContext)=>{
- 
+
     console.log("HEREE IS CANVASCTX", canvasContext)
 })
 
-      var canvasURL = this.canvas.toDataURL();
+      // var canvasURL = this.canvas.toDataURL();
       // console.log("canvasURL", canvasURL)
       
       if (showVideo) {
@@ -565,7 +566,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
 
       //CURRENTLY EMITTING POSES AND CAMERA BUT WE WILL ONLY WANT ONE  
       socket.emit('poses', {poses: poses})
-      socket.emit('canvasURL', {canvasURL: canvasURL})  
+      // socket.emit('canvasURL', {canvasURL: canvasURL})  
       // THESE TWO SOCKETS FUNCTIONS BELOW MAY BE PROBLEMATIC
   
   
@@ -620,92 +621,93 @@ socket.on('herecanvasCTX', (canvasContext)=>{
         <div>  
         <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
 
-        <canvas className="remoteCanvas" ref={this.remoteCanvas}  style={styles.canvas}/>
+        <canvas id="remoteCanvas" ref={this.remoteCanvas}  style={styles.canvas}/>
         </div>
-    
-        <Grid item xs={6}>
-          <div className='app'>
+   </Grid>
+
+       
+        
             <div id="buttons">
                 <button onClick={createRoom} style={styles.btn} className="rtcRoomButton" id="createBtn">
-                  <span>Create room</span>
+                  <span>Create Room</span>
                 </button>
                 <button onClick={hangUp} style={styles.btn} className="rtcRoomButton" id="hangupBtn">
-                  <span>Hangup</span>
+                  <span>End Prax</span>
                 </button>
             </div>
 
-            <div>
+       
               
-              <button type="button" style={styles.btn} className="rtcRoomButton">
-                <span>Cancel</span>
-              </button>
-
-
-              
-{/* I have switched up the joinBtn and confirmJoinBtn based on both WebRTC Codelab and Stage2Example */}
+              <button onClick={this.copyToClipboard} style={styles.btn} className="rtcRoomButton" >
+                <span>Enter Room</span>
+              </button> 
+         
               <button onClick={joinRoom} style={styles.btn} className="rtcRoomButton" id="confirmJoinBtn" type="button">
-                <span>Join</span>
+                <span>Join Room</span>
               </button>
-            </div>
-
-            <div id="room-dialog">
-              <div>
               
+      
+              <div id="room-dialog">
+ 
+              <div id="idRoomJoin">
+              Enter ID for room to join:
+            
+                <input type="text" id="room-id"
+                ref={(textarea) => this.textArea = textarea}
+                defaultValue={roomId || ''}
+        
+                ></input>
+                <label htmlFor="my-text-field">Room ID</label>
+            
+ 
+  
+              </div>
+              <LioWebRTC
+              options={options}
+              onReady={this.join}
+              onCreatedPeer={this.handleCreatedPeer}
+              onReceivedPeerData={this.handlePeerData}
+              >
+                <ChatBox
+                  id="chatbox"
+                  chatLog={chatLog}
+                  onSend={(msg) => msg && this.addChat('Me', msg)}
+                />
+              </LioWebRTC>
+            </div> 
               {
                 /* Logical shortcut for only displaying the 
                    button if the copy command exists */
                 document.queryCommandSupported('copy') &&
                  <div>
-                   <button onClick={this.copyToClipboard}>Copy</button> 
+
+   
                    {this.state.copySuccess}
                    {roomId}
-                 </div>
-               }
                   
-                  <div>
-                    Enter ID for room to join:
-                    <div>
-                      <input type="text" id="room-id"
-                      ref={(textarea) => this.textArea = textarea}
-                      defaultValue={roomId || ''}
-              
-                      ></input>
-                      <label htmlFor="my-text-field">Room ID</label>
-                    </div>
-                    <button id="confirmJoinBtn" type="button" ></button>
-                  </div>
-             
+                 </div>
+               
+                }
+          
+                <div>
               </div>
-            </div>
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div className="App">
-            <LioWebRTC
-            options={options}
-            onReady={this.join}
-            onCreatedPeer={this.handleCreatedPeer}
-            onReceivedPeerData={this.handlePeerData}
-            >
-              <ChatBox
-                chatLog={chatLog}
-                onSend={(msg) => msg && this.addChat('Me', msg)}
-              />
-            </LioWebRTC>
-          </div>
-        </Grid>
+ 
+
+ 
+         
 
 
-
-
-    
+  <Grid item xs={12} style={styles.container}> 
 
     <div className="media-bridge" id="videos">
     <video key={`local-video`} style={styles.video} id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
-    <video className="remote-video" id="remoteVideo" autoPlay playsInline ref={this.remoteStream}></video>
+    <video className="remote-video" id="remoteVideo" muted autoPlay playsInline ref={this.remoteStream}></video>
   </div>
   </Grid>
+
   </>
     )
   }
+
 }
+

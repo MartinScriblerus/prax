@@ -40,7 +40,7 @@ class ChatBox extends Component {
     return (
       <div className="container">
         <div className="chatHeader">
-          <h1 className="title">P2P Chat Example</h1>
+          <h1 className="title">Share Your Room Key</h1>
           <hr />
         </div>
         <div className="chatBox" ref={(div) => this.chatBox = div}>

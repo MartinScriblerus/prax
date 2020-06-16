@@ -43,16 +43,18 @@ const styles = {
   },
   roomNameCard: {
     backgroundColor: "#212121",
-    // color: "#dadcd7",
+    color: "#f6deba",
     width: "100%",
     justifyContent: 'center',
+    borderRadius: '15px'
   },
   openRoomsCard: {
     textAlign: 'center',
-    marginRight: '15%',
-    marginLeft: '15%',
+    marginRight: '10%',
+    marginLeft: '10%',
     backgroundColor: "#212121",
     color: "#030303",
+    borderRadius: '15px'
   },
 
   openRoomsDescription: {
@@ -214,9 +216,9 @@ baseball = redsox.map(
       <> 
     
       <div className="component-wrapper">
-      <h1 style={styles.roomNameCard}>Create a Room</h1>
+   
           <Card className="roomNameCard" style={styles.roomNameCard}> 
-          
+          <h1 style={styles.roomNameCard}>Create a Room</h1>
               <InputBoxDescription  addItem={this.addListItem} addItemDescription={this.addListItemDescription} style={styles.textarea2} /><br/>
           </Card>    
       </div>

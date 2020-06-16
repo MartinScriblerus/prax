@@ -63,17 +63,17 @@ import { makeStyles } from '@material-ui/core/styles';
         borderStyle: "solid",
         backgroundColor: "#212121",
         borderWidth: 2,
-        borderColor: "#85b1d7",
-        borderRadius: '5%',
+        borderColor: "#f6deba",
+        borderRadius: '15px',
         variant: "outlined",
         marginRight: "12%",
         marginLeft: "12%",
         paddingRight: '5%',
         paddingLeft: '5%',
-        paddingTop: '8vh',
+    
         paddingBottom: '20vh',
         marginBottom: '60vh',
-        marginTop: 20,
+        marginTop: '15vh',
         zIndex: 5
         }
     })
