@@ -2,7 +2,7 @@
 
 .container {
     // width: 500px;
-    max-width: 50%;
+    max-width: 100%;
     display: flex;
     flex-flow: column;
     // margin: 10px auto;
@@ -54,6 +54,8 @@
   .chatBox {
     overflow-x: hidden;
     height: 200px;
+    display: inline;
+    float: center;
     max-height: 70%;
     font-size: 20px;
     padding: 10px 10px 20px 30px;

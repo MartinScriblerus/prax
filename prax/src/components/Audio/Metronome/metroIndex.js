@@ -109,7 +109,7 @@ const Metronome = () => {
       <Set marginTop="major-1">
         <StyledInputField
           type="number"
-          width="45%"
+          width="47%"
           placeholder="Set beats per minute"
           onChange={e => setBpm(e.target.value)}
         />

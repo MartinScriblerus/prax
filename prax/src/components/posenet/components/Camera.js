@@ -392,8 +392,9 @@ export default class PoseNet extends Component {
     this.video = elem
   }
 
-  getRemoteCanvas = elem => {
-    this.canvas = elem
+  getRemoteCanvas = async (elem) => {
+    await this.remoteVideo
+    this.remoteCanvas = elem
     console.log(elem)
   }
 
@@ -430,6 +431,11 @@ export default class PoseNet extends Component {
       function poseFunct(serverDrawPoses){
         console.log("SERVERSIDE DRAW POSES", serverDrawPoses);
         
+     
+          const remoteCtx = this.remoteCanvas.current.getContext("2d");
+          remoteCtx.fillRect(serverDrawPoses, 0, 100, 100);
+
+
         }
       socket.on("serverDrawPoses", poseFunct)
       
@@ -445,14 +451,7 @@ export default class PoseNet extends Component {
       console.log("SOCKETS IN CAMERA COMPONENTDIDMOUNT WORK!")
     }
   
-    try{
-    const remoteCtx = this.remoteCanvas.current.getContext("2d");
-    remoteCtx.fillRect(0, 0, 100, 100);
-    } catch (error) {
-      throw new Error('PoseNet failed to load')
-    } finally {
-      console.log("remote canvas in ComponentDidMount should work")
-    }
+
   }
 
   async setupCamera() {
@@ -615,10 +614,8 @@ socket.on('herecanvasCTX', (canvasContext)=>{
     const { chatLog, options } = this.state;
     return (
    <>
-   <Grid item xs={12} style={styles.container}>
- 
-   
-        <div>  
+   <Grid item xs={12} id="canvasGrid" style={styles.container}>
+        <div >  
         <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
 
         <canvas id="remoteCanvas" ref={this.remoteCanvas}  style={styles.canvas}/>
@@ -626,7 +623,8 @@ socket.on('herecanvasCTX', (canvasContext)=>{
    </Grid>
 
        
-        
+  <Grid item xs={12} style={styles.container}>
+   
             <div id="buttons">
                 <button onClick={createRoom} style={styles.btn} className="rtcRoomButton" id="createBtn">
                   <span>Create Room</span>
@@ -635,9 +633,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                   <span>End Prax</span>
                 </button>
             </div>
-
-       
-              
+             
               <button onClick={this.copyToClipboard} style={styles.btn} className="rtcRoomButton" >
                 <span>Enter Room</span>
               </button> 
@@ -646,23 +642,19 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                 <span>Join Room</span>
               </button>
               
-      
-              <div id="room-dialog">
+            <div id="room-dialog">
  
-              <div id="idRoomJoin">
+            <div id="idRoomJoin">
               Enter ID for room to join:
             
-                <input type="text" id="room-id"
+              <input type="text" id="room-id"
                 ref={(textarea) => this.textArea = textarea}
                 defaultValue={roomId || ''}
-        
-                ></input>
+                />
                 <label htmlFor="my-text-field">Room ID</label>
-            
- 
-  
-              </div>
-              <LioWebRTC
+           
+              
+            <LioWebRTC
               options={options}
               onReady={this.join}
               onCreatedPeer={this.handleCreatedPeer}
@@ -673,31 +665,27 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                   chatLog={chatLog}
                   onSend={(msg) => msg && this.addChat('Me', msg)}
                 />
-              </LioWebRTC>
-            </div> 
-              {
-                /* Logical shortcut for only displaying the 
-                   button if the copy command exists */
-                document.queryCommandSupported('copy') &&
-                 <div>
-
-   
-                   {this.state.copySuccess}
-                   {roomId}
-                  
-                 </div>
-               
-                }
-          
-                <div>
+            </LioWebRTC>
+             </div>
+          </div> 
+          {
+            /* Logical shortcut for only displaying the 
+                button if the copy command exists */
+            document.queryCommandSupported('copy') &&
+              <div>
+                {this.state.copySuccess}
+                {roomId}
+                
               </div>
- 
+            }
+          
 
- 
-         
+        </Grid>  
+        <div id="metronomeContainer">
+        Works
+                  </div>
 
-
-  <Grid item xs={12} style={styles.container}> 
+  <Grid item xs={12} style={styles.container} id="videosGrid"> 
 
     <div className="media-bridge" id="videos">
     <video key={`local-video`} style={styles.video} id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>

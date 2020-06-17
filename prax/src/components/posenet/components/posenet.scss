@@ -19,6 +19,9 @@ button .rtcRoomButton {
         background-color: $header_black;
         box-shadow: 0 2px 4px 0 #030303, 0 4px 8px 0 #030303; 
   
+#canvasGrid {
+    width: 100%
+}
 
         justify-content: center;
         &:hover {
@@ -83,12 +86,26 @@ label {
 
 #chatbox {
     display:inline;
-    float:left;
-    width:50%
+    float: left;
+    width: 100%
 }
+
+#metronomeContainer {
+    background-color: pink;
+    display: inline;
+    float: right;
+    width: 50%;
+
+}
+
+#roomGrid {
+    width: 100%;
+    display: inline;
+}
+
 canvas {
   background-color: #ccc;
-  --width: calc(45%);
+  --width: calc(47%);
   width: var(--width);
   height: calc(var(--width) * 0.75);
   margin: 1em;
@@ -96,10 +113,18 @@ canvas {
 }
 
 #idRoomJoin {
-    width: 50%;
-    border: 4px solid green;
+    width: 100%;
+    border: 4px solid $header_black;
+    display: inline;
+  
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+#divConnectDetails {
     display: inline;
     float: left;
+    width: 100%
 }
 
 #roomNumberTextArea {
@@ -107,16 +132,28 @@ canvas {
 }
 
 #room-dialog {
-    width: 100%;
+    width: 50%;
     color: $white;
     border: 8px solid yellow;
+    display: inline;
+    float: left;
 }
 
 .chatContainer {
     width: 40%;
 }
 
+#videosGrid {
+    width: 100%;
+    display: inline;
+    float: left;
+}
 
+.videoContainer {
+    width: 100%;
+    display: inline;
+    float: left;
+}
 
 // video {
 //   --width: calc(45%);
