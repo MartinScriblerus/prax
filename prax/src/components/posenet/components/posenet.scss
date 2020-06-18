@@ -8,34 +8,49 @@
     margin: 1vh
 }
 
-button .rtcRoomButton {  
-        z-index: 10;
+.rtcRoomButton {  
+        
+ 
+    z-index: 10;
         font-size: 26;
         width: 60%;
         height: 40px;
         border-style: solid;
         // margin-bottom: 5vh;
         border-width: .5;
-        background-color: $header_black;
-        box-shadow: 0 2px 4px 0 #030303, 0 4px 8px 0 #030303; 
+        // background-color: $header_black;
+        // box-shadow: 0 4px 8px 0 #030303, 0 8px 16px 0 #030303; 
   
-#canvasGrid {
-    width: 100%
-}
-
+        background-color: $header_black;
+        color: $white;
+        z-index: 3;
+        font-size: 26;
+        width: 50%;
+        height: 12vh;
+        border-style: solid;
+       
+        border-width: .5;
+        box-shadow: 0 1px 2px 0 #030303, 0 2px 4px 0 #030303; 
+       
         justify-content: center;
         &:hover {
           justify-content: center;
           font-size: 22px;
           height: 12vh;
-          background-color: $metronome_off;
+          background-color: $white;
           color: $header_black;
-          border: 2px solid $metronome_on;
+          border: 2px solid $header_black;
           box-shadow: 0 20px 40px 0 #030303, 0 40px 80px 0 #030303; 
         }
+
+
+
+ 
       }
 
-
+      #canvasGrid {
+        width: 100%
+    }
 
 .canvasBigContainer {
     background-color: $metronome_off;
@@ -68,11 +83,11 @@ label {
 
 
 
-#MetronomeApp {
-    background-color: pink;
-    width: 50vw;
-    height: 20vh;
-};
+// #MetronomeApp {
+//     background-color: pink;
+//     width: 50vw;
+//     height: 20vh;
+// };
 
 #sampleLoaderContainer {
     background-color: teal;
@@ -134,7 +149,9 @@ canvas {
 }
 
 #room-dialog {
-    width: 50%;
+    width: 40%;
+    margin-right: 5%;
+    margin-left: 5%;
     color: $white;
     // border: 8px solid yellow;
     display: inline;

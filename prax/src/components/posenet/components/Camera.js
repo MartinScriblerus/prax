@@ -9,6 +9,7 @@ import firebase from '../../firebase';
 import Grid from '@material-ui/core/Grid';
 import TimingComponent from '../../Audio/TimingComponent'
 import ClientLatencyApp from '../../Audio/Metronome/client'
+import CrossCorrelation from '../../Audio/Metronome/crosscorrelation'
 
 import './posenet.scss'
 
@@ -39,15 +40,10 @@ const styles = {
     backgroundColor: "#aaf0d1"
   },
   container: {
-    backgroundColor: '#aff',
+    backgroundColor: '#212121',
   
   },
-  btn: {
-    backgroundColor: '#212121', 
-    color: '#f6deba',
-    width: '50%',
-    height: '10vh'
-  }
+
 }
 
 
@@ -106,6 +102,7 @@ registerPeerConnectionListeners();
     event.streams[0].getTracks().forEach(track => {
       console.log('Add a track to the remoteStream:', track);
       remoteStream.addTrack(track);
+   
     });
   });
 
@@ -213,16 +210,17 @@ async function openUserMedia() {
       {video: true, audio: true});
 
       document.querySelector('#localVideo').srcObject = stream;
-  localStream = stream;
-  remoteStream = new MediaStream();
-  document.querySelector('#remoteVideo').srcObject = remoteStream;
-  
+      localStream = stream;
+      remoteStream = new MediaStream();
+      document.querySelector('#remoteVideo').srcObject = remoteStream;
+     
 // tk added querySelectors below based on codelab
 console.log('Stream:', document.querySelector('#localVideo').srcObject);
 // document.querySelector('#cameraBtn').disabled = true;
 // document.querySelector('#joinBtn').disabled = false;
 // document.querySelector('#createBtn').disabled = false;
 // document.querySelector('#hangupBtn').disabled = false;
+
 }
 
 
@@ -299,6 +297,7 @@ function registerPeerConnectionListeners() {
 
 export default class PoseNet extends Component {
   static defaultProps = {
+
     videoWidth: (550),
     videoHeight: (550),
     flipHorizontal: true,
@@ -322,9 +321,10 @@ export default class PoseNet extends Component {
     super(props, PoseNet.defaultProps)
     this.remoteCanvas = React.createRef();
     this.remoteVideo = React.createRef();
-    console.log(props)
+  
     this.state = {
       source: "",
+      stream: {},
       isVideoLoading: true,
       copySuccess: '', 
       nick: this.props.nick,
@@ -344,12 +344,12 @@ export default class PoseNet extends Component {
       }
     };
   }
-    state = {
-      source: ""
-    }
+    // state = {
+    //   source: ""
+    // }
    
     join = (webrtc) => webrtc.joinRoom('video-chat-room-arbitrary-name');
- 
+
     handleCreatedPeer = (webrtc, peer) => {
       console.log(this.props)
       this.setState({ peers: [...this.state.peers, peer] });
@@ -629,7 +629,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
   <Grid item xs={12} style={styles.container}>
    
             <div id="buttons">
-                <button onClick={createRoom} style={styles.btn} className="rtcRoomButton" id="createBtn">
+                <button onClick={createRoom} className="rtcRoomButton" id="createBtn">
                   <span>Create Room</span>
                 </button>
                 <button onClick={hangUp} style={styles.btn} className="rtcRoomButton" id="hangupBtn">
@@ -670,11 +670,11 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                 />
             </LioWebRTC>
              </div>
- 
+            
           </div> 
           
           <div id="metronomeContainer"/>
-   
+          <CrossCorrelation />
           {
             /* Logical shortcut for only displaying the 
                 button if the copy command exists */
@@ -690,7 +690,13 @@ socket.on('herecanvasCTX', (canvasContext)=>{
         </Grid>  
         
       
-        <ClientLatencyApp />
+        <ClientLatencyApp props={this.props} stream={this.state.stream}/>
+ 
+   
+
+
+ 
+ 
   <Grid item xs={12} style={styles.container} id="videosGrid"> 
 
     <div className="media-bridge" id="videos">

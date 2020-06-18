@@ -1,39 +1,42 @@
 import React from 'react';
 import Metronome from "./metronome.js";
 import Correlator from "./correlator.js";
+import Kick from '/Users/matthewreilly/Desktop/Prax/prax/src/components/Audio/Metronome/Kick.wav'
 
 var audioContext, sampleRate; // for Web Audio API
 
-
 export default function CrossCorrelation(){
-    document.addEventListener("DOMContentLoaded", initDocument);
-
+// document.addEventListener("DOMContentLoaded", initDocument);
+if (window !== undefined) {
+  initDocument()
+}
 // We start by associating the event handlers to the frontend.
 function initDocument()
 {
   console.log("Adding event handlers to DOM.")
-  document.getElementById("startButton").onclick = start;
+
 }
 
 const test = false;
 var clickBufferDuration;
+var metronome, clickBuffer;
+var inputNode, mediaStream;
 
 async function start()
 {
-  var metronome, clickBuffer;
-  var inputNode, mediaStream;
+
 
   sampleRate = document.getElementById("sampleRate").value * 1;
-  document.getElementById("sampleRate").disabled = true;
+  document.getElementById("sampleRate");
   console.log("Sample rate: %.0f Hz.", sampleRate);
 
-  document.getElementById("startButton").disabled = true;
+  document.getElementById("startButton");
 
   console.log("Creating audio context.");
   audioContext = new AudioContext({sampleRate});
 
   // metronome and input node
-  clickBuffer = await loadAudioBuffer("./Kick.wav");
+  clickBuffer = await loadAudioBuffer(Kick);
   clickBufferDuration = clickBuffer.duration;
   console.log("click buffer duration: %.1f ms.", 1000*clickBufferDuration);
 
@@ -87,20 +90,21 @@ async function loadAudioBuffer(url)
   console.log("Loaded audio data from %s.", url);  
   return buffer;
 }
-    return(
-        <>
-        <h1>Looper - Latency Detector</h1>
-        <p>
-          Sample rate:
-          <select id="sampleRate">
-            <option value="44100" selected>44100 Hz</option>
-            <option value="48000">48000 Hz</option>
-          </select>
-        </p>
-        <p>
-          <button id="startButton">Start</button>
-          <span id="outputSpan"></span>
-        </p>
-        </>
-    )
+
+return(
+  <>
+  <h1>Looper - Latency Detector</h1>
+  <p>
+    Sample rate:
+    <select defaultValue="44100" id="sampleRate">
+      <option value="44100">44100 Hz</option>
+      <option value="48000">48000 Hz</option>
+    </select>
+  </p>
+  <p>
+    <button id="startButton" onClick={()=>{start()}}>Start</button>
+    <span id="outputSpan"></span>
+  </p>
+  </>
+)
 }

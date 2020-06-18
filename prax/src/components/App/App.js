@@ -69,14 +69,12 @@ if (window !== undefined){
     <Provider store={store}>
     
     <Router>
-   
         <div id="outerDiv">
-
       <Header />
       <MuiThemeProvider theme={theme}>
         <Navbar style={styles.navbar}/>
       </MuiThemeProvider>
-    <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
 
       <Switch>
                   
