@@ -47,12 +47,14 @@ button .rtcRoomButton {
 }
 
 #room-IDNamed {
-    background-color: yellow;
+    background-color: $header_black;
 }
 
 #room-id {
     color: #030303;
-    
+    width: 70%;
+    margin-right: 15%;
+    margin-left: 15%;
 }
 
 #peerConnectionNamed {
@@ -134,7 +136,7 @@ canvas {
 #room-dialog {
     width: 50%;
     color: $white;
-    border: 8px solid yellow;
+    // border: 8px solid yellow;
     display: inline;
     float: left;
 }

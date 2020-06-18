@@ -7,6 +7,9 @@ import { LioWebRTC } from 'react-liowebrtc'
 import ChatBox from '../../Chat/CreatePraxSpace/chatbox';
 import firebase from '../../firebase';
 import Grid from '@material-ui/core/Grid';
+import TimingComponent from '../../Audio/TimingComponent'
+import ClientLatencyApp from '../../Audio/Metronome/client'
+
 import './posenet.scss'
 
 const configuration = {
@@ -667,7 +670,11 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                 />
             </LioWebRTC>
              </div>
+ 
           </div> 
+          
+          <div id="metronomeContainer"/>
+   
           {
             /* Logical shortcut for only displaying the 
                 button if the copy command exists */
@@ -678,13 +685,12 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                 
               </div>
             }
-          
+         
 
         </Grid>  
-        <div id="metronomeContainer">
-        Works
-                  </div>
-
+        
+      
+        <ClientLatencyApp />
   <Grid item xs={12} style={styles.container} id="videosGrid"> 
 
     <div className="media-bridge" id="videos">

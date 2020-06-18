@@ -98,6 +98,12 @@ a.bottom-right {
   right: 50px;
 }
 
+#metroOuter {
+
+    color: #aaf;
+
+}
+
 canvas {
   /* width: 100%;
   height: 100%; */

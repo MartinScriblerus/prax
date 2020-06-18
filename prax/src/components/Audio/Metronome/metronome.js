@@ -1,76 +1,43 @@
-import { useEffect, useState } from "react";
-import _strongTick from "./strongTick.wav";
-import _weakTick from "./weakTick.wav";
-// WAIT----- WHAT ARE THE TICKS HERE? ARE THEY FILES?
+export default class Metronome
+{
+  constructor(audioContext, outputNode, tempo, buffer, outputNodeInput = 0,
+    gain = 1.0)
+  {
+    this.audioContext    = audioContext;
+    this.outputNode      = outputNode;
+    this.period          = 60/tempo;
+    this.buffer          = buffer;
+    this.outputNodeInput = outputNodeInput;
+    this.gain            = gain;
+  }
 
-const FIRST_BEAT = 1;
-const DEFAULT_BPM = 60;
-const DEFAULT_BEATS_PER_MEASURE = 4;
+  playClick(t = 0)
+  {
+    var node;
+    var gainNode;
+  
+    node = new AudioBufferSourceNode(this.audioContext, {buffer: this.buffer});
+    gainNode = new GainNode(this.audioContext, {gain: this.gain});
+    node.connect(gainNode);
+    gainNode.connect(this.outputNode, 0, this.outputNodeInput);
+    node.start(t)
+  }
+  
+  // Use when =  0 to start playback immediately.
+  // Use when = -1 to start playback as soon as possible but in sync with
+  //               currentTime.
+  start(when = 0)
+  {
+    var t, now;
 
-export const useMetronome = (
-  initialBpm = DEFAULT_BPM,
-  initialBeatsPerMeasure = DEFAULT_BEATS_PER_MEASURE,
-  initialTickSounds = [_weakTick, _strongTick]
-) => {
-  const [isTicking, setIsTicking] = useState(false);
-  const [bpm, setBpm] = useState(initialBpm);
-  const [beatsPerMeasure, setBeatsPerMeasure] = useState(
-    initialBeatsPerMeasure
-  );
-  const [sounds, setSounds] = useState(initialTickSounds);
+    now = this.audioContext.currentTime;
+    
+    if (when ==  0) when = now;
+    if (when == -1) when = Math.ceil(now/this.period)*this.period;
 
-  const startMetronome = () => {
-    setIsTicking(true);
-  };
+    for (t = when; t < now + 2; t += this.period)
+      this.playClick(t);
 
-  const stopMetronome = () => {
-    setIsTicking(false);
-  };
-
-  useEffect(() => {
-    let interval;
-    let beat = 1;
-    const strongTick = new Audio(sounds[1]);
-    const weakTick = new Audio(sounds[0]);
-    const resetSounds = () => {
-      strongTick.pause();
-      strongTick.currentTime = 0;
-      weakTick.pause();
-      weakTick.currentTime = 0;
-    };
-    const tick = () => {
-      resetSounds();
-      if (beat === FIRST_BEAT) {
-        strongTick.play();
-        console.log("BOOP");
-      } else {
-        weakTick.play();
-        console.log("BEEP");
-      }
-
-      if (beat === beatsPerMeasure) {
-        beat = FIRST_BEAT;
-      } else {
-        beat++;
-      }
-    };
-
-    if (isTicking) {
-      tick();
-      interval = setInterval(tick, (60 / bpm) * 1000);
-    }
-
-    return () => clearInterval(interval);
-  }, [isTicking, bpm, beatsPerMeasure, sounds]);
-
-  return {
-    startMetronome,
-    stopMetronome,
-    isTicking,
-    setBpm,
-    bpm,
-    beatsPerMeasure,
-    setBeatsPerMeasure,
-    setSounds
-  };
-};
+    setTimeout(() => this.start(t), 1000);
+  }
+}

@@ -1,0 +1,18 @@
+@import '../../App/variables';
+
+input {
+    width: 40%;
+
+}
+#latencyContainer {
+    display: inline;
+    float: left;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+p { 
+    color: $white;
+}
+.title {
+    color: $white; 
+}

@@ -13,6 +13,7 @@ import Home from '../Home/Home';
 import { AuthContext } from "../../context/auth";
 import { Provider } from "react-redux";
 import PrivateRoute from './PrivateRoute';
+import MetroOuter from './MetronomeOuter';
 import About from '../About/about';
 import Login from '../AuthLogin/Login/Login'
 import FirstTimeLogin from '../FirstTimeSignIn/firstTimeSignIn';
@@ -76,6 +77,7 @@ if (window !== undefined){
         <Navbar style={styles.navbar}/>
       </MuiThemeProvider>
     <MuiThemeProvider theme={theme}>
+
       <Switch>
                   
         <Route exact path="/" component={Login} />

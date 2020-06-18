@@ -133,6 +133,11 @@ var passport = require("passport");
         socket.broadcast.to(itemToAdd).emit("herecanvasCTX", canvasContext)
       }
       
+      socket.on('signalSERVER', signalingServerURL)
+      function signalingServerURL(signalingServerURL){
+        socket.broadcast.to(itemToAdd).emit("signalingURLFromServer", signalingServerURL)
+      };
+
       // socket.on('canvasURL', canvasURL)
       // function canvasURL(canvasURL){
   
