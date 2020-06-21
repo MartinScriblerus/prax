@@ -72,7 +72,10 @@ if (window !== undefined){
         <div id="outerDiv">
       <Header />
       <MuiThemeProvider theme={theme}>
-        <Navbar style={styles.navbar}/>
+       {<PoseNet/>
+      ? null
+      : <Navbar style={styles.navbar}/>
+      } 
       </MuiThemeProvider>
       <MuiThemeProvider theme={theme}>
 

@@ -1,11 +1,11 @@
 import * as posenet from '@tensorflow-models/posenet'
 
 
-const pointRadius = 30
+const pointRadius = 13
 
 export const config = {
   videoWidth: (550),
-  videoHeight: (450),
+  videoHeight: (550),
   flipHorizontal: true,
   algorithm: 'single-pose',
   showVideo: false,
@@ -18,7 +18,7 @@ export const config = {
   nmsRadius: 2,
   outputStride: 16,
   imageScaleFactor: .2,
-  skeletonColor: "#198C63",
+  skeletonColor: "#148aa3",
   skeletonLineWidth: 12,
   loadingText: 'Loading...please be patient...'
 }
@@ -30,7 +30,7 @@ function toTuple({x, y}) {
 export function drawKeyPoints(
   keypoints,
   minConfidence,
-  {skeletonColor = "#aaa"},
+  {skeletonColor = "#ee7e5b"},
   canvasContext,
   scale = 1
 ) {

@@ -35,7 +35,7 @@ export default function Fourier(){
     
       const mediaStream = await navigator.mediaDevices.getUserMedia({audio: true});
       const userInputNode = new MediaStreamAudioSourceNode(audioContext, {mediaStream});
-    
+   
       analyserNode = new AnalyserNode(audioContext, {fftSize, smoothingTimeConstant});
       oscillatorNode.connect(analyserNode);
       userInputNode.connect(analyserNode);

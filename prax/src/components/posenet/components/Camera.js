@@ -340,7 +340,7 @@ export default class PoseNet extends Component {
     minPartConfidence: 0.3,
     multiplier: 6,
     maxPoseDetections: 2,
-    nmsRadius: 2,
+    nmsRadius: 1,
     outputStride: 16,
     imageScaleFactor: .2,
     skeletonColor: "#f6deba",

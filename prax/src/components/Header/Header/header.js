@@ -27,7 +27,7 @@ const style={
       fontFamily: 'Arial',
       fontSize: 22,
       marginLeft: '10%',
-      color: "#7295AB",
+      color: "#148aa3",
       paddingBottom: '20px'
     }   
 }
