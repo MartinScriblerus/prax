@@ -555,6 +555,9 @@ export default class PoseNet extends Component {
           poses.push(pose)
     
       canvasContext.clearRect(0, 0, videoWidth, videoHeight)
+      if(remoteCanvasContext !== undefined){
+      remoteCanvasContext.clearReact(0, 0, videoWidth, videoHeight)
+      }
       // console.log(canvasContext)
 
       // WebRTC canvas stream below -->
@@ -578,6 +581,11 @@ export default class PoseNet extends Component {
         canvasContext.translate(-videoWidth, 0)
         canvasContext.drawImage(video, 0, 0, videoWidth, videoHeight)
         canvasContext.restore()
+        remoteCanvasContext.save()
+        remoteCanvasContext.scale(-.2, .2)
+        remoteCanvasContext.translate(-videoWidth, 0)
+        remoteCanvasContext.drawImage(video, 0, 0, videoWidth, videoHeight)
+        remoteCanvasContext.restore()
       }
 
       //CURRENTLY EMITTING POSES AND CAMERA BUT WE WILL ONLY WANT ONE  
