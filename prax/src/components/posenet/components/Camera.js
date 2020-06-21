@@ -484,9 +484,10 @@ export default class PoseNet extends Component {
       )
     }
     const {videoWidth, videoHeight} = this.props
-    const video = this.video
-    video.width = videoWidth
-    video.height = videoHeight
+    const video = this.video;
+    const remoteVideo = this.remoteVideo;
+    video.width = videoWidth;
+    video.height = videoHeight;
 
 
 
@@ -501,15 +502,20 @@ export default class PoseNet extends Component {
   detectPose() {
     const {videoWidth, videoHeight} = this.props
     const canvas = this.canvas
+    const remoteCanvas = this.remoteCanvas
     const canvasContext = canvas.getContext('2d')
+    const remoteCanvasContext = remoteCanvas.getContext('2d')
+
 
     canvas.width = videoWidth
     canvas.height = videoHeight
+    
 
     this.poseDetectionFrame(canvasContext)
+    this.poseDetectionFrame(remoteCanvasContext)
   }
 
-  poseDetectionFrame(canvasContext) {
+  poseDetectionFrame(canvasContext, remoteCanvasContext) {
     const {
       // algorithm,
       imageScaleFactor, 
@@ -529,7 +535,8 @@ export default class PoseNet extends Component {
       } = this.props
 
     const posenetModel = this.posenet
-    const video = this.video
+    const video = this.video;
+    const remoteVideo = this.remoteVideo;
     
 
     if(this.remoteStream !== undefined || null){
