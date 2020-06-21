@@ -1,2 +1,2 @@
-export const signalingServerUrl = "https://registry.npmjs.org/@firebase/firestore/-/firestore-1.15.0.tgz";
+export const signalingServerUrl = "ws://localhost:3000/sockjs-node/235/pperkqfp/websocket";
 export const stunServerUrl = "stun:stun1.l.google.com:19302";

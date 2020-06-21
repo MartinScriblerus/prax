@@ -1,7 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Metronome from "./metronome.js";
-import {signalingServerUrl, stunServerUrl} from "./Constants.js";
-import "https://webrtc.github.io/adapter/adapter-latest.js"
+import {signalingServerUrl, stunServerUrl} from "./constants.js";
+// import "https://webrtc.github.io/adapter/adapter-latest.js"
+import Grid from '@material-ui/core/Grid';
+import adapter from 'webrtc-adapter';
+import './streamserver.scss';
+import Kick from './Kick.wav';
+
+console.log(adapter);
 
 var signalingChannel, ownId; // for Websocket 
 var connection = []; // For RTC
@@ -9,6 +15,10 @@ var audioContext, clientOutputNode, gainNode, delayNode, channelMergerNode,
   sampleRate, loopGain; // for Web Audio API
 
 export default function StreamServer(){
+const [loopBeats, setLoopBeats] = useState("4")
+const [decay, setDecay] = useState("0.9");
+const [metronomeGain, setMetronomeGain] = useState("0.5")
+
     document.addEventListener("DOMContentLoaded", initDocument);
 
 function initDocument()
@@ -23,24 +33,23 @@ function initDocument()
     document.getElementById("startServerButton").disabled = false;
 }
 
-async function startServer()
-{
+async function startServer(){
   var metronome, loopLength, loopBeats, tempo, metronomeGain;
 
   // Update UI
-  document.getElementById("sampleRate")       .disabled = true;
-  document.getElementById("loopBeats")        .disabled = true;
-  document.getElementById("tempo")            .disabled = true;
-  document.getElementById("loopGain")         .disabled = true;
-  document.getElementById("metronomeGain")    .disabled = true;
+  document.getElementById("sampleRate").disabled = true;
+  document.getElementById("loopBeats").disabled = true;
+  document.getElementById("tempo").disabled = true;
+  document.getElementById("loopGain").disabled = true;
+  document.getElementById("metronomeGain").disabled = true;
   document.getElementById("startServerButton").disabled = true;
 
   // Get user input
-  sampleRate    = document.getElementById("sampleRate")   .value;
-  loopGain      = document.getElementById("loopGain")     .value;
+  sampleRate    = document.getElementById("sampleRate").value;
+  loopGain      = document.getElementById("loopGain").value;
   metronomeGain = document.getElementById("metronomeGain").value;
-  tempo         = document.getElementById("tempo")        .value;
-  loopBeats     = document.getElementById("loopBeats")    .value;
+  tempo         = document.getElementById("tempo").value;
+  loopBeats     = document.getElementById("loopBeats").value;
 
   // Adjust loop length and tempo according to the Web Audio API specification:
   // "If DelayNode is part of a cycle, then the value of the delayTime
@@ -49,7 +58,7 @@ async function startServer()
   loopLength = 60/tempo*loopBeats;
   loopLength = Math.round(loopLength*sampleRate/128)*128/sampleRate;
   tempo      = 60/loopLength*loopBeats;
-  console.log("Loop lengh is %.5f s, tempos is %.1f bpm.", loopLength, tempo);
+  console.log("Loop lengh is %.5f s, tempo is %.1f bpm.", loopLength, tempo);
 
 
   console.log("Creating Web Audio.");
@@ -60,9 +69,9 @@ async function startServer()
   channelMergerNode = new ChannelMergerNode(audioContext, {numberOfInputs: 2});
   clientOutputNode  = new MediaStreamAudioDestinationNode(audioContext);
   
-  gainNode         .connect(delayNode);
-  delayNode        .connect(gainNode);
-  gainNode         .connect(channelMergerNode, 0, 0);
+  gainNode.connect(delayNode);
+  delayNode.connect(gainNode);
+  gainNode.connect(channelMergerNode, 0, 0);
   channelMergerNode.connect(clientOutputNode);
 
 /*
@@ -84,7 +93,7 @@ SERVER           V                                  |
                                                   *created on demand
 */
 
-  const clickBuffer = await loadAudioBuffer("./Kick.wav");
+  const clickBuffer = await loadAudioBuffer(Kick);
   metronome = new Metronome(audioContext, channelMergerNode, tempo,
     clickBuffer, 0, metronomeGain);
   metronome.start();
@@ -96,7 +105,7 @@ function receiveMessage(message)
 {
   var data;
 
-  data = JSON.parse(message.data);
+  data = (message.data)
 
   if (data.id)           receiveIdMessage(data);
   if (data.offer)        receiveOfferMessage(data);
@@ -172,10 +181,10 @@ function gotRemoteStream(event)
   const channelSplitterNode = new ChannelSplitterNode       (audioContext, {numberOfOutputs: 2          });
   const clientGainNode      = new GainNode                  (audioContext, {gain:            0          });
 
-  clientInputNode    .connect(channelSplitterNode);
+  clientInputNode.connect(channelSplitterNode);
   channelSplitterNode.connect(channelMergerNode, 1, 1);
   channelSplitterNode.connect(clientGainNode, 0);
-  clientGainNode     .connect(gainNode);
+  clientGainNode.connect(gainNode);
 
   clientGainNode.gain.setValueAtTime(0, audioContext.currentTime + 0.5);
   clientGainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 1);
@@ -200,24 +209,29 @@ async function loadAudioBuffer(url)
 
   return buffer;
 }
-    
+  
+const handleSubmit = (evt) => {
+  evt.preventDefault();
+  alert(`Submitting Name ${loopBeats}`)
+  alert(`Submitting Name ${decay}`)
+  alert(`Submitting Name ${metronomeGain}`)
+}
+
     return(
-<>
-<h1>Looper - Session Manager</h1>
-<p>
-  The following parameters must be also entered at each client exactly
-  the same way:
+<Grid item xs={12} id="LatencyGrid">
+<p className="latencyBoxText">
+Both players must include matching parameters below:
 </p>
 <p>
   Sample rate:
-  <select id="sampleRate">
-    <option value="44100" selected>44100 Hz</option>
+  <select defaultValue="44100" id="sampleRate">
+    <option value="44100">44100 Hz</option>
     <option value="48000">48000 Hz</option>
   </select>
 </p>
 <p>
-  Tempo:
-  <select id="tempo">
+  Set Prax Tempo:
+  <select defaultValue="120" id="tempo">
     <option value="40">40 bpm</option>
     <option value="42">42 bpm</option>
     <option value="44">44 bpm</option>
@@ -243,7 +257,7 @@ async function loadAudioBuffer(url)
     <option value="108">108 bpm</option>
     <option value="112">112 bpm</option>
     <option value="116">116 bpm</option>
-    <option value="120" selected>120 bpm</option>
+    <option value="120">120 bpm</option>
     <option value="126">126 bpm</option>
     <option value="132">132 bpm</option>
     <option value="138">138 bpm</option>
@@ -257,24 +271,37 @@ async function loadAudioBuffer(url)
     <option value="208">208 bpm</option>
   </select>
 </p>
-<p>
-  Loop lenght:
-  <input type="number" id="loopBeats" value="4"/>
-  beats.
-</p>
-<p>
-  The following parameters only need to be set on session level:
-</p>
-<p>
-  Decay factor: <input id="loopGain" value="0.9"/>
-  Note to the sorcerer's apprentice:  Don't pick values &gt;1.
-</p>
-<p>
-  Metronome volume: <input id="metronomeGain" value="0.5"/>
+<br/>
+<form onSubmit={handleSubmit}>
+
+<label>  Loop Interval </label>
+  <input 
+    className="sessionLoopInput" 
+    id="loopBeats" 
+    defaultValue={loopBeats} 
+    onChange={e => setLoopBeats(e.target.value)}
+  />
+
+<label>  Decay </label>
+  <input 
+    className="sessionLoopInput" 
+    id="loopGain" 
+    defaultValue={decay} 
+    onChange={e => setDecay(e.target.value)}
+  />
+
+<label> Metronome volume: </label>
+  <input 
+    className="sessionLoopInput" 
+    id="metronomeGain" 
+    value={metronomeGain} 
+    onChange={e => setMetronomeGain(e.target.value)}
+  />
   (pick 0 - 1).
-</p>
-<p><button id="startServerButton" disabled>Start Session</button></p>
+</form>
+
+<button id="startServerButton" disabled>Start Session</button>
 <p>Session ID: <span id="sessionId"></span></p>
-</>
+</Grid>
     )
 }

@@ -1,12 +1,14 @@
 import React from 'react';
 import Metronome from "./metronome.js";
 import Correlator from "./correlator.js";
-import Kick from '/Users/matthewreilly/Desktop/Prax/prax/src/components/Audio/Metronome/Kick.wav'
+import Kick from './Kick.wav'
+import './crosscorrelation.scss'
 
 var audioContext, sampleRate; // for Web Audio API
 
-export default function CrossCorrelation(){
-// document.addEventListener("DOMContentLoaded", initDocument);
+export default function CrossCorrelation(props){
+
+  // document.addEventListener("DOMContentLoaded", initDocument);
 if (window !== undefined) {
   initDocument()
 }
@@ -22,8 +24,7 @@ var clickBufferDuration;
 var metronome, clickBuffer;
 var inputNode, mediaStream;
 
-async function start()
-{
+async function start(){
 
 
   sampleRate = document.getElementById("sampleRate").value * 1;
@@ -51,11 +52,10 @@ async function start()
   else
   {
     console.log("Working actual mode.")
-
-    mediaStream =  await navigator.mediaDevices.getUserMedia({audio: {
-      echoCancellation: false,
-      noiseSuppression: false,
-      channelCount:     1}});
+    if (props.stream !== null || undefined){
+      console.log("props= ", props.stream)
+    mediaStream = props.stream
+    }
     inputNode = new MediaStreamAudioSourceNode(audioContext, {mediaStream});
 
     metronome = new Metronome(audioContext, audioContext.destination, 60,
@@ -68,6 +68,10 @@ async function start()
   new Correlator(audioContext, inputNode, clickBuffer, updateOutput);
 
   console.log("running...")
+}
+
+async function stop(){
+  metronome.stop()
 }
 
 function updateOutput(latency)
@@ -93,7 +97,7 @@ async function loadAudioBuffer(url)
 
 return(
   <>
-  <h1>Looper - Latency Detector</h1>
+  <h3 id="LatencyDetectorContainer">Looper - Latency Detector</h3>
   <p>
     Sample rate:
     <select defaultValue="44100" id="sampleRate">
@@ -101,10 +105,12 @@ return(
       <option value="48000">48000 Hz</option>
     </select>
   </p>
-  <p>
-    <button id="startButton" onClick={()=>{start()}}>Start</button>
+
+    <button id="startButton" className="latencyDetectorButton" onClick={()=>{start()}}>Start Latency Detector</button>
+
     <span id="outputSpan"></span>
-  </p>
+
+    
   </>
 )
 }

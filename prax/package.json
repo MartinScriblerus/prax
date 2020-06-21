@@ -62,6 +62,8 @@
     "peer-data": "^3.1.7",
     "peer-data-server": "^1.0.10",
     "peerjs": "^1.2.0",
+    "pitch-analyser": "^1.1.0",
+    "pitchy": "^2.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-emoji": "^0.5.0",

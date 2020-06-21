@@ -10,7 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import TimingComponent from '../../Audio/TimingComponent'
 import ClientLatencyApp from '../../Audio/Metronome/client'
 import CrossCorrelation from '../../Audio/Metronome/crosscorrelation'
-
+import { PitchDetector } from 'pitchy';
+ 
 import './posenet.scss'
 
 const configuration = {
@@ -80,7 +81,6 @@ registerPeerConnectionListeners();
     });
     // Code for collecting ICE candidates above
   
-
   // Code for creating a room below
   const offer = await peerConnection.createOffer();
   await peerConnection.setLocalDescription(offer);
@@ -94,15 +94,18 @@ registerPeerConnectionListeners();
   };
   await roomRef.set(roomWithOffer);
   roomId = roomRef.id;
+ 
   console.log(`New room created with SDP offer. Room ID: ${roomRef.id}`);
   // Code for creating a room above
+
+
 
   peerConnection.addEventListener('track', event => {
     console.log('Got remote track:', event.streams[0]);
     event.streams[0].getTracks().forEach(track => {
       console.log('Add a track to the remoteStream:', track);
       remoteStream.addTrack(track);
-   
+remotePoses()
     });
   });
 
@@ -118,7 +121,7 @@ registerPeerConnectionListeners();
     // Listening for remote session description above
 
       // Listen for remote ICE candidates below
-  roomRef.collection('calleeCandidates').onSnapshot(snapshot => {
+    roomRef.collection('calleeCandidates').onSnapshot(snapshot => {
     snapshot.docChanges().forEach(async change => {
       if (change.type === 'added') {
         let data = change.doc.data();
@@ -126,19 +129,21 @@ registerPeerConnectionListeners();
         await peerConnection.addIceCandidate(new RTCIceCandidate(data));
       }
     });
-  });
+    });
   // Listen for remote ICE candidates above
-}
+  }
 // PICK BACK UP HERE TK
-function joinRoom() {
-  document.querySelector('#confirmJoinBtn').addEventListener('click', async () => {
+  function joinRoom() {
+    document.querySelector('#confirmJoinBtn').addEventListener('click', async () => {
         roomId = document.querySelector('#room-id').value;
         console.log('Join room: ', roomId);
         await joinRoomById(roomId);
+   
       }, {once: true});
-}
+
+  }
   
-async function joinRoomById (roomId) {
+  async function joinRoomById (roomId) {
     const db = firebase.firestore();
     const roomRef = db.collection('rooms').doc(`${roomId}`);
     const roomSnapshot = await roomRef.get();
@@ -150,7 +155,7 @@ async function joinRoomById (roomId) {
       //added register peer connection listeners based on codelab
       registerPeerConnectionListeners();
       localStream.getTracks().forEach(track => {
-        peerConnection.addTrack(track, localStream);
+        peerConnection.addTrack(track, localStream); 
       });
     
         // Code for collecting ICE candidates below
@@ -205,32 +210,52 @@ async function joinRoomById (roomId) {
 }
   
 
-async function openUserMedia() {
-  const stream = await navigator.mediaDevices.getUserMedia(
-      {video: true, audio: true});
 
+
+  async function openUserMedia() {
+  // let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  var AudioContext = new (window.AudioContext || window.webkitAudioContext)();
+  var AnalyserNode = AudioContext.createAnalyser();
+    const stream = await navigator.mediaDevices.getUserMedia(
+      {
+      video: true, 
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        channelCount: 1,
+        latency: {exact: 0.003},
+      }
+    });
+
+    function updatePitch(analyserNode, stream, sampleRate) {
+      // console.log(analyserNode);
+     
+      window.requestAnimationFrame(() => updatePitch(analyserNode, sampleRate));
+    }
+   
+   
+    let sourceNode = AudioContext.createMediaStreamSource(stream);
+    
+    sourceNode.connect(AnalyserNode);
+    const detector = PitchDetector.forFloat32Array(AnalyserNode.fftSize);
+    (console.log(detector))
+    const input = new Float32Array(detector.inputLength);
+    updatePitch(AnalyserNode, detector, input, AudioContext.sampleRate);
+    
       document.querySelector('#localVideo').srcObject = stream;
       localStream = stream;
       remoteStream = new MediaStream();
       document.querySelector('#remoteVideo').srcObject = remoteStream;
-     
+     console.log(remoteStream)
 // tk added querySelectors below based on codelab
 console.log('Stream:', document.querySelector('#localVideo').srcObject);
 // document.querySelector('#cameraBtn').disabled = true;
-// document.querySelector('#joinBtn').disabled = false;
-// document.querySelector('#createBtn').disabled = false;
-// document.querySelector('#hangupBtn').disabled = false;
+document.querySelector('#joinBtn').disabled = false;
+document.querySelector('#createBtn').disabled = false;
+document.querySelector('#hangupBtn').disabled = false;
 
-}
-
-
-
-
-
-
-
-
-
+    }
 
   async function hangUp(e) {
     const tracks = document.querySelector('#localVideo').srcObject.getTracks();
@@ -250,9 +275,9 @@ console.log('Stream:', document.querySelector('#localVideo').srcObject);
     document.querySelector('#localVideo').srcObject = null;
     document.querySelector('#remoteVideo').srcObject = null;
     // document.querySelector('#cameraBtn').disabled = false;
-    // document.querySelector('#joinBtn').disabled = true;
-    // document.querySelector('#createBtn').disabled = true;
-    // document.querySelector('#hangupBtn').disabled = true;
+    document.querySelector('#joinBtn').disabled = true;
+    document.querySelector('#createBtn').disabled = true;
+    document.querySelector('#hangupBtn').disabled = true;
     document.querySelector('#currentRoom').innerText = '';
 
       // Delete room on hangup
@@ -273,11 +298,11 @@ console.log('Stream:', document.querySelector('#localVideo').srcObject);
 }
 
 // tk added registerpeerconnection function based on codelab
-function registerPeerConnectionListeners() {
-  peerConnection.addEventListener('icegatheringstatechange', () => {
-    console.log(
+  function registerPeerConnectionListeners() {
+    peerConnection.addEventListener('icegatheringstatechange', () => {
+      console.log(
         `ICE gathering state changed: ${peerConnection.iceGatheringState}`);
-  });
+    });
 
   peerConnection.addEventListener('connectionstatechange', () => {
     console.log(`Connection state change: ${peerConnection.connectionState}`);
@@ -293,11 +318,17 @@ function registerPeerConnectionListeners() {
   });
 }
 
-
+function remotePoses(remCan, remVid, remCanContext){
+  remCan= document.getElementById("remoteCanvas")
+  remVid= document.getElementById("remoteVideo")
+  remCanContext = remCan.getContext('2d')
+  remCan.width = 550;
+  remCan.height = 550;
+ 
+}
 
 export default class PoseNet extends Component {
   static defaultProps = {
-
     videoWidth: (550),
     videoHeight: (550),
     flipHorizontal: true,
@@ -329,16 +360,16 @@ export default class PoseNet extends Component {
       copySuccess: '', 
       nick: this.props.nick,
       roomID: `party-${this.props.roomName}`,
-      muted: false,
+      muted: true,
       camPaused: false,
-      chatLog: [],
+      chatLog: [],    
       peers: [],
       options: {
         debug: true,
         autoRequestMedia: true,
         media: {
             video: true,
-            audio: false
+            audio: true
         },
         video: null,
       }
@@ -395,22 +426,18 @@ export default class PoseNet extends Component {
     this.video = elem
   }
 
-  getRemoteCanvas = async (elem) => {
-    await this.remoteVideo
-    this.remoteCanvas = elem
-    console.log(elem)
+  getRemoteCanvas = async (elemCanvas) => {
+    await this.remoteStream
+    this.remoteCanvas = elemCanvas
   }
 
   getVideo = elem => {
     this.video = elem
   }
 
-  getRemoteVideo = elem => {
-    this.video = elem
-  }
-  
   async componentDidMount() {
     openUserMedia();
+    this.audioContext = new AudioContext();
     try {
       await this.setupCamera()
     } catch (error) {
@@ -433,30 +460,22 @@ export default class PoseNet extends Component {
     try {
       function poseFunct(serverDrawPoses){
         console.log("SERVERSIDE DRAW POSES", serverDrawPoses);
-        
-     
-          const remoteCtx = this.remoteCanvas.current.getContext("2d");
-          remoteCtx.fillRect(serverDrawPoses, 0, 100, 100);
-
-
         }
       socket.on("serverDrawPoses", poseFunct)
       
       socket.on("serverDrawCanvasURL", function (canvasURL){
         
         console.log("SERVERSIDE DRAW CANVAS", canvasURL);
-
-
       }) 
     } catch (error) {
       throw new Error('PoseNet failed to load')
     } finally {
       console.log("SOCKETS IN CAMERA COMPONENTDIDMOUNT WORK!")
     }
-  
-
   }
 
+
+  
   async setupCamera() {
     await this.video
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -470,20 +489,6 @@ export default class PoseNet extends Component {
     video.height = videoHeight
 
 
-    const stream = await navigator.mediaDevices.getUserMedia({
-       audio: false,
-      video: {
-        facingMode: 'user',
-        width: videoWidth,
-        height: videoHeight
-      }
-    })
-    await this.stream
-    try {
-    this.video.srcObject = stream
-    }
-    catch(err){console.log(err)}
-    finally{console.log("stream is ready")}
 
     return new Promise(resolve => {
       video.onloadedmetadata = () => {
@@ -525,6 +530,11 @@ export default class PoseNet extends Component {
 
     const posenetModel = this.posenet
     const video = this.video
+    
+
+    if(this.remoteStream !== undefined || null){
+    console.log(this.remoteStream)
+    }
 
     const findPoseDetectionFrame = async () => {
       let poses = []
@@ -544,16 +554,13 @@ export default class PoseNet extends Component {
       const canvas_RTCstream = this.canvas.captureStream(25);
       // console.log(canvas_RTCstream)
       
-   
+  // console.log(canvas_RTCstream)
 
       
 
-      socket.emit('canvasContext', {canvasContext: this.canvas.webcam})
+      socket.emit('canvasContext', canvas_RTCstream)
       
-socket.on('herecanvasCTX', (canvasContext)=>{
-
-    console.log("HEREE IS CANVASCTX", canvasContext)
-})
+    
 
       // var canvasURL = this.canvas.toDataURL();
       // console.log("canvasURL", canvasURL)
@@ -590,15 +597,21 @@ socket.on('herecanvasCTX', (canvasContext)=>{
               minPartConfidence,
               skeletonColor,
               skeletonLineWidth,
-              canvasContext
-              
+              canvasContext             
             )
           }
         }
       })
       // console.log(canvasContext)
-      socket.emit('poses', {poses: poses})
-      
+  //     socket.on('herecanvasCTX', (canvas_RTCstream)=>{
+
+  //       console.log("HEREE IS CANVASCTX", canvas_RTCstream)
+  // })
+  // console.log(poses)
+      // socket.emit('poses', {poses: poses})
+      // socket.on('posesFromServer', (poses)=>{
+      //   console.log(poses)
+      // })
       requestAnimationFrame(findPoseDetectionFrame)
     }
     findPoseDetectionFrame()
@@ -611,8 +624,13 @@ socket.on('herecanvasCTX', (canvasContext)=>{
     // I prefer to not show the the whole text area selected.
     e.target.focus();
     this.setState({ copySuccess: 'Copied!' });
+    this.addChat(`The Room ID is: `, `${roomId}`, true)
   };
 
+
+
+
+  
   render() {
     const { chatLog, options } = this.state;
     return (
@@ -621,7 +639,7 @@ socket.on('herecanvasCTX', (canvasContext)=>{
         <div >  
         <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
 
-        <canvas id="remoteCanvas" ref={this.remoteCanvas}  style={styles.canvas}/>
+        <canvas id="remoteCanvas" ref={this.getRemoteCanvas} style={styles.canvas}/>
         </div>
    </Grid>
 
@@ -637,10 +655,14 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                 </button>
             </div>
              
-              <button onClick={this.copyToClipboard} style={styles.btn} className="rtcRoomButton" >
+           {
+             roomId !== undefined || null 
+            ? <button onClick={this.copyToClipboard} style={styles.btn} id="joinBtn" className="rtcRoomButton" >
                 <span>Enter Room</span>
               </button> 
-         
+            : <h1>not yet</h1>
+           }
+
               <button onClick={joinRoom} style={styles.btn} className="rtcRoomButton" id="confirmJoinBtn" type="button">
                 <span>Join Room</span>
               </button>
@@ -648,14 +670,16 @@ socket.on('herecanvasCTX', (canvasContext)=>{
             <div id="room-dialog">
  
             <div id="idRoomJoin">
-              Enter ID for room to join:
-            
-              <input type="text" id="room-id"
-                ref={(textarea) => this.textArea = textarea}
-                defaultValue={roomId || ''}
-                />
-                <label htmlFor="my-text-field">Room ID</label>
-           
+            {
+              /* Logical shortcut for only displaying the 
+                button if the copy command exists */
+              document.queryCommandSupported('copy') &&
+            <div>
+                  {this.state.copySuccess}
+                  {roomId}
+                
+                </div>
+            }
               
             <LioWebRTC
               options={options}
@@ -666,42 +690,38 @@ socket.on('herecanvasCTX', (canvasContext)=>{
                 <ChatBox
                   id="chatbox"
                   chatLog={chatLog}
-                  onSend={(msg) => msg && this.addChat('Me', msg)}
+                  onSend={(msg) => msg && this.addChat('Me: ', msg)}
                 />
             </LioWebRTC>
+
+   
+
              </div>
-            
           </div> 
           
-          <div id="metronomeContainer"/>
-          <CrossCorrelation />
-          {
-            /* Logical shortcut for only displaying the 
-                button if the copy command exists */
-            document.queryCommandSupported('copy') &&
-              <div>
-                {this.state.copySuccess}
-                {roomId}
-                
-              </div>
-            }
-         
+          <div id="metronomeContainer">
+          <p> Copy Room Id and Click Join: </p>
+            
+          <input type="text" id="room-id"
+            ref={(textarea) => this.textArea = textarea}
+            defaultValue={roomId || ''}
+            />
+          {/*<p className="currentRoomID" htmlFor="my-text-field">Room ID: {roomId} </p>*/}
+       
+          
+          <CrossCorrelation stream={localStream}/>
 
+          </div>
+            
+    
         </Grid>  
         
       
-        <ClientLatencyApp props={this.props} stream={this.state.stream}/>
- 
    
-
-
- 
- 
   <Grid item xs={12} style={styles.container} id="videosGrid"> 
-
     <div className="media-bridge" id="videos">
-    <video key={`local-video`} style={styles.video} id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
-    <video className="remote-video" id="remoteVideo" muted autoPlay playsInline ref={this.remoteStream}></video>
+    <video key={`local-video`} style={styles.video} muted id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
+    <video className="remote-video" id="remoteVideo" autoPlay playsInline ref={this.remoteStream}></video>
   </div>
   </Grid>
 
@@ -710,4 +730,3 @@ socket.on('herecanvasCTX', (canvasContext)=>{
   }
 
 }
-

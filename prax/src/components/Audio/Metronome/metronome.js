@@ -26,7 +26,7 @@ export default class Metronome
   // Use when =  0 to start playback immediately.
   // Use when = -1 to start playback as soon as possible but in sync with
   //               currentTime.
-  start(when = 0)
+  start(when = -1)
   {
     var t, now;
 

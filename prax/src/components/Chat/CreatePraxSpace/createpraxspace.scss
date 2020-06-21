@@ -6,10 +6,10 @@
     display: flex;
     flex-flow: column;
     // margin: 10px auto;
-    border-radius: 5px;
+    // border-radius: 5px;
     padding: 0;
-    background-color: #383838;
-    border: 8px solid $white;
+    // background-color: #383838;
+  
 
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   }
@@ -78,14 +78,17 @@
     margin-top: 20px;
     word-wrap: break-word;
   }
-  .msg {
-    color: #f6deba;
-  }
+
   .chat :first{
     margin-top: -30px;
   }
   .name {
     margin-right: 20px;
+  }
+  .msg {
+    background-color: #595959;
+    color: $white;
+ 
   }
   .webcam {
     height: 200;

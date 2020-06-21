@@ -8,6 +8,8 @@
     margin: 1vh
 }
 
+
+
 .rtcRoomButton {  
         
  
@@ -26,7 +28,7 @@
         z-index: 3;
         font-size: 26;
         width: 50%;
-        height: 12vh;
+        height: 60px;
         border-style: solid;
        
         border-width: .5;
@@ -36,7 +38,7 @@
         &:hover {
           justify-content: center;
           font-size: 22px;
-          height: 12vh;
+          height: 60px;
           background-color: $white;
           color: $header_black;
           border: 2px solid $header_black;
@@ -108,7 +110,7 @@ label {
 }
 
 #metronomeContainer {
-    background-color: pink;
+    padding-top: 2vh;
     display: inline;
     float: right;
     width: 50%;
@@ -184,4 +186,9 @@ canvas {
 
 h3 {
     color: black;
+}
+
+.currentRoomID {
+    margin-bottom: 2roomvh;
+    background-color: transparent;
 }

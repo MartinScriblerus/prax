@@ -102,10 +102,10 @@ var passport = require("passport");
     // socket.emit('message_Users', {message_Users: users});   
     // socket.emit('message_Messages', {message_Messages: messages});
     
-    // socket.on('username', username)
-    // function username(username){
-    //   console.log(username)
-    //   socket.broadcast.emit('username_Joined', username)
+    // socket.on('poses', poses)
+    // function poses(poses){
+    //   console.log(poses)
+    //   socket.broadcast.emit('posesFromServer', poses)
     // }  
 
     // socket.on('userID', userID)
@@ -125,18 +125,21 @@ var passport = require("passport");
         // console.log(poses)
         // This broadcast emit is working when there are 2 users!!! 
         const serverDrawPoses = poses
+        // console.log(serverDrawPoses)
         socket.broadcast.to(itemToAdd).emit('serverDrawPoses', serverDrawPoses )
       }
     
       socket.on('canvasContext', canvasCTX)
-      function canvasCTX(canvasContext){
-        socket.broadcast.to(itemToAdd).emit("herecanvasCTX", canvasContext)
+      function canvasCTX(canvas_RTCstream){
+       console.log(canvas_RTCstream)
+        socket.broadcast.to(itemToAdd).emit("herecanvasCTX", canvas_RTCstream)
       }
       
-      // socket.on('signalSERVER', signalingServerURL)
-      // function signalingServerURL(signalingServerURL){
-      //   socket.broadcast.to(itemToAdd).emit("signalingURLFromServer", signalingServerURL)
-      // };
+      socket.on('poses', poses)
+      function poses(posesFromServer){
+        console.log(posesFromServer)
+        socket.broadcast.to(itemToAdd).emit("posesFromServer", posesFromServer)
+      };
 
       // socket.on('canvasURL', canvasURL)
       // function canvasURL(canvasURL){
