@@ -7,11 +7,17 @@ import { LioWebRTC } from 'react-liowebrtc'
 import ChatBox from '../../Chat/CreatePraxSpace/chatbox';
 import firebase from '../../firebase';
 import Grid from '@material-ui/core/Grid';
-import TimingComponent from '../../Audio/TimingComponent'
-import ClientLatencyApp from '../../Audio/Metronome/client'
-import CrossCorrelation from '../../Audio/Metronome/crosscorrelation'
+import StreamServer from '../../Audio/Metronome/streamserver'
+import Client from '../../Audio/Metronome/client'
+import Fourier from '../../Audio/scratchpad/fourier'
+import Latency from '../../Audio/scratchpad/fourier'
+import Metronome from '../../Audio/scratchpad/fourier'
 import { PitchDetector } from 'pitchy';
- 
+import CrossCorrelation from '../../Audio/Metronome/crosscorrelation'
+import Recorder from '../../Audio/Metronome/recorder'
+
+
+
 import './posenet.scss'
 
 const configuration = {
@@ -53,6 +59,7 @@ let localStream = null;
 let remoteStream = null;
 // let roomDialog = null;
 let roomId = null;
+let canvas_RTCstream = null;
 
 async function createRoom() {
   const db = firebase.firestore();
@@ -217,6 +224,8 @@ remotePoses()
 
   var AudioContext = new (window.AudioContext || window.webkitAudioContext)();
   var AnalyserNode = AudioContext.createAnalyser();
+  console.log("AnalyserNode", AnalyserNode)
+  console.log("AudioContext", AudioContext)
     const stream = await navigator.mediaDevices.getUserMedia(
       {
       video: true, 
@@ -227,7 +236,7 @@ remotePoses()
         latency: {exact: 0.003},
       }
     });
-
+console.log("Here is getUserMedia Stream", stream)
     function updatePitch(analyserNode, stream, sampleRate) {
       // console.log(analyserNode);
      
@@ -236,7 +245,7 @@ remotePoses()
    
    
     let sourceNode = AudioContext.createMediaStreamSource(stream);
-    
+    console.log("sourceNode", sourceNode)
     sourceNode.connect(AnalyserNode);
     const detector = PitchDetector.forFloat32Array(AnalyserNode.fftSize);
     (console.log(detector))
@@ -246,8 +255,9 @@ remotePoses()
       document.querySelector('#localVideo').srcObject = stream;
       localStream = stream;
       remoteStream = new MediaStream();
+      
       document.querySelector('#remoteVideo').srcObject = remoteStream;
-     console.log(remoteStream)
+     console.log("REMOTE STREAM", remoteStream)
 // tk added querySelectors below based on codelab
 console.log('Stream:', document.querySelector('#localVideo').srcObject);
 // document.querySelector('#cameraBtn').disabled = true;
@@ -335,7 +345,9 @@ export default class PoseNet extends Component {
     algorithm: 'single-pose',
     showVideo: false,
     showSkeleton: true,
+    showRemoteSkeleton: true,
     showPoints: true,
+    showRemotePoints: true,
     minPoseConfidence: 0.2,
     minPartConfidence: 0.3,
     multiplier: 6,
@@ -344,6 +356,7 @@ export default class PoseNet extends Component {
     outputStride: 16,
     imageScaleFactor: .2,
     skeletonColor: "#f6deba",
+    remoteSkeletonColor: "#aff",
     skeletonLineWidth: 6,
     loadingText: 'Loading...please be patient...'
   }
@@ -355,7 +368,7 @@ export default class PoseNet extends Component {
   
     this.state = {
       source: "",
-      stream: {},
+      stream: this.props.stream,
       isVideoLoading: true,
       copySuccess: '', 
       nick: this.props.nick,
@@ -375,6 +388,7 @@ export default class PoseNet extends Component {
       }
     };
   }
+
     // state = {
     //   source: ""
     // }
@@ -418,17 +432,19 @@ export default class PoseNet extends Component {
     }
 
   getCanvas = elem => {
+    console.log(this.state.stream)
     this.canvas = elem
   }
 
   getRemoteVideo = async (elem) => {
-  await this.video
-    this.video = elem
+  await this.remoteVideo
+    this.remoteVideo = elem
   }
 
   getRemoteCanvas = async (elemCanvas) => {
     await this.remoteStream
     this.remoteCanvas = elemCanvas
+    console.log("this.remoteCanvas", this.remoteCanvas)
   }
 
   getVideo = elem => {
@@ -448,6 +464,7 @@ export default class PoseNet extends Component {
 
     try {
       this.posenet = await posenet.load()
+      console.log("this.posenet", this.posenet)
     } catch (error) {
       throw new Error('PoseNet failed to load')
     } finally {
@@ -463,8 +480,7 @@ export default class PoseNet extends Component {
         }
       socket.on("serverDrawPoses", poseFunct)
       
-      socket.on("serverDrawCanvasURL", function (canvasURL){
-        
+      socket.on("serverDrawCanvasURL", function (canvasURL){      
         console.log("SERVERSIDE DRAW CANVAS", canvasURL);
       }) 
     } catch (error) {
@@ -488,7 +504,7 @@ export default class PoseNet extends Component {
     const remoteVideo = this.remoteVideo;
     video.width = videoWidth;
     video.height = videoHeight;
-
+console.log("remoteVideo", remoteVideo)
 
 
     return new Promise(resolve => {
@@ -505,14 +521,15 @@ export default class PoseNet extends Component {
     const remoteCanvas = this.remoteCanvas
     const canvasContext = canvas.getContext('2d')
     const remoteCanvasContext = remoteCanvas.getContext('2d')
-
+console.log("remoteCanvasContext", remoteCanvasContext)
 
     canvas.width = videoWidth
     canvas.height = videoHeight
-    
+  remoteCanvas.width = videoWidth 
+  remoteCanvas.height = videoHeight
 
-    this.poseDetectionFrame(canvasContext)
-    this.poseDetectionFrame(remoteCanvasContext)
+    this.poseDetectionFrame(canvasContext, remoteCanvasContext)
+    // this.poseDetectionFrame(remoteCanvasContext)
   }
 
   poseDetectionFrame(canvasContext, remoteCanvasContext) {
@@ -529,12 +546,16 @@ export default class PoseNet extends Component {
       videoHeight, 
       showVideo, 
       showPoints, 
+      showRemotePoints,
       showSkeleton, 
+      showRemoteSkeleton,
       skeletonColor, 
+      remoteSkeletonColor,
       skeletonLineWidth 
       } = this.props
 
     const posenetModel = this.posenet
+    console.log("posenetModel", posenetModel)
     const video = this.video;
     const remoteVideo = this.remoteVideo;
     
@@ -556,12 +577,13 @@ export default class PoseNet extends Component {
     
       canvasContext.clearRect(0, 0, videoWidth, videoHeight)
       if(remoteCanvasContext !== undefined){
-      remoteCanvasContext.clearReact(0, 0, videoWidth, videoHeight)
+      remoteCanvasContext.clearRect(0, 0, videoWidth, videoHeight)
       }
       // console.log(canvasContext)
 
       // WebRTC canvas stream below -->
-      const canvas_RTCstream = this.canvas.captureStream(25);
+      canvas_RTCstream = this.canvas.captureStream(25);
+      console.log(canvas_RTCstream)
       // console.log(canvas_RTCstream)
       
   // console.log(canvas_RTCstream)
@@ -584,7 +606,7 @@ export default class PoseNet extends Component {
         remoteCanvasContext.save()
         remoteCanvasContext.scale(-.2, .2)
         remoteCanvasContext.translate(-videoWidth, 0)
-        remoteCanvasContext.drawImage(video, 0, 0, videoWidth, videoHeight)
+        remoteCanvasContext.drawImage(remoteVideo, 0, 0, videoWidth, videoHeight)
         remoteCanvasContext.restore()
       }
 
@@ -594,7 +616,7 @@ export default class PoseNet extends Component {
       // THESE TWO SOCKETS FUNCTIONS BELOW MAY BE PROBLEMATIC
   
   
-  
+  console.log("poses", poses)
 
       poses.forEach(({score, keypoints}) => {
         if (score >= minPoseConfidence) {
@@ -606,6 +628,14 @@ export default class PoseNet extends Component {
               canvasContext
             )
           }
+          if (showRemotePoints) {
+            drawKeyPoints(
+              keypoints,
+              minPartConfidence,
+              remoteSkeletonColor,
+              remoteCanvasContext
+            )
+          }
           if (showSkeleton) {
             drawSkeleton(
               keypoints,
@@ -613,6 +643,15 @@ export default class PoseNet extends Component {
               skeletonColor,
               skeletonLineWidth,
               canvasContext             
+            )
+          }
+          if (showRemoteSkeleton) {
+            drawSkeleton(
+              keypoints,
+              minPartConfidence,
+              remoteSkeletonColor,
+              skeletonLineWidth,
+              remoteCanvasContext             
             )
           }
         }
@@ -689,7 +728,7 @@ export default class PoseNet extends Component {
               /* Logical shortcut for only displaying the 
                 button if the copy command exists */
               document.queryCommandSupported('copy') &&
-            <div>
+                <div>
                   {this.state.copySuccess}
                   {roomId}
                 
@@ -724,11 +763,17 @@ export default class PoseNet extends Component {
           {/*<p className="currentRoomID" htmlFor="my-text-field">Room ID: {roomId} </p>*/}
        
           
-          <CrossCorrelation stream={localStream}/>
+          <CrossCorrelation stream={localStream} remoteStream={remoteStream} canvas_RTCstream={canvas_RTCstream} AudioContext={AudioContext} />
+
+          <h1>FOURIER BEGINS HERE</h1>
+          <Fourier remoteStream={remoteStream} canvas_RTCstream={canvas_RTCstream} AudioContext={AudioContext} />       
+
 
           </div>
-            
-    
+     
+      
+          <p>Recorder begins here:</p>
+          <Recorder/>
         </Grid>  
         
       

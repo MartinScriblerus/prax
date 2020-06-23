@@ -12,7 +12,10 @@ var signalingChannel, ownId, sessionId; // for Websocket
 var connection; // for RTC
 var audioContext; // for Web Audio API
 var clickBuffer; // click for latency detection
+console.log(clickBuffer)
 var delayNode, userLatency; // needs to be global to access from processAudio
+console.log(delayNode);
+console.log(userLatency)
 var sampleRate;
 var loopLength;
 var recorder;
@@ -38,7 +41,7 @@ const [loopBeats, setLoopBeats] = useState("")
     signalingChannel = new WebSocket(signalingServerUrl);
     signalingChannel.onmessage = receiveMessage;
     signalingChannel.onopen = () =>
-      document.getElementById("startButton").disabled = false;
+      document.getElementById("startButton");
   }
 
 /*                                               * created in gotRemoteStream
@@ -67,12 +70,12 @@ async function startStream()
     channelMergerNode, metronome, tempo, loopBeats;
 
   // Disable UI
-  document.getElementById("sessionId").disabled = true;
-  document.getElementById("sampleRate").disabled = true;
-  document.getElementById("loopBeats").disabled = true;
-  document.getElementById("tempo").disabled = true;
-  document.getElementById("latency").disabled = true
-  document.getElementById("startButton").disabled = true;
+  document.getElementById("sessionId")
+  document.getElementById("sampleRate")
+  document.getElementById("loopBeats")
+  document.getElementById("tempo")
+  document.getElementById("latency")
+  document.getElementById("startButton");
 
   // Get user input
   let sessionId   = document.getElementById("sessionId").value;
@@ -97,6 +100,8 @@ async function startStream()
     noiseSuppression: false,
     channelCount:     1}});
 
+  console.log(userInputStream)
+
   // TODO: Assign handler to userInputStream.oninactive
 
   // Create Web Audio
@@ -115,6 +120,11 @@ async function startStream()
   channelMergerNode.connect(serverOutputNode);
 
   metronome.start(-1);
+
+console.log(userInputNode);
+console.log(delayNode);
+console.log(channelMergerNode);
+console.log(serverOutputNode)
 
   // Creating RTC connection
   connection = new RTCPeerConnection({iceServers: [{urls: stunServerUrl}]});
@@ -191,12 +201,15 @@ function gotRemoteStream(event)
   recorder = new Recorder(recordingNode.stream, downloadButton);
   recorder.start();
 
-  document.getElementById("stopButton").disabled = false;
+  document.getElementById("stopButton");
 }
 
 function updateDelayNode(networkLatency)
 {
   const totalLatency = userLatency + networkLatency;
+console.log(userLatency);
+console.log(networkLatency);
+console.log(totalLatency);
 
   console.log("Latency: %.2f ms (user) + %.2f ms (network) = %.2f ms.",
     1000*userLatency,
@@ -226,7 +239,7 @@ async function loadAudioBuffer(url)
 
 function stopStream()
 {
-  document.getElementById("stopButton").disabled = true;
+  document.getElementById("stopButton");
   console.log("Leaving the session");
   recorder.stop();
   connection.close();

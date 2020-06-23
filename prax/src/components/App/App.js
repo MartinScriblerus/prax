@@ -27,19 +27,19 @@ require('typeface-overpass')
 require('fontsource-poppins')
 
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#212121',
-    },
-    secondary: {
-        main: '#f6deba'
-      }
-    },
-    background: {
-      backgroundColor: "$offset_black"
-    }
-  })
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       main: '#212121',
+//     },
+//     secondary: {
+//         main: '#f6deba'
+//       }
+//     },
+//     background: {
+//       backgroundColor: "$offset_black"
+//     }
+//   })
 
 const styles = {
   camera : {
@@ -71,13 +71,13 @@ if (window !== undefined){
     <Router>
         <div id="outerDiv">
       <Header />
-      <MuiThemeProvider theme={theme}>
+ 
        {<PoseNet/>
       ? null
       : <Navbar style={styles.navbar}/>
       } 
-      </MuiThemeProvider>
-      <MuiThemeProvider theme={theme}>
+
+
 
       <Switch>
                   
@@ -91,7 +91,7 @@ if (window !== undefined){
         <PrivateRoute exact path="/admin" component={Admin} />
 
       </Switch>
-    </MuiThemeProvider>
+
     </div>
     
     </Router>

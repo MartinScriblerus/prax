@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Metronome from "./metronome.js";
 import Correlator from "./correlator.js";
 import Kick from './Kick.wav'
@@ -7,7 +7,8 @@ import './crosscorrelation.scss'
 var audioContext, sampleRate; // for Web Audio API
 
 export default function CrossCorrelation(props){
-
+console.log(props.stream)
+  const [bpm, setBpm] = useState(120); 
   // document.addEventListener("DOMContentLoaded", initDocument);
 if (window !== undefined) {
   initDocument()
@@ -23,6 +24,9 @@ const test = false;
 var clickBufferDuration;
 var metronome, clickBuffer;
 var inputNode, mediaStream;
+console.log(mediaStream)
+console.log(clickBufferDuration)
+console.log(clickBuffer)
 
 async function start(){
 
@@ -35,7 +39,7 @@ async function start(){
 
   console.log("Creating audio context.");
   audioContext = new AudioContext({sampleRate});
-
+console.log(audioContext)
   // metronome and input node
   clickBuffer = await loadAudioBuffer(Kick);
   clickBufferDuration = clickBuffer.duration;
@@ -52,21 +56,23 @@ async function start(){
   else
   {
     console.log("Working actual mode.")
+    console.log("PROPS", props)
     if (props.stream !== null || undefined){
-      console.log("props= ", props.stream)
+      console.log("propsSTREAM= ", props.stream)
     mediaStream = props.stream
     }
     inputNode = new MediaStreamAudioSourceNode(audioContext, {mediaStream});
-
-    metronome = new Metronome(audioContext, audioContext.destination, 60,
+    console.log(inputNode)
+    metronome = new Metronome(audioContext, audioContext.destination, bpm,
       clickBuffer);
+      console.log("TK LOOK TO USE THIS VARIABLE", metronome)
   }
 
   metronome.start(-1);
 
   console.log("Creating correlator")
   new Correlator(audioContext, inputNode, clickBuffer, updateOutput);
-
+console.log(inputNode);
   console.log("running...")
 }
 
@@ -90,6 +96,7 @@ async function loadAudioBuffer(url)
   console.log("Loading audio data from %s.", url);
   response = await fetch(url);
   audioData = await response.arrayBuffer();
+  console.log(audioData)
   buffer = await audioContext.decodeAudioData(audioData);
   console.log("Loaded audio data from %s.", url);  
   return buffer;
@@ -105,10 +112,14 @@ return(
       <option value="48000">48000 Hz</option>
     </select>
   </p>
+<form>
+    <input placeholder="Set BPM" onChange={e => setBpm(e.target.value)}></input>
+</form>
+<h1>Current Latency: <span id="outputSpan">s</span></h1>
 
-    <button id="startButton" className="latencyDetectorButton" onClick={()=>{start()}}>Start Latency Detector</button>
+<button id="startButton" className="latencyDetectorButton" onClick={()=>start()}>Start Latency Detector</button>
 
-    <span id="outputSpan"></span>
+   
 
     
   </>

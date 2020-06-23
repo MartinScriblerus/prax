@@ -37,12 +37,12 @@ async function startServer(){
   var metronome, loopLength, loopBeats, tempo, metronomeGain;
 
   // Update UI
-  document.getElementById("sampleRate").disabled = true;
-  document.getElementById("loopBeats").disabled = true;
-  document.getElementById("tempo").disabled = true;
-  document.getElementById("loopGain").disabled = true;
-  document.getElementById("metronomeGain").disabled = true;
-  document.getElementById("startServerButton").disabled = true;
+  // document.getElementById("sampleRate").disabled = true;
+  // document.getElementById("loopBeats").disabled = true;
+  // document.getElementById("tempo").disabled = true;
+  // document.getElementById("loopGain").disabled = true;
+  // document.getElementById("metronomeGain").disabled = true;
+  // document.getElementById("startServerButton").disabled = true;
 
   // Get user input
   sampleRate    = document.getElementById("sampleRate").value;
@@ -96,6 +96,7 @@ SERVER           V                                  |
   const clickBuffer = await loadAudioBuffer(Kick);
   metronome = new Metronome(audioContext, channelMergerNode, tempo,
     clickBuffer, 0, metronomeGain);
+    console.log(metronome)
   metronome.start();
 
   console.log("Waiting for offers.")
@@ -104,7 +105,7 @@ SERVER           V                                  |
 function receiveMessage(message)
 {
   var data;
-
+console.log(data)
   data = (message.data)
 
   if (data.id)           receiveIdMessage(data);
@@ -173,13 +174,15 @@ function gotRemoteStream(event)
 
   const mediaStream = event.streams[0];
   //const mediaStreamTrack = event.track;
-
+console.log(mediaStream);
   // Workaround for Chrome from https://stackoverflow.com/a/54781147
   new Audio().srcObject = mediaStream;
 
   const clientInputNode     = new MediaStreamAudioSourceNode(audioContext, {mediaStream:     mediaStream});
   const channelSplitterNode = new ChannelSplitterNode       (audioContext, {numberOfOutputs: 2          });
   const clientGainNode      = new GainNode                  (audioContext, {gain:            0          });
+
+console.log(clientInputNode);
 
   clientInputNode.connect(channelSplitterNode);
   channelSplitterNode.connect(channelMergerNode, 1, 1);

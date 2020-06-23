@@ -119,27 +119,27 @@ var passport = require("passport");
        console.log("SOCKET JOINING ITEMTOADD", socket.join(itemToAdd));
         socket.broadcast.to(itemToAdd).emit('roomOption_Joined', itemToAdd)
        
-      socket.broadcast.to(itemToAdd).on('poses', poses)
-      function poses(poses){
-        // BELOW IS AN OBJECT w. PROPERTIES OF SCORE & KEYPOINTS ARRAY
-        // console.log(poses)
-        // This broadcast emit is working when there are 2 users!!! 
-        const serverDrawPoses = poses
-        // console.log(serverDrawPoses)
-        socket.broadcast.to(itemToAdd).emit('serverDrawPoses', serverDrawPoses )
-      }
+      // socket.broadcast.to(itemToAdd).on('poses', poses)
+      // function poses(poses){
+      //   // BELOW IS AN OBJECT w. PROPERTIES OF SCORE & KEYPOINTS ARRAY
+      //   // console.log(poses)
+      //   // This broadcast emit is working when there are 2 users!!! 
+      //   // const serverDrawPoses = poses
+      //   // console.log(serverDrawPoses)
+      //   // socket.broadcast.to(itemToAdd).emit('serverDrawPoses', serverDrawPoses )
+      // }
     
-      socket.on('canvasContext', canvasCTX)
-      function canvasCTX(canvas_RTCstream){
-       console.log(canvas_RTCstream)
-        socket.broadcast.to(itemToAdd).emit("herecanvasCTX", canvas_RTCstream)
-      }
+      // socket.on('canvasContext', canvasCTX)
+      // function canvasCTX(canvas_RTCstream){
+      //  console.log(canvas_RTCstream)
+      //   socket.broadcast.to(itemToAdd).emit("herecanvasCTX", canvas_RTCstream)
+      // }
       
-      socket.on('poses', poses)
-      function poses(posesFromServer){
-        console.log(posesFromServer)
-        socket.broadcast.to(itemToAdd).emit("posesFromServer", posesFromServer)
-      };
+      // socket.on('poses', poses)
+      // function poses(posesFromServer){
+      //   console.log(posesFromServer)
+      //   socket.broadcast.to(itemToAdd).emit("posesFromServer", posesFromServer)
+      // };
 
       // socket.on('canvasURL', canvasURL)
       // function canvasURL(canvasURL){

@@ -1,15 +1,20 @@
 import React from 'react';
 
-export default function Fourier(){
-   
-    document.addEventListener("DOMContentLoaded", initDocument);
 
-    function initDocument()
-    {
-      document.getElementById("startButton").onclick = start;
-      document.getElementById("setButton").onclick = setFrequency;
-      document.getElementById("logButton").onclick = logFrequencyData;
-    }
+export default function Fourier(props){
+
+  console.log(props)
+  
+    // document.addEventListener("DOMContentLoaded", initDocument);
+
+    // function initDocument()
+    // {
+
+   
+   
+ 
+   
+    // }
     
     const sampleRate            = 48000;
     const fftSize               = 32768;
@@ -22,35 +27,56 @@ export default function Fourier(){
     const superWideBand = Math.round(12000/sampleRate*fftSize);
     const fullBand      = Math.round(20000/sampleRate*fftSize);
     
-    var oscillatorNode, analyserNode;
+    var liveAudioNode, analyserNode;
+    console.log(analyserNode)
     
     async function start()
     {
-      document.getElementById("startButton").disabled = true;
+      
+
+
+      // document.getElementById("startButton").disabled = true;
     
-      const audioContext = new AudioContext({sampleRate});
-    
-      oscillatorNode = new OscillatorNode(audioContext);
-      oscillatorNode.start()
-    
-      const mediaStream = await navigator.mediaDevices.getUserMedia({audio: true});
-      const userInputNode = new MediaStreamAudioSourceNode(audioContext, {mediaStream});
+      const audioContext = props.AudioContext
+      console.log(audioContext)
+  if (audioContext !== undefined){
+   liveAudioNode = audioContext.createDelay();
+   liveAudioNode.delayTime.value = 5.5;
+   var feedback = audioContext.createGain();
+   feedback.gain.value = 0.8;
    
+   liveAudioNode.connect(feedback);
+   feedback.connect(liveAudioNode);
+   
+   audioContext.connect(liveAudioNode);
+   audioContext.connect(audioContext.destination);
+   liveAudioNode.connect(audioContext.destination);
+
+      liveAudioNode.start()
+  }
+ 
+      const mediaStream = props.remoteStream;
+      if (mediaStream !== undefined){
+      console.log(mediaStream)
+      const userInputNode = new MediaStreamAudioSourceNode(audioContext, {mediaStream});
+   console.log({mediaStream});
+   console.log(audioContext)
+   console.log(userInputNode)
       analyserNode = new AnalyserNode(audioContext, {fftSize, smoothingTimeConstant});
-      oscillatorNode.connect(analyserNode);
+      liveAudioNode.connect(analyserNode);
       userInputNode.connect(analyserNode);
-    
-      document.getElementById("setButton").disabled = false;
-      document.getElementById("logButton").disabled = false;
+  }
+      document.getElementById("setButton");
+      document.getElementById("logButton");
     }
     
     function setFrequency()
     {
       const frequency = document.getElementById("frequencyInput").value
-      oscillatorNode.frequency.value = frequency;
+      liveAudioNode.frequency.value = frequency;
       console.log(frequency/sampleRate*fftSize);
+      }
     
-    }
     
     function logFrequencyData()
     {
@@ -66,7 +92,7 @@ export default function Fourier(){
       console.log("%d %d %d %d %d", narrowBandMax, mediumBandMax, wideBandMax,
         superWideBandMax, fullBandMax);
     }
-    
+   
     function arraySliceMax(array, start, end)
     {
       return array.slice(start, end).reduce((a, b) => Math.max(a, b));
@@ -75,12 +101,15 @@ export default function Fourier(){
     return(
         <>
         <h1>Fourier Analysis</h1>
-        <p>
-          <button id="startButton">Start</button>
-          <input id="frequencyInput" value="440"/>
-          <button id="setButton" disabled>Set frequency</button>
-          <button id="logButton" disabled>Log frequencies</button>
-        </p>
+       
+          <button id="startButton" onClick={()=>{start()}}>Start</button>
+          <input id="frequencyInput" defaultValue="440" onClick={()=>{}}/>
+          <button id="setButton" onClick={()=>{setFrequency()}}>Set frequency</button>
+          <button id="logButton" onClick={()=>{logFrequencyData()}}>Log frequencies</button>
+        
+          
+        
+       
         </>
     )
 }

@@ -7,6 +7,7 @@ export default class Correlator
   {
     console.log("Creating convolver node.");
     clickBufferDuration = clickBuffer.duration;
+    console.log(clickBufferDuration)
     sampleRate = audioContext.sampleRate;
     const reverseBuffer = revertBuffer(audioContext, clickBuffer);
     const convolverNode = new ConvolverNode(audioContext, {buffer: reverseBuffer});
@@ -61,7 +62,9 @@ function processAudio(event)
   currentPlaybackTime = Math.round(event.playbackTime*sampleRate) % 16384;
   if (!initialPlaybackTime) initialPlaybackTime = currentPlaybackTime;
   playbackTimeAdjustment = (currentPlaybackTime - initialPlaybackTime) % 16384;
-
+console.log(initialPlaybackTime)
+console.log(currentPlaybackTime)
+console.log(playbackTimeAdjustment)
   if (startSecond == endSecond) // Buffer contained within one second
   {
     for (i = 0; i < bufferSize; i++) if (array[i] > max)
@@ -85,7 +88,7 @@ function processAudio(event)
     networkLatency = frac(argmax - clickBufferDuration - bufferDuration
       - (playbackTimeAdjustment - 1)/sampleRate);
     if (networkLatency > 16384/sampleRate) networkLatency -= 16384/sampleRate;
-
+console.log(networkLatency)
     callBackFunction(networkLatency);
 
     // Process part of buffer in end second
