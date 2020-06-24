@@ -26,7 +26,7 @@ if (token) {
 const styles = {
   button: {
     // backgroundColor: "#030303",
-    color: "#f6deba",
+    color: "#4942ED",
     height:60,
     fontSize: '22px',
     width: "76%",
@@ -43,7 +43,7 @@ const styles = {
   },
   roomNameCard: {
     backgroundColor: "#212121",
-    color: "#f6deba",
+    color: "#eaeaea",
     width: "100%",
     justifyContent: 'center',
     borderRadius: '15px'
@@ -52,6 +52,9 @@ const styles = {
     textAlign: 'center',
     marginRight: '10%',
     marginLeft: '10%',
+    borderstyle: 'solid',
+    borderSize: '2px', 
+    borderColor: '#4942ED',
     backgroundColor: "#212121",
     color: "#030303",
     borderRadius: '15px'
@@ -342,9 +345,9 @@ export class InputBoxDescription extends React.Component {
        
         <input className="inputCreateRoom" type="text" id="item" ref="item" placeholder="Name your Room"/>
 
-        <Button type="submit" style={styles.button} className="buttonJoin btn btn-primary roomDefineButton"
+        <button type="submit" className="openRoomButton buttonJoin roomDefineButton"
         > Open Room
-        </Button>
+        </button>
       </form>
 
       );

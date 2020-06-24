@@ -159,6 +159,7 @@ remotePoses()
     if (roomSnapshot.exists) {
       console.log('Create PeerConnection with configuration: ', configuration);
       peerConnection = new RTCPeerConnection(configuration);
+     
       //added register peer connection listeners based on codelab
       registerPeerConnectionListeners();
       localStream.getTracks().forEach(track => {
@@ -199,6 +200,10 @@ remotePoses()
      sdp: answer.sdp,
    },
  };
+ 
+
+
+
  await roomRef.update(roomWithAnswer);
  // Code for creating SDP answer above
 
@@ -236,6 +241,7 @@ remotePoses()
         latency: {exact: 0.003},
       }
     });
+   
 console.log("Here is getUserMedia Stream", stream)
     function updatePitch(analyserNode, stream, sampleRate) {
       // console.log(analyserNode);
@@ -247,6 +253,7 @@ console.log("Here is getUserMedia Stream", stream)
     let sourceNode = AudioContext.createMediaStreamSource(stream);
     console.log("sourceNode", sourceNode)
     sourceNode.connect(AnalyserNode);
+  
     const detector = PitchDetector.forFloat32Array(AnalyserNode.fftSize);
     (console.log(detector))
     const input = new Float32Array(detector.inputLength);
@@ -764,10 +771,6 @@ console.log("remoteCanvasContext", remoteCanvasContext)
        
           
           <CrossCorrelation stream={localStream} remoteStream={remoteStream} canvas_RTCstream={canvas_RTCstream} AudioContext={AudioContext} />
-
-          <h1>FOURIER BEGINS HERE</h1>
-          <Fourier remoteStream={remoteStream} canvas_RTCstream={canvas_RTCstream} AudioContext={AudioContext} />       
-
 
           </div>
      

@@ -17,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
     const useStyles = makeStyles(theme => ({
         root: {
             flexGrow: 1,
-            backgroundImage: "url(https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg)",
+            // backgroundImage: "url(https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg)",
       
             backgroundPosition: 'top',
             backgroundSize: 'cover',

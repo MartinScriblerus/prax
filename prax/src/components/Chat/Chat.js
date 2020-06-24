@@ -31,7 +31,7 @@ const styles = ({
 		// marginTop: 50,
 		// backgroundColor: "#212121",	
 		backgroundSize: "cover",
-		backgroundImage: "url(https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg)",
+		// backgroundImage: "url(https://www.getty.edu/art/exhibitions/cisneros/images/landing/4_Fiaminghi_Alternado2_x1024.jpg)",
 	},
 
 	card2: {

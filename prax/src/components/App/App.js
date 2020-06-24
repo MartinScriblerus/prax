@@ -72,10 +72,8 @@ if (window !== undefined){
         <div id="outerDiv">
       <Header />
  
-       {<PoseNet/>
-      ? null
-      : <Navbar style={styles.navbar}/>
-      } 
+       <Navbar style={styles.navbar}/>
+       
 
 
 

@@ -6,8 +6,12 @@ import './crosscorrelation.scss'
 
 var audioContext, sampleRate; // for Web Audio API
 
+
+
 export default function CrossCorrelation(props){
-console.log(props.stream)
+
+  console.log(props)
+
   const [bpm, setBpm] = useState(120); 
   // document.addEventListener("DOMContentLoaded", initDocument);
 if (window !== undefined) {
@@ -45,6 +49,8 @@ console.log(audioContext)
   clickBufferDuration = clickBuffer.duration;
   console.log("click buffer duration: %.1f ms.", 1000*clickBufferDuration);
 
+
+  
   if (test)
   {
     console.log("Working in simulation mode.")
@@ -52,6 +58,7 @@ console.log(audioContext)
     inputNode.connect(audioContext.destination); // for monitoring
 
     metronome = new Metronome(audioContext, inputNode, 60, clickBuffer);
+
   }
   else
   {
@@ -60,15 +67,24 @@ console.log(audioContext)
     if (props.stream !== null || undefined){
       console.log("propsSTREAM= ", props.stream)
     mediaStream = props.stream
+    console.log(mediaStream)
     }
     inputNode = new MediaStreamAudioSourceNode(audioContext, {mediaStream});
     console.log(inputNode)
     metronome = new Metronome(audioContext, audioContext.destination, bpm,
       clickBuffer);
       console.log("TK LOOK TO USE THIS VARIABLE", metronome)
+      console.log("TK LOOK TO USE THIS VARIABLE", audioContext)
+      console.log("TK LOOK TO USE THIS VARIABLE", audioContext.destination)
+    console.log(mediaStream)
+ 
   }
 
+
+
   metronome.start(-1);
+
+ 
 
   console.log("Creating correlator")
   new Correlator(audioContext, inputNode, clickBuffer, updateOutput);
@@ -115,7 +131,8 @@ return(
 <form>
     <input placeholder="Set BPM" onChange={e => setBpm(e.target.value)}></input>
 </form>
-<h1>Current Latency: <span id="outputSpan">s</span></h1>
+
+<h1>User Latency: <span id="outputSpan">in milliseconds</span></h1>
 
 <button id="startButton" className="latencyDetectorButton" onClick={()=>start()}>Start Latency Detector</button>
 
