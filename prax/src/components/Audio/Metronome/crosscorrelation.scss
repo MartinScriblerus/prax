@@ -4,6 +4,11 @@
         
     p {
         color: $white;
+        padding: 1vw;
+    }
+
+    #latencyRate {
+      color: #F2C84B
     }
 
     .inputFieldAudio {
@@ -11,16 +16,35 @@
       margin-left: 50%;
       margin-right: 20%;
       text-align: left;
-      color: $white;
+      color: $metronome_on;
       background: $header_black
     }
 
+#bpmInput {
+  color: $white
+}
 
+#latencyDetectorContainer {
+  background-color: $metronome_on;
+  color: $header_black;
+  text-align: center;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
     
+#bpmBackground {
+  background-color: $metronome_on;
+}
+
+#latencyMeasure {
+  color: $metronome_off
+}
+
     .latencyDetectorButton { 
     z-index: 10;
         font-size: 26;
-     
+     margin: 2vw;
         height: 40px;
         border-style: solid;
         // margin-bottom: 5vh;
@@ -29,15 +53,16 @@
         // box-shadow: 0 4px 8px 0 #030303, 0 8px 16px 0 #030303; 
   
         background-color: $header_black;
-        color: $white;
+        color: $metronome_on;
         z-index: 3;
         font-size: 26;
-        width: 70%;
-        margin-right: 15%;
-        margin-left: 15%;
+        width: 50%;
+        margin-right: 25%;
+        margin-left: 25%;
         height: 12vh;
         border-style: solid;
         border-width: .5;
+        margin-bottom: 15vh;
         box-shadow: 0 1px 2px 0 #030303, 0 2px 4px 0 #030303; 
        
         justify-content: center;
@@ -45,7 +70,8 @@
           justify-content: center;
           font-size: 22px;
           height: 18vh;
-          background-color: $white;
+          background-color: $red;  
+          margin-bottom: 15vh;
           color: $header_black;
           border: 2px solid $header_black;
           box-shadow: 0 20px 40px 0 #030303, 0 40px 80px 0 #030303; 

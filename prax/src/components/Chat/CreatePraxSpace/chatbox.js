@@ -40,13 +40,13 @@ class ChatBox extends Component {
     return (
       <div className="container">
         <div className="chatHeader">
-          <h1 className="title">Share Your Room Key</h1>
+          <h2 className="titleChat">Share Your Room Key</h2>
           <hr />
         </div>
         <div className="chatBox" ref={(div) => this.chatBox = div}>
           {chatLog.length ? this.generateChats() : (
             <div className="info">
-              <p>To test this component out, open this page in a new tab or send it to a friend.</p>
+              <p>Share your room id with other players in this chat area.</p>
             </div>
           )}
         </div>

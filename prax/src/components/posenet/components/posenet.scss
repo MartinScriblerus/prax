@@ -8,7 +8,11 @@
  
 // }
 
-
+.socialicons {
+    background-color: #212121;
+    margin: 5vh;
+  
+}
 
 .rtcRoomButton {  
         
@@ -26,18 +30,18 @@
         background-color: $header_black;
         color: #eaeaea;
         z-index: 3;
-        font-size: 26px;
+        font-size: 22px;
         width: 50%;
         height: 60px;
         border-style: solid;
-       border-color: #f2c84b;
-        border-width: 2;
+        // border-color: #f2c84b;
+        // border-width: 0.5px;
         box-shadow: 0 1px 2px 0 #030303, 0 2px 4px 0 #030303; 
        
         justify-content: center;
         &:hover {
           justify-content: center;
-          font-size: 30px;
+          font-size: 26px;
           height: 60px;
           background-color: $red;
           color: $header_black;
@@ -67,8 +71,13 @@
     background-color: $header_black;
 }
 
+#joinNow {
+    text-align: center;
+    border-bottom: $headline_text;
+}
+
 #room-id {
-    color: #030303;
+    color: $white;
     width: 70%;
     margin-right: 15%;
     margin-left: 15%;
@@ -111,7 +120,7 @@ label {
 
 #metronomeContainer {
     border: 1px solid $dark_grey;
-    padding-top: 2vh;
+  
     display: inline;
     float: right;
     width: 50%;
@@ -121,6 +130,31 @@ label {
 #roomGrid {
     width: 100%;
     display: inline;
+}
+
+.iconOrder {
+    display: flex;
+    justify-content: center;
+    fill: $white;
+    color: $white;
+}
+
+
+.social-svg {
+    background-color: $header_black;
+    color: $header_black;
+}
+
+svg {
+    display: inline-block;
+    fill: $metronome_on;
+}
+
+.social-svg-mask > path {
+    fill: $headline_text;
+}
+.social-svg-mask:hover > path {
+    fill: $metronome_on;
 }
 
 canvas {
@@ -156,7 +190,7 @@ canvas {
     margin-right: 5%;
     margin-left: 5%;
     color: $white;
-    // border: 8px solid yellow;
+    // border: 8px solid $headline_text;
     display: inline;
     float: left;
 }

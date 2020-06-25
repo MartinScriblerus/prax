@@ -1,15 +1,26 @@
 import React, { Component } from 'react'
 import MediaCapturer from 'react-multimedia-capture';
  
+const styles={
+    recorderTitle: {
+        color: "#50D4F2"
+    },
+    recorderGrid: {
+        width: '100%',
+        backgroundColor: "#141013"
+    },
+}
+
 export default class Recorder extends Component {
 
     render() {
         return (
-            <div>
-                ...
-                <h1>Video Recording Example</h1>
+            <div style={styles.recorderGrid}>
+       
+
                 <hr />
- 
+                <h1 style={styles.recorderTitle}>Record Prax</h1>
+                <video autoPlay></video>
                 <MediaCapturer
                     constraints={{ audio: true, video: true }}
                     timeSlice={10}
@@ -22,18 +33,17 @@ export default class Recorder extends Component {
                     onError={this.handleError}
                     onStreamClosed={this.handleStreamClose}
                     render={({ request, start, stop, pause, resume }) => 
-                    <div>
+                    <>
                
  
-                        {<button onClick={request}>Get Permission</button>}
-                        <button onClick={start}>Start</button>
-                        <button onClick={stop}>Stop</button>
-                        <button onClick={pause}>Pause</button>
-                        <button onClick={resume}>Resume</button>
+                        {<button className="rtcRoomButton" onClick={request}>Get Permission</button>}
+                        <button className="rtcRoomButton" onClick={start}>Start</button>
+                        <button className="rtcRoomButton" onClick={stop}>Stop</button>
+                        <button className="rtcRoomButton" onClick={pause}>Pause</button>
+                        <button className="rtcRoomButton" onClick={resume}>Resume</button>
                         
-                        <p>Streaming test</p>
-                        <video autoPlay></video>
-                    </div>
+                   
+                    </>
                 } />
             </div>
         );

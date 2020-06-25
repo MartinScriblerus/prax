@@ -15,7 +15,7 @@ import Metronome from '../../Audio/scratchpad/fourier'
 import { PitchDetector } from 'pitchy';
 import CrossCorrelation from '../../Audio/Metronome/crosscorrelation'
 import Recorder from '../../Audio/Metronome/recorder'
-
+import { SocialIcon } from 'react-social-icons';
 
 
 import './posenet.scss'
@@ -36,20 +36,31 @@ const configuration = {
 const styles = {
   video: {
     // display:"none"
-    height: '200px',
-    width: '200px'
+    height: '550px',
+    width: '50%'
+  },
+  remoteVideo: {
+      // display:"none"
+      height: '550px',
+      width: '50%'
+  },
+  icons: {
+    marginRight: 10,
+    marginLeft: 10,
+    align: 'center',
+    backgroundColor: '#212121',
+    fill: '' 
   },
   // THIS IS THE STYLE CONTROLLING CANVAS
   canvas: {
     backgroundColor: "#030303"
   }, 
   joinRoomContainer: {
-    backgroundColor: "#6e6363"
+    backgroundColor: "#141013"
   },
   container: {
     backgroundColor: '#212121',
-
-  
+    
   },
 
 }
@@ -352,19 +363,20 @@ export default class PoseNet extends Component {
     flipHorizontal: true,
     algorithm: 'single-pose',
     showVideo: false,
+    showRemoteVideo: false,
     showSkeleton: true,
     showRemoteSkeleton: true,
     showPoints: true,
     showRemotePoints: true,
-    minPoseConfidence: 0.2,
-    minPartConfidence: 0.3,
+    minPoseConfidence: 0.3,
+    minPartConfidence: 0.4,
     multiplier: 6,
     maxPoseDetections: 2,
     nmsRadius: 1,
     outputStride: 16,
     imageScaleFactor: .2,
-    skeletonColor: "#90A0D6",
-    remoteSkeletonColor: "#76f1c3",
+    skeletonColor: "#50D4F2",
+    remoteSkeletonColor: "#F2C84B",
     skeletonLineWidth: 6,
     loadingText: 'Loading...please be patient...'
   }
@@ -553,6 +565,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
       videoWidth, 
       videoHeight, 
       showVideo, 
+      showRemoteVideo,
       showPoints, 
       showRemotePoints,
       showSkeleton, 
@@ -613,6 +626,8 @@ console.log("remoteCanvasContext", remoteCanvasContext)
         canvasContext.translate(-videoWidth, 0)
         canvasContext.drawImage(video, 0, 0, videoWidth, videoHeight)
         canvasContext.restore()
+     
+   
         remoteCanvasContext.save()
         remoteCanvasContext.scale(-.2, .2)
         remoteCanvasContext.translate(-videoWidth, 0)
@@ -701,40 +716,39 @@ console.log("remoteCanvasContext", remoteCanvasContext)
     return (
    <>
    <Grid item xs={12} id="canvasGrid" style={styles.container}>
-        <div >  
+  
         <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
 
         <canvas id="remoteCanvas" ref={this.getRemoteCanvas} style={styles.canvas}/>
-        </div>
+    
    </Grid>
 
        
-  <Grid item xs={12} style={styles.container}>
-   
-            <div id="buttons">
+
+     
                 <button onClick={createRoom} className="rtcRoomButton" id="createBtn">
-                  <span>Create Room</span>
+                  <span>1. Create Room (Sender Only) </span>
                 </button>
-                <button onClick={hangUp} style={styles.btn} className="rtcRoomButton" id="hangupBtn">
-                  <span>End Prax</span>
+                <button onClick={hangUp} className="rtcRoomButton" id="hangupBtn">
+                  <span>4. End Prax</span>
                 </button>
-            </div>
+       
              
            {
              roomId !== undefined || null 
             ? <button onClick={this.copyToClipboard} style={styles.btn} id="joinBtn" className="rtcRoomButton" >
-                <span>Enter Room</span>
+                <span>2. Enter Room (Sender Only) </span>
               </button> 
             : <h1>not yet</h1>
            }
 
               <button onClick={joinRoom} style={styles.btn} className="rtcRoomButton" id="confirmJoinBtn" type="button">
-                <span>Join Room</span>
+                <span>3. Join Room (Receiver Only)</span>
               </button>
               
             <div id="room-dialog">
  
-            <div id="idRoomJoin">
+         
             {
               /* Logical shortcut for only displaying the 
                 button if the copy command exists */
@@ -745,7 +759,14 @@ console.log("remoteCanvasContext", remoteCanvasContext)
                 
                 </div>
             }
-              
+            <h2 id="joinNow">(Receiver Only) <br/> Copy Room Id and Click Join: 
+            
+            <input type="text" id="room-id"
+              ref={(textarea) => this.textArea = textarea}
+              defaultValue={roomId || ''}
+              />
+
+              </h2>
             <LioWebRTC
               options={options}
               onReady={this.join}
@@ -759,38 +780,49 @@ console.log("remoteCanvasContext", remoteCanvasContext)
                 />
             </LioWebRTC>
 
-   
+      
 
              </div>
-          </div> 
+        
           
           <div id="metronomeContainer">
-          <p> Copy Room Id and Click Join: </p>
-            
-          <input type="text" id="room-id"
-            ref={(textarea) => this.textArea = textarea}
-            defaultValue={roomId || ''}
-            />
+ 
           {/*<p className="currentRoomID" htmlFor="my-text-field">Room ID: {roomId} </p>*/}
        
           
           <CrossCorrelation stream={localStream} remoteStream={remoteStream} canvas_RTCstream={canvas_RTCstream} AudioContext={AudioContext} />
 
           </div>
-     
-      
-          <p>Recorder begins here:</p>
-          <Recorder/>
+      <Grid item xs={12} style={styles.container} id="videosGrid">  
+       
+        <Grid item xs={12} style={styles.container} id="videosGrid"> 
+          <div className="media-bridge" id="videos">
+            <video key={`local-video`} style={styles.video} muted id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
+            <video className="remote-video" style={styles.remoteVideo}  id="remoteVideo" autoPlay playsInline ref={this.remoteStream}></video>
+          </div>
+                <Grid item xs={12} className="iconGrid">
+            <div className="iconOrder">
+                <SocialIcon className="socialicons" url="https://github.com/MartinScriblerus" style={styles.icons}/>
+                <SocialIcon className="socialicons" url="https://twitter.com/A00PE"  style={styles.icons} />
+                <SocialIcon className="socialicons" url="https://www.linkedin.com/in/matthew-reilly-91b316142/" style={styles.icons} />
+            </div>
         </Grid>  
+      </Grid>
+
+      <Grid item xs={12} className="iconGrid">
+  
+  </Grid>
+
+
+        {/*  <Recorder/>  */}
+        
+          </Grid>
+    
+   
         
       
-   
-  <Grid item xs={12} style={styles.container} id="videosGrid"> 
-    <div className="media-bridge" id="videos">
-    <video key={`local-video`} style={styles.video} muted id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
-    <video className="remote-video" id="remoteVideo" autoPlay playsInline ref={this.remoteStream}></video>
-  </div>
-  </Grid>
+     
+
 
   </>
     )

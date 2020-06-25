@@ -120,24 +120,24 @@ async function loadAudioBuffer(url)
 
 return(
   <>
-  <h3 id="LatencyDetectorContainer">Looper - Latency Detector</h3>
-  <p>
+  <h2 id="latencyDetectorContainer">Metronome - Latency Detector
+  <p id="latencyRate">
     Sample rate:
     <select defaultValue="44100" id="sampleRate">
       <option value="44100">44100 Hz</option>
       <option value="48000">48000 Hz</option>
     </select>
   </p>
-<form>
-    <input placeholder="Set BPM" onChange={e => setBpm(e.target.value)}></input>
+<form id="bpmBackground">
+    <input id="bpmInput" placeholder="Set BPM" onChange={e => setBpm(e.target.value)}></input>
 </form>
 
-<h1>User Latency: <span id="outputSpan">in milliseconds</span></h1>
+<h4 id="latencyMeasure">User Latency: <span id="outputSpan">in milliseconds</span></h4>
 
 <button id="startButton" className="latencyDetectorButton" onClick={()=>start()}>Start Latency Detector</button>
 
-   
 
+</h2> 
     
   </>
 )

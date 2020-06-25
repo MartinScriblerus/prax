@@ -67,7 +67,7 @@ h3: {
   fontSize: 28,
 },
 textarea2: {
-  color: "#eaeaea"
+  color: '#50D4F2',
 }
 }
 

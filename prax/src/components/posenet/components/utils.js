@@ -1,7 +1,7 @@
 import * as posenet from '@tensorflow-models/posenet'
 
 
-const pointRadius = 20
+const pointRadius = 10
 
 export const config = {
   videoWidth: (550),
@@ -10,22 +10,22 @@ export const config = {
   remoteVideoWidth: (550),
   flipHorizontal: true,
   algorithm: 'single-pose',
-  showVideo: false,
-  showRemoteVideo: false,
+  showVideo: true,
+  // showRemoteVideo: true,
   showSkeleton: true,
   showRemoteSkeleton: true,
   showPoints: true,
   showRemotePoints: true,
-  minPoseConfidence: 0.1,
-  minPartConfidence: 0.1,
+  minPoseConfidence: 0.3,
+  minPartConfidence: 0.3,
   multiplier: 4,
-  maxPoseDetections: 2,
-  nmsRadius: 2,
+  maxPoseDetections: 5,
+  nmsRadius: 20,
   outputStride: 16,
-  imageScaleFactor: 1,
-  skeletonColor: "#148aa3",
-  remoteSkeletonColor: "#aaf",
-  skeletonLineWidth: 12,
+  imageScaleFactor: .3,
+  skeletonColor: "#38A69B",
+  remoteSkeletonColor: "#F25252",
+  skeletonLineWidth: 6,
   loadingText: 'Loading...please be patient...'
 }
 
@@ -36,7 +36,8 @@ function toTuple({x, y}) {
 export function drawKeyPoints(
   keypoints,
   minConfidence,
-  {skeletonColor = "#2f2766"},
+  {skeletonColor = "#38A698"},
+
   canvasContext,
   scale = 1
 ) {
@@ -58,7 +59,7 @@ export function drawKeyPoints(
 export function drawRemoteKeyPoints(
   keypoints,
   minConfidence,
-  remoteSkeletonColor = "#aaf",
+  remoteSkeletonColor = "#F25252",
   remoteCanvasContext,
   scale = 1
 ) {
