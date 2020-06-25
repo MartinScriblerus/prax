@@ -48,7 +48,7 @@ import { makeStyles } from '@material-ui/core/styles';
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
-            marginTop: '2vh',
+            marginTop: '4vh',
             borderStyle: "solid",
             borderColor: "#38A69B",
             color: '',
@@ -61,7 +61,7 @@ import { makeStyles } from '@material-ui/core/styles';
         },
         card: {
         borderStyle: "solid",
-        backgroundColor: "#5e5d5d",
+        backgroundColor: "#333",
         borderWidth: 2,
         borderColor: "#50D4F2",
         borderRadius: '15px',

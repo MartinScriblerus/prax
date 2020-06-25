@@ -19,7 +19,7 @@ const styles = ({
 		fill: '#50D4F2'
 	},
 	card: {
-		backgroundColor: 'rgba(0, 0, 0, 0.3)',
+		backgroundColor: '#212121',
 		color: "#F2C84B",
 		variant: "solid",
 		width: "100%",

@@ -56,6 +56,7 @@ const styles = ({
     marginRight: "7%",
     marginBottom: 40,
     paddingRight: 10,
+    padding: '2vw',
     // marginTop: 15,
  
   },
@@ -70,11 +71,11 @@ const styles = ({
     borderStyle: 'solid',
     borderWidth: 1, 
     color: '#f1fffa',
-    // borderColor: '#F25252',
-    // borderRadius: 7,
+    borderColor: '#F25252',
+    borderRadius: 7,
     fontFamily: 'Overpass',
     backgroundColor: '#141013',
-   
+    padding: '2vw',
     marginBottom: 50,
     opacity: .97,
    
@@ -115,7 +116,7 @@ export default function About(newUser){
 <Grid item xs={12} className="about" style={styles.about}>
         <Card style={styles.card}> 
               <Typography variant="h3" gutterBottom style={styles.text}>
-              Prax is a site for remote collaboration. It provides a low-latency A/V connection, tools for audio synchronization, and filters to mask appearance and environment.  
+              Prax is a site for remote creative collaboration. It provides a low-latency A/V connection, tools for audio synchronization, and filters to mask participants' appearance and environment.  
        </Typography>
               </Card> 
  
