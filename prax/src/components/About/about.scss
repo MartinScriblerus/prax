@@ -41,7 +41,7 @@
 }
 
 #aboutTech {
-    color: #7295AB;
+    color: "$metronome_on";
     font-family: "Poppins"
 }
 
@@ -52,14 +52,14 @@
 
 svg {
     display: inline-block;
-    fill: $white;
+    fill: $metronome_on;
 }
 
 .social-svg-mask > path {
-    fill: $white;
+    fill: $headline_text;
 }
 .social-svg-mask:hover > path {
-    fill: $metronome_off;
+    fill: $metronome_on;
 }
 g {
     fill: $white;
@@ -85,7 +85,7 @@ g {
         border-style: 'solid';
         border-width: 2;
         color: $white;
-        border-color: '#85b1d7';
+        border-color: '$red';
         // borderRadius: 7,
         margin-right: 6;
        
@@ -142,7 +142,7 @@ li, ul, h5 {
     .title {
 
         // flex: 1;
-        color: #f6deba;
+        color: "$white";
       font-size: 18;
       margin-top: -7;
       width: 100%;
@@ -159,5 +159,5 @@ li, ul, h5 {
    
 }
 .socialicons .MuiGrid-root  {
-    background-color: $header_black
+    background-color: $dark_grey
 }

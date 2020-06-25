@@ -3,8 +3,9 @@
 
 .MuiButton-label {
     align-items: 'center';
+    color: "$headline_text";
     height: 60vh;
-    border: #4942ED;
+  
 }
 .title {
     // flex: 1;
@@ -18,12 +19,13 @@ main {
 
     .container{
         display: flex;
+        background-color: $dark_grey;
      
         .left-side{
-            width: 20%;
-            background-color: $header_black;
+            width: 30%;
+            background-color: $dark_grey;
             color: $dark_grey;
-          
+            margin-bottom: 10vh;
             // height: 100%
             //display: flex;
             //flex-direction: column;
@@ -36,7 +38,7 @@ main {
             background-position: center;
             width: 100%;
             margin-top: 100vh;
-            background-color: $header_black;
+            background-color: $offset_black;
             // border-right: 1px solid $border;
             //display: flex;
             //flex-direction: column;
@@ -47,7 +49,7 @@ main {
                 align-items: center;
             }
             style {
-                background-color: #212121;
+                background-color: $dark_grey;
                 color: #212121
               }
         }
@@ -91,8 +93,8 @@ main {
     flex: 1 0 auto;
     /* height: 100%; */
     display: flex;
-    background-color: $header_black;
-    color: $header_black;
+    background-color: $dark_grey;
+    color:  $dark_grey;
     outline: 0;
     z-index: 1200;
     position: fixed;

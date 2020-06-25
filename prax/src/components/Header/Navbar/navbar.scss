@@ -1,23 +1,22 @@
-@import "../../App/variables";
+@import "../../App/_variables";
 
 .toolbar {
     background-color: $header_black;
     height: 6vh;
     width: 100%;
-    box-shadow: .5px .5px 1px #78725c, 1px 1px 2px 0 #78725c;
+    box-shadow: .5px .5px 1px #030303, 1px 1px 2px 0 #030303;
 }
 .title {
-    color: $white;
+    color: $red;
     text-align: center;
 }
 h6 {
-    color: $white;
+    color: $red;
    
 }
 .MuiButton-root {
-    width: 6vw;
-
-    color: $white;
+    width: 5vw;
+    color: $red;
     margin-bottom: 10vh;
 }
 
@@ -25,19 +24,19 @@ h6 {
     .title {
 
         // flex: 1;
-        color:  $white;
+        color:  $red;
       font-size: 20;
       text-align: center;
       margin-top: -7;
-      width: 20vw;
+      width: 7vw;
       }
       h6 {
-        color: $white
+        color: $red
     }
     .MuiButton-root {
-        width: 15vw;
+        width: 7vw;
         // margin-left: 6vw;
-        color: $white;
+        color: $red;
     }
 }
 
@@ -45,19 +44,19 @@ h6 {
     .title {
 
         // flex: 1;
-        color:  $white;
+        color:  $red;
       font-size: 24;
       margin-top: -7;
       text-align: center;
-      width: 15vw;
+      width: 10vw;
       }
       h6 {
-        color: $white
+        color: $red
     }
     .MuiButton-root {
-        width: 20vw;
+        width: 10vw;
         margin-left: 5vw;
-        color: $white;
+        color: $red;
     }
 }
 
@@ -65,19 +64,19 @@ h6 {
     .title {
 
         // flex: 1;
-        color:  $white;
+        color:  $red;
       font-size: 18;
       text-align: center;
       margin-top: -7;
-      width: 100%;
+      width: 12vw;
       }
       h6 {
-        color: $white
+        color: $red
     }
     .MuiButton-root {
-        width: 20vw;
+        width: 12vw;
         margin-left: 4vw;
-        color: $white;
+        color: $red;
     }
 }
 .MuiAppBar-colorPrimary {

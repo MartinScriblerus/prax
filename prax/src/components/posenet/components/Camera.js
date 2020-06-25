@@ -44,10 +44,11 @@ const styles = {
     backgroundColor: "#030303"
   }, 
   joinRoomContainer: {
-    backgroundColor: "#aaf0d1"
+    backgroundColor: "#6e6363"
   },
   container: {
     backgroundColor: '#212121',
+
   
   },
 
@@ -362,8 +363,8 @@ export default class PoseNet extends Component {
     nmsRadius: 1,
     outputStride: 16,
     imageScaleFactor: .2,
-    skeletonColor: "#f6deba",
-    remoteSkeletonColor: "#aff",
+    skeletonColor: "#90A0D6",
+    remoteSkeletonColor: "#76f1c3",
     skeletonLineWidth: 6,
     loadingText: 'Loading...please be patient...'
   }
@@ -578,8 +579,10 @@ console.log("remoteCanvasContext", remoteCanvasContext)
           video, 
           imageScaleFactor, 
           flipHorizontal, 
-          outputStride
+          outputStride,
+
           )
+          console.log(pose)
           poses.push(pose)
     
       canvasContext.clearRect(0, 0, videoWidth, videoHeight)
@@ -624,7 +627,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
   
   
   console.log("poses", poses)
-
+  console.log(poses[0].keypoints[0].part)
       poses.forEach(({score, keypoints}) => {
         if (score >= minPoseConfidence) {
           if (showPoints) {
@@ -663,6 +666,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
           }
         }
       })
+      
       // console.log(canvasContext)
   //     socket.on('herecanvasCTX', (canvas_RTCstream)=>{
 

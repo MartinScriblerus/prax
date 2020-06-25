@@ -1,7 +1,7 @@
 import React from 'react'
 import store from '../../redux/store'
 // import Camera from '../posenet/components/Camera.js'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 import { fire, fireAnalytics } from '../firebase';
 import Header from '../Header/Header/header'
 import Navbar from '../Header/Navbar/navbar'
@@ -13,7 +13,7 @@ import Home from '../Home/Home';
 import { AuthContext } from "../../context/auth";
 import { Provider } from "react-redux";
 import PrivateRoute from './PrivateRoute';
-import MetroOuter from './MetronomeOuter';
+
 import About from '../About/about';
 import Login from '../AuthLogin/Login/Login'
 import FirstTimeLogin from '../FirstTimeSignIn/firstTimeSignIn';
@@ -44,7 +44,7 @@ require('fontsource-poppins')
 const styles = {
   camera : {
     backgroundColor: "#030303",
-    color: "#f6deba"
+    color: "#38A69B"
   },
   navbar: {
     marginTop: '100vh',

@@ -8,26 +8,26 @@ require('fontsource-poppins')
 
 const style={
     header: {
-        backgroundColor: "#505478",
-        fontFamily: 'Didact Gothic',
+        backgroundColor: "#50D4F2",
+        // fontFamily: 'Didact Gothic',
         borderBottom: "solid",
         borderWidth: '4px',
-        borderColor: "#505478",
+        borderColor: "",
         
     },
     text: {
       fontFamily: 'Poppins',
       // subset: 'devanagari',
-      weights: 900,
-      style: 'normal',
+      weights: 1200,
+      style: 'bold',
       marginLeft: 40,
-      color: "#f6deba"
+      color: "#F1FFFA"
     },  
     text2: {
       fontFamily: 'Arial',
       fontSize: 22,
       marginLeft: '10%',
-      color: "#148aa3",
+      color: "#50D4F2",
       paddingBottom: '20px'
     }   
 }

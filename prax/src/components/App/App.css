@@ -69,7 +69,7 @@ span.header {
 }
 
 a {
-  color: #f6deba;
+  /* color: #38a69b; */
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
   position: absolute;
   font-size: 1.1em;
@@ -100,7 +100,7 @@ a.bottom-right {
 
 #metroOuter {
 
-    color: #aaf;
+    color: #F2C84B;
 
 }
 
@@ -122,7 +122,7 @@ canvas {
   position: relative;
   width: 50vw;
   height: 50vw;
-  background: #212121;
+  background: green;
 }
 
 @media only screen and (max-width: 480px) {

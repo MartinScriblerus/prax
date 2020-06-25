@@ -31,9 +31,9 @@ export default function Navbar() {
                 style={{ textDecoration: 'none' }}
                 className="title"  
               >
-                <Typography variant="h6" className="title" id="homeText" >
+                <div className="title" id="homeText" >
                     Home
-                </Typography>
+                </div>
               </Link>  
             </Button>       
 
@@ -45,9 +45,9 @@ export default function Navbar() {
                 style={{ textDecoration: 'none' }}
                 className="title"  
                 >
-                <Typography variant="h6" className="title" id="aboutText" >
+                <div className="title" id="aboutText" >
                     About
-                </Typography>
+                </div>
               </Link>
             </Button>
 
@@ -58,9 +58,9 @@ export default function Navbar() {
                 style={{ textDecoration: 'none' }}
                 className="title"  
               >
-                <Typography variant="h6"  className="title" id="signupText" >
+                <div className="title" id="signupText" >
                     Sign Up
-                </Typography>
+                </div>
               </Link>
             </Button>
 

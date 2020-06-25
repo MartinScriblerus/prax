@@ -26,7 +26,7 @@ if (token) {
 const styles = {
   button: {
     // backgroundColor: "#030303",
-    color: "#4942ED",
+    color: "#38A69B",
     height:60,
     fontSize: '22px',
     width: "76%",
@@ -35,15 +35,15 @@ const styles = {
     border: "solid",
     borderWidth: 2,
 
-    marginBottom: 30,
+   
     // marginTop:20,
   },
   openRoomGrid: {
-    margin:4
+    margin: 4
   },
   roomNameCard: {
-    backgroundColor: "#212121",
-    color: "#eaeaea",
+    backgroundColor: "#141013",
+    color: "#f2c84b",
     width: "100%",
     justifyContent: 'center',
     borderRadius: '15px'
@@ -52,9 +52,6 @@ const styles = {
     textAlign: 'center',
     marginRight: '10%',
     marginLeft: '10%',
-    borderstyle: 'solid',
-    borderSize: '2px', 
-    borderColor: '#4942ED',
     backgroundColor: "#212121",
     color: "#030303",
     borderRadius: '15px'
@@ -66,12 +63,11 @@ const styles = {
   },
 
 h3: {
-  // color: "#5e5d5d",
-
+  color: "#F2C84B",
   fontSize: 28,
 },
 textarea2: {
-  color: "#f6deba"
+  color: "#eaeaea"
 }
 }
 
@@ -220,8 +216,8 @@ baseball = redsox.map(
     
       <div className="component-wrapper">
    
-          <Card className="roomNameCard" style={styles.roomNameCard}> 
-          <h1 style={styles.roomNameCard}>Create a Room</h1>
+          <Card style={styles.roomNameCard}> 
+          <h1 className="roomNameCard" >Create a Room</h1>
               <InputBoxDescription  addItem={this.addListItem} addItemDescription={this.addListItemDescription} style={styles.textarea2} /><br/>
           </Card>    
       </div>
@@ -229,7 +225,7 @@ baseball = redsox.map(
  
      
     <Card style={styles.openRoomsCard}> 
-        <h3 style={styles.roomNameCard} >Open Rooms</h3>
+        <h2 className="openRoomsTitle">Open Rooms</h2>
  
       
     {/*tk*/}    

@@ -16,41 +16,45 @@ fa-ellipsis-v {
     color: $headline_text
 }
 .profile-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: inline;
+    // justify-content: space-between;
+    align-items: left;
+    margin-bottom: 15vh;
     // height: 100%;
     // background-color: $dark_grey;
     // padding-left: 2rem;
     color: $dark_grey;
 
     .menuNav {
-        
-        
+        top: 1vh;
+        width: 20vw;
+        z-index: 200;
+        margin-bottom: 10vw;
     }
     
     .options-box{
-        width: 100%;
-        // margin-right: 30vw;
-    
+        width: 30vw;
+        margin-bottom: 10vw;
+        z-index: 200;
         height: 40;
         position: relative;
-        display: flex;
+        display: inline;
         justify-content: center;
         text-align: center;
         color: #7295AB;
      
         .buttonMenu:focus {
-            background-color: transparent;
+        
             border: none;
-            margin-bottom: 25vh;
-         
+            margin-bottom: 20vh;
+            z-index: 200;
         }
         .buttonMenu {
+            width: 30vw;
             position: relative;
             background-color: $header_black;
-            box-shadow: 0 .5px 1px 0 #0B748C, 0 1px 2px 0 #0B748C;
-            margin-top: 1vh;
+            // box-shadow: 0 .5px 1px 0 #0B748C, 0 1px 2px 0 #0B748C;
+            margin-bottom: 20vh;
             margin: 1vh;
 
    
@@ -59,8 +63,8 @@ fa-ellipsis-v {
                 // margin-right: 30vw;
 
                 height: 0;
-                position: relative;
-                display: flex;
+                display: inline;
+                // display: flex;
                 justify-content: center;
                 text-align: center;
             
@@ -80,11 +84,12 @@ fa-ellipsis-v {
             }
             .profile-menu{
                 z-index: 1;
+                width: 300px;
                 font-size: 0.9rem;
                 // padding: 0.5rem 0 ;
                 margin-right: 5vw;
-            
-                display: block;
+            margin-bottom: 30px;
+                display: flex;
                 background-color: $header_black;
                 position: relative;
                 // top: 150%;

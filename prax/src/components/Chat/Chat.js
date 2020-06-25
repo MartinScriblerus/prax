@@ -11,16 +11,16 @@ import { SocialIcon } from 'react-social-icons';
 const styles = ({
 	button: {
 		height: 50,
-		backgroundColor: '#85b1d7',
+		backgroundColor: '#F2C84B',
 		variant: "solid",
 		marginTop: 5
 	},
 	icons: {
-		fill: '#aaf'
+		fill: '#50D4F2'
 	},
 	card: {
 		backgroundColor: 'rgba(0, 0, 0, 0.3)',
-		color: "#85b1d7",
+		color: "#F2C84B",
 		variant: "solid",
 		width: "100%",
 		textAlign: 'center',

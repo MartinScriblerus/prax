@@ -7,23 +7,22 @@ import { logOutUser } from '../../../redux/auth/actions'
 
 const styles = {
   loggedAs: {
-    color: "#f6deba",
+    color: "#f1fffa",
   
 
   },
   logout: {
     fontSize: "26px",
     // padding: '20vh',
-  justifyContent: 'left',
+    justifyContent: 'left',
     // backgroundColor: "#85b1d7",
-    color: "#272", 
-    
+    color: "#38a69b", 
   },
   logoutPopup: {
-    color: "#85b1d7",
+    color: "#5e5d5d",
     fontSize: 20,
     width: '100%',
-
+    paddingBottom: '50px' 
     // marginRight: '5vh',
     // paddingRight: '5vh',
     
@@ -36,7 +35,7 @@ const styles = {
     backgroundColor: '#212121' 
   },
   button: {
-    color: '#7295AB',
+    color: '#f3c84b',
     backgroundColor: '#212121',
 
   },

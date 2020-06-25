@@ -47,7 +47,7 @@
     border-width: 2px;
     border-color: $headline_text;
     border-radius: 5%;
-    background-color: #212121;
+    background-color: #141013;
     // margin-top: 10vh;
     margin-bottom: 30vh;
     position: relative;
@@ -173,6 +173,7 @@ color: $white
 }
 #logTitle{
     background-color: $headline_text;
+    padding: 1 rem;
     color: $header_black;
     text-align: center;
 }

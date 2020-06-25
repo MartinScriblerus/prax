@@ -31,27 +31,27 @@ import { makeStyles } from '@material-ui/core/styles';
 
     const styles = ({
         input: {
-         marginLeft: '10vw',
-         marginRight: '10vw',
-         backgroundColor: "#0B748C",
-         color: "#030303",
-         marginTop: '10%'
+        //  marginLeft: '10vw',
+         marginRight: '15vw',
+        //  backgroundColor: "#212121",
+        //  color: "#030303",
+        //  marginTop: '10%'
         },
         signup: {
         marginTop: 0,
-        color: '#030303'
+       
         },
      
         a: {
             width: 400,
-            height: 80,
+            height: '60px',
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
-            
+            marginTop: '2vh',
             borderStyle: "solid",
-            borderColor: "#9ED1FF",
-            color: '#f6deba',
+            borderColor: "#38A69B",
+            color: '',
             borderWidth: 2,
             borderRadius: '5%',
             variant: "outlined",
@@ -61,9 +61,9 @@ import { makeStyles } from '@material-ui/core/styles';
         },
         card: {
         borderStyle: "solid",
-        backgroundColor: "#212121",
+        backgroundColor: "#5e5d5d",
         borderWidth: 2,
-        borderColor: "#f6deba",
+        borderColor: "#50D4F2",
         borderRadius: '15px',
         variant: "outlined",
         marginRight: "12%",
@@ -127,7 +127,7 @@ export default function FirstTimeLogin(newUser){
             className="inputPad"  
             type="username"
             variant="outlined"
-            margin="normal"
+            
             required
             fullWidth
             id="username"
@@ -146,7 +146,7 @@ export default function FirstTimeLogin(newUser){
             className="inputPad"
             type="password"
             variant="outlined"
-            margin="normal"
+           
             required
             fullWidth
             name="password"
@@ -166,7 +166,7 @@ export default function FirstTimeLogin(newUser){
         className="inputPad"     
         type="text"
         variant="outlined"
-        margin="normal"
+        
         required
         fullWidth
         id="firstName"
@@ -186,7 +186,7 @@ export default function FirstTimeLogin(newUser){
            
             type="text"
             variant="outlined"
-            margin="normal"
+            
             required
             fullWidth
             name="lastName"
@@ -206,7 +206,7 @@ export default function FirstTimeLogin(newUser){
             className="inputPad"
             type="email"
             variant="outlined"
-            margin="normal"
+            
             required
             fullWidth
             id="email"
@@ -226,7 +226,7 @@ export default function FirstTimeLogin(newUser){
            
             type="text"
             variant="outlined"
-            margin="normal"
+         
             required
             fullWidth
             name="bandName"
@@ -246,7 +246,7 @@ export default function FirstTimeLogin(newUser){
       
             type="text"
             variant="outlined"
-            margin="normal"
+        
             required
             fullWidth
             name="instrument"
@@ -259,14 +259,11 @@ export default function FirstTimeLogin(newUser){
             label="Your Primary Instrument" 
         />
     </form>
-
-            <Button 
-                // id="register_button"
-                className="button"
-            >
+<Button id="firstSub">
+         
             <Link 
                 to="/" 
-                className="firsttimeSubmit"
+                className="firstTimeSubmit"
                 onClick={() => 
                 handleSubmit()
             }
@@ -274,9 +271,9 @@ export default function FirstTimeLogin(newUser){
             >
             Start Playing
             </Link>
-            </Button> 
-
-            <br/>
+        
+            </Button>
+          
                 
         </Card>
     </div>

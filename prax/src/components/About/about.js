@@ -36,7 +36,7 @@ const styles = ({
     marginLeft: 10,
     align: 'center',
     backgroundColor: '#212121',
-    fill: '#aaf' 
+    fill: '' 
 
   },
   card : {
@@ -46,11 +46,11 @@ const styles = ({
     overflow: 'auto',
        borderStyle: 'solid',
     borderWidth: 2, 
-    color: '#f6deba',
-    borderColor: '#7295AB',
+    color: '#f1fffa',
+    borderColor: '#F2C84B',
     // borderRadius: 7,
     fontFamily: 'Overpass',
-    backgroundColor: '#333333',
+    backgroundColor: '#141013',
     opacity: .97,
     marginLeft:"25%",
     marginRight: "7%",
@@ -68,12 +68,12 @@ const styles = ({
     width: "100%",
     overflow: 'auto',
     borderStyle: 'solid',
-    borderWidth: 2, 
-    color: '#f6deba',
-    borderColor: '#85b1d7',
+    borderWidth: 1, 
+    color: '#f1fffa',
+    // borderColor: '#F25252',
     // borderRadius: 7,
     fontFamily: 'Overpass',
-    backgroundColor: '#333333',
+    backgroundColor: '#141013',
    
     marginBottom: 50,
     opacity: .97,

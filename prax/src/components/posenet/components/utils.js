@@ -1,7 +1,7 @@
 import * as posenet from '@tensorflow-models/posenet'
 
 
-const pointRadius = 13
+const pointRadius = 20
 
 export const config = {
   videoWidth: (550),
@@ -13,16 +13,16 @@ export const config = {
   showVideo: false,
   showRemoteVideo: false,
   showSkeleton: true,
-  sshowRemoteSkeleton: true,
+  showRemoteSkeleton: true,
   showPoints: true,
   showRemotePoints: true,
   minPoseConfidence: 0.1,
   minPartConfidence: 0.1,
-  multiplier: .5,
+  multiplier: 4,
   maxPoseDetections: 2,
   nmsRadius: 2,
   outputStride: 16,
-  imageScaleFactor: .2,
+  imageScaleFactor: 1,
   skeletonColor: "#148aa3",
   remoteSkeletonColor: "#aaf",
   skeletonLineWidth: 12,
@@ -36,7 +36,7 @@ function toTuple({x, y}) {
 export function drawKeyPoints(
   keypoints,
   minConfidence,
-  {skeletonColor = "#ee7e5b"},
+  {skeletonColor = "#2f2766"},
   canvasContext,
   scale = 1
 ) {
@@ -49,7 +49,7 @@ export function drawKeyPoints(
       canvasContext.fillStyle = skeletonColor
       canvasContext.fill()
       canvasContext.moveTo(20, 20);
-      // canvasContext.bezierCurveTo(20, 100, 200, 100, 200, 20);
+      canvasContext.bezierCurveTo(20, 100, 200, 100, 200, 20);
       canvasContext.stroke();
     }
   })
@@ -63,7 +63,7 @@ export function drawRemoteKeyPoints(
   scale = 1
 ) {
 
-  keypoints.forEach(keypoint => {
+  keypoints[0].poses[0].forEach(keypoint => {
     if (keypoint.score >= minConfidence) {
       const {x, y} = keypoint.position
       remoteCanvasContext.beginPath()
@@ -71,7 +71,7 @@ export function drawRemoteKeyPoints(
       remoteCanvasContext.fillStyle = remoteSkeletonColor
       remoteCanvasContext.fill("#a4a")
       remoteCanvasContext.moveTo(20, 20);
-      // canvasContext.bezierCurveTo(20, 100, 200, 100, 200, 20);
+      remoteCanvasContext.bezierCurveTo(20, 100, 200, 100, 200, 20);
       remoteCanvasContext.stroke();
     }
   })
@@ -142,7 +142,7 @@ export function drawRemoteSkeleton(
   color,
   lineWidth,
   remoteCanvasContext,
-  scale = 1
+  scale = 5
 ) {
   const adjacentKeyPoints = posenet.getAdjacentKeyPoints(
     keypoints,
@@ -162,5 +162,3 @@ export function drawRemoteSkeleton(
 
 
 }
-
-
