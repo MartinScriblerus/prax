@@ -704,7 +704,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
     // I prefer to not show the the whole text area selected.
     e.target.focus();
     this.setState({ copySuccess: 'Copied!' });
-    this.addChat(`The Room ID is: `, `${roomId}`, true)
+    this.addChat(`Room ID: `, `${roomId}`, true)
   };
 
 
@@ -761,7 +761,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
             }
             <h2 id="joinNow">(Receiver Only) <br/> Copy Room Id and Click Join: 
             
-            <input type="text" id="room-id"
+            <input type="text" id="room-id" placeholder="Paste Existing Room ID Here"
               ref={(textarea) => this.textArea = textarea}
               defaultValue={roomId || ''}
               />

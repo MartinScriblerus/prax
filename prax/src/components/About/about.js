@@ -70,7 +70,7 @@ const styles = ({
     overflow: 'auto',
     borderStyle: 'solid',
     borderWidth: 1, 
-    color: '#f1fffa',
+    color: '#F2C84B',
     borderColor: '#F25252',
     borderRadius: 7,
     fontFamily: 'Overpass',
@@ -124,11 +124,11 @@ export default function About(newUser){
       <Grid item xs={6}>
           <Card style={styles.card2}>
           <h4 id="aboutTech">Tech Stack:</h4>
-          <p style={styles.text2}>
+          <Typography style={styles.text2}>
           WebRTC, Socket.io, Media Stream API, 
           Tensorflow PoseNet, Firebase,
           React, Redux, Express, MySQL, JWT Tokens
-          </p>
+          </Typography>
          
              
        
