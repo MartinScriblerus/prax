@@ -96,6 +96,9 @@
       border: 2px solid $header_black;
       box-shadow: 0 20px 40px 0 #030303, 0 40px 80px 0 #030303; 
     }
+    &:focus {
+      background-color: $red; 
+    }
 }
 
 
@@ -121,6 +124,9 @@
       color: $header_black;
       border: 2px solid $header_black;
       box-shadow: 0 20px 40px 0 #030303, 0 40px 80px 0 #030303; 
+    }
+    &:focus {
+      background-color: $red; 
     }
   }
 
@@ -204,6 +210,9 @@ a {
       color: $header_black;
       border: 2px solid $header_black;
       box-shadow: 0 20px 40px 0 #030303, 0 40px 80px 0 #030303; 
+    }
+    &:focus {
+      background-color: $red; 
     }
   }
 

@@ -418,7 +418,7 @@ export default class PoseNet extends Component {
     handleCreatedPeer = (webrtc, peer) => {
       console.log(this.props)
       this.setState({ peers: [...this.state.peers, peer] });
-      this.addChat(`Peer-${peer.id.substring(0, 5)} joined the room!`, ' ', true);
+      // this.addChat(`Peer-${peer.id.substring(0, 5)} joined the room!`, ' ', true);
     }
    
     handleRemovedPeer = () => {
@@ -703,7 +703,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
     // This is just personal preference.
     // I prefer to not show the the whole text area selected.
     e.target.focus();
-    this.setState({ copySuccess: 'Copied!' });
+    this.setState({ copySuccess: 'If an ID does not appear, create session again. If one appears, share this once the other player joins the room...' });
     this.addChat(`Room ID: `, `${roomId}`, true)
   };
 
@@ -727,23 +727,23 @@ console.log("remoteCanvasContext", remoteCanvasContext)
 
      
                 <button onClick={createRoom} className="rtcRoomButton" id="createBtn">
-                  <span>1. Create Room (Sender Only) </span>
+                  <span>Create Session (Sender Only) </span>
                 </button>
                 <button onClick={hangUp} className="rtcRoomButton" id="hangupBtn">
-                  <span>4. End Prax</span>
+                  <span>End Prax</span>
                 </button>
        
              
            {
              roomId !== undefined || null 
             ? <button onClick={this.copyToClipboard} style={styles.btn} id="joinBtn" className="rtcRoomButton" >
-                <span>2. Enter Room (Sender Only) </span>
+                <span>Start Session (Sender Only) </span>
               </button> 
             : <h1>not yet</h1>
            }
 
               <button onClick={joinRoom} style={styles.btn} className="rtcRoomButton" id="confirmJoinBtn" type="button">
-                <span>3. Join Room (Receiver Only)</span>
+                <span>Join Room</span>
               </button>
               
             <div id="room-dialog">
@@ -759,14 +759,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
                 
                 </div>
             }
-            <h2 id="joinNow">(Receiver Only) <br/> Copy Room Id and Click Join: 
-            
-            <input type="text" id="room-id" placeholder="Paste Existing Room ID Here"
-              ref={(textarea) => this.textArea = textarea}
-              defaultValue={roomId || ''}
-              />
 
-              </h2>
             <LioWebRTC
               options={options}
               onReady={this.join}
@@ -787,9 +780,18 @@ console.log("remoteCanvasContext", remoteCanvasContext)
           
           <div id="metronomeContainer">
  
+    
+
           {/*<p className="currentRoomID" htmlFor="my-text-field">Room ID: {roomId} </p>*/}
        
-          
+                <h2 id="joinNow">(Receiver Only) <br/> Copy Room Id and Click Join: 
+            
+          <input type="text" id="room-id" placeholder="Paste Existing Room ID Here"
+            ref={(textarea) => this.textArea = textarea}
+            defaultValue={roomId || ''}
+            />
+
+            </h2>
           <CrossCorrelation stream={localStream} remoteStream={remoteStream} canvas_RTCstream={canvas_RTCstream} AudioContext={AudioContext} />
 
           </div>

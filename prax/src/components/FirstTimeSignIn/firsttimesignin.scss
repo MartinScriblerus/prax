@@ -109,6 +109,9 @@ form {
     &:hover{
         background-color: $white;
     }
+    &:focus {
+        background-color: $metronome_on; 
+      }
 }
 .MuiButtonBase-root .MuiButton-root .MuiButton-text {
     justify-content: center;
@@ -159,6 +162,9 @@ form {
           border: 2px solid $offset_black;
           box-shadow: 0 80px 160px 0 #030303, 0 100px 1220px 0 #030303; 
         }
+        &:focus {
+            background-color: $metronome_off; 
+          }
         // margin: '10vw',
      
         // margin-top: 10vh

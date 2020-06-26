@@ -16,7 +16,7 @@ class ChatBox extends Component {
     }
     return this.props.chatLog.map((item) => (
       <div className="chat" key={`chat-${item.name}-${item.timestamp}`}>
-        <b className="name" style={{ color: item.alert ? '#f2c84b' : '#38A69B' }}>{item.name}</b> <textarea className="msg">{item.message}</textarea>
+        <b className="name" style={{ color: item.alert ? '#f2c84b' : '#38A69B' }}>{item.name}</b> <h3 className="msg">{item.message}</h3>
       </div>
     ));
   }

@@ -1,7 +1,7 @@
 @import '../../App/variables';
 
 .container {
-    // width: 500px;
+  
     max-width: 100%;
     display: flex;
     flex-flow: column;
@@ -9,7 +9,7 @@
     // margin-bottom: 4vh;
     // border-radius: 5px;
     padding: 0;
-    background-color: $red; 
+    background-color: $metronome_on; 
 
     // background-color: #383838;
 }
@@ -17,6 +17,7 @@
 
 
   .info {
+    height: 350px;
     color: $header_black;
     font-size: 18px;
   }
@@ -25,7 +26,7 @@
     margin: 0;
     border: none;
     flex-shrink: 0;
-    background-color: $red;
+    background-color: $metronome_on;
   }
   // .bottomBar {
   //   align-self: flex-end;
@@ -54,16 +55,17 @@
     text-align: center;
     font-size: 24px;
     color: $header_black;
-    background-color: $red;
+    background-color: $metronome_on;
     font-size: 24px;
     width: 100%;
+
   }
   .chatBox {
     overflow-x: hidden;
-   
+
     display: inline;
     float: left;
-    // max-height: 70%;
+    max-height: 70%;
     font-size: 20px;
     margin: 15px 15px 10px 10px;
     overflow-y: scroll;
@@ -99,7 +101,7 @@
   .msg {
     background-color: $header_black;
     color: $white;
- 
+    font-size: 18px;
   }
   .webcam {
     height: 550;

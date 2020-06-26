@@ -4,8 +4,6 @@ const express = require('express')
 const app = express();
 
 
-
-
 app.get('/', (req, res) => {
     console.log("in /")
     return res.json(users)
@@ -45,4 +43,4 @@ app.get('/login-cached', (request, response)=>{
     response.set('Cache-Control', 'public, max-age=300, s-maxage=600',)
 })
 
-exports.helloWorld = functions.https.onRequest(app)
+exports.expressFunctions = functions.https.onRequest(app)

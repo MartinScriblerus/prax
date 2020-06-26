@@ -8,10 +8,7 @@ import Button from '@material-ui/core/Button';
 import { StylesContext } from '@material-ui/styles';
 
 
-const styles = {
 
-    background: "url(http://davidhall.io/wp-content/uploads/2019/07/graphic-notation-John-Cage.jpg)",
-}
 
 export default function Login (props){
     const auth = useSelector(state=> state.auth)
@@ -51,7 +48,7 @@ export default function Login (props){
     return ( 
             
         <Welcome 
-        style={styles.background}
+   
         >  
      
             <div 

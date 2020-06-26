@@ -13,10 +13,10 @@
   ],
   "hosting": {
     "public": "build",
-    "rewrites": [{
-      "source": "**", 
-        "function": "app"
-    }],
+    "rewrites": [ {
+      "source": "**",
+      "function": "app"
+    } ],
     "ignore": [
       "firebase.json",
       "**/.*",

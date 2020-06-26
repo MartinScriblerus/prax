@@ -25,7 +25,7 @@
 }
 
 #latencyDetectorContainer {
-  background-color: $metronome_on;
+  background-color: $metronome_off;
   color: $header_black;
   text-align: center;
   width: 80%;
@@ -34,11 +34,11 @@
 }
     
 #bpmBackground {
-  background-color: $metronome_on;
+  background-color: $metronome_off;
 }
 
 #latencyMeasure {
-  color: $metronome_off
+  color: $header_black
 }
 
     .latencyDetectorButton { 
@@ -53,7 +53,7 @@
         // box-shadow: 0 4px 8px 0 #030303, 0 8px 16px 0 #030303; 
   
         background-color: $header_black;
-        color: $metronome_on;
+        color: $metronome_off;
         z-index: 3;
         font-size: 22px;
         width: 70%;
@@ -75,6 +75,9 @@
           color: $header_black;
           border: 2px solid $header_black;
           box-shadow: 0 5px 10px 0 #030303, 0 5px 15px 0 #030303; 
+        }
+        &:focus {
+          background-color: $metronome_off; 
         }
 
 
