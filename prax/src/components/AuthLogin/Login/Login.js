@@ -55,7 +55,7 @@ export default function Login (props){
             className="auth-container"
            
             >
-          
+          <h1 id="underConstruction">This site is under construction! We look forward to launching soon.</h1>
     
                <h1 id="logTitle"
                     >  
