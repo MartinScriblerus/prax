@@ -75,7 +75,7 @@ if (window !== undefined){
        <Navbar style={styles.navbar}/>
        
 
-
+<PoseNet/>
 
       <Switch>
                   

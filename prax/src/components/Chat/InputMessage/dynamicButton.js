@@ -111,7 +111,7 @@ export default class DynamButtons extends React.Component {
       const {rooms} = this.state
       console.log(this.props)
 
-      axios.get('http://localhost:5001/api/message')
+      axios.get('http://localhost:8080/api/message')
                 .then(res => {
                     const rooms = res.data;
                     this.setState({rooms});
@@ -166,7 +166,7 @@ export default class DynamButtons extends React.Component {
 
       axios({
           method: 'post',
-          url: 'http://localhost:5001/api/message',
+          url: '/api/message',
           data: message
         })
     

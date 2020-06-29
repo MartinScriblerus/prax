@@ -55,7 +55,7 @@ var passport = require("passport");
   // app.use(bodyParser.urlencoded({ extended: true }));
 
   try{
-    const PORT  = process.env.PORT || 5001;
+    const PORT  = process.env.PORT || 8080;
     var server = app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`))
     }
     catch{console.log('server err')}

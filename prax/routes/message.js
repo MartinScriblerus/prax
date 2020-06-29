@@ -11,7 +11,7 @@ const auth = require('./verifyToken');
 
 console.log(auth)
 
-// router.post('http://localhost:5001/api/message', auth, async (req, res) => {
+// router.post('http://localhost:8080/api/message', auth, async (req, res) => {
 // 	const origin = req.user.origin
 // 	const { content } = req.body;
 // 	const  description  = req.body.description;

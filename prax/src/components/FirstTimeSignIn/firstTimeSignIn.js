@@ -111,7 +111,7 @@ export default function FirstTimeLogin(newUser){
       
     axios({
         method: 'post',
-        url: 'http://localhost:5001/api/user',
+        url: 'http://localhost:8080/api/user',
         data: user
       })
     }
