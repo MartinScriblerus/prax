@@ -7,5 +7,5 @@ This is a minimal implementation of a WebRTC audio/video connection. The project
 
 
 
-[![Prax Demo](https://share.gifyoutube.com/KzB6Gb.gif)](https://drive.google.com/file/d/188OnAEfSRFXkmP6oguSSEMp0L3Qmb-9o/view)
+[![Prax Demo](https://github.com/MartinScriblerus/Prax/blob/master/PraxPhoto.png?raw=true)](https://drive.google.com/file/d/188OnAEfSRFXkmP6oguSSEMp0L3Qmb-9o/view)
 
