@@ -12,16 +12,17 @@ import {
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card'
 
-import setAuthToken from "../../../services/setAuthToken";
+// import setAuthToken from "../../../services/setAuthToken";
 // import CreatePraxSpace from '../CreatePraxSpace/CreatePraxSpace';
 
-import {socket} from '../../../services/socketIO' 
+// TK EDITED SOCKET
+// import {socket} from '../../../services/socketIO' 
 
 
-const token = localStorage.getItem("token");
-if (token) {
-  setAuthToken(token);
-}
+// const token = localStorage.getItem("token");
+// if (token) {
+//   setAuthToken(token);
+// }
 
 const styles = {
   button: {
@@ -119,10 +120,10 @@ export default class DynamButtons extends React.Component {
                 });
                 console.log(rooms)
   
-                socket.on("roomOption_Joined", roomOptionFunct)
-                function roomOptionFunct(itemToAdd){
-                  console.log("ROOM OPTION (ITEM TO ADD): ", itemToAdd);
-                }
+                // socket.on("roomOption_Joined", roomOptionFunct)
+                // function roomOptionFunct(itemToAdd){
+                //   console.log("ROOM OPTION (ITEM TO ADD): ", itemToAdd);
+                // }
     
     }
     
@@ -148,19 +149,10 @@ export default class DynamButtons extends React.Component {
       }
 
 
-      // socket.emit('username', {username: username})
-      // socket.emit('userID', {userID: origin})
-      socket.emit('joinRoom', itemToAdd)   
+// TK EDITED SOCKET
+      // socket.emit('joinRoom', itemToAdd)   
 
-      // socket.on("username_Joined", usernameFunct)
-      // function usernameFunct(username){
-      //   console.log("USERNAME joined: ", username);
-      //   return username;
-      //   }
-      // socket.on("userID_Joined", userIDFunct)
-      // function userIDFunct(userID){
-      //   console.log("USERID joined: ", userID);
-      //   }
+
 
 
 
@@ -247,9 +239,9 @@ baseball = redsox.map(
 }
 
 
-console.log(messages);
-console.log(instrument);
-console.log(userID);
+// console.log(messages);
+// console.log(instrument);
+// console.log(userID);
 
 let count = 0
 

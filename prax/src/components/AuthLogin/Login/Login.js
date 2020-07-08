@@ -3,7 +3,7 @@ import '../authlogin.scss'
 import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
 import Welcome from '../../Layout/Welcome/Welcome'
-import { loginUserRequest } from '../../../redux/auth/actions'
+// import { loginUserRequest } from '../../../redux/auth/actions'
 import Button from '@material-ui/core/Button';
 import { StylesContext } from '@material-ui/styles';
 
@@ -42,7 +42,7 @@ export default function Login (props){
             username,
             password
         }
-        dispatch(loginUserRequest(dataLogin))
+        // dispatch(loginUserRequest(dataLogin))
     }
 
     return ( 

@@ -7,12 +7,12 @@ import { BASE_URL } from '../const/index'
 
 const getAxiosClient = () => {
  
-  const token = localStorage.getItem("token");
-  console.log(token)
-  return axios.create({
-    baseURL: BASE_URL,
-    headers: { "auth-token": token }
-  });
+  // const token = localStorage.getItem("token");
+  // console.log(token)
+  // return axios.create({
+  //   baseURL: BASE_URL,
+  //   headers: { "auth-token": token }
+  // });
   
 };
 

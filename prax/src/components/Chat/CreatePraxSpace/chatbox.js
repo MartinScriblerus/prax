@@ -10,13 +10,37 @@ class ChatBox extends Component {
     };
   }
     
+copyAlert = () => {
+
+  var range, selection, worked;
+let buttonAlert = document.getElementById("copyAlert")
+  if (document.body.createTextRange) {
+    range = document.body.createTextRange();
+    range.moveToElementText(buttonAlert);
+    range.select();
+  } else if (window.getSelection) {
+    // selection = buttonAlert
+    range = document.createRange();
+    range.selectNodeContents(buttonAlert);
+  }
+  
+  try {
+    document.execCommand('copy');
+    alert('Paste this string in the blue box below, then double-click the Join button! ' + range);
+  
+  }
+  catch (err) {
+    alert('unable to copy text');
+  }
+}
+
   generateChats = () => {
     if(this.chatBox && this.chatBox.scrollHeight !== undefined || null ) {
       setTimeout(() => { this.chatBox.scrollTop = this.chatBox.scrollHeight; }, 2);
     }
     return this.props.chatLog.map((item) => (
       <div className="chat" key={`chat-${item.name}-${item.timestamp}`}>
-        <b className="name" style={{ color: item.alert ? '#f2c84b' : '#38A69B' }}>{item.name}</b> <h3 className="msg">{item.message}</h3>
+        <b className="name" style={{ color: item.alert ? '#f2c84b' : '#38A69B' }}>{item.name}</b> <button id="copyAlert" onClick={()=>this.copyAlert()} className="msg">{item.message}</button>
       </div>
     ));
   }

@@ -72,12 +72,13 @@ if (window !== undefined){
         <div id="outerDiv">
       <Header />
  
-       <Navbar style={styles.navbar}/>
-       
+      {/*} <Navbar style={styles.navbar}/> */}
 
+      <div id="firebaseui-auth-container"></div>
 <PoseNet/>
 
-      <Switch>
+
+   {/*}   <Switch>
                   
         <Route exact path="/" component={Login} />
 
@@ -88,7 +89,7 @@ if (window !== undefined){
         <PrivateRoute exact path="/:message" component={PoseNet}/> 
         <PrivateRoute exact path="/admin" component={Admin} />
 
-      </Switch>
+  </Switch> */}
 
     </div>
     

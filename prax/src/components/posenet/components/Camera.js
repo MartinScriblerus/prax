@@ -1,8 +1,10 @@
 import {drawKeyPoints, drawSkeleton} from './utils'
 import React, {Component} from 'react'
 import * as posenet from '@tensorflow-models/posenet'
-import {socket} from '../../../services/socketIO'
-// import { withWebRTC } from 'react-liowebrtc';
+
+// TK EDITED SOCKET
+// import {socket} from '../../../services/socketIO'
+
 import { LioWebRTC } from 'react-liowebrtc'
 import ChatBox from '../../Chat/CreatePraxSpace/chatbox';
 import firebase from '../../firebase';
@@ -34,16 +36,16 @@ const configuration = {
 
 
 const styles = {
-  video: {
-    // display:"none"
-    height: '550px',
-    width: '50%'
-  },
-  remoteVideo: {
-      // display:"none"
-      height: '550px',
-      width: '50%'
-  },
+  // video: {
+  //   // display:"none"
+  //   height: '550px',
+  //   width: '50%'
+  // },
+  // remoteVideo: {
+  //     // display:"none"
+  //     height: '550px',
+  //     width: '50%'
+  // },
   icons: {
     marginRight: 10,
     marginLeft: 10,
@@ -124,7 +126,7 @@ registerPeerConnectionListeners();
     event.streams[0].getTracks().forEach(track => {
       console.log('Add a track to the remoteStream:', track);
       remoteStream.addTrack(track);
-remotePoses()
+// remotePoses()
     });
   });
 
@@ -195,6 +197,8 @@ remotePoses()
           event.streams[0].getTracks().forEach(track => {
             console.log('Add a track to the remoteStream:', track);
             remoteStream.addTrack(track);
+            console.log(remoteStream)
+
           });
         });
 
@@ -254,7 +258,7 @@ remotePoses()
       }
     });
    
-console.log("Here is getUserMedia Stream", stream)
+// console.log("Here is getUserMedia Stream", stream)
     function updatePitch(analyserNode, stream, sampleRate) {
       // console.log(analyserNode);
      
@@ -278,7 +282,7 @@ console.log("Here is getUserMedia Stream", stream)
       document.querySelector('#remoteVideo').srcObject = remoteStream;
      console.log("REMOTE STREAM", remoteStream)
 // tk added querySelectors below based on codelab
-console.log('Stream:', document.querySelector('#localVideo').srcObject);
+// console.log('Stream:', document.querySelector('#localVideo').srcObject);
 // document.querySelector('#cameraBtn').disabled = true;
 document.querySelector('#joinBtn').disabled = false;
 document.querySelector('#createBtn').disabled = false;
@@ -344,17 +348,11 @@ document.querySelector('#hangupBtn').disabled = false;
   peerConnection.addEventListener('iceconnectionstatechange ', () => {
     console.log(
         `ICE connection state change: ${peerConnection.iceConnectionState}`);
+        // remotePoses()
   });
 }
 
-function remotePoses(remCan, remVid, remCanContext){
-  remCan= document.getElementById("remoteCanvas")
-  remVid= document.getElementById("remoteVideo")
-  remCanContext = remCan.getContext('2d')
-  remCan.width = 550;
-  remCan.height = 550;
- 
-}
+
 
 export default class PoseNet extends Component {
   static defaultProps = {
@@ -484,7 +482,7 @@ export default class PoseNet extends Component {
 
     try {
       this.posenet = await posenet.load()
-      console.log("this.posenet", this.posenet)
+      // console.log("this.posenet", this.posenet)
     } catch (error) {
       throw new Error('PoseNet failed to load')
     } finally {
@@ -492,17 +490,18 @@ export default class PoseNet extends Component {
         this.setState({loading: false})
       }, 2000)
     }
-    this.detectPose()
+    // this.detectPose()
 
+    // TK EDITED SOCKETS
     try {
-      function poseFunct(serverDrawPoses){
-        console.log("SERVERSIDE DRAW POSES", serverDrawPoses);
-        }
-      socket.on("serverDrawPoses", poseFunct)
+      // function poseFunct(serverDrawPoses){
+      //   console.log("SERVERSIDE DRAW POSES", serverDrawPoses);
+      //   }
+      // socket.on("serverDrawPoses", poseFunct)
       
-      socket.on("serverDrawCanvasURL", function (canvasURL){      
-        console.log("SERVERSIDE DRAW CANVAS", canvasURL);
-      }) 
+      // socket.on("serverDrawCanvasURL", function (canvasURL){      
+      //   console.log("SERVERSIDE DRAW CANVAS", canvasURL);
+      // }) 
     } catch (error) {
       throw new Error('PoseNet failed to load')
     } finally {
@@ -535,152 +534,151 @@ console.log("remoteVideo", remoteVideo)
     })
   }
 
-  detectPose() {
-    const {videoWidth, videoHeight} = this.props
-    const canvas = this.canvas
-    const remoteCanvas = this.remoteCanvas
-    const canvasContext = canvas.getContext('2d')
-    const remoteCanvasContext = remoteCanvas.getContext('2d')
-console.log("remoteCanvasContext", remoteCanvasContext)
+//   detectPose() {
+//     const {videoWidth, videoHeight} = this.props
+//     const canvas = this.canvas
+//     const remoteCanvas = this.remoteCanvas
+//     const canvasContext = canvas.getContext('2d')
+//     const remoteCanvasContext = remoteCanvas.getContext('2d')
+// console.log("remoteCanvasContext", remoteCanvasContext)
 
-    canvas.width = videoWidth
-    canvas.height = videoHeight
-  remoteCanvas.width = videoWidth 
-  remoteCanvas.height = videoHeight
+//     canvas.width = videoWidth
+//     canvas.height = videoHeight
+//   remoteCanvas.width = videoWidth 
+//   remoteCanvas.height = videoHeight
 
-    this.poseDetectionFrame(canvasContext, remoteCanvasContext)
-    // this.poseDetectionFrame(remoteCanvasContext)
-  }
+//     this.poseDetectionFrame(canvasContext, remoteCanvasContext)
+//     // this.poseDetectionFrame(remoteCanvasContext)
+//   }
 
-  poseDetectionFrame(canvasContext, remoteCanvasContext) {
-    const {
-      // algorithm,
-      imageScaleFactor, 
-      flipHorizontal, 
-      outputStride, 
-      minPoseConfidence, 
-      minPartConfidence, 
-      // maxPoseDetections, 
-      // nmsRadius, 
-      videoWidth, 
-      videoHeight, 
-      showVideo, 
-      showRemoteVideo,
-      showPoints, 
-      showRemotePoints,
-      showSkeleton, 
-      showRemoteSkeleton,
-      skeletonColor, 
-      remoteSkeletonColor,
-      skeletonLineWidth 
-      } = this.props
+//   poseDetectionFrame(canvasContext, remoteCanvasContext) {
+//     const {
+//       // algorithm,
+//       imageScaleFactor, 
+//       flipHorizontal, 
+//       outputStride, 
+//       minPoseConfidence, 
+//       minPartConfidence, 
+//       // maxPoseDetections, 
+//       // nmsRadius, 
+//       videoWidth, 
+//       videoHeight, 
+//       showVideo, 
+//       showRemoteVideo,
+//       showPoints, 
+//       showRemotePoints,
+//       showSkeleton, 
+//       showRemoteSkeleton,
+//       skeletonColor, 
+//       remoteSkeletonColor,
+//       skeletonLineWidth 
+//       } = this.props
 
-    const posenetModel = this.posenet
-    console.log("posenetModel", posenetModel)
-    const video = this.video;
-    const remoteVideo = this.remoteVideo;
+//     const posenetModel = this.posenet
+//     // console.log("posenetModel", posenetModel)
+//     const video = this.video;
+//     const remoteVideo = this.remoteVideo;
     
 
-    if(this.remoteStream !== undefined || null){
-    console.log(this.remoteStream)
-    }
+//     // if(remoteVideo !== undefined || null){
+//     // console.log(remoteStream)
+//     // }
 
-    const findPoseDetectionFrame = async () => {
-      let poses = []
+  //   const findPoseDetectionFrame = async () => {
+  //     let poses = []
 
-        const pose = await posenetModel.estimateSinglePose(
-          video, 
-          imageScaleFactor, 
-          flipHorizontal, 
-          outputStride,
-
-          )
-          console.log(pose)
-          poses.push(pose)
+  //       const pose = await posenetModel.estimateSinglePose(
+  //         video, 
+  //         imageScaleFactor, 
+  //         flipHorizontal, 
+  //         outputStride,
+  //         remoteVideo
+  //         )
+  //         // console.log(pose)
+  //         poses.push(pose)
     
-      canvasContext.clearRect(0, 0, videoWidth, videoHeight)
-      if(remoteCanvasContext !== undefined){
-      remoteCanvasContext.clearRect(0, 0, videoWidth, videoHeight)
-      }
-      // console.log(canvasContext)
+  //     canvasContext.clearRect(0, 0, videoWidth, videoHeight)
+  //     if(remoteCanvasContext !== undefined){
+  //     remoteCanvasContext.clearRect(0, 0, videoWidth, videoHeight)
+  //     }
+  //     // console.log(canvasContext)
 
-      // WebRTC canvas stream below -->
-      canvas_RTCstream = this.canvas.captureStream(25);
-      console.log(canvas_RTCstream)
-      // console.log(canvas_RTCstream)
+  //     // WebRTC canvas stream below -->
+  //     canvas_RTCstream = this.canvas.captureStream(25);
+ 
+  //     // console.log(canvas_RTCstream)
       
-  // console.log(canvas_RTCstream)
+  // // console.log(canvas_RTCstream)
 
       
-
-      socket.emit('canvasContext', canvas_RTCstream)
+// TK EDITED SOCKETS
+      // socket.emit('canvasContext', canvas_RTCstream)
       
     
 
       // var canvasURL = this.canvas.toDataURL();
       // console.log("canvasURL", canvasURL)
       
-      if (showVideo) {
-        canvasContext.save()
-        canvasContext.scale(-.2, .2)
-        canvasContext.translate(-videoWidth, 0)
-        canvasContext.drawImage(video, 0, 0, videoWidth, videoHeight)
-        canvasContext.restore()
+      // if (showVideo) {
+      //   canvasContext.save()
+      //   canvasContext.scale(-.2, .2)
+      //   canvasContext.translate(-videoWidth, 0)
+      //   canvasContext.drawImage(video, 0, 0, videoWidth, videoHeight)
+      //   canvasContext.restore()
      
    
-        remoteCanvasContext.save()
-        remoteCanvasContext.scale(-.2, .2)
-        remoteCanvasContext.translate(-videoWidth, 0)
-        remoteCanvasContext.drawImage(remoteVideo, 0, 0, videoWidth, videoHeight)
-        remoteCanvasContext.restore()
-      }
+      //   remoteCanvasContext.save()
+      //   remoteCanvasContext.scale(-.2, .2)
+      //   remoteCanvasContext.translate(-videoWidth, 0)
+      //   remoteCanvasContext.drawImage(remoteVideo, 0, 0, videoWidth, videoHeight)
+      //   remoteCanvasContext.restore()
+      // }
 
-      //CURRENTLY EMITTING POSES AND CAMERA BUT WE WILL ONLY WANT ONE  
-      socket.emit('poses', {poses: poses})
-      // socket.emit('canvasURL', {canvasURL: canvasURL})  
-      // THESE TWO SOCKETS FUNCTIONS BELOW MAY BE PROBLEMATIC
+  // TK EDITED SOCKET  
+      // socket.emit('poses', {poses: poses})
   
   
-  console.log("poses", poses)
-  console.log(poses[0].keypoints[0].part)
-      poses.forEach(({score, keypoints}) => {
-        if (score >= minPoseConfidence) {
-          if (showPoints) {
-            drawKeyPoints(
-              keypoints,
-              minPartConfidence,
-              skeletonColor,
-              canvasContext
-            )
-          }
-          if (showRemotePoints) {
-            drawKeyPoints(
-              keypoints,
-              minPartConfidence,
-              remoteSkeletonColor,
-              remoteCanvasContext
-            )
-          }
-          if (showSkeleton) {
-            drawSkeleton(
-              keypoints,
-              minPartConfidence,
-              skeletonColor,
-              skeletonLineWidth,
-              canvasContext             
-            )
-          }
-          if (showRemoteSkeleton) {
-            drawSkeleton(
-              keypoints,
-              minPartConfidence,
-              remoteSkeletonColor,
-              skeletonLineWidth,
-              remoteCanvasContext             
-            )
-          }
-        }
-      })
+  // console.log("poses", poses)
+  // console.log(poses[0].keypoints[0].part)
+      // poses.forEach(({score, keypoints}) => {
+      //   if (score >= minPoseConfidence) {
+      //     if (showPoints) {
+      //       drawKeyPoints(
+      //         keypoints,
+      //         minPartConfidence,
+      //         skeletonColor,
+      //         canvasContext,
+            
+      //       )
+      //     }
+      //     if (showRemotePoints) {
+      //       drawKeyPoints(
+      //         keypoints,
+      //         minPartConfidence,
+      //         remoteSkeletonColor,
+      //         remoteCanvasContext
+      //       )
+      //     }
+      //     if (showSkeleton) {
+      //       drawSkeleton(
+      //         keypoints,
+      //         minPartConfidence,
+      //         skeletonColor,
+      //         skeletonLineWidth,
+      //         canvasContext             
+      //       )
+      //     }
+      //     if (showRemoteSkeleton) {
+      //       drawSkeleton(
+      //         keypoints,
+      //         minPartConfidence,
+      //         remoteSkeletonColor,
+      //         skeletonLineWidth,
+      //         remoteCanvasContext             
+      //       )
+      //     }
+      //   }
+      // })
       
       // console.log(canvasContext)
   //     socket.on('herecanvasCTX', (canvas_RTCstream)=>{
@@ -692,10 +690,10 @@ console.log("remoteCanvasContext", remoteCanvasContext)
       // socket.on('posesFromServer', (poses)=>{
       //   console.log(poses)
       // })
-      requestAnimationFrame(findPoseDetectionFrame)
-    }
-    findPoseDetectionFrame()
-    }
+    //   requestAnimationFrame(findPoseDetectionFrame)
+    // }
+    // findPoseDetectionFrame()
+    // }
 
   copyToClipboard = (e) => {
     this.textArea.select();
@@ -703,8 +701,8 @@ console.log("remoteCanvasContext", remoteCanvasContext)
     // This is just personal preference.
     // I prefer to not show the the whole text area selected.
     e.target.focus();
-    this.setState({ copySuccess: 'If an ID does not appear, create session again. If one appears, share this once the other player joins the room...' });
-    this.addChat(`Room ID: `, `${roomId}`, true)
+    this.setState({ copySuccess: 'Once a room ID appears in the blue box, copy and paste it into the green box. ' });
+    // this.addChat(`Room ID: `, `${roomId}`, true)
   };
 
 
@@ -717,10 +715,15 @@ console.log("remoteCanvasContext", remoteCanvasContext)
    <>
    <Grid item xs={12} id="canvasGrid" style={styles.container}>
   
-        <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
+   {/*     <canvas className="webcam" style={styles.canvas} ref={this.getCanvas} />
 
         <canvas id="remoteCanvas" ref={this.getRemoteCanvas} style={styles.canvas}/>
+    */}
     
+    <div className="media-bridge" id="videos">
+    <video key={`local-video`} muted id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
+    <video className="remote-video" id="remoteVideo" autoPlay playsInline ref={this.remoteStream}></video>
+  </div>
    </Grid>
 
        
@@ -743,7 +746,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
            }
 
               <button onClick={joinRoom} style={styles.btn} className="rtcRoomButton" id="confirmJoinBtn" type="button">
-                <span>Join Room</span>
+                <span>Join Room (Guest Only)</span>
               </button>
               
             <div id="room-dialog">
@@ -753,10 +756,12 @@ console.log("remoteCanvasContext", remoteCanvasContext)
               /* Logical shortcut for only displaying the 
                 button if the copy command exists */
               document.queryCommandSupported('copy') &&
-                <div>
-                  {this.state.copySuccess}
-                  {roomId}
-                
+                <div id="copySuccess">
+                <h3 id="roomReady">Room Ready Alert </h3>
+                <h4 id="instructions">To open a room, first click "Create Session" above. Then, click "Start Session." Be sure to wear headphones once you enter the room in order to avoid loud feedback!<br/>
+                {this.state.copySuccess}
+                {roomId}
+                </h4>
                 </div>
             }
 
@@ -773,7 +778,9 @@ console.log("remoteCanvasContext", remoteCanvasContext)
                 />
             </LioWebRTC>
 
-      
+            <div id="recorder">
+            <Recorder/>  
+            </div>
 
              </div>
         
@@ -786,7 +793,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
        
                 <h2 id="joinNow">(Receiver Only) <br/> Copy Room Id and Click Join: 
             
-          <input type="text" id="room-id" placeholder="Paste Existing Room ID Here"
+          <input type="text" id="room-id" placeholder="Paste Room ID Here"
             ref={(textarea) => this.textArea = textarea}
             defaultValue={roomId || ''}
             />
@@ -798,10 +805,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
       <Grid item xs={12} style={styles.container} id="videosGrid">  
        
         <Grid item xs={12} style={styles.container} id="videosGrid"> 
-          <div className="media-bridge" id="videos">
-            <video key={`local-video`} style={styles.video} muted id="localVideo" playsInline ref={this.getVideo} className="local-video" muted autoPlay></video>
-            <video className="remote-video" style={styles.remoteVideo}  id="remoteVideo" autoPlay playsInline ref={this.remoteStream}></video>
-          </div>
+     
                 <Grid item xs={12} className="iconGrid">
             <div className="iconOrder">
                 <SocialIcon className="socialicons" url="https://github.com/MartinScriblerus" style={styles.icons}/>
@@ -816,7 +820,7 @@ console.log("remoteCanvasContext", remoteCanvasContext)
   </Grid>
 
 
-        {/*  <Recorder/>  */}
+     
         
           </Grid>
     

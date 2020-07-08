@@ -19,14 +19,14 @@ import FirstTimeLogin from "../FirstTimeSignIn/firstTimeSignIn";
 // var jwt = require('jsonwebtoken');
 
 
-const token = localStorage.getItem("token");
-if (token) {
+// const token = localStorage.getItem("token");
+// if (token) {
 
-  setAuthToken(token);
-  console.log(token)
-  const decoded = jwt_decode(token);
-  store.dispatch(setUserLogged(decoded));
-}
+//   setAuthToken(token);
+//   // console.log(token)
+//   const decoded = jwt_decode(token);
+//   store.dispatch(setUserLogged(decoded));
+// }
 
 const styles = ({
     // color:  '#030303',

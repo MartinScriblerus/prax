@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid';
 import setAuthToken from "../../../services/setAuthToken";
 
-const token = localStorage.getItem("token");
-if (token) {
-  setAuthToken(token);
-}
-console.log(token)
+// const token = localStorage.getItem("token");
+// if (token) {
+//   setAuthToken(token);
+// }
+
 
 
 

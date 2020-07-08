@@ -88,18 +88,18 @@ router.post('/login', async (req, res) => {
 		id: user.id,
 		username
 	};
-	const token = await jwt.sign(payload, "Alt_SXSW");
+	// const token = await jwt.sign(payload, "Alt_SXSW");
 
 	res.status(200)
 
-	.header('auth-token', token).json({
-		success: true,
-		token,
-		user: {
-			id: user.id,
-			username: user.username
-		}
-	});
+	// .header('auth-token', token).json({
+	// 	success: true,
+	// 	token,
+	// 	user: {
+	// 		id: user.id,
+	// 		username: user.username
+	// 	}
+	// });
 });
 
 

@@ -17,7 +17,7 @@
 
 
   .info {
-    height: 350px;
+    height: 40vh;
     color: $header_black;
     font-size: 18px;
   }
@@ -65,7 +65,7 @@
 
     display: inline;
     float: left;
-    max-height: 70%;
+    max-height: 20%;
     font-size: 20px;
     margin: 15px 15px 10px 10px;
     overflow-y: scroll;
@@ -79,7 +79,7 @@
     margin-left: 15%;
     font-size: 24px;
     color: $metronome_on;
-    border: 1px solid $dark_grey;
+    // border: 1px solid $dark_grey;
     font-weight: 100;
     padding: 10px;
     border-radius: 5px;

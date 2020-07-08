@@ -17,7 +17,7 @@ if (config.use_env_variable) {
   var sequelize = new Sequelize({
     database: "Alt_SXSW_db",
     username: "root",
-    password: "test1234",
+    password: "",
     dialect: "mysql",
   });
 } else {

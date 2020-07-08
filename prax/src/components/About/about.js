@@ -125,9 +125,7 @@ export default function About(newUser){
           <Card style={styles.card2}>
           <h4 id="aboutTech">Tech Stack:</h4>
           <Typography style={styles.text2}>
-          WebRTC, Socket.io, Media Stream API, 
-          Tensorflow PoseNet, Firebase,
-          React, Redux, Express, MySQL, JWT Tokens
+   
           </Typography>
          
              

@@ -11,7 +11,7 @@ const InitialState = {
 
 export default function(state = InitialState, action) {
   // payload.config request response contains contacts from firsttimesignin/db
-  console.log(action)
+  // console.log(action)
   switch (action.type) {
 
     case ChatTypes.GET_USERS_REQUEST:

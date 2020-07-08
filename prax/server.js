@@ -12,8 +12,6 @@ var cors = require('cors')
 var passport = require("passport");
 
 
-// app.use(cors())
-
   app.use(cors({
     origin: "http://localhost:3000",
     credentials: true
@@ -27,10 +25,7 @@ var passport = require("passport");
     next();
   });
 
-  // jwt.sign({
-  //   exp: Math.floor(Date.now() / 1000) + (60 * 60),
-  //   data: 'token'
-  // }, 'alt_SXSW');
+
 
   app.use(morgan('dev'))
 
@@ -155,7 +150,7 @@ var passport = require("passport");
     //+++++++++++++++++++++++++++++++++++++++++++++++++
 //=====================================================
 
-const db = require('./models/index');
+// const db = require('./models/index');
 
 
   app.use('/api/user', require('./routes/user'))
@@ -192,70 +187,70 @@ const db = require('./models/index');
          console.log(res.json({}));
        });
 
-  app.post("/api/user", function(req, res) {
+  // app.post("/api/user", function(req, res) {
   
-      db.User.create({
-            // id: req.body.id, 
-            username: req.body.username, 
-            email: req.body.email,
-            // password: req.body.password,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            bandName: req.body.bandName,
-            password : req.body.password,
-            instrument : req.body.instrument,
-            // createdAt : req.body.createdAt,
-            // updatedAt : req.body.updatedAt
-          })
+  //     db.User.create({
+  //           // id: req.body.id, 
+  //           username: req.body.username, 
+  //           email: req.body.email,
+  //           // password: req.body.password,
+  //           firstName: req.body.firstName,
+  //           lastName: req.body.lastName,
+  //           bandName: req.body.bandName,
+  //           password : req.body.password,
+  //           instrument : req.body.instrument,
+  //           // createdAt : req.body.createdAt,
+  //           // updatedAt : req.body.updatedAt
+  //         })
  
-        var newUser = req.body;
-          newUser= [{
-            // id: req.body.id,
-            username: req.body.username, 
-            email: req.body.email,
-            // password: req.body.password,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            bandName: req.body.bandName,
-            password : req.body.password,
-            instrument : req.body.instrument,
-            // createdAt : req.body.createdAt,
-            // updatedAt : req.body.updatedAt
-          }]
+  //       var newUser = req.body;
+  //         newUser= [{
+  //           // id: req.body.id,
+  //           username: req.body.username, 
+  //           email: req.body.email,
+  //           // password: req.body.password,
+  //           firstName: req.body.firstName,
+  //           lastName: req.body.lastName,
+  //           bandName: req.body.bandName,
+  //           password : req.body.password,
+  //           instrument : req.body.instrument,
+  //           // createdAt : req.body.createdAt,
+  //           // updatedAt : req.body.updatedAt
+  //         }]
 
-          console.log(newUser);
-          users.push(newUser);
-          res.json(users);
-          console.log("this is users:", users)
-        });
+  //         console.log(newUser);
+  //         users.push(newUser);
+  //         res.json(users);
+  //         console.log("this is users:", users)
+  //       });
 
 
-  app.post("/api/message", async function(req, res) {
+  // app.post("/api/message", async function(req, res) {
   
-          console.log("server is posting db.Message & api/message");
+  //         console.log("server is posting db.Message & api/message");
   
-          db.Message.create({
-            // id: req.body.id, 
-            origin: req.body.origin,
-            content: req.body.content,
-            username: req.body.username
-          })
+  //         db.Message.create({
+  //           // id: req.body.id, 
+  //           origin: req.body.origin,
+  //           content: req.body.content,
+  //           username: req.body.username
+  //         })
   
-        var newMessage = req.body;
-            newMessage= {
-            origin: req.body.origin,
-            content: req.body.content,
-            username: req.body.username
-          }
+  //       var newMessage = req.body;
+  //           newMessage= {
+  //           origin: req.body.origin,
+  //           content: req.body.content,
+  //           username: req.body.username
+  //         }
 
-        console.log("newMessage", newMessage)
-        messages.push(newMessage);
-        res.json(messages);
-          console.log(messages);
-        console.log("this is messages origin!: ", req.body.origin);
+  //       console.log("newMessage", newMessage)
+  //       messages.push(newMessage);
+  //       res.json(messages);
+  //         console.log(messages);
+  //       console.log("this is messages origin!: ", req.body.origin);
       
      
-      })
+  //     })
         
         var users = [];
         var messages = [];
@@ -266,7 +261,7 @@ const db = require('./models/index');
 
 
 
-  db.sequelize.sync().then(() => {
-    // eslint-disable-next-line no-console
-    console.log('User db and user table have been created');
-  });
+  // db.sequelize.sync().then(() => {
+  //   // eslint-disable-next-line no-console
+  //   console.log('User db and user table have been created');
+  // });

@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'production'){
     config = {
         db: 'Alt_SXSW_db',
         username: 'root',
-        password: 'test1234',
+        password: '',
         host: '0.0.0.0'
     }
 }

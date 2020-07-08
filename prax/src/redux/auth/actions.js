@@ -1,7 +1,6 @@
 import { AuthTypes } from "./types";
 import setAuthToken from "../../services/setAuthToken";
 import { ChatTypes } from "../chat/types";
-// import { socket } from "../../services/socketio";
 
 
 
@@ -29,9 +28,9 @@ export const registerUserRequest = dataRegister => async dispatch => {
 export const registerUserSuccess = dataLogin => async dispatch => {
   console.log("in auth getusers")
   dispatch({ type: AuthTypes.REGISTER_USERS_SUCCESS });
-  dispatch(loginUserRequest(dataLogin));
+  // dispatch(loginUserRequest(dataLogin));
 console.log(dataLogin)
-  // socket.emit("getUsers");
+
 };
 
 export const registerUserFailure = errors => async dispatch => {
@@ -41,35 +40,35 @@ export const registerUserFailure = errors => async dispatch => {
   });
 };
 
-export const loginUserRequest = dataLogin => async dispatch => {
-  dispatch({ type: AuthTypes.LOGIN_USER_REQUEST });
-  try {
-    //const response = await axios.post(`${BASE_URL}/user/login`, dataLogin);
-    const response = await loginUserAPI(dataLogin)
-    dispatch(loginUserSuccess(response.data));
-  } catch (err) {
-    dispatch(loginUserFailure(err.response.data.errors));
-  }
-};
+// export const loginUserRequest = dataLogin => async dispatch => {
+//   dispatch({ type: AuthTypes.LOGIN_USER_REQUEST });
+//   try {
+//     //const response = await axios.post(`${BASE_URL}/user/login`, dataLogin);
+//     const response = await loginUserAPI(dataLogin)
+//     dispatch(loginUserSuccess(response.data));
+//   } catch (err) {
+//     dispatch(loginUserFailure(err.response.data.errors));
+//   }
+// };
 
-export const loginUserSuccess = response => async dispatch => {
-  await response;
-  const { token, user } = response;
-  localStorage.setItem("token", token);
-  //setAuthToken(token);
-  dispatch({
-    type: AuthTypes.LOGIN_USER_SUCCESS,
-    payload: user
-  });
-};
+// export const loginUserSuccess = response => async dispatch => {
+//   await response;
+//   const { token, user } = response;
+//   localStorage.setItem("token", token);
+//   //setAuthToken(token);
+//   dispatch({
+//     type: AuthTypes.LOGIN_USER_SUCCESS,
+//     payload: user
+//   });
+// };
 
-export const loginUserFailure = errors => async dispatch => {
-  await errors;
-  dispatch({
-    type: AuthTypes.LOGIN_USER_FAILURE,
-    payload: errors
-  });
-};
+// export const loginUserFailure = errors => async dispatch => {
+//   await errors;
+//   dispatch({
+//     type: AuthTypes.LOGIN_USER_FAILURE,
+//     payload: errors
+//   });
+// };
 
 export const setUserLogged = user => async dispatch => {
   await user;

@@ -1,0 +1,62 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: helloworld
+  namespace: '165177072479'
+  selfLink: /apis/serving.knative.dev/v1/namespaces/165177072479/services/helloworld
+  uid: ecfbda40-39c3-48f0-9109-04a54eff9879
+  resourceVersion: AAWpMNAuozg
+  generation: 18
+  creationTimestamp: '2020-06-27T16:34:16.565168Z'
+  labels:
+    cloud.googleapis.com/location: us-central1
+  annotations:
+    run.googleapis.com/client-name: gcloud
+    serving.knative.dev/creator: matthewfreilly@gmail.com
+    serving.knative.dev/lastModifier: matthewfreilly@gmail.com
+    client.knative.dev/user-image: gcr.io/fir-rtc-d3a58/helloworld
+    run.googleapis.com/client-version: 298.0.0
+spec:
+  template:
+    metadata:
+      name: helloworld-00018-met
+      annotations:
+        run.googleapis.com/client-name: gcloud
+        client.knative.dev/user-image: gcr.io/fir-rtc-d3a58/helloworld
+        run.googleapis.com/client-version: 298.0.0
+        autoscaling.knative.dev/maxScale: '1000'
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      containers:
+      - image: gcr.io/fir-rtc-d3a58/helloworld
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 256Mi
+  traffic:
+  - percent: 100
+    latestRevision: true
+status:
+  observedGeneration: 18
+  conditions:
+  - type: Ready
+    status: 'True'
+    lastTransitionTime: '2020-06-29T03:39:59.795Z'
+  - type: ConfigurationsReady
+    status: 'True'
+    lastTransitionTime: '2020-06-29T03:39:53.558Z'
+  - type: RoutesReady
+    status: 'True'
+    lastTransitionTime: '2020-06-29T03:39:59.795Z'
+  latestReadyRevisionName: helloworld-00018-met
+  latestCreatedRevisionName: helloworld-00018-met
+  traffic:
+  - revisionName: helloworld-00018-met
+    percent: 100
+    latestRevision: true
+  url: https://helloworld-rkgxbc5ezq-uc.a.run.app
+  address:
+    url: https://helloworld-rkgxbc5ezq-uc.a.run.app

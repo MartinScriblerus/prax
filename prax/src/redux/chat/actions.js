@@ -1,5 +1,5 @@
 import { ChatTypes } from './types'
-// import { socket } from '../../services/socketio'
+
 
 import {
     getUsers as getUsersAPI,
@@ -31,15 +31,7 @@ export const getUsersSuccess = (user)=> async dispatch=>{
             type: ChatTypes.GET_USERS_SUCCESS,
             payload: user
         })
-        // THIS SOCKET IS PROBABLY OK TO CUT =>
-        // socket.on("connection", ()=>{
-        //     const getUsers = {
-        //         id: user.id, 
-        //         contacts: user 
-        //     };
-        //     socket.emit("getUsers", getUsers)
-        //     console.log("chat actions got users")
-        // })
+     
        
 
     } catch (err){
@@ -82,26 +74,16 @@ export const postMessageRequest = (messages, idOrigin)=>async dispatch=>{
     }
 }
 
-// export const postMessageSuccess = (idDestiny, idOrigin)=>async dispatch=>{
+
     export const postMessageSuccess = (idOrigin)=>async dispatch=>{
     dispatch({type: ChatTypes.POST_MESSAGE_SUCCESS})
-    // dispatch(markAsReadRequest(idDestiny))
+
     dispatch(getUsersRequest())
-    // dispatch(getChatRequest(idDestiny))
-    // socket.emit('getUsers', idOrigin)
-    // socket.emit('getMessages', idOrigin)
+
+
 }
 
-// export const markAsReadRequest = (idDestiny) =>async dispatch=>{
-//     dispatch({type: ChatTypes.MARK_AS_READ_REQUEST})
-//     try{
-//         //await axios.put(`${BASE_URL}/message/mark-as-read/${idDestiny}`)
-//         await markAsReadAPI(idDestiny)
-//         dispatch(markAsReadSuccess())
-//     }catch(err){
-//         console.log(err.response)
-//     }
-// }
+
 
 export const markAsReadSuccess =()=> async dispatch=>{
     dispatch({type: ChatTypes.MARK_AS_READ_SUCCESS})

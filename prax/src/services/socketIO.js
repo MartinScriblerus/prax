@@ -1,6 +1,7 @@
-import io from 'socket.io-client';
+// TK EDITED SOCKET
+// import io from 'socket.io-client';
 
 
 
-export const socket = io('http://localhost:8080',{transports: ['websocket']});
+// export const socket = io('http://localhost:8080',{transports: ['websocket']});
   

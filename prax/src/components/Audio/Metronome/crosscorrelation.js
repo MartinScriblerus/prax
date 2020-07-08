@@ -80,11 +80,7 @@ console.log(audioContext)
  
   }
 
-
-
   metronome.start(-1);
-
- 
 
   console.log("Creating correlator")
   new Correlator(audioContext, inputNode, clickBuffer, updateOutput);
@@ -92,12 +88,7 @@ console.log(inputNode);
   console.log("running...")
 }
 
-async function stop(){
-  metronome.stop()
-}
-
-function updateOutput(latency)
-{
+function updateOutput(latency){
   console.log("Latency: %.2f ms = %.0f samples",
     1000*latency, Math.round(latency*sampleRate));
 
@@ -118,6 +109,12 @@ async function loadAudioBuffer(url)
   return buffer;
 }
 
+async function stop(){
+
+audioContext.close()
+
+}
+
 return(
   <>
   <h2 id="latencyDetectorContainer">Metronome - Latency Detector
@@ -132,9 +129,10 @@ return(
     <input id="bpmInput" placeholder="Set BPM" onChange={e => setBpm(e.target.value)}></input>
 </form>
 
-<h4 id="latencyMeasure">User Latency: <span id="outputSpan">in milliseconds</span></h4>
+<p id="latencyMeasure">User Latency: <span id="outputSpan">in milliseconds</span></p>
 
 <button id="startButton" className="latencyDetectorButton" onClick={()=>start()}>Start Latency Detector</button>
+<button id="stopButton" className="latencyDetectorButton" onClick={()=>stop()}>Stop Latency Detector</button>
 
 
 </h2> 
