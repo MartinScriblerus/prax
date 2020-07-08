@@ -758,7 +758,7 @@ console.log("remoteVideo", remoteVideo)
               document.queryCommandSupported('copy') &&
                 <div id="copySuccess">
                 <h3 id="roomReady">Room Ready Alert </h3>
-                <h4 id="instructions">To open a room, first click "Create Session" above. Then, click "Start Session." Be sure to wear headphones once you enter the room in order to avoid loud feedback!<br/>
+                <h4 id="instructions">To open a room, first click "Create Session" above. Then, click "Start Session." Be sure to wear headphones once you enter the room in order to avoid loud feedback! If the session ID does not appear, make sure you've enabled popups to allow sign-in.<br/>
                 {this.state.copySuccess}
                 {roomId}
                 </h4>
