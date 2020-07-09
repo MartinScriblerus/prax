@@ -1,8 +1,8 @@
 import React from 'react'
 import store from '../../redux/store'
 // import Camera from '../posenet/components/Camera.js'
-
 import { fire, fireAnalytics } from '../firebase';
+import GoogAuth from './googleAuth';
 import Header from '../Header/Header/header'
 import Navbar from '../Header/Navbar/navbar'
 // import Grid from '@material-ui/core/Grid';
@@ -13,7 +13,7 @@ import Home from '../Home/Home';
 import { AuthContext } from "../../context/auth";
 import { Provider } from "react-redux";
 import PrivateRoute from './PrivateRoute';
-
+import UserProvider from "../providers/UserProvider";
 import About from '../About/about';
 import Login from '../AuthLogin/Login/Login'
 import FirstTimeLogin from '../FirstTimeSignIn/firstTimeSignIn';
@@ -74,9 +74,14 @@ if (window !== undefined){
  
       {/*} <Navbar style={styles.navbar}/> */}
 
-      <div id="firebaseui-auth-container"></div>
-<PoseNet/>
+      <div id="firebaseui-auth-container">
 
+     
+      </div>
+ 
+      <PoseNet/>
+
+  
 
    {/*}   <Switch>
                   
